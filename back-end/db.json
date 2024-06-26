@@ -1,39 +1,754 @@
 {
   "words": [
     {
-      "english": "sdfasd",
-      "chinese": "asdfasd",
-      "id": "sdfasd"
+      "english": "give me",
+      "chinese": "给我",
+      "id": "give me"
     },
     {
-      "english": "23434",
-      "chinese": "3443",
-      "id": "23434"
+      "english": "right now",
+      "chinese": "现在",
+      "id": "right now"
     },
     {
-      "english": "asdfasdf",
-      "chinese": "啊手动阀手动阀",
-      "id": "asdfasdf"
+      "id": "clone it",
+      "english": "clean it",
+      "chinese": "清洁它"
     },
     {
-      "english": "qwerwqe",
-      "chinese": "啊手动阀手动阀",
-      "id": "qwerwqe"
+      "english": "one sencond",
+      "chinese": "一秒钟(很快)",
+      "id": "one sencond"
     },
     {
-      "english": "asdf",
-      "chinese": "啊手动阀手动阀",
-      "id": "asdf"
+      "english": "time's up",
+      "chinese": "时间到了",
+      "id": "time's up"
     },
     {
-      "id": "asdf444",
-      "english": "asdf44455",
-      "chinese": "啊"
+      "english": "hold on",
+      "chinese": "等一下",
+      "id": "hold on"
     },
     {
-      "english": "333",
-      "chinese": "44",
-      "id": "333"
+      "english": "hold up",
+      "chinese": "延误",
+      "id": "hold up"
+    },
+    {
+      "english": "I'm home",
+      "chinese": "我回家了",
+      "id": "i'm home"
+    },
+    {
+      "id": "your finished",
+      "english": "you finished",
+      "chinese": "你完成了"
+    },
+    {
+      "english": "For real",
+      "chinese": "是真的",
+      "id": "for real"
+    },
+    {
+      "english": "you bet",
+      "chinese": "你猜对了",
+      "id": "you bet"
+    },
+    {
+      "english": "nice one",
+      "chinese": "很棒",
+      "id": "nice one"
+    },
+    {
+      "english": "I bet",
+      "chinese": "我打赌",
+      "id": "i bet"
+    },
+    {
+      "english": "I swear",
+      "chinese": "我发誓",
+      "id": "i swear"
+    },
+    {
+      "english": "Which one?",
+      "chinese": "哪一件？",
+      "id": "which one?"
+    },
+    {
+      "english": "this one",
+      "chinese": "这一个",
+      "id": "this one"
+    },
+    {
+      "english": "that one",
+      "chinese": "那一个",
+      "id": "that one"
+    },
+    {
+      "english": "Drop it",
+      "chinese": "丢掉它",
+      "id": "drop it"
+    },
+    {
+      "english": "Throw it",
+      "chinese": "扔掉它",
+      "id": "throw it"
+    },
+    {
+      "english": "move back",
+      "chinese": "往后退",
+      "id": "move back"
+    },
+    {
+      "english": "thank you",
+      "chinese": "谢谢你",
+      "id": "thank you"
+    },
+    {
+      "english": "go ahead",
+      "chinese": "继续",
+      "id": "go ahead"
+    },
+    {
+      "english": "I know",
+      "chinese": "我知道",
+      "id": "i know"
+    },
+    {
+      "english": "hold it",
+      "chinese": "握住它",
+      "id": "hold it"
+    },
+    {
+      "english": "hold tight",
+      "chinese": "抓紧",
+      "id": "hold tight"
+    },
+    {
+      "english": "look out",
+      "chinese": "当心",
+      "id": "look out"
+    },
+    {
+      "english": "watch out",
+      "chinese": "当心",
+      "id": "watch out"
+    },
+    {
+      "english": "get in",
+      "chinese": "进去吧",
+      "id": "get in"
+    },
+    {
+      "english": "Why not?",
+      "chinese": "为什么不呢？",
+      "id": "why not?"
+    },
+    {
+      "english": "what for?",
+      "chinese": "为了什么？",
+      "id": "what for?"
+    },
+    {
+      "english": "I'll say",
+      "chinese": "我说",
+      "id": "i'll say"
+    },
+    {
+      "english": "show me",
+      "chinese": "给我看看",
+      "id": "show me"
+    },
+    {
+      "english": "Do it",
+      "chinese": "做吧",
+      "id": "do it"
+    },
+    {
+      "english": "come in",
+      "chinese": "进来吧",
+      "id": "come in"
+    },
+    {
+      "english": "get ready",
+      "chinese": "准备好",
+      "id": "get ready"
+    },
+    {
+      "english": "all right",
+      "chinese": "好的",
+      "id": "all right"
+    },
+    {
+      "english": "you okay?",
+      "chinese": "你还好吗",
+      "id": "you okay?"
+    },
+    {
+      "english": "very well",
+      "chinese": "很好",
+      "id": "very well"
+    },
+    {
+      "english": "No hurry",
+      "chinese": "不着急",
+      "id": "no hurry"
+    },
+    {
+      "english": "try this",
+      "chinese": "试试这个",
+      "id": "try this"
+    },
+    {
+      "english": "let go",
+      "chinese": "放手吧",
+      "id": "let go"
+    },
+    {
+      "english": "I'm busy",
+      "chinese": "我很忙",
+      "id": "i'm busy"
+    },
+    {
+      "english": "stay put",
+      "chinese": "不要动",
+      "id": "stay put"
+    },
+    {
+      "english": "stand up",
+      "chinese": "站起来",
+      "id": "stand up"
+    },
+    {
+      "english": "have fun",
+      "chinese": "玩的开心点",
+      "id": "have fun"
+    },
+    {
+      "english": "good idea",
+      "chinese": "好主意",
+      "id": "good idea"
+    },
+    {
+      "english": "don't shout",
+      "chinese": "不要大喊大叫",
+      "id": "don't shout"
+    },
+    {
+      "english": "open it",
+      "chinese": "打开它",
+      "id": "open it"
+    },
+    {
+      "english": "feel this",
+      "chinese": "感受一下这个",
+      "id": "feel this"
+    },
+    {
+      "english": "warn him",
+      "chinese": "警告他",
+      "id": "warn him"
+    },
+    {
+      "english": "no bragging",
+      "chinese": "不要再吹嘘了",
+      "id": "no bragging"
+    },
+    {
+      "english": "stop boasting",
+      "chinese": "不吹牛",
+      "id": "stop boasting"
+    },
+    {
+      "english": "I'll stop",
+      "chinese": "我就不说了",
+      "id": "i'll stop"
+    },
+    {
+      "english": "shut up",
+      "chinese": "闭上嘴",
+      "id": "shut up"
+    },
+    {
+      "english": "zip it",
+      "chinese": "闭嘴吧",
+      "id": "zip it"
+    },
+    {
+      "english": "just kidding",
+      "chinese": "开玩笑的",
+      "id": "just kidding"
+    },
+    {
+      "english": "Be nice",
+      "chinese": "乖一点",
+      "id": "be nice"
+    },
+    {
+      "english": "write down",
+      "chinese": "写下来",
+      "id": "write down"
+    },
+    {
+      "english": "no kidding",
+      "chinese": "别开玩笑了",
+      "id": "no kidding"
+    },
+    {
+      "english": "repeat it",
+      "chinese": "重复一下吧",
+      "id": "repeat it"
+    },
+    {
+      "english": "move aside",
+      "chinese": "让一让",
+      "id": "move aside"
+    },
+    {
+      "english": "make way",
+      "chinese": "让路",
+      "id": "make way"
+    },
+    {
+      "english": "just amazing",
+      "chinese": "只是令人惊讶",
+      "id": "just amazing"
+    },
+    {
+      "english": "have patience",
+      "chinese": "要有耐心",
+      "id": "have patience"
+    },
+    {
+      "english": "i forgot",
+      "chinese": "我忘了",
+      "id": "i forgot"
+    },
+    {
+      "english": "Don't fight",
+      "chinese": "不要争吵",
+      "id": "don't fight"
+    },
+    {
+      "english": "remember me?",
+      "chinese": "记得我？",
+      "id": "remember me?"
+    },
+    {
+      "english": "i remember",
+      "chinese": "我记得",
+      "id": "i remember"
+    },
+    {
+      "english": "yes indeed",
+      "chinese": "确实是的",
+      "id": "yes indeed"
+    },
+    {
+      "english": "focus here",
+      "chinese": "聚焦这里",
+      "id": "focus here"
+    },
+    {
+      "english": "say something",
+      "chinese": "说点什么",
+      "id": "say something"
+    },
+    {
+      "english": "welcome back",
+      "chinese": "欢迎回来",
+      "id": "welcome back"
+    },
+    {
+      "english": "don't panic",
+      "chinese": "不要惊慌",
+      "id": "don't panic"
+    },
+    {
+      "english": "cheer up",
+      "chinese": "打起精神来",
+      "id": "cheer up"
+    },
+    {
+      "english": "keep silent",
+      "chinese": "保持沉默",
+      "id": "keep silent"
+    },
+    {
+      "english": "don't rush",
+      "chinese": "不要着急",
+      "id": "don't rush"
+    },
+    {
+      "english": "nothing special",
+      "chinese": "没什么特别的",
+      "id": "nothing special"
+    },
+    {
+      "english": "don't argue",
+      "chinese": "不要争吵",
+      "id": "don't argue"
+    },
+    {
+      "english": "have faith",
+      "chinese": "要有信心",
+      "id": "have faith"
+    },
+    {
+      "english": "lesson learned",
+      "chinese": "吸取了教训",
+      "id": "lesson learned"
+    },
+    {
+      "english": "go slow",
+      "chinese": "慢点走",
+      "id": "go slow"
+    },
+    {
+      "english": "anybody home?",
+      "chinese": "有人在家吗",
+      "id": "anybody home?"
+    },
+    {
+      "english": "pace yourself",
+      "chinese": "掌握好节奏",
+      "id": "pace yourself"
+    },
+    {
+      "id": "tym some",
+      "english": "try some",
+      "chinese": "尝试一些"
+    },
+    {
+      "english": "have some",
+      "chinese": "吃点吧",
+      "id": "have some"
+    },
+    {
+      "english": "want some",
+      "chinese": "想要一些",
+      "id": "want some"
+    },
+    {
+      "english": "yes please",
+      "chinese": "是的，请",
+      "id": "yes please"
+    },
+    {
+      "english": "have another",
+      "chinese": "再来一杯(个)",
+      "id": "have another"
+    },
+    {
+      "english": "bring water",
+      "chinese": "带上水",
+      "id": "bring water"
+    },
+    {
+      "english": "time flies",
+      "chinese": "时间飞逝",
+      "id": "time flies"
+    },
+    {
+      "english": "stop yelling",
+      "chinese": "别嚷嚷了",
+      "id": "stop yelling"
+    },
+    {
+      "id": "aim hight",
+      "english": "aim high",
+      "chinese": "目标要高"
+    },
+    {
+      "english": "people change",
+      "chinese": "人是会变的",
+      "id": "people change"
+    },
+    {
+      "english": "be yourself",
+      "chinese": "做你自己",
+      "id": "be yourself"
+    },
+    {
+      "english": "eat up",
+      "chinese": "吃吧",
+      "id": "eat up"
+    },
+    {
+      "english": "stay calm",
+      "chinese": "保持冷静",
+      "id": "stay calm"
+    },
+    {
+      "english": "sing along",
+      "chinese": "一起唱",
+      "id": "sing along"
+    },
+    {
+      "english": "go home",
+      "chinese": "回家去",
+      "id": "go home"
+    },
+    {
+      "english": "go back",
+      "chinese": "回去吧",
+      "id": "go back"
+    },
+    {
+      "english": "ask around",
+      "chinese": "四处问问",
+      "id": "ask around"
+    },
+    {
+      "english": "drive faster",
+      "chinese": "开快点",
+      "id": "drive faster"
+    },
+    {
+      "english": "drive carefully",
+      "chinese": "小心驾驶",
+      "id": "drive carefully"
+    },
+    {
+      "english": "come alone",
+      "chinese": "独自前来",
+      "id": "come alone"
+    },
+    {
+      "english": "behave properly",
+      "chinese": "行为端正",
+      "id": "behave properly"
+    },
+    {
+      "english": "tack mine",
+      "chinese": "带上我的",
+      "id": "tack mine"
+    },
+    {
+      "english": "back off",
+      "chinese": "退开",
+      "id": "back off"
+    },
+    {
+      "english": "look ahead",
+      "chinese": "往前看",
+      "id": "look ahead"
+    },
+    {
+      "english": "you'll see",
+      "chinese": "你会看到的",
+      "id": "you'll see"
+    },
+    {
+      "english": "look away",
+      "chinese": "看远一点",
+      "id": "look away"
+    },
+    {
+      "english": "no worries",
+      "chinese": "不用担心",
+      "id": "no worries"
+    },
+    {
+      "english": "keep going",
+      "chinese": "继续前进",
+      "id": "keep going"
+    },
+    {
+      "english": "let me",
+      "chinese": "让我来",
+      "id": "let me"
+    },
+    {
+      "english": "keep trying",
+      "chinese": "继续努力",
+      "id": "keep trying"
+    },
+    {
+      "english": "be sensible",
+      "chinese": "要理智",
+      "id": "be sensible"
+    },
+    {
+      "english": "check again",
+      "chinese": "再次检查",
+      "id": "check again"
+    },
+    {
+      "english": "check around",
+      "chinese": "检查周围",
+      "id": "check around"
+    },
+    {
+      "english": "cool down",
+      "chinese": "冷静下来",
+      "id": "cool down"
+    },
+    {
+      "english": "memorize it",
+      "chinese": "记住它",
+      "id": "memorize it"
+    },
+    {
+      "english": "tack control",
+      "chinese": "把握住",
+      "id": "tack control"
+    },
+    {
+      "english": "big deal",
+      "chinese": "大事一桩",
+      "id": "big deal"
+    },
+    {
+      "english": "hurry back",
+      "chinese": "快点回来",
+      "id": "hurry back"
+    },
+    {
+      "english": "get serious",
+      "chinese": "严肃起来",
+      "id": "get serious"
+    },
+    {
+      "english": "have courage",
+      "chinese": "要有勇气",
+      "id": "have courage"
+    },
+    {
+      "english": "it happened",
+      "chinese": "它发生了",
+      "id": "it happened"
+    },
+    {
+      "english": "things change",
+      "chinese": "事情变了",
+      "id": "things change"
+    },
+    {
+      "english": "thanks anyway",
+      "chinese": "无论如何要感谢",
+      "id": "thanks anyway"
+    },
+    {
+      "english": "dress warmly",
+      "chinese": "穿的暖和点",
+      "id": "dress warmly"
+    },
+    {
+      "english": "stop medding",
+      "chinese": "不要再管闲事了",
+      "id": "stop medding"
+    },
+    {
+      "english": "fix this",
+      "chinese": "解决这个问题",
+      "id": "fix this"
+    },
+    {
+      "english": "i overslept",
+      "chinese": "我睡过头了",
+      "id": "i overslept"
+    },
+    {
+      "english": "he snores",
+      "chinese": "他打鼾了",
+      "id": "he snores"
+    },
+    {
+      "english": "finish this",
+      "chinese": "完成这个",
+      "id": "finish this"
+    },
+    {
+      "english": "i well",
+      "chinese": "我会的",
+      "id": "i well"
+    },
+    {
+      "english": "stop whining",
+      "chinese": "不要再抱怨了",
+      "id": "stop whining"
+    },
+    {
+      "english": "taste this",
+      "chinese": "尝尝这个",
+      "id": "taste this"
+    },
+    {
+      "english": "be vigilant",
+      "chinese": "保持警惕",
+      "id": "be vigilant"
+    },
+    {
+      "english": "holy cow!",
+      "chinese": "哇喔！",
+      "id": "holy cow!"
+    },
+    {
+      "id": "holy saoke!",
+      "english": "holy smoke!",
+      "chinese": "哇奥！"
+    },
+    {
+      "english": "dear me",
+      "chinese": "天啊！",
+      "id": "dear me"
+    },
+    {
+      "english": "you better",
+      "chinese": "你最好",
+      "id": "you better"
+    },
+    {
+      "english": "better hope",
+      "chinese": "更好的希望",
+      "id": "better hope"
+    },
+    {
+      "english": "can't complain",
+      "chinese": "不能抱怨",
+      "id": "can't complain"
+    },
+    {
+      "english": "of course",
+      "chinese": "当然了",
+      "id": "of course"
+    },
+    {
+      "english": "it's crazy",
+      "chinese": "这很疯狂",
+      "id": "it's crazy"
+    },
+    {
+      "english": "still up?",
+      "chinese": "还没睡？",
+      "id": "still up?"
+    },
+    {
+      "english": "i'm up",
+      "chinese": "我起来了",
+      "id": "i'm up"
+    },
+    {
+      "english": "not necessary",
+      "chinese": "没有必要",
+      "id": "not necessary"
+    },
+    {
+      "english": "nothing tricky",
+      "chinese": "没有什么棘手的",
+      "id": "nothing tricky"
+    },
+    {
+      "english": "not precisely",
+      "chinese": "不确切",
+      "id": "not precisely"
+    },
+    {
+      "english": "anything urgent",
+      "chinese": "有什么急事吗",
+      "id": "anything urgent"
     }
   ]
 }
