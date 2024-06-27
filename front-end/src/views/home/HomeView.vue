@@ -50,7 +50,7 @@ const searchWord = debounce(getWord, 300)
 </script>
 
 <template>
-  <div class="container rounded-t-xl">
+  <div class="container rounded-t-xl text-lg">
     <header class="flex items-center justify-between h-12 px-4 bg-sky-300 text-center text-white">
       <span class="w-10">{{ words.length }}</span>
       <span class="text-xl">Welcome</span>

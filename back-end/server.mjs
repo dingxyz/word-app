@@ -17,7 +17,7 @@ app.use('/words', wordsRouter);
 app.use('/users', usersRouter);
 
 initDatabase().then(() => {
-  app.listen(port, () => {
+  app.listen(port, '0.0.0.0',() => {
     console.log(`Server is running at http://localhost:${port}`);
   });
 }).catch(err => {

@@ -749,6 +749,506 @@
       "english": "anything urgent",
       "chinese": "有什么急事吗",
       "id": "anything urgent"
+    },
+    {
+      "english": "made it",
+      "chinese": "做好了",
+      "id": "id-1719490397609-4773"
+    },
+    {
+      "english": "that's beneficial",
+      "chinese": "这是有好处的",
+      "id": "id-1719490441597-6307"
+    },
+    {
+      "english": "leave now",
+      "chinese": "现在就走",
+      "id": "id-1719490471138-9231"
+    },
+    {
+      "english": "too much",
+      "chinese": "太多了",
+      "id": "id-1719490494983-7448"
+    },
+    {
+      "english": "but why",
+      "chinese": "但为什么",
+      "id": "id-1719490520973-5408"
+    },
+    {
+      "english": "but how?",
+      "chinese": "但怎么做呢",
+      "id": "id-1719490554044-233"
+    },
+    {
+      "english": "go immediately",
+      "chinese": "马上走",
+      "id": "id-1719490605654-5062"
+    },
+    {
+      "english": "handle this",
+      "chinese": "处理这个问题",
+      "id": "id-1719490639321-8001"
+    },
+    {
+      "english": "wait patiently",
+      "chinese": "耐心等待",
+      "id": "id-1719490685951-4131"
+    },
+    {
+      "english": "enjoy yourself",
+      "chinese": "享受自己",
+      "id": "id-1719490734992-7418"
+    },
+    {
+      "english": "be happy",
+      "chinese": "开心点",
+      "id": "id-1719490759567-3552"
+    },
+    {
+      "english": "help me",
+      "chinese": "帮助我",
+      "id": "id-1719490789926-8604"
+    },
+    {
+      "english": "with pleasure",
+      "chinese": "很乐意",
+      "id": "id-1719490842920-4699"
+    },
+    {
+      "english": "my pleasure",
+      "chinese": "我乐意",
+      "id": "id-1719490937777-340"
+    },
+    {
+      "english": "just imagine",
+      "chinese": "想象一下吧",
+      "id": "id-1719490988928-4898"
+    },
+    {
+      "english": "trust me",
+      "chinese": "相信我",
+      "id": "id-1719491018179-6079"
+    },
+    {
+      "english": "return immediately",
+      "chinese": "立即返回",
+      "id": "id-1719491087767-4344"
+    },
+    {
+      "english": "don't lie",
+      "chinese": "不要撒谎",
+      "id": "id-1719491134478-3586"
+    },
+    {
+      "english": "go away",
+      "chinese": "走吧",
+      "id": "id-1719491158624-5904"
+    },
+    {
+      "english": "that's terrific",
+      "chinese": "那是很好的",
+      "id": "id-1719491206957-3279"
+    },
+    {
+      "english": "i'm easy going",
+      "chinese": "我很随和",
+      "id": "id-1719491275451-3529"
+    },
+    {
+      "english": "he's outgoing",
+      "chinese": "他很外向",
+      "id": "id-1719491317201-5816"
+    },
+    {
+      "english": "stay here",
+      "chinese": "留在这里",
+      "id": "id-1719491344437-6172"
+    },
+    {
+      "english": "not ever",
+      "chinese": "永远不要",
+      "id": "id-1719491376310-1456"
+    },
+    {
+      "english": "how long",
+      "chinese": "多久",
+      "id": "id-1719491417401-8137"
+    },
+    {
+      "english": "hang on",
+      "chinese": "等一下",
+      "id": "id-1719491454705-7597"
+    },
+    {
+      "english": "nice try",
+      "chinese": "不错的尝试",
+      "id": "id-1719491497852-494"
+    },
+    {
+      "english": "you think",
+      "chinese": "你想",
+      "id": "id-1719491525136-4253"
+    },
+    {
+      "english": "don't worry",
+      "chinese": "别担心",
+      "id": "id-1719491579979-5594"
+    },
+    {
+      "english": "many thanks",
+      "chinese": "非常感谢",
+      "id": "id-1719491611952-5305"
+    },
+    {
+      "english": "you're welcome",
+      "chinese": "不客气",
+      "id": "id-1719491673292-847"
+    },
+    {
+      "english": "i'm content",
+      "chinese": "我很满意",
+      "id": "id-1719491727351-4828"
+    },
+    {
+      "english": "behave yourself",
+      "chinese": "做好你自己",
+      "id": "id-1719491801178-6826"
+    },
+    {
+      "english": "please understand",
+      "chinese": "请理解",
+      "id": "id-1719491840701-596"
+    },
+    {
+      "english": "it's incredible",
+      "chinese": "这真是不可思议",
+      "id": "id-1719491889379-3858"
+    },
+    {
+      "english": "anything special",
+      "chinese": "有什么特别的吗",
+      "id": "id-1719491929552-6130"
+    },
+    {
+      "english": "she giggled",
+      "chinese": "她咯咯地笑了",
+      "id": "id-1719491997598-3729"
+    },
+    {
+      "english": "stop daydreaming",
+      "chinese": "别做白日梦了",
+      "id": "id-1719492055755-7403"
+    },
+    {
+      "english": "stop overreacting",
+      "chinese": "停止过度反应",
+      "id": "id-1719492132786-6800"
+    },
+    {
+      "english": "i'm married",
+      "chinese": "我已经结婚了",
+      "id": "id-1719492174000-4901"
+    },
+    {
+      "english": "me too",
+      "chinese": "我也是",
+      "id": "id-1719492223659-951"
+    },
+    {
+      "english": "i'm divorced",
+      "chinese": "我已经离婚了",
+      "id": "id-1719492267695-8485"
+    },
+    {
+      "english": "poor you",
+      "chinese": "可怜的你",
+      "id": "id-1719492305487-404"
+    },
+    {
+      "english": "sleep well",
+      "chinese": "睡个好觉吧",
+      "id": "id-1719492331418-680"
+    },
+    {
+      "english": "well said",
+      "chinese": "说的好",
+      "id": "id-1719492352823-4697"
+    },
+    {
+      "english": "it's nothing",
+      "chinese": "这不算什么",
+      "id": "id-1719492387407-5247"
+    },
+    {
+      "english": "i'm flattered",
+      "chinese": "我受宠若惊",
+      "id": "id-1719492424356-2138"
+    },
+    {
+      "english": "what else?",
+      "chinese": "还有什么",
+      "id": "id-1719492451112-51"
+    },
+    {
+      "english": "forget it",
+      "chinese": "别管它了",
+      "id": "id-1719492489928-4479"
+    },
+    {
+      "english": "seems fair",
+      "chinese": "似乎很公平",
+      "id": "id-1719492521635-4447"
+    },
+    {
+      "english": "who knows",
+      "chinese": "谁知道呢",
+      "id": "id-1719492554204-366"
+    },
+    {
+      "english": "nothing else",
+      "chinese": "没有别的了",
+      "id": "id-1719498270760-7554"
+    },
+    {
+      "english": "weather changed",
+      "chinese": "天气变了",
+      "id": "id-1719498304817-3641"
+    },
+    {
+      "english": "my apologies",
+      "chinese": "我很抱歉",
+      "id": "id-1719498345083-4893"
+    },
+    {
+      "english": "pay attention",
+      "chinese": "请注意",
+      "id": "id-1719498373601-9250"
+    },
+    {
+      "english": "how's work",
+      "chinese": "工作怎么样了？",
+      "id": "id-1719498408144-7088"
+    },
+    {
+      "english": "as usual",
+      "chinese": "像往常一样",
+      "id": "id-1719498442184-2422"
+    },
+    {
+      "english": "it works",
+      "chinese": "它有用",
+      "id": "id-1719498473908-545"
+    },
+    {
+      "english": "it helps",
+      "chinese": "它有帮助",
+      "id": "id-1719498500645-1195"
+    },
+    {
+      "english": "get lost",
+      "chinese": "迷路了",
+      "id": "id-1719498526252-330"
+    },
+    {
+      "english": "too bad",
+      "chinese": "太糟糕了",
+      "id": "id-1719498555033-8309"
+    },
+    {
+      "english": "leave it",
+      "chinese": "放着吧",
+      "id": "id-1719498583292-2580"
+    },
+    {
+      "english": "don't push",
+      "chinese": "不要强求",
+      "id": "id-1719498617220-548"
+    },
+    {
+      "english": "no comment",
+      "chinese": "无可奉告",
+      "id": "id-1719498652206-9632"
+    },
+    {
+      "english": "come back",
+      "chinese": "回来吧",
+      "id": "id-1719498681473-3239"
+    },
+    {
+      "english": "come here",
+      "chinese": "来这里",
+      "id": "id-1719498707243-8234"
+    },
+    {
+      "english": "that's right",
+      "chinese": "这是对的",
+      "id": "id-1719498736708-5921"
+    },
+    {
+      "english": "feel better",
+      "chinese": "感觉好些",
+      "id": "id-1719498789304-3812"
+    },
+    {
+      "english": "definitely improving",
+      "chinese": "绝对是在改善",
+      "id": "id-1719498842815-4125"
+    },
+    {
+      "english": "i'm late",
+      "chinese": "我迟到了",
+      "id": "id-1719498881558-9716"
+    },
+    {
+      "english": "that hurts",
+      "chinese": "这很痛",
+      "id": "id-1719498926190-6344"
+    },
+    {
+      "english": "hug me",
+      "chinese": "拥抱我",
+      "id": "id-1719499000717-8361"
+    },
+    {
+      "english": "love you",
+      "chinese": "爱你",
+      "id": "id-1719499029716-3075"
+    },
+    {
+      "english": "wake up",
+      "chinese": "醒来吧",
+      "id": "id-1719499050132-4815"
+    },
+    {
+      "english": "sit down",
+      "chinese": "坐下",
+      "id": "id-1719499110100-4505"
+    },
+    {
+      "english": "scoot over",
+      "chinese": "滑行过去",
+      "id": "id-1719499141613-7282"
+    },
+    {
+      "english": "not bad",
+      "chinese": "还不错",
+      "id": "id-1719499162450-893"
+    },
+    {
+      "english": "i'm full",
+      "chinese": "我饱了",
+      "id": "id-1719499190984-2336"
+    },
+    {
+      "english": "i can",
+      "chinese": "我能",
+      "id": "id-1719499212571-6724"
+    },
+    {
+      "english": "i can't",
+      "chinese": "我不能",
+      "id": "id-1719499230641-8367"
+    },
+    {
+      "english": "it's cool",
+      "chinese": "很凉爽",
+      "id": "id-1719499262022-550"
+    },
+    {
+      "english": "it's cold",
+      "chinese": "很冷",
+      "id": "id-1719499294155-5469"
+    },
+    {
+      "english": "it's chilly",
+      "chinese": "很冷",
+      "id": "id-1719499327985-7736"
+    },
+    {
+      "english": "it's freezing",
+      "chinese": "天很寒冷",
+      "id": "id-1719499371675-3682"
+    },
+    {
+      "english": "it's snowing",
+      "chinese": "下雪了",
+      "id": "id-1719499405689-5512"
+    },
+    {
+      "english": "it's foggy",
+      "chinese": "有雾",
+      "id": "id-1719499443387-3600"
+    },
+    {
+      "english": "it's raining",
+      "chinese": "下雨了",
+      "id": "id-1719499482951-2338"
+    },
+    {
+      "english": "hurry up",
+      "chinese": "快一点",
+      "id": "id-1719499514785-3447"
+    },
+    {
+      "english": "not really",
+      "chinese": "不是的",
+      "id": "id-1719499547735-7501"
+    },
+    {
+      "english": "good job",
+      "chinese": "干得好",
+      "id": "id-1719499568470-4041"
+    },
+    {
+      "english": "well done",
+      "chinese": "干得好",
+      "id": "id-1719499592731-1554"
+    },
+    {
+      "english": "that's me",
+      "chinese": "那是我",
+      "id": "id-1719499628825-9775"
+    },
+    {
+      "english": "he's nice",
+      "chinese": "他很友好",
+      "id": "id-1719499668700-345"
+    },
+    {
+      "english": "my bad",
+      "chinese": "我的错",
+      "id": "id-1719499690539-9266"
+    },
+    {
+      "english": "i apologize",
+      "chinese": "我道歉",
+      "id": "id-1719499733582-508"
+    },
+    {
+      "english": "that's enough",
+      "chinese": "这就够了",
+      "id": "id-1719499773697-6391"
+    },
+    {
+      "english": "i'm serious",
+      "chinese": "我是认真的",
+      "id": "id-1719499800553-5239"
+    },
+    {
+      "english": "lighten up",
+      "chinese": "放松点",
+      "id": "id-1719499833176-5601"
+    },
+    {
+      "english": "sleep tight",
+      "chinese": "睡个好觉",
+      "id": "id-1719499862591-1082"
+    },
+    {
+      "english": "sweet dreams",
+      "chinese": "做个甜甜的梦",
+      "id": "id-1719499898749-5747"
     }
   ]
 }

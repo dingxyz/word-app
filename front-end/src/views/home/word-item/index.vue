@@ -25,14 +25,15 @@ const removeHandler = async (id: string) => {
 </script>
 
 <template>
-  <div class="px-4">
+  <div class="px-4 text-lg">
     <van-swipe-cell>
       <li class="li-box">
         <div class="word-box">
           <div class="content">{{ wordData.english }}</div>
-          <div class="chinese-box">{{ wordData.chinese }}</div>
+          <div class="chinese-box text-base">{{ wordData.chinese }}</div>
         </div>
-        <van-icon name="volume-o" @click="playSound(wordData.english)"/>
+<!--        <van-icon name="volume-o" />-->
+        <van-button icon="volume-o" @click="playSound(wordData.english)" plain hairline type="primary" class="px-2 h-8 border-0 bg-transparent border-transparent"  />
       </li>
 
 
@@ -52,16 +53,14 @@ const removeHandler = async (id: string) => {
   align-items: center;
 
   .chinese-box {
-    font-size: 12px;
     color: #838383;
   }
 }
 
 
 .word-box {
-  height: 44px;
-  @apply flex-1;
-  transform: translateY(8px);
+  @apply h-14 flex-1;
+  transform: translateY(12px);
   transition: transform 0.3s ease;
 
   .chinese-box {
