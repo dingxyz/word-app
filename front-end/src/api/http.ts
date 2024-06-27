@@ -4,7 +4,7 @@ import type { AxiosInstance, AxiosResponse } from 'axios';
 
 // 创建 axios 实例
 const service: AxiosInstance = axios.create({
-  baseURL: 'http://localhost:3000', // 这里是你的 API 地址
+  baseURL: 'http://localhost:3030', // 这里是你的 API 地址
   timeout: 5000, // 请求超时时间
   headers: {
     'Content-Type': 'application/json',

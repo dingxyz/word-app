@@ -8,8 +8,8 @@ export class IWord {
 }
 
 class WordApi {
-  static get(): Promise<any> {
-    return http.get('/words');
+  static get(params: any): Promise<any> {
+    return http.get('/words', { params });
   }
   static add(data: IWord): Promise<any> {
     return http.post('/words', data);

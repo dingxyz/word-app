@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "axios": "1.6.7",
+    "lodash-es": "^4.17.21",
     "pinia": "^2.1.7",
     "vant": "^4.9.1",
     "vue": "^3.4.21",
@@ -22,6 +23,7 @@
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.8.0",
     "@tsconfig/node20": "^20.1.4",
+    "@types/lodash-es": "^4.17.12",
     "@types/node": "^20.12.5",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vue/eslint-config-prettier": "^9.0.0",

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import WordApi, { IWord } from '@/api/word-api'
-import { defineComponent, reactive, ref } from 'vue'
-import {showNotify} from "vant";
+import {defineComponent, nextTick, reactive, ref} from 'vue'
+import {FieldInstance, showNotify} from "vant";
 
 defineComponent({
   name: 'AddWord',
@@ -9,8 +9,8 @@ defineComponent({
 
 const emit = defineEmits(['add-complete'])
 
+const fieldRef = ref<FieldInstance>();
 const isShow = ref(false)
-
 const wordData = reactive<IWord>(new IWord())
 
 const addHandler = () => {
@@ -36,7 +36,11 @@ const editHandler = () => {
     english,
     chinese,
   }).then(res => {
-    emit('add-complete')
+    if (res.code === '000000') {
+      emit('add-complete')
+    } else {
+      showNotify({ type: 'danger', message: res.message });
+    }
   }).finally(() => {
     isShow.value = false
   })
@@ -62,6 +66,9 @@ const resetData = () => {
 const open = (word?: IWord) => {
   isShow.value = true
   Object.assign(wordData, word || {})
+  nextTick(() => {
+    fieldRef.value?.focus()
+  })
 }
 
 defineExpose({open})
@@ -71,7 +78,7 @@ defineExpose({open})
   <van-action-sheet v-model:show="isShow" title="add" @close="resetData">
     <div>
       <van-cell-group inset>
-        <van-field v-model="wordData.english" label="en" placeholder="Please input english" label-width="40px"/>
+        <van-field v-model="wordData.english" ref="fieldRef" label="en" placeholder="Please input english" label-width="40px"/>
         <van-field v-model="wordData.chinese" label="cn" placeholder="Please input chinese" label-width="40px"/>
       </van-cell-group>
       <div class="flex justify-center m-4">
