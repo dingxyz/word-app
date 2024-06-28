@@ -10,7 +10,12 @@ export const voiceSpeak = (english: string, onEnd?: () => void) => {
     });
 }
 
-export const autoSpeak = (words: IWord[]) => {
+export const autoSpeak = (words: IWord[], value: boolean) => {
+    if (!value) {
+        stopSpeak();
+        return
+    }
+
     let index = 0
     const onEnd = () => {
         const word = words[index];
@@ -22,6 +27,6 @@ export const autoSpeak = (words: IWord[]) => {
     onEnd();
 }
 
-export const stopSpeak = () => {
+const stopSpeak = () => {
     responsiveVoice?.cancel();
 }

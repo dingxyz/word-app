@@ -1,5 +1,5 @@
 export const responseHandler = (req, res, next) => {
-    res.sendSuccess = (data = {}) => {
+    res.sendSuccess = (data = null) => {
         res.send({
             code: '000000',
             data,

@@ -17,8 +17,8 @@ class WordApi {
   static update(data: IWord): Promise<any> {
     return http.put(`/words/${data.id}`, data);
   }
-  static remove(id: string): Promise<any> {
-    return http.delete(`/words/${id}`);
+  static remove(id: string, params: any): Promise<any> {
+    return http.delete(`/words/${id}`, { params });
   }
 }
 

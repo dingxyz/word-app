@@ -1,10 +1,22 @@
-import { Low, JSONFile } from 'lowdb';
+import {JSONFile, Low} from 'lowdb';
 
-const adapter = new JSONFile('db.json');
+const adapter = new JSONFile('db/db.json');
 export const db = new Low(adapter);
+
+export const WORD_TYPE = {
+    WORDS: 'words',
+    PHRASE: 'phrase',
+    ANSWER: 'answer'
+};
 
 export async function initDatabase() {
     await db.read();
-    db.data ||= { words: [], users: [] };
+    db.data ||= {
+        users: []
+    };
+    db.data[WORD_TYPE.WORDS] ||= [];
+    db.data[WORD_TYPE.PHRASE] ||= [];
+    db.data[WORD_TYPE.ANSWER] ||= [];
+
     await db.write();
 }

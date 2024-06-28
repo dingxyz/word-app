@@ -2,6 +2,9 @@
 import WordApi, {IWord} from '@/api/word-api'
 import {defineComponent} from 'vue'
 import {voiceSpeak} from "@/utils/responsive-voice";
+import IconBtn from "@/components/IconBtn.vue";
+import {useAppStore} from "@/stores/app";
+import {showConfirmDialog} from "vant";
 
 defineComponent({
   name: 'WordItem',
@@ -11,6 +14,8 @@ defineProps<{
   wordData: IWord
 }>()
 
+const appStore = useAppStore()
+
 const playSound = (english: string) => {
   voiceSpeak(english);
 }
@@ -18,25 +23,36 @@ const playSound = (english: string) => {
 const emit = defineEmits(['refresh-list', 'edit-word'])
 
 const removeHandler = async (id: string) => {
-  await WordApi.remove(id)
+
+  const confirm = await showConfirmDialog({
+    message: 'Are you sure you want to delete?',
+    width: '280px',
+    theme: 'round-button',
+    closeOnClickOverlay: true,
+    cancelButtonText: 'Cancel',
+    cancelButtonColor: '#c7c7c7',
+    confirmButtonText: 'Confirm',
+  })
+  if (!confirm) return
+  await WordApi.remove(id, {
+    wordType: appStore.wordType,
+  })
   emit('refresh-list')
 }
 
 </script>
 
 <template>
-  <div class="px-4 text-lg">
+  <div class="px-4 text-lg odd:bg-violet-100">
     <van-swipe-cell>
       <li class="li-box">
         <div class="word-box">
           <div class="content">{{ wordData.english }}</div>
           <div class="chinese-box text-base">{{ wordData.chinese }}</div>
         </div>
-<!--        <van-icon name="volume-o" />-->
-        <van-button icon="volume-o" @click="playSound(wordData.english)" plain hairline type="primary" class="px-2 h-8 border-0 bg-transparent border-transparent"  />
+        <IconBtn icon="volume-o" @click="playSound(wordData.english)" color="blue"/>
+        <IconBtn icon="volume-o" @click="playSound(wordData.english)"/>
       </li>
-
-
       <template #right>
         <div class="flex items-center gap-3 px-3">
           <van-icon class="text-red-500" name="delete-o" @click="removeHandler(wordData.id)"/>
@@ -81,5 +97,4 @@ const removeHandler = async (id: string) => {
   display: flex;
   align-items: center;
 }
-
 </style>

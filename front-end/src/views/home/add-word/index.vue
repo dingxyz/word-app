@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import WordApi, { IWord } from '@/api/word-api'
+import WordApi, {IWord} from '@/api/word-api'
 import {defineComponent, nextTick, reactive, ref} from 'vue'
 import {FieldInstance, showNotify} from "vant";
+import {useAppStore} from "@/stores/app";
 
 defineComponent({
   name: 'AddWord',
@@ -9,54 +10,33 @@ defineComponent({
 
 const emit = defineEmits(['add-complete'])
 
+const appStore = useAppStore()
 const fieldRef = ref<FieldInstance>();
 const isShow = ref(false)
 const wordData = reactive<IWord>(new IWord())
 
-const addHandler = () => {
-  const {english, chinese} = wordData
-  WordApi.add({
-    english,
-    chinese,
-  }).then(res => {
-    if (res.code === '000000') {
-      emit('add-complete')
-    } else {
-      showNotify({ type: 'danger', message: res.message });
-    }
-  }).finally(() => {
-    isShow.value = false
-  })
-}
-
-const editHandler = () => {
-  const {id, english, chinese} = wordData
-  WordApi.update({
-    id,
-    english,
-    chinese,
-  }).then(res => {
-    if (res.code === '000000') {
-      emit('add-complete')
-    } else {
-      showNotify({ type: 'danger', message: res.message });
-    }
-  }).finally(() => {
-    isShow.value = false
-  })
-}
-
 const saveWord = () => {
-  const {english} = wordData
+  const {id, english, chinese} = wordData
   if (!english) {
     alert('Please input english')
     return
   }
-  if (wordData.id) {
-    editHandler()
-  } else {
-    addHandler()
+  const params = {
+    id: id ?? undefined,
+    english,
+    chinese,
+    wordType: appStore.wordType,
   }
+  const apiFunc = wordData.id ? WordApi.update : WordApi.add
+  apiFunc(params).then(res => {
+    if (res.code === '000000') {
+      emit('add-complete')
+    } else {
+      showNotify({type: 'danger', message: res.message});
+    }
+  }).finally(() => {
+    isShow.value = false
+  })
 }
 
 const resetData = () => {
@@ -75,7 +55,7 @@ defineExpose({open})
 </script>
 
 <template>
-  <van-action-sheet v-model:show="isShow" title="add" @close="resetData">
+  <van-action-sheet v-model:show="isShow" :title="wordData.id? 'Edit Word' : 'Add Word'" @closed="resetData">
     <div>
       <van-cell-group inset>
         <van-field v-model="wordData.english" ref="fieldRef" label="en" placeholder="Please input english" label-width="40px"/>
@@ -87,7 +67,3 @@ defineExpose({open})
     </div>
   </van-action-sheet>
 </template>
-
-<style scoped lang="scss">
-
-</style>

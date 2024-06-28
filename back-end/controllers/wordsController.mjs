@@ -2,21 +2,21 @@ import {db} from '../db/initDatabase.mjs';
 import {generateUniqueId} from "../utils/commonUtil.mjs";
 
 export const getWords = async (req, res) => {
-    const { searchKey } = req.query;
-    let sendData = [];
+    const {searchKey, wordType} = req.query;
+    let sendData = null;
     await db.read();
     if (searchKey) {
-        sendData = db.data.words.filter(w => w.english.toLowerCase().includes(searchKey.toLowerCase()) || w.chinese.toLowerCase().includes(searchKey.toLowerCase()));
+        sendData = db.data[wordType].filter(w => w.english.toLowerCase().includes(searchKey.toLowerCase()) || w.chinese.toLowerCase().includes(searchKey.toLowerCase()));
     } else {
-        sendData = db.data.words;
+        sendData = db.data[wordType];
     }
-    res.sendSuccess(sendData);
+    res.sendSuccess(sendData ?? []);
 };
 
 export const addWord = async (req, res) => {
-    const { body } = req;
-    const newId = body.english.trim().toLowerCase();
-    const existingWord = db.data.words?.find(w => w.english.trim().toLowerCase() === body.english.trim().toLowerCase());
+    const {body} = req;
+    const {wordType} = body
+    const existingWord = db.data[wordType]?.find(w => w.english.trim().toLowerCase() === body.english.trim().toLowerCase());
 
     if (existingWord) {
         res.sendError("Word already exists");
@@ -25,32 +25,32 @@ export const addWord = async (req, res) => {
 
     body.id = generateUniqueId();
     await db.read();
-    db.data.words.push(body);
+    db.data[wordType].push(body);
     await db.write();
     res.sendSuccess();
 };
 
 export const updateWord = async (req, res) => {
-    const { id } = req.params;
-    const { body } = req;
-    const existingWord = db.data.words?.find(w => w.english.trim().toLowerCase() === body.english.trim().toLowerCase());
-
+    const {id} = req.params;
+    const {body} = req;
+    const {wordType} = body
+    const existingWord = db.data[wordType]?.find(w => w.english.trim().toLowerCase() === body.english.trim().toLowerCase());
     if (existingWord) {
         res.sendError("Word already exists");
         return;
     }
-
     await db.read();
-    const index = db.data.words.findIndex(w => w.id === id);
-    db.data.words[index] = body;
+    const index = db.data[wordType].findIndex(w => w.id === id);
+    db.data[wordType][index] = body;
     await db.write();
     res.sendSuccess();
 };
 
 export const deleteWord = async (req, res) => {
-    const { id } = req.params;
+    const {id} = req.params;
+    const {wordType} = req.query;
     await db.read();
-    db.data.words = db.data.words.filter(n => n.id !== id);
+    db.data[wordType] = db.data[wordType].filter(n => n.id !== id);
     await db.write();
     res.sendSuccess();
 };
