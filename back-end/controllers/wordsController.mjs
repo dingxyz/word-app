@@ -33,15 +33,17 @@ export const addWord = async (req, res) => {
 export const updateWord = async (req, res) => {
     const {id} = req.params;
     const {body} = req;
-    const {wordType} = body
-    const existingWord = db.data[wordType]?.find(w => w.english.trim().toLowerCase() === body.english.trim().toLowerCase());
-    if (existingWord) {
-        res.sendError("Word already exists");
-        return;
-    }
+    const {wordType, english, chinese} = body
+    // const existingWord = db.data[wordType]?.find(w => w.english.trim().toLowerCase() === body.english.trim().toLowerCase());
+    // if (existingWord) {
+    //     res.sendError("Word already exists");
+    //     return;
+    // }
     await db.read();
     const index = db.data[wordType].findIndex(w => w.id === id);
-    db.data[wordType][index] = body;
+    db.data[wordType][index] = {
+      id,english,chinese
+    };
     await db.write();
     res.sendSuccess();
 };

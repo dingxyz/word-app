@@ -1251,13 +1251,586 @@
       "id": "id-1719499898749-5747"
     }
   ],
-  "phrase": [],
+  "phrase": [
+    {
+      "english": "what's the fuss?",
+      "chinese": "吵什么呢？",
+      "id": "id-1719644043544-4834"
+    },
+    {
+      "english": "still up?",
+      "chinese": "还没睡呀？",
+      "id": "id-1719644117845-2002"
+    },
+    {
+      "id": "id-1719644218480-4608",
+      "english": "it doesn't make any difference",
+      "chinese": "没关系,没什么区别"
+    },
+    {
+      "id": "id-1719644699505-1007",
+      "english": "it is a deal",
+      "chinese": "一言为定"
+    },
+    {
+      "english": "tack a seat",
+      "chinese": "请坐",
+      "wordType": "phrase",
+      "id": "id-1719644811447-9995"
+    },
+    {
+      "english": "it can be a killer",
+      "chinese": "这是个伤脑筋的问题",
+      "wordType": "phrase",
+      "id": "id-1719644959171-4897"
+    },
+    {
+      "english": "it's up in the air",
+      "chinese": "尚未确定",
+      "wordType": "phrase",
+      "id": "id-1719645244529-2332"
+    },
+    {
+      "english": "i am all ears",
+      "chinese": "我洗耳恭听",
+      "wordType": "phrase",
+      "id": "id-1719645973463-8086"
+    },
+    {
+      "english": "right over there",
+      "chinese": "就在那里",
+      "wordType": "phrase",
+      "id": "id-1719646220399-3727"
+    },
+    {
+      "english": "get an eyeful",
+      "chinese": "看个够",
+      "wordType": "phrase",
+      "id": "id-1719646323201-8226"
+    },
+    {
+      "english": "here we are",
+      "chinese": "我们到了",
+      "wordType": "phrase",
+      "id": "id-1719646369152-32"
+    },
+    {
+      "english": "i lost my way",
+      "chinese": "我迷路了",
+      "wordType": "phrase",
+      "id": "id-1719646437747-4645"
+    },
+    {
+      "english": "say hello to everybody for me",
+      "chinese": "替我向大家问好",
+      "wordType": "phrase",
+      "id": "id-1719646530018-6183"
+    },
+    {
+      "english": "not precisely",
+      "chinese": "不见得，不一定",
+      "wordType": "phrase",
+      "id": "id-1719646655196-5043"
+    },
+    {
+      "english": "that's unfair",
+      "chinese": "这不公平",
+      "wordType": "phrase",
+      "id": "id-1719646712848-27"
+    },
+    {
+      "english": "we have no way out",
+      "chinese": "我们没有办法",
+      "wordType": "phrase",
+      "id": "id-1719646769264-4694"
+    },
+    {
+      "english": "that's great",
+      "chinese": "太棒了！",
+      "wordType": "phrase",
+      "id": "id-1719647034822-6104"
+    },
+    {
+      "english": "you are welcome",
+      "chinese": "别客气",
+      "wordType": "phrase",
+      "id": "id-1719647091105-9255"
+    },
+    {
+      "english": "i'm bored to death",
+      "chinese": "我无聊死了",
+      "wordType": "phrase",
+      "id": "id-1719647185253-4625"
+    },
+    {
+      "english": "Bottoms up",
+      "chinese": "干杯！",
+      "wordType": "phrase",
+      "id": "id-1719647264223-1780"
+    },
+    {
+      "english": "my girlfriend and I broke up",
+      "chinese": "我和我的女朋友吹了",
+      "wordType": "phrase",
+      "id": "id-1719647383447-3191"
+    },
+    {
+      "english": "big mouth",
+      "chinese": "多嘴驴！",
+      "wordType": "phrase",
+      "id": "id-1719647486936-5164"
+    },
+    {
+      "english": "can do",
+      "chinese": "能人",
+      "wordType": "phrase",
+      "id": "id-1719647539094-8354"
+    },
+    {
+      "english": "good luck",
+      "chinese": "祝你好运",
+      "wordType": "phrase",
+      "id": "id-1719647564577-4246"
+    },
+    {
+      "english": "mack up",
+      "chinese": "不记前嫌",
+      "wordType": "phrase",
+      "id": "id-1719647590755-3949"
+    },
+    {
+      "english": "he neither drinks nor smokes",
+      "chinese": "他既不抽烟也不喝酒",
+      "wordType": "phrase",
+      "id": "id-1719647686808-2986"
+    },
+    {
+      "english": "watch your mouth",
+      "chinese": "注意言辞",
+      "wordType": "phrase",
+      "id": "id-1719647783059-8686"
+    },
+    {
+      "english": "anything urgent",
+      "chinese": "有急事吗？",
+      "wordType": "phrase",
+      "id": "id-1719648175820-4682"
+    },
+    {
+      "english": "made it",
+      "chinese": "获得成功",
+      "wordType": "phrase",
+      "id": "id-1719648277436-3344"
+    },
+    {
+      "english": "i'll be seeing you",
+      "chinese": "再见",
+      "wordType": "phrase",
+      "id": "id-1719648331718-1840"
+    },
+    {
+      "english": "can you give me a lift?",
+      "chinese": "能让我搭一程吗",
+      "wordType": "phrase",
+      "id": "id-1719648408510-373"
+    },
+    {
+      "english": "it's raining",
+      "chinese": "下雨了",
+      "wordType": "phrase",
+      "id": "id-1719648596507-2091"
+    },
+    {
+      "english": "don't get loaded",
+      "chinese": "别喝醉了",
+      "wordType": "phrase",
+      "id": "id-1719648686508-6568"
+    },
+    {
+      "english": "stay away from him",
+      "chinese": "别靠近他",
+      "wordType": "phrase",
+      "id": "id-1719648907131-5646"
+    },
+    {
+      "english": "he's a pain in the neck",
+      "chinese": "他真让人讨厌",
+      "wordType": "phrase",
+      "id": "id-1719649016902-4495"
+    },
+    {
+      "english": "stop making up stories",
+      "chinese": "不要捏造事实",
+      "wordType": "phrase",
+      "id": "id-1719649089101-2545"
+    },
+    {
+      "english": "absence makes the heart grow fonder",
+      "chinese": "小别胜新婚",
+      "wordType": "phrase",
+      "id": "id-1719649184178-8060"
+    },
+    {
+      "english": "she makes a mess of things",
+      "chinese": "她把事情搞得一塌糊涂",
+      "wordType": "phrase",
+      "id": "id-1719649283024-4447"
+    },
+    {
+      "english": "he has a good eye",
+      "chinese": "他的眼睛很锐利",
+      "wordType": "phrase",
+      "id": "id-1719649367107-6713"
+    },
+    {
+      "english": "shoot the breeze",
+      "chinese": "闲谈",
+      "wordType": "phrase",
+      "id": "id-1719649449819-1382"
+    },
+    {
+      "english": "tell me when",
+      "chinese": "随时奉陪",
+      "wordType": "phrase",
+      "id": "id-1719650078293-7560"
+    },
+    {
+      "english": "it's a small world",
+      "chinese": "世界真是小",
+      "wordType": "phrase",
+      "id": "id-1719650150525-9464"
+    },
+    {
+      "english": "not at all",
+      "chinese": "一点也不",
+      "wordType": "phrase",
+      "id": "id-1719650226348-1664"
+    },
+    {
+      "english": "let's play it by ear",
+      "chinese": "我们随机应变",
+      "wordType": "phrase",
+      "id": "id-1719650284818-5618"
+    },
+    {
+      "english": "wait and see",
+      "chinese": "等着瞧",
+      "wordType": "phrase",
+      "id": "id-1719650455935-5550"
+    },
+    {
+      "english": "why so blue",
+      "chinese": "怎么垂头丧气",
+      "wordType": "phrase",
+      "id": "id-1719650515059-5933"
+    },
+    {
+      "english": "what brought you here",
+      "chinese": "什么风把你吹来了",
+      "wordType": "phrase",
+      "id": "id-1719650585157-2065"
+    },
+    {
+      "english": "hang on",
+      "chinese": "别挂电话",
+      "wordType": "phrase",
+      "id": "id-1719650733114-7272"
+    },
+    {
+      "english": "leave me alone",
+      "chinese": "别理我",
+      "wordType": "phrase",
+      "id": "id-1719650757806-5356"
+    },
+    {
+      "english": "chin up",
+      "chinese": "振作些",
+      "wordType": "phrase",
+      "id": "id-1719650819189-2090"
+    },
+    {
+      "id": "id-1719650877361-5287",
+      "english": "dead end",
+      "chinese": "死胡同"
+    },
+    {
+      "english": "once in a blue moon",
+      "chinese": "这是千载难逢的事",
+      "wordType": "phrase",
+      "id": "id-1719650939831-5799"
+    },
+    {
+      "english": "he pushes his luck",
+      "chinese": "他太贪心了",
+      "wordType": "phrase",
+      "id": "id-1719650989123-4943"
+    },
+    {
+      "english": "it's high quality",
+      "chinese": "它质量上乘",
+      "wordType": "phrase",
+      "id": "id-1719651066547-5418"
+    },
+    {
+      "english": "you never know",
+      "chinese": "世事难料",
+      "wordType": "phrase",
+      "id": "id-1719651115135-4711"
+    },
+    {
+      "english": "i stay at home alot",
+      "chinese": "我多半在家里",
+      "wordType": "phrase",
+      "id": "id-1719651190754-4547"
+    },
+    {
+      "english": "he'll be here in a few minutes",
+      "chinese": "他马上会过来",
+      "wordType": "phrase",
+      "id": "id-1719651267841-5864"
+    },
+    {
+      "english": "i'm not in a good mood",
+      "chinese": "没有心情(做某事)",
+      "wordType": "phrase",
+      "id": "id-1719651335955-9016"
+    },
+    {
+      "english": "he's a fast talker",
+      "chinese": "他是个吹牛大王",
+      "wordType": "phrase",
+      "id": "id-1719651398280-7683"
+    },
+    {
+      "english": "darling",
+      "chinese": "亲爱的",
+      "wordType": "phrase",
+      "id": "id-1719651463830-4485"
+    },
+    {
+      "english": "nobody by that name works here",
+      "chinese": "这里没有这个人",
+      "wordType": "phrase",
+      "id": "id-1719651559419-5030"
+    },
+    {
+      "english": "would you mind making less noise",
+      "chinese": "能不能小声点",
+      "wordType": "phrase",
+      "id": "id-1719651642706-4241"
+    },
+    {
+      "english": "he doesn't drink or smoke",
+      "chinese": "他既不喝酒也不抽烟",
+      "wordType": "phrase",
+      "id": "id-1719651823753-4479"
+    },
+    {
+      "english": "i can't make both ends meet",
+      "chinese": "我无法维持生计",
+      "wordType": "phrase",
+      "id": "id-1719651949189-9213"
+    },
+    {
+      "english": "where are you going",
+      "chinese": "你要去哪里",
+      "wordType": "phrase",
+      "id": "id-1719652002053-9595"
+    },
+    {
+      "english": "she's still mad at me",
+      "chinese": "她还在生我的气",
+      "wordType": "phrase",
+      "id": "id-1719652081362-4698"
+    },
+    {
+      "english": "i'll get even with him one day",
+      "chinese": "我总有一天跟他扯平",
+      "wordType": "phrase",
+      "id": "id-1719652183524-8554"
+    },
+    {
+      "english": "hit the ceiling",
+      "chinese": "大发雷霆",
+      "wordType": "phrase",
+      "id": "id-1719652244328-2441"
+    },
+    {
+      "english": "she's got quite a wad",
+      "chinese": "她身怀巨款",
+      "wordType": "phrase",
+      "id": "id-1719652335278-7693"
+    },
+    {
+      "english": "i don't have to be anywhere",
+      "chinese": "我没有什么计划",
+      "wordType": "phrase",
+      "id": "id-1719652425276-9755"
+    },
+    {
+      "english": "i'm dying to see you",
+      "chinese": "我很想见你",
+      "wordType": "phrase",
+      "id": "id-1719652510158-6153"
+    },
+    {
+      "english": "i swear to God",
+      "chinese": "我对天发誓",
+      "wordType": "phrase",
+      "id": "id-1719652612490-9919"
+    },
+    {
+      "english": "nothing tricky",
+      "chinese": "别耍花招",
+      "wordType": "phrase",
+      "id": "id-1719652672500-1216"
+    },
+    {
+      "english": "you should apologize",
+      "chinese": "你应该道歉",
+      "wordType": "phrase",
+      "id": "id-1719652742179-5783"
+    },
+    {
+      "english": "you don't seem to be yourself today",
+      "chinese": "你今天看起来不大对劲",
+      "wordType": "phrase",
+      "id": "id-1719652837712-9877"
+    },
+    {
+      "english": "do you have any money on you",
+      "chinese": "你身上带钱了吗",
+      "wordType": "phrase",
+      "id": "id-1719652914268-9035"
+    },
+    {
+      "english": "what is your major",
+      "chinese": "你学什么专业",
+      "wordType": "phrase",
+      "id": "id-1719652972957-7091"
+    }
+  ],
   "answer": [
     {
-      "english": "sdafa",
-      "chinese": "asdsf adsf ",
+      "english": "访谈节目很适合学英语",
+      "chinese": "",
       "wordType": "answer",
-      "id": "id-1719560126350-2992"
+      "id": "id-1719654204406-2490"
+    },
+    {
+      "english": "摩登家庭  美剧",
+      "chinese": "",
+      "wordType": "answer",
+      "id": "id-1719654847715-8745"
+    },
+    {
+      "english": "老爸老妈的浪漫史 美剧",
+      "chinese": "",
+      "wordType": "answer",
+      "id": "id-1719654861836-6397"
+    },
+    {
+      "english": "访谈 艾伦秀",
+      "chinese": "",
+      "wordType": "answer",
+      "id": "id-1719654901066-3602"
+    },
+    {
+      "english": "访谈 柯南",
+      "chinese": "",
+      "wordType": "answer",
+      "id": "id-1719654910038-2005"
+    },
+    {
+      "english": "神烦警探 美剧",
+      "chinese": "",
+      "wordType": "answer",
+      "id": "id-1719655079506-3968"
+    },
+    {
+      "english": "实习医生风云 美剧",
+      "chinese": "",
+      "wordType": "answer",
+      "id": "id-1719655105940-9422"
+    },
+    {
+      "id": "id-1719655117622-3858",
+      "english": "硅谷 silicon valley 美剧",
+      "chinese": ""
+    },
+    {
+      "english": "博主 casey neistat",
+      "chinese": "",
+      "wordType": "answer",
+      "id": "id-1719655554305-7720"
+    },
+    {
+      "english": "博主 best dressed",
+      "chinese": "",
+      "wordType": "answer",
+      "id": "id-1719655596093-2270"
+    }
+  ],
+  "sentence": [
+    {
+      "english": "搜索时不区分type",
+      "chinese": "",
+      "wordType": "sentence",
+      "id": "id-1719644830741-9228"
+    },
+    {
+      "english": "新增时查重所有的",
+      "chinese": "",
+      "wordType": "sentence",
+      "id": "id-1719644863287-4820"
+    },
+    {
+      "english": "对type进行记忆",
+      "chinese": "",
+      "wordType": "sentence",
+      "id": "id-1719645162708-5740"
+    },
+    {
+      "english": "让chatgpt 进行发音",
+      "chinese": "",
+      "wordType": "sentence",
+      "id": "id-1719646243742-8801"
+    },
+    {
+      "english": "增加可以显示详情的功能",
+      "chinese": "",
+      "wordType": "sentence",
+      "id": "id-1719647111444-339"
+    },
+    {
+      "english": "自动播放时从当前位置播放",
+      "chinese": "",
+      "wordType": "sentence",
+      "id": "id-1719648834974-6710"
+    },
+    {
+      "english": "长句子换行显示",
+      "chinese": "",
+      "wordType": "sentence",
+      "id": "id-1719649232905-1199"
+    },
+    {
+      "english": "英语和中文上下反转时完全分开",
+      "chinese": "",
+      "wordType": "sentence",
+      "id": "id-1719649499945-7139"
+    },
+    {
+      "english": "设置里增加只显示中文的功能",
+      "chinese": "",
+      "wordType": "sentence",
+      "id": "id-1719649519582-191"
+    },
+    {
+      "english": "复制的功能",
+      "chinese": "",
+      "wordType": "sentence",
+      "id": "id-1719650638697-1318"
     }
   ]
 }

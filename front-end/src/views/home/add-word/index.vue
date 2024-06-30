@@ -21,6 +21,7 @@ const saveWord = () => {
     alert('Please input english')
     return
   }
+  isShow.value = false
   const params = {
     id: id ?? undefined,
     english,
@@ -34,8 +35,6 @@ const saveWord = () => {
     } else {
       showNotify({type: 'danger', message: res.message});
     }
-  }).finally(() => {
-    isShow.value = false
   })
 }
 

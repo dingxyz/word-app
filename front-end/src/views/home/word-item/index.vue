@@ -43,7 +43,7 @@ const removeHandler = async (id: string) => {
 </script>
 
 <template>
-  <div class="px-4 text-lg odd:bg-violet-100">
+  <div class="px-2 text-lg odd:bg-violet-100">
     <van-swipe-cell>
       <li class="li-box">
         <div class="word-box">

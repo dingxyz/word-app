@@ -22,6 +22,7 @@ const wordType = computed({
     <van-radio-group v-model="wordType" @change="emit('refresh-list')" shape="dot">
       <van-radio name="words" class="m-4">words</van-radio>
       <van-radio name="phrase" class="m-4">phrase</van-radio>
+      <van-radio name="sentence" class="m-4">sentence</van-radio>
       <van-radio name="answer" class="m-4">answer</van-radio>
     </van-radio-group>
     <template #reference>

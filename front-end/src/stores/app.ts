@@ -4,6 +4,7 @@ import {defineStore} from 'pinia'
 export enum WORD_TYPE {
   WORDS = 'words',
   PHRASE = 'phrase',
+  SENTENCE = 'sentence',
   ANSWER = 'answer'
 }
 

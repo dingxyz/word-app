@@ -6,6 +6,7 @@ export const db = new Low(adapter);
 export const WORD_TYPE = {
     WORDS: 'words',
     PHRASE: 'phrase',
+    SENTENCE: 'sentence',
     ANSWER: 'answer'
 };
 
@@ -16,6 +17,7 @@ export async function initDatabase() {
     };
     db.data[WORD_TYPE.WORDS] ||= [];
     db.data[WORD_TYPE.PHRASE] ||= [];
+    db.data[WORD_TYPE.SENTENCE] ||= [];
     db.data[WORD_TYPE.ANSWER] ||= [];
 
     await db.write();

@@ -43,7 +43,7 @@ const searchWord = debounce(getWord, 300)
       <span class="text-xl">Welcome</span>
       <WordTypeSelect @refresh-list="getWord"/>
     </header>
-    <article class="flex-1 bg-violet-50 rounded-b-xl overflow-auto opacity-10">
+    <article class="flex-1 bg-violet-50 rounded-b-xl overflow-auto opacity-100">
       <ul>
         <WordItem
           v-for="word in words"
