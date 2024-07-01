@@ -59,11 +59,11 @@ export const addWord = async (req, res) => {
 export const updateWord = async (req, res) => {
     const {id} = req.params;
     const {body} = req;
-    const {wordType, english, chinese} = body
+    const {wordType, english, chinese, annotation} = body
     await db.read();
     const index = db.data[wordType].findIndex(w => w.id === id);
     db.data[wordType][index] = {
-        id, english, chinese
+        id, english, chinese, annotation
     };
     await db.write();
     res.sendSuccess();

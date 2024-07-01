@@ -16,7 +16,7 @@ const isShow = ref(false)
 const wordData = reactive<IWord>(new IWord())
 
 const saveWord = () => {
-  const {id, english, chinese} = wordData
+  const {id, english, chinese, annotation} = wordData
   if (!english) {
     alert('Please input english')
     return
@@ -26,6 +26,7 @@ const saveWord = () => {
     id: id ?? undefined,
     english,
     chinese,
+    annotation,
     wordType: appStore.wordType,
   }
   const apiFunc = wordData.id ? WordApi.update : WordApi.add
@@ -59,6 +60,7 @@ defineExpose({open})
       <van-cell-group inset>
         <van-field v-model="wordData.english" ref="fieldRef" label="en" placeholder="Please input english" label-width="40px"/>
         <van-field v-model="wordData.chinese" label="cn" placeholder="Please input chinese" label-width="40px"/>
+        <van-field v-model="wordData.annotation" type="textarea" label="annotation" placeholder="Please input annotation" label-width="40px"/>
       </van-cell-group>
       <div class="flex justify-center m-4">
         <van-button type="success" @click="saveWord" size="small">SAVE WORD</van-button>

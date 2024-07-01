@@ -5,6 +5,7 @@ export class IWord {
   id?: string = null;
   english: string = '';
   chinese: string = '';
+  annotation?: string = ''
 }
 
 class WordApi {

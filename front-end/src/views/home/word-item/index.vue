@@ -1,25 +1,30 @@
 <script setup lang="ts">
 import WordApi, {IWord} from '@/api/word-api'
-import {defineComponent, nextTick, ref, watch} from 'vue'
+import {computed, defineComponent, nextTick, ref, watch} from 'vue'
 import {voiceSpeak} from "@/utils/responsive-voice";
 import IconBtn from "@/components/IconBtn.vue";
 import {useAppStore} from "@/stores/app";
 import {showConfirmDialog} from "vant";
 import {copyToClipboard} from "@/utils/common-util";
+import {marked} from "marked";
 
 defineComponent({
   name: 'WordItem',
 })
 
-defineProps<{
+const poops = defineProps<{
   wordData: IWord
   index: number
 }>()
 
 const appStore = useAppStore()
 const emit = defineEmits(['refresh-list', 'edit-word'])
+const showDetailPopup = ref(false)
 const showChinese = ref(false)
 watch(() => appStore.showChineseChecked, (val) => showChinese.value = val)
+const compiledMarkdown = computed(() => {
+  return marked(poops.wordData.annotation);
+});
 
 const removeHandler = async (id: string) => {
   const confirm = await showConfirmDialog({
@@ -46,6 +51,10 @@ const mouseHandler = (isHover: boolean) => {
 
 const playSound = (english: string) => voiceSpeak(english)
 
+const openDetail = () => {
+  showDetailPopup.value = true
+}
+
 </script>
 
 <template>
@@ -61,6 +70,7 @@ const playSound = (english: string) => voiceSpeak(english)
           <div class="btn h-14 flex items-center" @click="showChinese = true">{{ wordData.english }}</div>
           <div class="btn h-14 flex items-center text-slate-400 text-base" @click="showChinese = false">{{ index + 1 }} --{{ wordData.chinese }}</div>
         </div>
+        <IconBtn v-if="wordData.annotation" icon="eye-o" @click="openDetail"/>
         <IconBtn icon="notes-o" @click.stop="copyToClipboard(showChinese ? wordData.chinese : wordData.english)"/>
         <IconBtn icon="volume-o" @click="playSound(wordData.english)"/>
       </li>
@@ -71,6 +81,7 @@ const playSound = (english: string) => voiceSpeak(english)
         </div>
       </template>
     </van-swipe-cell>
+    <van-popup v-model:show="showDetailPopup" v-if="wordData.annotation" closeable round class="p-2" ><div v-html="compiledMarkdown"></div></van-popup>
   </div>
 </template>
 
