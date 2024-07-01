@@ -7,7 +7,8 @@ export const WORD_TYPE = {
     WORDS: 'words',
     PHRASE: 'phrase',
     SENTENCE: 'sentence',
-    ANSWER: 'answer'
+    ANSWER: 'answer',
+    NOTEBOOK: 'notebook'
 };
 
 export async function initDatabase() {
@@ -19,6 +20,7 @@ export async function initDatabase() {
     db.data[WORD_TYPE.PHRASE] ||= [];
     db.data[WORD_TYPE.SENTENCE] ||= [];
     db.data[WORD_TYPE.ANSWER] ||= [];
+    db.data[WORD_TYPE.NOTEBOOK] ||= [];
 
     await db.write();
 }

@@ -1,12 +1,29 @@
 import {db} from '../db/initDatabase.mjs';
 import {generateUniqueId} from "../utils/commonUtil.mjs";
 
+export const WORD_TYPE = {
+    WORDS: 'words',
+    PHRASE: 'phrase',
+    SENTENCE: 'sentence',
+    ANSWER: 'answer',
+    NOTEBOOK: 'notebook'
+};
+
 export const getWords = async (req, res) => {
     const {searchKey, wordType} = req.query;
-    let sendData = null;
+    let sendData = [];
     await db.read();
     if (searchKey) {
-        sendData = db.data[wordType].filter(w => w.english.toLowerCase().includes(searchKey.toLowerCase()) || w.chinese.toLowerCase().includes(searchKey.toLowerCase()));
+        Object.values(WORD_TYPE).forEach(type => {
+            if (db.data[type]) {
+                sendData = sendData.concat(
+                    db.data[type].filter(w =>
+                        w.english.toLowerCase().includes(searchKey.toLowerCase()) ||
+                        w.chinese.toLowerCase().includes(searchKey.toLowerCase())
+                    )
+                );
+            }
+        });
     } else {
         sendData = db.data[wordType];
     }
@@ -16,8 +33,17 @@ export const getWords = async (req, res) => {
 export const addWord = async (req, res) => {
     const {body} = req;
     const {wordType} = body
-    const existingWord = db.data[wordType]?.find(w => w.english.trim().toLowerCase() === body.english.trim().toLowerCase());
 
+    let existingWord = null;
+    Object.values(WORD_TYPE).some(type => {
+        if (db.data[type]) {
+            existingWord = db.data[type].find(w => w.english.trim().toLowerCase() === body.english.trim().toLowerCase());
+            if (existingWord) {
+                return true;
+            }
+        }
+        return false;
+    });
     if (existingWord) {
         res.sendError("Word already exists");
         return;
@@ -34,15 +60,10 @@ export const updateWord = async (req, res) => {
     const {id} = req.params;
     const {body} = req;
     const {wordType, english, chinese} = body
-    // const existingWord = db.data[wordType]?.find(w => w.english.trim().toLowerCase() === body.english.trim().toLowerCase());
-    // if (existingWord) {
-    //     res.sendError("Word already exists");
-    //     return;
-    // }
     await db.read();
     const index = db.data[wordType].findIndex(w => w.id === id);
     db.data[wordType][index] = {
-      id,english,chinese
+        id, english, chinese
     };
     await db.write();
     res.sendSuccess();

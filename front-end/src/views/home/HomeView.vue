@@ -37,18 +37,19 @@ const searchWord = debounce(getWord, 300)
 </script>
 
 <template>
-  <div class="w-auto max-w-xl flex flex-1 flex-col container rounded-t-xl text-lg overflow-auto m-2">
+  <div class="w-auto max-w-xl flex flex-1 flex-col container rounded-t-xl text-lg overflow-auto m-2 opacity-20">
     <header class="flex items-center justify-between h-12 px-4 bg-fuchsia-300 text-center text-white">
       <span class="w-10">{{ words.length }}</span>
-      <span class="text-xl">Welcome</span>
+      <span class="text-xl">{{ appStore.wordType }}</span>
       <WordTypeSelect @refresh-list="getWord"/>
     </header>
-    <article class="flex-1 bg-violet-50 rounded-b-xl overflow-auto opacity-100">
+    <article class="flex-1 bg-violet-50 rounded-b-xl overflow-auto">
       <ul>
         <WordItem
-          v-for="word in words"
+          v-for="(word, index) in words"
           :key="word.id"
           :wordData="word"
+          :index="index"
           @refresh-list="getWord"
           @edit-word="editWordOpen"
         />

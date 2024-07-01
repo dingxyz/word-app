@@ -24,6 +24,7 @@ const wordType = computed({
       <van-radio name="phrase" class="m-4">phrase</van-radio>
       <van-radio name="sentence" class="m-4">sentence</van-radio>
       <van-radio name="answer" class="m-4">answer</van-radio>
+      <van-radio name="notebook" class="m-4">notebook</van-radio>
     </van-radio-group>
     <template #reference>
       <IconBtn icon="list-switch"/>
