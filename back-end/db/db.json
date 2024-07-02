@@ -2375,28 +2375,19 @@
   ],
   "sentence": [
     {
-      "id": "id-1719646243742-8801",
-      "english": "让chatgpt 进行发音",
-      "chinese": "asdfasdf"
-    },
-    {
-      "id": "id-1719647111444-339",
-      "english": "增加可以显示详情的功能",
-      "chinese": "sdfasdf"
-    },
-    {
       "id": "id-1719648834974-6710",
       "english": "自动播放时从当前位置播放",
       "chinese": "dd",
       "annotation": "\"I'm bored\" 是一个常见的英语短语，用来表达一个人感到无聊或对当前情况没有兴趣。\n\n### 详细解释\n\n#### 1. 定义\n- **I'm**：I am 的缩写形式，表示“我”。\n- **bored**：形容词，表示“无聊的”。\n\n#### 2. 发音\n- **I'm**: /aɪm/\n- **bored**: /bɔːrd/\n\n#### 3. 用法\n- 这个短语通常用在对话中，当你想告诉别人你觉得某件事无趣或者没有事情可做时，可以说 \"I'm bored\"。\n\n#### 4. 例句\n- \"I'm bored. Let's go for a walk.\"\n- \"There's nothing to do here. I'm so bored.\"\n\n#### 5. 同义词\n- I'm uninterested.\n- I'm disinterested.\n- I'm not entertained.\n\n#### 6. 反义词\n- I'm excited.\n- I'm interested.\n- I'm engaged.\n\n#### 7. 文化背景\n- 在英语文化中，人们通常会用 \"I'm bored\" 来表达他们对当前活动的厌倦或者对周围环境的不满意。有时也会用这句话来寻求建议或帮助，以找到一些有趣的事情来做。\n\n#### 8. 搭配\n- bored with: \"I'm bored with this movie.\"\n- bored of: \"I'm bored of playing the same game.\"\n\n希望这些信息对你有帮助！如果有更多问题，请随时告诉我。"
     }
   ],
-  "notebook": [
+  "notebook": [],
+  "learned": [
     {
-      "english": "添加一个会的分类",
-      "chinese": "",
-      "wordType": "notebook",
-      "id": "id-1719838428334-9883"
+      "id": "id-1719646243742-8801",
+      "english": "让chatgpt 进行发音",
+      "chinese": "asdfasdf",
+      "annotation": "asdf"
     }
   ]
 }

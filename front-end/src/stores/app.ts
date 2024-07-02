@@ -6,6 +6,7 @@ export enum WORD_TYPE {
   PHRASE = 'phrase',
   SENTENCE = 'sentence',
   ANSWER = 'answer',
+  LEARNED = 'learned',
   NOTEBOOK = 'notebook'
 }
 

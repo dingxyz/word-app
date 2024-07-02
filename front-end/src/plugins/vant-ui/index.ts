@@ -1,6 +1,6 @@
 import { type App } from "vue"
 import 'vant/lib/index.css';
-import {ActionSheet, Button, CellGroup, Dialog, Field, FloatingBubble, Form, Icon, Notify, Popover, Popup, Radio, RadioGroup, Search, SwipeCell, Switch} from "vant";
+import {ActionSheet, Button, CellGroup, Dialog, Field, FloatingBubble, Form, Icon, Notify, Pagination, Popover, Popup, Radio, RadioGroup, Search, SwipeCell, Switch} from "vant";
 
 export function loadVantUI(app: App) {
   app.use(Popup);
@@ -19,4 +19,5 @@ export function loadVantUI(app: App) {
   app.use(Radio);
   app.use(RadioGroup);
   app.use(Dialog);
+  app.use(Pagination);
 }

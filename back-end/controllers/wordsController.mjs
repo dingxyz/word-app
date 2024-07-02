@@ -56,6 +56,22 @@ export const addWord = async (req, res) => {
     res.sendSuccess();
 };
 
+export const moveWord = async (req, res) => {
+    const {body} = req;
+    const {id, wordType, toType} = body
+    await db.read();
+    const index = db.data[wordType].findIndex(w => w.id === id);
+    if (index === -1) {
+        res.sendError("Word not found");
+        return;
+    }
+    const word = db.data[wordType][index];
+    db.data[wordType].splice(index, 1);
+    db.data[toType].push(word);
+    await db.write();
+    res.sendSuccess();
+};
+
 export const updateWord = async (req, res) => {
     const {id} = req.params;
     const {body} = req;
