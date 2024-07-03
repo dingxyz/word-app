@@ -2,7 +2,7 @@
 import WordApi, {IWord} from '@/api/word-api'
 import {defineComponent, nextTick, reactive, ref} from 'vue'
 import {FieldInstance, showNotify} from "vant";
-import {useAppStore} from "@/stores/app";
+import {useAppStore} from "@/stores/useApp";
 
 defineComponent({
   name: 'AddWord',
@@ -60,10 +60,10 @@ defineExpose({open})
       <van-cell-group inset>
         <van-field v-model="wordData.english" ref="fieldRef" label="en" placeholder="Please input english" label-width="40px"/>
         <van-field v-model="wordData.chinese" label="cn" placeholder="Please input chinese" label-width="40px"/>
-        <van-field v-model="wordData.annotation" type="textarea" label="annotation" placeholder="Please input annotation" label-width="40px"/>
+        <van-field v-model="wordData.annotation" type="textarea" label="annotation" placeholder="Please input annotation" clearable label-width="40px"/>
       </van-cell-group>
       <div class="flex justify-center m-4">
-        <van-button type="success" @click="saveWord" size="small">SAVE WORD</van-button>
+        <van-button type="success" @click="saveWord" block size="small">SAVE WORD</van-button>
       </div>
     </div>
   </van-action-sheet>

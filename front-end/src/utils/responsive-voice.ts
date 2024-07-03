@@ -1,6 +1,12 @@
 import {IWord} from "@/api/word-api";
 
+export enum ORDER_TYPE {
+    SEQUENTIAL = 'sequential',
+    RANDOM = 'random'
+}
+
 const responsiveVoice = window['responsiveVoice'];
+
 
 export const voiceSpeak = (english: string, onEnd?: () => void) => {
     // let words = new SpeechSynthesisUtterance(english);
@@ -10,21 +16,37 @@ export const voiceSpeak = (english: string, onEnd?: () => void) => {
     });
 }
 
-export const autoSpeak = (words: IWord[], value: boolean) => {
-    if (!value) {
+export const autoSpeak = (words: IWord[], autoPlayOrder: ORDER_TYPE) => {
+    console.log(autoPlayOrder)
+    if (!autoPlayOrder) {
         stopSpeak();
         return
     }
+    // If autoPlayOrder === ORDER_TYPE.SEQUENTIAL, play in sequence
+    // If autoPlayOrder === ORDER_TYPE.RANDOM, play randomly
+    let index = 0;
+    const totalWords = words.length;
+    let sequence: number[] = [];
 
-    let index = 0
-    const onEnd = () => {
-        const word = words[index];
-        index++;
-        if (index < words.length) {
-            voiceSpeak(word.english, onEnd);
+    if (autoPlayOrder === ORDER_TYPE.SEQUENTIAL) {
+        sequence = Array.from({ length: totalWords }, (_, i) => i);
+    } else if (autoPlayOrder === ORDER_TYPE.RANDOM) {
+        sequence = Array.from({ length: totalWords }, (_, i) => i);
+        for (let i = totalWords - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [sequence[i], sequence[j]] = [sequence[j], sequence[i]];
         }
     }
-    onEnd();
+
+    const playNext = () => {
+        if (index < totalWords) {
+            const word = words[sequence[index]];
+            index++;
+            voiceSpeak(word.english, playNext);
+        }
+    }
+
+    playNext();
 }
 
 const stopSpeak = () => {

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import WordApi, {IWord} from '@/api/word-api'
-import {computed, defineComponent, nextTick, ref, watch} from 'vue'
+import {computed, defineComponent, ref, watch} from 'vue'
 import {voiceSpeak} from "@/utils/responsive-voice";
 import IconBtn from "@/components/IconBtn.vue";
-import {useAppStore, WORD_TYPE} from "@/stores/app";
+import {useAppStore, WORD_TYPE} from "@/stores/useApp";
 import {showConfirmDialog, showNotify} from "vant";
 import {copyToClipboard} from "@/utils/common-util";
 import {marked} from "marked";
@@ -17,17 +17,6 @@ const poops = defineProps<{
   wordData: IWord
   index: number
 }>()
-
-marked.setOptions({
-  renderer: new marked.Renderer(),
-  gfm: true,
-  tables: true,
-  breaks: false,
-  pedantic: false,
-  sanitize: false,
-  smartLists: true,
-  smartypants: false
-});
 
 const appStore = useAppStore()
 const emit = defineEmits(['refresh-list', 'edit-word'])
@@ -86,8 +75,8 @@ const openDetail = () => showDetailPopup.value = true
           @mouseover="mouseHandler(true)"
           @mouseleave="mouseHandler(false)"
         >
-          <div class="btn h-14 flex items-center" >{{ wordData.english }}</div>
-          <div class="btn h-14 flex items-center text-slate-400 text-base" >{{ wordData.chinese }}</div>
+          <div class="btn h-14 flex items-center">{{ wordData.english }}</div>
+          <div class="btn h-14 flex items-center text-slate-400 text-base">{{ wordData.chinese }}</div>
         </div>
         <IconBtn v-if="wordData.annotation" icon="eye-o" @click="openDetail"/>
         <IconBtn icon="notes-o" @click.stop="copyToClipboard(showChinese ? wordData.chinese : wordData.english)"/>

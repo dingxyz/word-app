@@ -5,9 +5,9 @@ import {debounce} from 'lodash-es';
 import WordItem from "@/views/home/word-item/index.vue";
 import AddWord from "@/views/home/add-word/index.vue";
 import SettingPopup from "@/views/home/setting-popup/index.vue";
-import {autoSpeak} from "@/utils/responsive-voice";
+import {autoSpeak, ORDER_TYPE} from "@/utils/responsive-voice";
 import WordTypeSelect from "@/views/home/word-type-select/index.vue";
-import {useAppStore} from "@/stores/app";
+import {useAppStore} from "@/stores/useApp";
 import SearchInput from "@/views/home/search-input/index.vue";
 import PaginationBox from "@/views/home/pagination-box/index.vue";
 import {usePaginationStore} from "@/stores/usePagination";
@@ -23,13 +23,17 @@ const loading = ref(false)
 const openAddWord = () => addWordRef.value?.open()
 const openSettingPopup = () => settingPopupRef.value?.open()
 const editWordOpen = (word: IWord) => addWordRef.value?.open(word)
-const autoPlayChange = (value: boolean) => autoSpeak(renderList.value, value)
+const autoPlayChange = (autoPlayOrder: ORDER_TYPE) => autoSpeak(renderList.value, autoPlayOrder)
 
 const setRenderList = () => {
   const {PAGE_SIZE, currentPage} = paginationStore
-  const start = (currentPage - 1) * PAGE_SIZE
-  const end = start + PAGE_SIZE
-  renderList.value = words.slice(start, end)
+  if (words.length > PAGE_SIZE) {
+    const start = (currentPage - 1) * PAGE_SIZE
+    const end = start + PAGE_SIZE
+    renderList.value = words.slice(start, end)
+  } else {
+    renderList.value = words
+  }
 }
 
 const getWord = async (searchKey: string = '') => {
@@ -50,10 +54,10 @@ const searchWord = debounce(getWord, 300)
 </script>
 
 <template>
-  <div class="w-auto max-w-xl flex flex-1 flex-col container rounded-t-xl text-lg overflow-auto m-2 opacity-100">
+  <div class="w-auto max-w-xl flex flex-1 flex-col container rounded-t-xl text-lg overflow-auto m-2 opacity-10">
     <header class="flex items-center justify-between h-12 px-4 bg-fuchsia-300 text-center text-white">
       <span class="w-10">{{ words.length }}</span>
-      <span class="text-xl">{{ appStore.wordType }}</span>
+      <span class="text-xl">{{ appStore?.wordType }}</span>
       <WordTypeSelect @refresh-list="getWord"/>
     </header>
     <article class="flex-1 bg-violet-50 rounded-b-xl overflow-auto">
@@ -68,7 +72,7 @@ const searchWord = debounce(getWord, 300)
         />
       </ul>
     </article>
-    <div class="mt-2">
+    <div class="mt-2" v-if="words.length > paginationStore.PAGE_SIZE">
       <PaginationBox
         :total-items="words.length"
         @update:currentPage="setRenderList"
