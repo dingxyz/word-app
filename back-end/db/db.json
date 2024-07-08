@@ -1,1259 +1,1510 @@
 {
   "words": [
     {
+      "id": "give me",
       "english": "Give me",
       "chinese": "给我",
-      "id": "give me"
+      "annotation": "",
+      "wordType": "words"
     },
     {
       "english": "Right now",
       "chinese": "现在",
-      "id": "right now"
+      "id": "right now",
+      "wordType": "words"
     },
     {
       "id": "clone it",
       "english": "Clean it",
-      "chinese": "清洁它"
+      "chinese": "清洁它",
+      "wordType": "words"
     },
     {
       "english": "One sencond",
       "chinese": "一秒钟(很快)",
-      "id": "one sencond"
+      "id": "one sencond",
+      "wordType": "words"
     },
     {
       "english": "Time's up",
       "chinese": "时间到了",
-      "id": "time's up"
+      "id": "time's up",
+      "wordType": "words"
     },
     {
       "english": "Hold on",
       "chinese": "等一下",
-      "id": "hold on"
+      "id": "hold on",
+      "wordType": "words"
     },
     {
       "english": "Hold up",
       "chinese": "延误",
-      "id": "hold up"
+      "id": "hold up",
+      "wordType": "words"
     },
     {
       "english": "I'm home",
       "chinese": "我回家了",
-      "id": "i'm home"
+      "id": "i'm home",
+      "wordType": "words"
     },
     {
       "id": "your finished",
       "english": "You finished",
-      "chinese": "你完成了"
+      "chinese": "你完成了",
+      "wordType": "words"
     },
     {
       "id": "for real",
       "english": "For real",
       "chinese": "是真的",
-      "annotation": "### 解释：For real\n\n#### 1. 定义\n- **For real**: 这个短语在口语中常用，意为“真的”，“实实在在的”。\n\n#### 2. 发音\n- **For**: /fɔːr/\n- **real**: /rɪəl/\n\n#### 3. 用法\n- 这个短语通常用来确认或强调某件事情是真实的或确实发生了。\n\n#### 4. 例句\n- \"Did you hear? He won the lottery for real!\"\n- \"Are you quitting your job for real this time?\"\n\n#### 5. 同义词\n- Seriously (真的)\n- Actually (实际上)\n- Truly (真正地)\n\n#### 6. 反义词\n- Not really (不是真的)\n- Joking (开玩笑的)\n\n#### 7. 文化背景\n- “For real” 是一种非正式的口语表达，用于强调某事的真实性或真实发生的情况。它常见于日常交流中，表示说话者确信或确认所说的内容是事实。\n\n#### 8. 搭配\n- \"Are you coming to the party for real?\"\n- \"She said she's moving to another city for real.\"\n\n希望这些信息能帮助您理解这个表达！如有更多问题，请随时问我。"
+      "annotation": "### 解释：For real\n\n#### 1. 定义\n- **For real**: 这个短语在口语中常用，意为“真的”，“实实在在的”。\n\n#### 2. 发音\n- **For**: /fɔːr/\n- **real**: /rɪəl/\n\n#### 3. 用法\n- 这个短语通常用来确认或强调某件事情是真实的或确实发生了。\n\n#### 4. 例句\n- \"Did you hear? He won the lottery for real!\"\n- \"Are you quitting your job for real this time?\"\n\n#### 5. 同义词\n- Seriously (真的)\n- Actually (实际上)\n- Truly (真正地)\n\n#### 6. 反义词\n- Not really (不是真的)\n- Joking (开玩笑的)\n\n#### 7. 文化背景\n- “For real” 是一种非正式的口语表达，用于强调某事的真实性或真实发生的情况。它常见于日常交流中，表示说话者确信或确认所说的内容是事实。\n\n#### 8. 搭配\n- \"Are you coming to the party for real?\"\n- \"She said she's moving to another city for real.\"\n\n希望这些信息能帮助您理解这个表达！如有更多问题，请随时问我。",
+      "wordType": "words"
     },
     {
       "english": "You bet",
       "chinese": "你猜对了",
-      "id": "you bet"
+      "id": "you bet",
+      "wordType": "words"
     },
     {
       "english": "Nice one",
       "chinese": "很棒",
-      "id": "nice one"
+      "id": "nice one",
+      "wordType": "words"
     },
     {
       "english": "I bet",
       "chinese": "我打赌",
-      "id": "i bet"
+      "id": "i bet",
+      "wordType": "words"
     },
     {
       "english": "I swear",
       "chinese": "我发誓",
-      "id": "i swear"
+      "id": "i swear",
+      "wordType": "words"
     },
     {
       "english": "Which one?",
       "chinese": "哪一件？",
-      "id": "which one?"
+      "id": "which one?",
+      "wordType": "words"
     },
     {
       "english": "This one",
       "chinese": "这一个",
-      "id": "this one"
+      "id": "this one",
+      "wordType": "words"
     },
     {
       "english": "That one",
       "chinese": "那一个",
-      "id": "that one"
+      "id": "that one",
+      "wordType": "words"
     },
     {
       "english": "Drop it",
       "chinese": "丢掉它",
-      "id": "drop it"
+      "id": "drop it",
+      "wordType": "words"
     },
     {
       "english": "Throw it",
       "chinese": "扔掉它",
-      "id": "throw it"
+      "id": "throw it",
+      "wordType": "words"
     },
     {
       "english": "Move back",
       "chinese": "往后退",
-      "id": "move back"
+      "id": "move back",
+      "wordType": "words"
     },
     {
       "english": "Thank you",
       "chinese": "谢谢你",
-      "id": "thank you"
+      "id": "thank you",
+      "wordType": "words"
     },
     {
       "english": "Go ahead",
       "chinese": "继续",
-      "id": "go ahead"
+      "id": "go ahead",
+      "wordType": "words"
     },
     {
       "english": "I know",
       "chinese": "我知道",
-      "id": "i know"
+      "id": "i know",
+      "wordType": "words"
     },
     {
       "english": "Hold it",
       "chinese": "握住它",
-      "id": "hold it"
+      "id": "hold it",
+      "wordType": "words"
     },
     {
       "id": "hold tight",
       "english": "Hold tight",
       "chinese": "抓紧",
-      "annotation": "### 解释：Hold tight\n\n#### 1. 定义\n- **Hold tight**: 这个短语在口语中常用，意为“等一下”，“稍等一下”，“保持耐心”。\n\n#### 2. 发音\n- **Hold**: /hoʊld/\n- **tight**: /taɪt/\n\n#### 3. 用法\n- 这个短语通常用来告诉别人等一会儿，或者让他们保持耐心，等待一些事情的发生。\n\n#### 4. 例句\n- \"Hold tight, I'll be right there.\"\n- \"Hold tight and I'll check if the documents are ready.\"\n\n#### 5. 同义词\n- Wait a moment (等一下)\n- Hang on (稍等)\n- Be patient (耐心等待)\n\n#### 6. 反义词\n- Hurry up (赶快)\n- Go ahead (继续)\n\n#### 7. 文化背景\n- “Hold tight” 是一种常见的口头表达，通常用于日常交流中，特别是在需要一些时间来处理事情或等待特定事件发生时。\n\n#### 8. 搭配\n- \"Hold tight while I find the keys.\"\n- \"They asked us to hold tight until the results are announced.\"\n\n希望这些信息能帮助您理解这个表达！如有更多问题，请随时问我。"
+      "annotation": "### 解释：Hold tight\n\n#### 1. 定义\n- **Hold tight**: 这个短语在口语中常用，意为“等一下”，“稍等一下”，“保持耐心”。\n\n#### 2. 发音\n- **Hold**: /hoʊld/\n- **tight**: /taɪt/\n\n#### 3. 用法\n- 这个短语通常用来告诉别人等一会儿，或者让他们保持耐心，等待一些事情的发生。\n\n#### 4. 例句\n- \"Hold tight, I'll be right there.\"\n- \"Hold tight and I'll check if the documents are ready.\"\n\n#### 5. 同义词\n- Wait a moment (等一下)\n- Hang on (稍等)\n- Be patient (耐心等待)\n\n#### 6. 反义词\n- Hurry up (赶快)\n- Go ahead (继续)\n\n#### 7. 文化背景\n- “Hold tight” 是一种常见的口头表达，通常用于日常交流中，特别是在需要一些时间来处理事情或等待特定事件发生时。\n\n#### 8. 搭配\n- \"Hold tight while I find the keys.\"\n- \"They asked us to hold tight until the results are announced.\"\n\n希望这些信息能帮助您理解这个表达！如有更多问题，请随时问我。",
+      "wordType": "words"
     },
     {
       "english": "Look out",
       "chinese": "当心",
-      "id": "look out"
+      "id": "look out",
+      "wordType": "words"
     },
     {
       "english": "Watch out",
       "chinese": "当心",
-      "id": "watch out"
+      "id": "watch out",
+      "wordType": "words"
     },
     {
       "english": "Get in",
       "chinese": "进去吧",
-      "id": "get in"
+      "id": "get in",
+      "wordType": "words"
     },
     {
       "english": "Why not?",
       "chinese": "为什么不呢？",
-      "id": "why not?"
+      "id": "why not?",
+      "wordType": "words"
     },
     {
       "english": "What for?",
       "chinese": "为了什么？",
-      "id": "what for?"
+      "id": "what for?",
+      "wordType": "words"
     },
     {
       "english": "I'll say",
       "chinese": "我说",
-      "id": "i'll say"
+      "id": "i'll say",
+      "wordType": "words"
     },
     {
       "english": "Show me",
       "chinese": "给我看看",
-      "id": "show me"
+      "id": "show me",
+      "wordType": "words"
     },
     {
       "english": "Do it",
       "chinese": "做吧",
-      "id": "do it"
+      "id": "do it",
+      "wordType": "words"
     },
     {
       "english": "Come in",
       "chinese": "进来吧",
-      "id": "come in"
+      "id": "come in",
+      "wordType": "words"
     },
     {
       "english": "Get ready",
       "chinese": "准备好",
-      "id": "get ready"
+      "id": "get ready",
+      "wordType": "words"
     },
     {
       "english": "All right",
       "chinese": "好的",
-      "id": "all right"
+      "id": "all right",
+      "wordType": "words"
     },
     {
       "english": "You okay?",
       "chinese": "你还好吗",
-      "id": "you okay?"
+      "id": "you okay?",
+      "wordType": "words"
     },
     {
       "english": "Very well",
       "chinese": "很好",
-      "id": "very well"
+      "id": "very well",
+      "wordType": "words"
     },
     {
       "id": "no hurry",
       "english": "No hurry",
       "chinese": "不着急",
-      "annotation": "### 解释：No hurry\n\n#### 1. 定义\n- **No**: 用于否定句子，表示“没有”或“不”。\n- **hurry**: 名词或动词，意为“匆忙”，“急忙”。\n\n#### 2. 发音\n- **No**: /nəʊ/\n- **hurry**: /ˈhʌri/\n\n#### 3. 用法\n- 这个短语通常用来表示不需要匆忙行事，可以慢慢来，没有时间上的紧迫感。\n\n#### 4. 例句\n- \"You can finish that report later, there's no hurry.\"\n- \"No hurry, take your time to decide.\"\n\n#### 5. 同义词\n- No rush (不着急)\n- Take your time (慢慢来)\n- There's no rush (没有什么要紧的)\n\n#### 6. 反义词\n- Hurry up (赶快)\n- Quick (快的)\n\n#### 7. 文化背景\n- “No hurry” 是一种常见的口语表达，用来告诉别人不需要着急或匆忙处理事情。这种表达方式常用于放松的环境中，例如朋友之间的交谈或日常生活中的情景。\n\n#### 8. 搭配\n- \"You can finish your meal whenever you like, there's no hurry.\"\n- \"No hurry, we have plenty of time to get there.\"\n\n希望这些信息能帮助您理解这个表达！如有更多问题，请随时问我。"
+      "annotation": "### 解释：No hurry\n\n#### 1. 定义\n- **No**: 用于否定句子，表示“没有”或“不”。\n- **hurry**: 名词或动词，意为“匆忙”，“急忙”。\n\n#### 2. 发音\n- **No**: /nəʊ/\n- **hurry**: /ˈhʌri/\n\n#### 3. 用法\n- 这个短语通常用来表示不需要匆忙行事，可以慢慢来，没有时间上的紧迫感。\n\n#### 4. 例句\n- \"You can finish that report later, there's no hurry.\"\n- \"No hurry, take your time to decide.\"\n\n#### 5. 同义词\n- No rush (不着急)\n- Take your time (慢慢来)\n- There's no rush (没有什么要紧的)\n\n#### 6. 反义词\n- Hurry up (赶快)\n- Quick (快的)\n\n#### 7. 文化背景\n- “No hurry” 是一种常见的口语表达，用来告诉别人不需要着急或匆忙处理事情。这种表达方式常用于放松的环境中，例如朋友之间的交谈或日常生活中的情景。\n\n#### 8. 搭配\n- \"You can finish your meal whenever you like, there's no hurry.\"\n- \"No hurry, we have plenty of time to get there.\"\n\n希望这些信息能帮助您理解这个表达！如有更多问题，请随时问我。",
+      "wordType": "words"
     },
     {
       "english": "Try this",
       "chinese": "试试这个",
-      "id": "try this"
+      "id": "try this",
+      "wordType": "words"
     },
     {
       "english": "Let go",
       "chinese": "放手吧",
-      "id": "let go"
+      "id": "let go",
+      "wordType": "words"
     },
     {
       "english": "I'm busy",
       "chinese": "我很忙",
-      "id": "i'm busy"
+      "id": "i'm busy",
+      "wordType": "words"
     },
     {
       "english": "Stay put",
       "chinese": "不要动",
-      "id": "stay put"
+      "id": "stay put",
+      "wordType": "words"
     },
     {
       "id": "stand up",
       "english": "Stand up",
       "chinese": "站起来,起立",
-      "annotation": ""
+      "annotation": "",
+      "wordType": "words"
     },
     {
       "english": "Have fun",
       "chinese": "玩的开心点",
-      "id": "have fun"
+      "id": "have fun",
+      "wordType": "words"
     },
     {
       "english": "Good idea",
       "chinese": "好主意",
-      "id": "good idea"
+      "id": "good idea",
+      "wordType": "words"
     },
     {
       "english": "Don't shout",
       "chinese": "不要大喊大叫",
-      "id": "don't shout"
+      "id": "don't shout",
+      "wordType": "words"
     },
     {
       "english": "Open it",
       "chinese": "打开它",
-      "id": "open it"
+      "id": "open it",
+      "wordType": "words"
     },
     {
       "english": "Feel this",
       "chinese": "感受一下这个",
-      "id": "feel this"
+      "id": "feel this",
+      "wordType": "words"
     },
     {
       "english": "Warn him",
       "chinese": "警告他",
-      "id": "warn him"
+      "id": "warn him",
+      "wordType": "words"
     },
     {
       "english": "No bragging",
       "chinese": "不要再吹嘘了",
-      "id": "no bragging"
+      "id": "no bragging",
+      "wordType": "words"
     },
     {
       "english": "Stop boasting",
       "chinese": "不吹牛",
-      "id": "stop boasting"
+      "id": "stop boasting",
+      "wordType": "words"
     },
     {
       "english": "I'll stop",
       "chinese": "我就不说了",
-      "id": "i'll stop"
+      "id": "i'll stop",
+      "wordType": "words"
     },
     {
       "english": "Shut up",
       "chinese": "闭上嘴",
-      "id": "shut up"
+      "id": "shut up",
+      "wordType": "words"
     },
     {
       "english": "Zip it",
       "chinese": "闭嘴吧",
-      "id": "zip it"
+      "id": "zip it",
+      "wordType": "words"
     },
     {
       "english": "Just kidding",
       "chinese": "开玩笑的",
-      "id": "just kidding"
+      "id": "just kidding",
+      "wordType": "words"
     },
     {
       "english": "Be nice",
       "chinese": "乖一点",
-      "id": "be nice"
+      "id": "be nice",
+      "wordType": "words"
     },
     {
       "english": "Write down",
       "chinese": "写下来",
-      "id": "write down"
+      "id": "write down",
+      "wordType": "words"
     },
     {
       "english": "No kidding",
       "chinese": "别开玩笑了",
-      "id": "no kidding"
+      "id": "no kidding",
+      "wordType": "words"
     },
     {
       "english": "Repeat it",
       "chinese": "重复一下吧",
-      "id": "repeat it"
+      "id": "repeat it",
+      "wordType": "words"
     },
     {
       "english": "Move aside",
       "chinese": "让一让",
-      "id": "move aside"
+      "id": "move aside",
+      "wordType": "words"
     },
     {
       "english": "Make way",
       "chinese": "让路",
-      "id": "make way"
+      "id": "make way",
+      "wordType": "words"
     },
     {
       "english": "Just amazing",
       "chinese": "只是令人惊讶",
-      "id": "just amazing"
+      "id": "just amazing",
+      "wordType": "words"
     },
     {
       "english": "Have patience",
       "chinese": "要有耐心",
-      "id": "have patience"
+      "id": "have patience",
+      "wordType": "words"
     },
     {
       "english": "I forgot",
       "chinese": "我忘了",
-      "id": "i forgot"
+      "id": "i forgot",
+      "wordType": "words"
     },
     {
       "english": "Don't fight",
       "chinese": "不要争吵",
-      "id": "don't fight"
+      "id": "don't fight",
+      "wordType": "words"
     },
     {
       "english": "Remember me?",
       "chinese": "记得我？",
-      "id": "remember me?"
+      "id": "remember me?",
+      "wordType": "words"
     },
     {
       "english": "I remember",
       "chinese": "我记得",
-      "id": "i remember"
+      "id": "i remember",
+      "wordType": "words"
     },
     {
       "english": "Yes indeed",
       "chinese": "确实是的",
-      "id": "yes indeed"
+      "id": "yes indeed",
+      "wordType": "words"
     },
     {
       "english": "Focus here",
       "chinese": "聚焦这里",
-      "id": "focus here"
+      "id": "focus here",
+      "wordType": "words"
     },
     {
       "english": "Say something",
       "chinese": "说点什么",
-      "id": "say something"
+      "id": "say something",
+      "wordType": "words"
     },
     {
       "english": "Welcome back",
       "chinese": "欢迎回来",
-      "id": "welcome back"
+      "id": "welcome back",
+      "wordType": "words"
     },
     {
       "english": "Don't panic",
       "chinese": "不要惊慌",
-      "id": "don't panic"
+      "id": "don't panic",
+      "wordType": "words"
     },
     {
       "english": "Cheer up",
       "chinese": "打起精神来",
-      "id": "cheer up"
+      "id": "cheer up",
+      "wordType": "words"
     },
     {
       "english": "Keep silent",
       "chinese": "保持沉默",
-      "id": "keep silent"
+      "id": "keep silent",
+      "wordType": "words"
     },
     {
       "english": "Don't rush",
       "chinese": "不要着急",
-      "id": "don't rush"
+      "id": "don't rush",
+      "wordType": "words"
     },
     {
       "english": "Nothing special",
       "chinese": "没什么特别的",
-      "id": "nothing special"
+      "id": "nothing special",
+      "wordType": "words"
     },
     {
       "english": "Don't argue",
       "chinese": "不要争吵",
-      "id": "don't argue"
+      "id": "don't argue",
+      "wordType": "words"
     },
     {
       "english": "Have faith",
       "chinese": "要有信心",
-      "id": "have faith"
+      "id": "have faith",
+      "wordType": "words"
     },
     {
       "english": "Lesson learned",
       "chinese": "吸取了教训",
-      "id": "lesson learned"
+      "id": "lesson learned",
+      "wordType": "words"
     },
     {
       "english": "Go slow",
       "chinese": "慢点走",
-      "id": "go slow"
+      "id": "go slow",
+      "wordType": "words"
     },
     {
       "english": "Anybody home?",
       "chinese": "有人在家吗",
-      "id": "anybody home?"
+      "id": "anybody home?",
+      "wordType": "words"
     },
     {
       "english": "Pace yourself",
       "chinese": "掌握好节奏",
-      "id": "pace yourself"
+      "id": "pace yourself",
+      "wordType": "words"
     },
     {
       "id": "tym some",
       "english": "Try some",
-      "chinese": "尝试一些"
+      "chinese": "尝试一些",
+      "wordType": "words"
     },
     {
       "english": "Have some",
       "chinese": "吃点吧",
-      "id": "have some"
+      "id": "have some",
+      "wordType": "words"
     },
     {
       "english": "Want some",
       "chinese": "想要一些",
-      "id": "want some"
+      "id": "want some",
+      "wordType": "words"
     },
     {
       "english": "Yes please",
       "chinese": "是的，请",
-      "id": "yes please"
+      "id": "yes please",
+      "wordType": "words"
     },
     {
       "english": "Have another",
       "chinese": "再来一杯(个)",
-      "id": "have another"
+      "id": "have another",
+      "wordType": "words"
     },
     {
       "english": "Bring water",
       "chinese": "带上水",
-      "id": "bring water"
+      "id": "bring water",
+      "wordType": "words"
     },
     {
       "english": "Time flies",
       "chinese": "时间飞逝",
-      "id": "time flies"
+      "id": "time flies",
+      "wordType": "words"
     },
     {
       "english": "Stop yelling",
       "chinese": "别嚷嚷了",
-      "id": "stop yelling"
+      "id": "stop yelling",
+      "wordType": "words"
     },
     {
       "id": "aim hight",
       "english": "Aim high",
-      "chinese": "目标要高"
+      "chinese": "目标要高",
+      "wordType": "words"
     },
     {
       "english": "People change",
       "chinese": "人是会变的",
-      "id": "people change"
+      "id": "people change",
+      "wordType": "words"
     },
     {
       "english": "Be yourself",
       "chinese": "做你自己",
-      "id": "be yourself"
+      "id": "be yourself",
+      "wordType": "words"
     },
     {
       "english": "Eat up",
       "chinese": "吃吧",
-      "id": "eat up"
+      "id": "eat up",
+      "wordType": "words"
     },
     {
       "english": "Stay calm",
       "chinese": "保持冷静",
-      "id": "stay calm"
+      "id": "stay calm",
+      "wordType": "words"
     },
     {
       "english": "Sing along",
       "chinese": "一起唱",
-      "id": "sing along"
+      "id": "sing along",
+      "wordType": "words"
     },
     {
       "english": "Go home",
       "chinese": "回家去",
-      "id": "go home"
+      "id": "go home",
+      "wordType": "words"
     },
     {
       "english": "Go back",
       "chinese": "回去吧",
-      "id": "go back"
+      "id": "go back",
+      "wordType": "words"
     },
     {
       "english": "Ask around",
       "chinese": "四处问问",
-      "id": "ask around"
+      "id": "ask around",
+      "wordType": "words"
     },
     {
       "english": "Drive faster",
       "chinese": "开快点",
-      "id": "drive faster"
+      "id": "drive faster",
+      "wordType": "words"
     },
     {
       "english": "Drive carefully",
       "chinese": "小心驾驶",
-      "id": "drive carefully"
+      "id": "drive carefully",
+      "wordType": "words"
     },
     {
       "english": "Come alone",
       "chinese": "独自前来",
-      "id": "come alone"
+      "id": "come alone",
+      "wordType": "words"
     },
     {
       "english": "Behave properly",
       "chinese": "行为端正",
-      "id": "behave properly"
+      "id": "behave properly",
+      "wordType": "words"
     },
     {
       "english": "Tack mine",
       "chinese": "带上我的",
-      "id": "tack mine"
+      "id": "tack mine",
+      "wordType": "words"
     },
     {
       "english": "Back off",
       "chinese": "退开",
-      "id": "back off"
+      "id": "back off",
+      "wordType": "words"
     },
     {
       "english": "Look ahead",
       "chinese": "往前看",
-      "id": "look ahead"
+      "id": "look ahead",
+      "wordType": "words"
     },
     {
       "english": "You'll see",
       "chinese": "你会看到的",
-      "id": "you'll see"
+      "id": "you'll see",
+      "wordType": "words"
     },
     {
       "english": "Look away",
       "chinese": "看远一点",
-      "id": "look away"
+      "id": "look away",
+      "wordType": "words"
     },
     {
       "english": "No worries",
       "chinese": "不用担心",
-      "id": "no worries"
+      "id": "no worries",
+      "wordType": "words"
     },
     {
       "english": "Keep going",
       "chinese": "继续前进",
-      "id": "keep going"
+      "id": "keep going",
+      "wordType": "words"
     },
     {
       "english": "Let me",
       "chinese": "让我来",
-      "id": "let me"
+      "id": "let me",
+      "wordType": "words"
     },
     {
       "english": "Keep trying",
       "chinese": "继续努力",
-      "id": "keep trying"
+      "id": "keep trying",
+      "wordType": "words"
     },
     {
       "english": "Be sensible",
       "chinese": "要理智",
-      "id": "be sensible"
+      "id": "be sensible",
+      "wordType": "words"
     },
     {
       "english": "Check again",
       "chinese": "再次检查",
-      "id": "check again"
+      "id": "check again",
+      "wordType": "words"
     },
     {
       "english": "Check around",
       "chinese": "检查周围",
-      "id": "check around"
+      "id": "check around",
+      "wordType": "words"
     },
     {
       "english": "Cool down",
       "chinese": "冷静下来",
-      "id": "cool down"
+      "id": "cool down",
+      "wordType": "words"
     },
     {
       "english": "Memorize it",
       "chinese": "记住它",
-      "id": "memorize it"
+      "id": "memorize it",
+      "wordType": "words"
     },
     {
       "english": "Tack control",
       "chinese": "把握住",
-      "id": "tack control"
+      "id": "tack control",
+      "wordType": "words"
     },
     {
       "english": "Big deal",
       "chinese": "大事一桩",
-      "id": "big deal"
+      "id": "big deal",
+      "wordType": "words"
     },
     {
       "english": "Hurry back",
       "chinese": "快点回来",
-      "id": "hurry back"
+      "id": "hurry back",
+      "wordType": "words"
     },
     {
       "english": "Get serious",
       "chinese": "严肃起来",
-      "id": "get serious"
+      "id": "get serious",
+      "wordType": "words"
     },
     {
       "english": "Have courage",
       "chinese": "要有勇气",
-      "id": "have courage"
+      "id": "have courage",
+      "wordType": "words"
     },
     {
       "english": "It happened",
       "chinese": "它发生了",
-      "id": "it happened"
+      "id": "it happened",
+      "wordType": "words"
     },
     {
       "english": "Things change",
       "chinese": "事情变了",
-      "id": "things change"
+      "id": "things change",
+      "wordType": "words"
     },
     {
       "english": "Thanks anyway",
       "chinese": "无论如何要感谢",
-      "id": "thanks anyway"
+      "id": "thanks anyway",
+      "wordType": "words"
     },
     {
       "english": "Dress warmly",
       "chinese": "穿的暖和点",
-      "id": "dress warmly"
+      "id": "dress warmly",
+      "wordType": "words"
     },
     {
       "english": "Stop medding",
       "chinese": "不要再管闲事了",
-      "id": "stop medding"
+      "id": "stop medding",
+      "wordType": "words"
     },
     {
       "english": "Fix this",
       "chinese": "解决这个问题",
-      "id": "fix this"
+      "id": "fix this",
+      "wordType": "words"
     },
     {
       "english": "I overslept",
       "chinese": "我睡过头了",
-      "id": "i overslept"
+      "id": "i overslept",
+      "wordType": "words"
     },
     {
       "english": "He snores",
       "chinese": "他打鼾了",
-      "id": "he snores"
+      "id": "he snores",
+      "wordType": "words"
     },
     {
       "english": "Finish this",
       "chinese": "完成这个",
-      "id": "finish this"
+      "id": "finish this",
+      "wordType": "words"
     },
     {
       "english": "I well",
       "chinese": "我会的",
-      "id": "i well"
+      "id": "i well",
+      "wordType": "words"
     },
     {
       "english": "Stop whining",
       "chinese": "不要再抱怨了",
-      "id": "stop whining"
+      "id": "stop whining",
+      "wordType": "words"
     },
     {
       "english": "Taste this",
       "chinese": "尝尝这个",
-      "id": "taste this"
+      "id": "taste this",
+      "wordType": "words"
     },
     {
       "english": "Be vigilant",
       "chinese": "保持警惕",
-      "id": "be vigilant"
+      "id": "be vigilant",
+      "wordType": "words"
     },
     {
       "english": "Holy cow!",
       "chinese": "哇喔！",
-      "id": "holy cow!"
+      "id": "holy cow!",
+      "wordType": "words"
     },
     {
       "id": "holy saoke!",
       "english": "Holy smoke!",
-      "chinese": "哇奥！"
+      "chinese": "哇奥！",
+      "wordType": "words"
     },
     {
       "english": "Dear me",
       "chinese": "天啊！",
-      "id": "dear me"
+      "id": "dear me",
+      "wordType": "words"
     },
     {
       "english": "You better",
       "chinese": "你最好",
-      "id": "you better"
+      "id": "you better",
+      "wordType": "words"
     },
     {
       "english": "Better hope",
       "chinese": "更好的希望",
-      "id": "better hope"
+      "id": "better hope",
+      "wordType": "words"
     },
     {
       "english": "Can't complain",
       "chinese": "不能抱怨",
-      "id": "can't complain"
+      "id": "can't complain",
+      "wordType": "words"
     },
     {
       "english": "Of course",
       "chinese": "当然了",
-      "id": "of course"
+      "id": "of course",
+      "wordType": "words"
     },
     {
       "english": "It's crazy",
       "chinese": "这很疯狂",
-      "id": "it's crazy"
+      "id": "it's crazy",
+      "wordType": "words"
     },
     {
       "english": "Still up?",
       "chinese": "还没睡？",
-      "id": "still up?"
+      "id": "still up?",
+      "wordType": "words"
     },
     {
       "english": "I'm up",
       "chinese": "我起来了",
-      "id": "i'm up"
+      "id": "i'm up",
+      "wordType": "words"
     },
     {
       "english": "Not necessary",
       "chinese": "没有必要",
-      "id": "not necessary"
+      "id": "not necessary",
+      "wordType": "words"
     },
     {
       "english": "Nothing tricky",
       "chinese": "没有什么棘手的",
-      "id": "nothing tricky"
+      "id": "nothing tricky",
+      "wordType": "words"
     },
     {
       "english": "Not precisely",
       "chinese": "不确切",
-      "id": "not precisely"
+      "id": "not precisely",
+      "wordType": "words"
     },
     {
       "id": "anything urgent",
       "english": "Anything urgent",
       "chinese": "有什么急事吗",
-      "annotation": "### 解释：Anything urgent\n\n#### 1. 定义\n- **Anything**: 任何事情。\n- **urgent**: 形容词，紧急的，迫切的。\n\n#### 2. 发音\n- **Anything**: /ˈɛnɪˌθɪŋ/\n- **urgent**: /ˈɜːrdʒənt/\n\n#### 3. 用法\n- 这个短语通常用来询问是否有任何紧急的事情需要处理或注意。\n\n#### 4. 例句\n- \"Is there anything urgent I should know about?\"\n- \"Let me know if there's anything urgent that needs my attention.\"\n\n#### 5. 同义词\n- Anything pressing (任何紧急的)\n- Any immediate matters (任何即时的事情)\n\n#### 6. 反义词\n- Nothing urgent (没有紧急的)\n- Nothing pressing (没有急需的)\n\n#### 7. 文化背景\n- “Anything urgent” 是一种常见的商务或日常用语，用来确认是否有需要紧急处理或关注的事务。这种表达方式常见于工作场合或个人生活中的紧急情况。\n\n#### 8. 搭配\n- \"Do you have anything urgent to discuss?\"\n- \"Please inform me if there's anything urgent that requires my immediate attention.\"\n\n希望这些信息能帮助您理解这个表达！如有更多问题，请随时问我。"
+      "annotation": "### 解释：Anything urgent\n\n#### 1. 定义\n- **Anything**: 任何事情。\n- **urgent**: 形容词，紧急的，迫切的。\n\n#### 2. 发音\n- **Anything**: /ˈɛnɪˌθɪŋ/\n- **urgent**: /ˈɜːrdʒənt/\n\n#### 3. 用法\n- 这个短语通常用来询问是否有任何紧急的事情需要处理或注意。\n\n#### 4. 例句\n- \"Is there anything urgent I should know about?\"\n- \"Let me know if there's anything urgent that needs my attention.\"\n\n#### 5. 同义词\n- Anything pressing (任何紧急的)\n- Any immediate matters (任何即时的事情)\n\n#### 6. 反义词\n- Nothing urgent (没有紧急的)\n- Nothing pressing (没有急需的)\n\n#### 7. 文化背景\n- “Anything urgent” 是一种常见的商务或日常用语，用来确认是否有需要紧急处理或关注的事务。这种表达方式常见于工作场合或个人生活中的紧急情况。\n\n#### 8. 搭配\n- \"Do you have anything urgent to discuss?\"\n- \"Please inform me if there's anything urgent that requires my immediate attention.\"\n\n希望这些信息能帮助您理解这个表达！如有更多问题，请随时问我。",
+      "wordType": "words"
     },
     {
       "english": "Made it",
       "chinese": "做好了",
-      "id": "id-1719490397609-4773"
+      "id": "id-1719490397609-4773",
+      "wordType": "words"
     },
     {
       "english": "That's beneficial",
       "chinese": "这是有好处的",
-      "id": "id-1719490441597-6307"
+      "id": "id-1719490441597-6307",
+      "wordType": "words"
     },
     {
       "english": "Leave now",
       "chinese": "现在就走",
-      "id": "id-1719490471138-9231"
+      "id": "id-1719490471138-9231",
+      "wordType": "words"
     },
     {
       "english": "Too much",
       "chinese": "太多了",
-      "id": "id-1719490494983-7448"
+      "id": "id-1719490494983-7448",
+      "wordType": "words"
     },
     {
       "english": "But why",
       "chinese": "但为什么",
-      "id": "id-1719490520973-5408"
+      "id": "id-1719490520973-5408",
+      "wordType": "words"
     },
     {
       "english": "But how?",
       "chinese": "但怎么做呢",
-      "id": "id-1719490554044-233"
+      "id": "id-1719490554044-233",
+      "wordType": "words"
     },
     {
       "english": "Go immediately",
       "chinese": "马上走",
-      "id": "id-1719490605654-5062"
+      "id": "id-1719490605654-5062",
+      "wordType": "words"
     },
     {
       "english": "Handle this",
       "chinese": "处理这个问题",
-      "id": "id-1719490639321-8001"
+      "id": "id-1719490639321-8001",
+      "wordType": "words"
     },
     {
       "english": "Wait patiently",
       "chinese": "耐心等待",
-      "id": "id-1719490685951-4131"
+      "id": "id-1719490685951-4131",
+      "wordType": "words"
     },
     {
       "english": "Enjoy yourself",
       "chinese": "享受自己",
-      "id": "id-1719490734992-7418"
+      "id": "id-1719490734992-7418",
+      "wordType": "words"
     },
     {
       "english": "Be happy",
       "chinese": "开心点",
-      "id": "id-1719490759567-3552"
+      "id": "id-1719490759567-3552",
+      "wordType": "words"
     },
     {
       "english": "Help me",
       "chinese": "帮助我",
-      "id": "id-1719490789926-8604"
+      "id": "id-1719490789926-8604",
+      "wordType": "words"
     },
     {
       "english": "With pleasure",
       "chinese": "很乐意",
-      "id": "id-1719490842920-4699"
+      "id": "id-1719490842920-4699",
+      "wordType": "words"
     },
     {
       "english": "My pleasure",
       "chinese": "我乐意",
-      "id": "id-1719490937777-340"
+      "id": "id-1719490937777-340",
+      "wordType": "words"
     },
     {
       "english": "Just imagine",
       "chinese": "想象一下吧",
-      "id": "id-1719490988928-4898"
+      "id": "id-1719490988928-4898",
+      "wordType": "words"
     },
     {
       "english": "Trust me",
       "chinese": "相信我",
-      "id": "id-1719491018179-6079"
+      "id": "id-1719491018179-6079",
+      "wordType": "words"
     },
     {
       "english": "Return immediately",
       "chinese": "立即返回",
-      "id": "id-1719491087767-4344"
+      "id": "id-1719491087767-4344",
+      "wordType": "words"
     },
     {
       "english": "Don't lie",
       "chinese": "不要撒谎",
-      "id": "id-1719491134478-3586"
+      "id": "id-1719491134478-3586",
+      "wordType": "words"
     },
     {
       "english": "Go away",
       "chinese": "走吧",
-      "id": "id-1719491158624-5904"
+      "id": "id-1719491158624-5904",
+      "wordType": "words"
     },
     {
       "english": "That's terrific",
       "chinese": "那是很好的",
-      "id": "id-1719491206957-3279"
+      "id": "id-1719491206957-3279",
+      "wordType": "words"
     },
     {
       "english": "I'm easy going",
       "chinese": "我很随和",
-      "id": "id-1719491275451-3529"
+      "id": "id-1719491275451-3529",
+      "wordType": "words"
     },
     {
       "english": "He's outgoing",
       "chinese": "他很外向",
-      "id": "id-1719491317201-5816"
+      "id": "id-1719491317201-5816",
+      "wordType": "words"
     },
     {
       "english": "Stay here",
       "chinese": "留在这里",
-      "id": "id-1719491344437-6172"
+      "id": "id-1719491344437-6172",
+      "wordType": "words"
     },
     {
       "english": "Not ever",
       "chinese": "永远不要",
-      "id": "id-1719491376310-1456"
+      "id": "id-1719491376310-1456",
+      "wordType": "words"
     },
     {
       "english": "How long",
       "chinese": "多久",
-      "id": "id-1719491417401-8137"
+      "id": "id-1719491417401-8137",
+      "wordType": "words"
     },
     {
       "english": "Hang on",
       "chinese": "等一下",
-      "id": "id-1719491454705-7597"
+      "id": "id-1719491454705-7597",
+      "wordType": "words"
     },
     {
       "english": "Nice try",
       "chinese": "不错的尝试",
-      "id": "id-1719491497852-494"
+      "id": "id-1719491497852-494",
+      "wordType": "words"
     },
     {
       "english": "You think",
       "chinese": "你想",
-      "id": "id-1719491525136-4253"
+      "id": "id-1719491525136-4253",
+      "wordType": "words"
     },
     {
       "english": "Don't worry",
       "chinese": "别担心",
-      "id": "id-1719491579979-5594"
+      "id": "id-1719491579979-5594",
+      "wordType": "words"
     },
     {
       "english": "Many thanks",
       "chinese": "非常感谢",
-      "id": "id-1719491611952-5305"
+      "id": "id-1719491611952-5305",
+      "wordType": "words"
     },
     {
       "english": "You're welcome",
       "chinese": "不客气",
-      "id": "id-1719491673292-847"
+      "id": "id-1719491673292-847",
+      "wordType": "words"
     },
     {
       "english": "I'm content",
       "chinese": "我很满意",
-      "id": "id-1719491727351-4828"
+      "id": "id-1719491727351-4828",
+      "wordType": "words"
     },
     {
       "english": "Behave yourself",
       "chinese": "做好你自己",
-      "id": "id-1719491801178-6826"
+      "id": "id-1719491801178-6826",
+      "wordType": "words"
     },
     {
       "english": "Please understand",
       "chinese": "请理解",
-      "id": "id-1719491840701-596"
+      "id": "id-1719491840701-596",
+      "wordType": "words"
     },
     {
       "english": "It's incredible",
       "chinese": "这真是不可思议",
-      "id": "id-1719491889379-3858"
+      "id": "id-1719491889379-3858",
+      "wordType": "words"
     },
     {
       "english": "Anything special",
       "chinese": "有什么特别的吗",
-      "id": "id-1719491929552-6130"
+      "id": "id-1719491929552-6130",
+      "wordType": "words"
     },
     {
       "english": "She giggled",
       "chinese": "她咯咯地笑了",
-      "id": "id-1719491997598-3729"
+      "id": "id-1719491997598-3729",
+      "wordType": "words"
     },
     {
       "english": "Stop daydreaming",
       "chinese": "别做白日梦了",
-      "id": "id-1719492055755-7403"
+      "id": "id-1719492055755-7403",
+      "wordType": "words"
     },
     {
       "english": "Stop overreacting",
       "chinese": "停止过度反应",
-      "id": "id-1719492132786-6800"
+      "id": "id-1719492132786-6800",
+      "wordType": "words"
     },
     {
       "english": "I'm married",
       "chinese": "我已经结婚了",
-      "id": "id-1719492174000-4901"
+      "id": "id-1719492174000-4901",
+      "wordType": "words"
     },
     {
       "english": "Me too",
       "chinese": "我也是",
-      "id": "id-1719492223659-951"
+      "id": "id-1719492223659-951",
+      "wordType": "words"
     },
     {
       "english": "I'm divorced",
       "chinese": "我已经离婚了",
-      "id": "id-1719492267695-8485"
+      "id": "id-1719492267695-8485",
+      "wordType": "words"
     },
     {
       "english": "Poor you",
       "chinese": "可怜的你",
-      "id": "id-1719492305487-404"
+      "id": "id-1719492305487-404",
+      "wordType": "words"
     },
     {
       "english": "Sleep well",
       "chinese": "睡个好觉吧",
-      "id": "id-1719492331418-680"
+      "id": "id-1719492331418-680",
+      "wordType": "words"
     },
     {
       "english": "Well said",
       "chinese": "说的好",
-      "id": "id-1719492352823-4697"
+      "id": "id-1719492352823-4697",
+      "wordType": "words"
     },
     {
       "english": "It's nothing",
       "chinese": "这不算什么",
-      "id": "id-1719492387407-5247"
+      "id": "id-1719492387407-5247",
+      "wordType": "words"
     },
     {
       "english": "I'm flattered",
       "chinese": "我受宠若惊",
-      "id": "id-1719492424356-2138"
+      "id": "id-1719492424356-2138",
+      "wordType": "words"
     },
     {
       "english": "What else?",
       "chinese": "还有什么",
-      "id": "id-1719492451112-51"
+      "id": "id-1719492451112-51",
+      "wordType": "words"
     },
     {
       "english": "Forget it",
       "chinese": "别管它了",
-      "id": "id-1719492489928-4479"
+      "id": "id-1719492489928-4479",
+      "wordType": "words"
     },
     {
       "english": "Seems fair",
       "chinese": "似乎很公平",
-      "id": "id-1719492521635-4447"
+      "id": "id-1719492521635-4447",
+      "wordType": "words"
     },
     {
       "english": "Who knows",
       "chinese": "谁知道呢",
-      "id": "id-1719492554204-366"
+      "id": "id-1719492554204-366",
+      "wordType": "words"
     },
     {
       "english": "Nothing else",
       "chinese": "没有别的了",
-      "id": "id-1719498270760-7554"
+      "id": "id-1719498270760-7554",
+      "wordType": "words"
     },
     {
       "english": "Weather changed",
       "chinese": "天气变了",
-      "id": "id-1719498304817-3641"
+      "id": "id-1719498304817-3641",
+      "wordType": "words"
     },
     {
       "english": "My apologies",
       "chinese": "我很抱歉",
-      "id": "id-1719498345083-4893"
+      "id": "id-1719498345083-4893",
+      "wordType": "words"
     },
     {
       "english": "Pay attention",
       "chinese": "请注意",
-      "id": "id-1719498373601-9250"
+      "id": "id-1719498373601-9250",
+      "wordType": "words"
     },
     {
       "english": "How's work",
       "chinese": "工作怎么样了？",
-      "id": "id-1719498408144-7088"
+      "id": "id-1719498408144-7088",
+      "wordType": "words"
     },
     {
       "english": "As usual",
       "chinese": "像往常一样",
-      "id": "id-1719498442184-2422"
+      "id": "id-1719498442184-2422",
+      "wordType": "words"
     },
     {
       "english": "It works",
       "chinese": "它有用",
-      "id": "id-1719498473908-545"
+      "id": "id-1719498473908-545",
+      "wordType": "words"
     },
     {
       "english": "It helps",
       "chinese": "它有帮助",
-      "id": "id-1719498500645-1195"
+      "id": "id-1719498500645-1195",
+      "wordType": "words"
     },
     {
       "english": "Get lost",
       "chinese": "迷路了",
-      "id": "id-1719498526252-330"
+      "id": "id-1719498526252-330",
+      "wordType": "words"
     },
     {
       "english": "Too bad",
       "chinese": "太糟糕了",
-      "id": "id-1719498555033-8309"
+      "id": "id-1719498555033-8309",
+      "wordType": "words"
     },
     {
       "english": "Leave it",
       "chinese": "放着吧",
-      "id": "id-1719498583292-2580"
+      "id": "id-1719498583292-2580",
+      "wordType": "words"
     },
     {
       "english": "Don't push",
       "chinese": "不要强求",
-      "id": "id-1719498617220-548"
+      "id": "id-1719498617220-548",
+      "wordType": "words"
     },
     {
       "english": "No comment",
       "chinese": "无可奉告",
-      "id": "id-1719498652206-9632"
+      "id": "id-1719498652206-9632",
+      "wordType": "words"
     },
     {
       "english": "Come back",
       "chinese": "回来吧",
-      "id": "id-1719498681473-3239"
+      "id": "id-1719498681473-3239",
+      "wordType": "words"
     },
     {
       "english": "Come here",
       "chinese": "来这里",
-      "id": "id-1719498707243-8234"
+      "id": "id-1719498707243-8234",
+      "wordType": "words"
     },
     {
       "english": "That's right",
       "chinese": "这是对的",
-      "id": "id-1719498736708-5921"
+      "id": "id-1719498736708-5921",
+      "wordType": "words"
     },
     {
       "english": "Feel better",
       "chinese": "感觉好些",
-      "id": "id-1719498789304-3812"
+      "id": "id-1719498789304-3812",
+      "wordType": "words"
     },
     {
       "english": "Definitely improving",
       "chinese": "绝对是在改善",
-      "id": "id-1719498842815-4125"
+      "id": "id-1719498842815-4125",
+      "wordType": "words"
     },
     {
       "english": "I'm late",
       "chinese": "我迟到了",
-      "id": "id-1719498881558-9716"
+      "id": "id-1719498881558-9716",
+      "wordType": "words"
     },
     {
       "english": "That hurts",
       "chinese": "这很痛",
-      "id": "id-1719498926190-6344"
+      "id": "id-1719498926190-6344",
+      "wordType": "words"
     },
     {
       "english": "Hug me",
       "chinese": "拥抱我",
-      "id": "id-1719499000717-8361"
+      "id": "id-1719499000717-8361",
+      "wordType": "words"
     },
     {
       "english": "Love you",
       "chinese": "爱你",
-      "id": "id-1719499029716-3075"
+      "id": "id-1719499029716-3075",
+      "wordType": "words"
     },
     {
       "english": "Wake up",
       "chinese": "醒来吧",
-      "id": "id-1719499050132-4815"
+      "id": "id-1719499050132-4815",
+      "wordType": "words"
     },
     {
       "english": "Sit down",
       "chinese": "坐下",
-      "id": "id-1719499110100-4505"
+      "id": "id-1719499110100-4505",
+      "wordType": "words"
     },
     {
       "english": "Scoot over",
       "chinese": "滑行过去",
-      "id": "id-1719499141613-7282"
+      "id": "id-1719499141613-7282",
+      "wordType": "words"
     },
     {
       "english": "Not bad",
       "chinese": "还不错",
-      "id": "id-1719499162450-893"
+      "id": "id-1719499162450-893",
+      "wordType": "words"
     },
     {
       "english": "I'm full",
       "chinese": "我饱了",
-      "id": "id-1719499190984-2336"
+      "id": "id-1719499190984-2336",
+      "wordType": "words"
     },
     {
       "english": "I can",
       "chinese": "我能",
-      "id": "id-1719499212571-6724"
+      "id": "id-1719499212571-6724",
+      "wordType": "words"
     },
     {
       "english": "I can't",
       "chinese": "我不能",
-      "id": "id-1719499230641-8367"
+      "id": "id-1719499230641-8367",
+      "wordType": "words"
     },
     {
       "english": "It's cool",
       "chinese": "很凉爽",
-      "id": "id-1719499262022-550"
+      "id": "id-1719499262022-550",
+      "wordType": "words"
     },
     {
       "english": "It's cold",
       "chinese": "很冷",
-      "id": "id-1719499294155-5469"
+      "id": "id-1719499294155-5469",
+      "wordType": "words"
     },
     {
       "english": "It's chilly",
       "chinese": "很冷",
-      "id": "id-1719499327985-7736"
+      "id": "id-1719499327985-7736",
+      "wordType": "words"
     },
     {
       "english": "It's freezing",
       "chinese": "天很寒冷",
-      "id": "id-1719499371675-3682"
+      "id": "id-1719499371675-3682",
+      "wordType": "words"
     },
     {
       "english": "It's snowing",
       "chinese": "下雪了",
-      "id": "id-1719499405689-5512"
+      "id": "id-1719499405689-5512",
+      "wordType": "words"
     },
     {
       "english": "It's foggy",
       "chinese": "有雾",
-      "id": "id-1719499443387-3600"
+      "id": "id-1719499443387-3600",
+      "wordType": "words"
     },
     {
       "english": "It's raining",
       "chinese": "下雨了",
-      "id": "id-1719499482951-2338"
+      "id": "id-1719499482951-2338",
+      "wordType": "words"
     },
     {
       "english": "Hurry up",
       "chinese": "快一点",
-      "id": "id-1719499514785-3447"
+      "id": "id-1719499514785-3447",
+      "wordType": "words"
     },
     {
       "english": "Not really",
       "chinese": "不是的",
-      "id": "id-1719499547735-7501"
+      "id": "id-1719499547735-7501",
+      "wordType": "words"
     },
     {
       "english": "Good job",
       "chinese": "干得好",
-      "id": "id-1719499568470-4041"
+      "id": "id-1719499568470-4041",
+      "wordType": "words"
     },
     {
       "english": "Well done",
       "chinese": "干得好",
-      "id": "id-1719499592731-1554"
+      "id": "id-1719499592731-1554",
+      "wordType": "words"
     },
     {
       "english": "That's me",
       "chinese": "那是我",
-      "id": "id-1719499628825-9775"
+      "id": "id-1719499628825-9775",
+      "wordType": "words"
     },
     {
       "english": "He's nice",
       "chinese": "他很友好",
-      "id": "id-1719499668700-345"
+      "id": "id-1719499668700-345",
+      "wordType": "words"
     },
     {
       "english": "My bad",
       "chinese": "我的错",
-      "id": "id-1719499690539-9266"
+      "id": "id-1719499690539-9266",
+      "wordType": "words"
     },
     {
       "english": "I apologize",
       "chinese": "我道歉",
-      "id": "id-1719499733582-508"
+      "id": "id-1719499733582-508",
+      "wordType": "words"
     },
     {
       "english": "That's enough",
       "chinese": "这就够了",
-      "id": "id-1719499773697-6391"
+      "id": "id-1719499773697-6391",
+      "wordType": "words"
     },
     {
       "english": "I'm serious",
       "chinese": "我是认真的",
-      "id": "id-1719499800553-5239"
+      "id": "id-1719499800553-5239",
+      "wordType": "words"
     },
     {
       "english": "Lighten up",
       "chinese": "放松点",
-      "id": "id-1719499833176-5601"
+      "id": "id-1719499833176-5601",
+      "wordType": "words"
     },
     {
       "english": "Sleep tight",
       "chinese": "睡个好觉",
-      "id": "id-1719499862591-1082"
+      "id": "id-1719499862591-1082",
+      "wordType": "words"
     },
     {
       "english": "Sweet dreams",
       "chinese": "做个甜甜的梦",
-      "id": "id-1719499898749-5747"
+      "id": "id-1719499898749-5747",
+      "wordType": "words"
     },
     {
       "english": "It depends",
@@ -1517,7 +1768,8 @@
       "id": "id-1719838699494-2254",
       "english": "No way",
       "chinese": "不可能,没门",
-      "annotation": ""
+      "annotation": "",
+      "wordType": "words"
     },
     {
       "english": "She's sick",
@@ -1678,7 +1930,8 @@
     {
       "id": "id-1719839544856-6666",
       "english": "Inform me",
-      "chinese": "通知我"
+      "chinese": "通知我",
+      "wordType": "words"
     },
     {
       "english": "Speak now",
@@ -1750,7 +2003,8 @@
       "id": "id-1719839931960-4821",
       "english": "I'm confused",
       "chinese": "我跟困惑",
-      "annotation": "### 解释：I'm confused\n\n#### 1. 定义\n- **I'm**: 缩写形式，意为“I am”，表示“我是”。\n- **confused**: 形容词，意为“困惑的”，“迷惑的”。\n\n“I'm confused” 意味着说话者感到困惑或不明白当前的情况或话题。\n\n#### 2. 发音\n- **I'm**: /aɪm/\n- **confused**: /kənˈfjuːzd/\n\n#### 3. 用法\n- 这个短语通常用来表达对某件事情感到困惑或不理解的感受。\n\n#### 4. 例句\n- \"I'm confused about the instructions for this assignment.\"\n- \"She's confused because the directions were unclear.\"\n\n#### 5. 同义词\n- Perplexed (困惑的)\n- Bewildered (迷惑的)\n- Puzzled (困惑的)\n\n#### 6. 反义词\n- Clear (清楚的)\n- Understand (理解的)\n\n#### 7. 文化背景\n- “I'm confused” 是一个常见的口语表达，用来描述在理解或解决问题时的困惑感受。这种表达方式比较随意，通常在日常交流中使用。\n\n#### 8. 搭配\n- \"I'm confused by the new software interface.\"\n- \"They're confused about which direction to take for the project.\"\n\n希望这些信息能帮助你理解这个表达！如有更多疑问，请随时问我。"
+      "annotation": "### 解释：I'm confused\n\n#### 1. 定义\n- **I'm**: 缩写形式，意为“I am”，表示“我是”。\n- **confused**: 形容词，意为“困惑的”，“迷惑的”。\n\n“I'm confused” 意味着说话者感到困惑或不明白当前的情况或话题。\n\n#### 2. 发音\n- **I'm**: /aɪm/\n- **confused**: /kənˈfjuːzd/\n\n#### 3. 用法\n- 这个短语通常用来表达对某件事情感到困惑或不理解的感受。\n\n#### 4. 例句\n- \"I'm confused about the instructions for this assignment.\"\n- \"She's confused because the directions were unclear.\"\n\n#### 5. 同义词\n- Perplexed (困惑的)\n- Bewildered (迷惑的)\n- Puzzled (困惑的)\n\n#### 6. 反义词\n- Clear (清楚的)\n- Understand (理解的)\n\n#### 7. 文化背景\n- “I'm confused” 是一个常见的口语表达，用来描述在理解或解决问题时的困惑感受。这种表达方式比较随意，通常在日常交流中使用。\n\n#### 8. 搭配\n- \"I'm confused by the new software interface.\"\n- \"They're confused about which direction to take for the project.\"\n\n希望这些信息能帮助你理解这个表达！如有更多疑问，请随时问我。",
+      "wordType": "words"
     },
     {
       "english": "I quit",
@@ -1780,12 +2034,14 @@
       "id": "id-1719840075165-2245",
       "english": "Stay focused",
       "chinese": "保持专注",
-      "annotation": "### 解释：Stay Focused\n\n#### 1. 定义\n- **Stay**：动词，保持、维持。\n- **Focused**：形容词，专注的，集中注意力的。\n\n“Stay focused” 意思是保持专注，不分心。\n\n#### 2. 发音\n- **Stay**: /steɪ/\n- **Focused**: /ˈfoʊ.kəst/\n\n#### 3. 用法\n- 这个短语通常用来鼓励或提醒自己或别人保持专注，不要被外界的事物干扰。例如，在工作、学习或进行某项任务时，人们常常使用这个短语。\n\n#### 4. 例句\n- \"You need to stay focused if you want to finish this project on time.\"\n- \"It's important to stay focused during the exam.\"\n\n#### 5. 同义词\n- Stay concentrated.\n- Stay attentive.\n- Keep your mind on the task.\n\n#### 6. 反义词\n- Get distracted.\n- Lose focus.\n- Get sidetracked.\n\n#### 7. 文化背景\n- 在现代快节奏的生活中，保持专注是一项重要的技能，特别是在学习和工作环境中。使用“stay focused”可以提醒自己或别人不要被无关的事情干扰，以提高效率和完成目标。\n\n#### 8. 搭配\n- stay focused on: \"Stay focused on your goals.\"\n- keep focused: \"Keep focused and you'll succeed.\"\n\n希望这些信息对你有帮助！如果有更多问题，请随时告诉我。"
+      "annotation": "### 解释：Stay Focused\n\n#### 1. 定义\n- **Stay**：动词，保持、维持。\n- **Focused**：形容词，专注的，集中注意力的。\n\n“Stay focused” 意思是保持专注，不分心。\n\n#### 2. 发音\n- **Stay**: /steɪ/\n- **Focused**: /ˈfoʊ.kəst/\n\n#### 3. 用法\n- 这个短语通常用来鼓励或提醒自己或别人保持专注，不要被外界的事物干扰。例如，在工作、学习或进行某项任务时，人们常常使用这个短语。\n\n#### 4. 例句\n- \"You need to stay focused if you want to finish this project on time.\"\n- \"It's important to stay focused during the exam.\"\n\n#### 5. 同义词\n- Stay concentrated.\n- Stay attentive.\n- Keep your mind on the task.\n\n#### 6. 反义词\n- Get distracted.\n- Lose focus.\n- Get sidetracked.\n\n#### 7. 文化背景\n- 在现代快节奏的生活中，保持专注是一项重要的技能，特别是在学习和工作环境中。使用“stay focused”可以提醒自己或别人不要被无关的事情干扰，以提高效率和完成目标。\n\n#### 8. 搭配\n- stay focused on: \"Stay focused on your goals.\"\n- keep focused: \"Keep focused and you'll succeed.\"\n\n希望这些信息对你有帮助！如果有更多问题，请随时告诉我。",
+      "wordType": "words"
     },
     {
       "id": "id-1719840096487-4808",
       "english": "Let's go",
-      "chinese": "我们走吧"
+      "chinese": "我们走吧",
+      "wordType": "words"
     },
     {
       "english": "Not now",
@@ -1827,7 +2083,8 @@
       "id": "id-1719840302783-1723",
       "english": "I'm bored",
       "chinese": "我很无聊",
-      "annotation": ""
+      "annotation": "",
+      "wordType": "words"
     },
     {
       "english": "Dinner's ready",
@@ -1969,7 +2226,8 @@
       "id": "id-1720016800031-4167",
       "english": "That's ridiculous",
       "chinese": "这很荒唐",
-      "annotation": ""
+      "annotation": "",
+      "wordType": "words"
     },
     {
       "english": "Come on",
@@ -2297,7 +2555,8 @@
       "id": "id-1720018800988-5850",
       "english": "Somebody called",
       "chinese": "有人打电话来",
-      "annotation": ""
+      "annotation": "",
+      "wordType": "words"
     },
     {
       "english": "Step inside",
@@ -2576,7 +2835,8 @@
       "id": "id-1720021030036-6645",
       "english": "It's fantastic",
       "chinese": "太棒了",
-      "annotation": ""
+      "annotation": "",
+      "wordType": "words"
     },
     {
       "english": "How many",
@@ -2596,7 +2856,8 @@
       "id": "id-1720021129036-6128",
       "english": "Many congratulations",
       "chinese": "祝贺你",
-      "annotation": ""
+      "annotation": "",
+      "wordType": "words"
     },
     {
       "english": "Excellent work",
@@ -2673,22 +2934,26 @@
     {
       "english": "What's the fuss?",
       "chinese": "吵什么呢？",
-      "id": "id-1719644043544-4834"
+      "id": "id-1719644043544-4834",
+      "wordType": "phrase"
     },
     {
       "english": "Still up?",
       "chinese": "还没睡呀？",
-      "id": "id-1719644117845-2002"
+      "id": "id-1719644117845-2002",
+      "wordType": "phrase"
     },
     {
       "id": "id-1719644218480-4608",
       "english": "It doesn't make any difference",
-      "chinese": "没关系,没什么区别"
+      "chinese": "没关系,没什么区别",
+      "wordType": "phrase"
     },
     {
       "id": "id-1719644699505-1007",
       "english": "It is a deal",
-      "chinese": "一言为定"
+      "chinese": "一言为定",
+      "wordType": "phrase"
     },
     {
       "english": "Tack a seat",
@@ -2969,7 +3234,8 @@
     {
       "id": "id-1719650877361-5287",
       "english": "Dead end",
-      "chinese": "死胡同"
+      "chinese": "死胡同",
+      "wordType": "phrase"
     },
     {
       "english": "Once in a blue moon",
@@ -3174,7 +3440,8 @@
     {
       "id": "id-1719655117622-3858",
       "english": "硅谷 silicon valley 美剧",
-      "chinese": ""
+      "chinese": "",
+      "wordType": "answer"
     },
     {
       "english": "博主 casey neistat",

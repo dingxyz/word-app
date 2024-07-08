@@ -2,11 +2,15 @@
 import axios from 'axios'
 import type { AxiosInstance, AxiosResponse } from 'axios';
 
+const baseURL = import.meta.env.VUE_APP_API_URL || 'http://10.1.52.70:3030/';
+
+
 // 创建 axios 实例
+// 区分开发环境和生产环境的 API 地址
 const service: AxiosInstance = axios.create({
-  baseURL: 'http://10.1.52.70:3030/', // 这里是你的 API 地址
   // baseURL: 'http://192.168.204.237:3030/', // 这里是你的 API 地址
-  timeout: 5000, // 请求超时时间
+  baseURL: baseURL, // 这里是你的 API 地址
+  timeout: 30000, // 请求超时时间
   headers: {
     'Content-Type': 'application/json',
   },
