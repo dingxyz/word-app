@@ -2,7 +2,7 @@
 import axios from 'axios'
 import type { AxiosInstance, AxiosResponse } from 'axios';
 
-const baseURL = import.meta.env.VUE_APP_API_URL || 'http://10.1.52.70:3030/';
+const baseURL = import.meta.env.VUE_APP_API_URL || 'https://word-ding.vercel.app/';
 
 
 // 创建 axios 实例
