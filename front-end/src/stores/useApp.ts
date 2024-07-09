@@ -1,5 +1,6 @@
-import {ref, watch} from 'vue'
+import {ref, watchEffect} from 'vue'
 import {defineStore} from 'pinia'
+import {getWordType, setWordType} from "@/utils/local-storage";
 
 export enum WORD_TYPE {
   WORDS = 'words',
@@ -10,22 +11,13 @@ export enum WORD_TYPE {
   NOTEBOOK = 'notebook'
 }
 
-const STORAGE_WORD_TYPE_KEY = 'storageWordType';
-
-const initWordType = () => {
-  const storedWordType = localStorage.getItem(STORAGE_WORD_TYPE_KEY);
-  const wordType = storedWordType ? (storedWordType as WORD_TYPE) : WORD_TYPE.WORDS;
-  localStorage.setItem(STORAGE_WORD_TYPE_KEY, wordType);
-  return wordType;
-}
-
 export const useAppStore = defineStore('app', () => {
-  const wordType = ref(initWordType())
+  const wordType = ref(getWordType())
   const showChineseChecked = ref(false)
 
-  watch(wordType, (newType) => {
-    localStorage.setItem(STORAGE_WORD_TYPE_KEY, newType);
-  });
+  watchEffect(() => {
+    setWordType(wordType.value)
+  })
 
   return {wordType, showChineseChecked}
 })

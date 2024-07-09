@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import WordApi, {IWord} from '@/api/word-api'
-import {reactive, ref} from 'vue'
+import {reactive, ref, watch} from 'vue'
 import {debounce} from 'lodash-es';
 import WordItem from "@/views/home/word-item/index.vue";
 import AddWord from "@/views/home/add-word/index.vue";
@@ -11,6 +11,7 @@ import {useAppStore} from "@/stores/useApp";
 import SearchInput from "@/views/home/search-input/index.vue";
 import PaginationBox from "@/views/home/pagination-box/index.vue";
 import {usePaginationStore} from "@/stores/usePagination";
+import {showNotify} from "vant";
 
 const appStore = useAppStore();
 const paginationStore = usePaginationStore()
@@ -18,7 +19,7 @@ const addWordRef = ref<InstanceType<typeof AddWord>>()
 const settingPopupRef = ref<InstanceType<typeof SettingPopup>>()
 const words = reactive<IWord[]>([])
 const renderList = ref<IWord[]>([])
-const loading = ref(false)
+const loading = ref(true)
 
 const openAddWord = () => addWordRef.value?.open()
 const openSettingPopup = () => settingPopupRef.value?.open()
@@ -26,42 +27,55 @@ const editWordOpen = (word: IWord) => addWordRef.value?.open(word)
 const autoPlayChange = (autoPlayOrder: ORDER_TYPE) => autoSpeak(renderList.value, autoPlayOrder)
 
 const setRenderList = () => {
-  const {PAGE_SIZE, currentPage} = paginationStore
-  if (words.length > PAGE_SIZE) {
-    const start = (currentPage - 1) * PAGE_SIZE
-    const end = start + PAGE_SIZE
+  const {isPaging, pageSize} = paginationStore
+  let {currentPage} = paginationStore
+  if (isPaging && words.length > pageSize) {
+    let start = (currentPage - 1) * pageSize
+    if (start >= words.length) {
+      currentPage = Math.ceil(words.length / pageSize)
+      start = (currentPage - 1) * pageSize
+    }
+    const end = start + pageSize
     renderList.value = words.slice(start, end)
   } else {
     renderList.value = words
   }
 }
 
+watch(() => paginationStore.isPaging, setRenderList)
+watch(() => paginationStore.pageSize, setRenderList)
+
 const getWord = async (searchKey: string = '') => {
   loading.value = true
-  const {data} = await WordApi.get({
+  const {data, code, message} = await WordApi.get({
     wordType: appStore.wordType,
     searchKey: searchKey.trim() || null
   }).finally(() => {
     loading.value = false
   })
+  if (code !== '000000') {
+    showNotify({type: 'danger', message});
+  }
   words.splice(0, words.length, ...data)
   setRenderList()
 }
 getWord()
 
 const searchWord = debounce(getWord, 300)
-
 </script>
 
 <template>
-  <div class="w-auto max-w-xl flex flex-1 flex-col container rounded-t-xl text-lg overflow-auto m-2 opacity-10s0">
+  <div class="w-auto max-w-xl flex flex-1 flex-col container rounded-t-xl text-lg overflow-auto m-2 opacity-10">
     <header class="flex items-center justify-between h-12 px-4 bg-fuchsia-300 text-center text-white">
       <span class="w-10">{{ words.length }}</span>
       <span class="text-xl">{{ appStore?.wordType }}</span>
       <WordTypeSelect @refresh-list="getWord"/>
     </header>
-    <article class="flex-1 bg-violet-50 rounded-b-xl overflow-auto">
-      <ul>
+    <article class="relative flex-1 bg-violet-50 rounded-b-xl overflow-auto">
+      <div v-if="loading" class="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-[#d9dae25a]">
+        <van-loading type="spinner"/>
+      </div>
+      <van-list>
         <WordItem
           v-for="(word, index) in renderList"
           :key="word.id"
@@ -70,9 +84,9 @@ const searchWord = debounce(getWord, 300)
           @refresh-list="getWord"
           @edit-word="editWordOpen"
         />
-      </ul>
+      </van-list>
     </article>
-    <div class="mt-2" v-if="words.length > paginationStore.PAGE_SIZE">
+    <div class="mt-2" v-if="paginationStore.isPaging && words.length > paginationStore.pageSize">
       <PaginationBox
         :total-items="words.length"
         @update:currentPage="setRenderList"

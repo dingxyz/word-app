@@ -45,7 +45,7 @@ const removeHandler = async (id: string) => {
 const moveToLearned = async () => {
   await WordApi.moveTo({
     id: poops.wordData.id,
-    wordType: appStore.wordType,
+    wordType: poops.wordData.wordType,
     toType: WORD_TYPE.LEARNED,
   }).then(() => {
     showNotify({type: 'success', message: 'Moved to learned successfully'});
@@ -91,7 +91,7 @@ const openDetail = () => showDetailPopup.value = true
         <div class="flex items-center">
           <IconBtn icon="delete-o" @click="removeHandler(wordData.id)" color="red"/>
           <IconBtn icon="edit" @click="emit('edit-word', wordData)"/>
-          <IconBtn icon="minus" @click="moveToLearned"/>
+          <IconBtn v-if="wordData.wordType !== WORD_TYPE.LEARNED" icon="minus" @click="moveToLearned"/>
         </div>
       </template>
     </van-swipe-cell>
@@ -99,7 +99,7 @@ const openDetail = () => showDetailPopup.value = true
       <div class="flex-1 flex flex-col">
         <div v-html="compiledMarkdown" class="markdown-body flex-auto overflow-auto"></div>
         <div class="text-center mt-4">
-          <van-button type="success" @click="showDetailPopup = false" class="h-8 w-full" size="small">CLOSE</van-button>
+          <van-button type="success" @click="showDetailPopup = false" class="w-full">CLOSE</van-button>
         </div>
       </div>
     </van-popup>

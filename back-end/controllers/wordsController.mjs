@@ -1,5 +1,23 @@
+// models/Word.js
+// import mongoose from '../db/mongoose.js';
+//
+// const wordSchema = new mongoose.Schema({
+//     id: { type: String, required: true },
+//     english: { type: String, required: true, index: true },
+//     chinese: { type: String, index: true },
+//     annotation: { type: String },
+//     wordType: { type: String, index: true },
+// });
+//
+// const Word = mongoose.model('Word', wordSchema);
+//
+// export default Word;
+
+
+
 import Word from '../models/Word.js';
 import { generateUniqueId } from "../utils/commonUtil.mjs";
+import {removeSpacesFromIds} from "./removeSpacesFromIds.mjs";
 
 export const WORD_TYPE = {
     WORDS: 'words',
@@ -10,6 +28,7 @@ export const WORD_TYPE = {
 };
 
 export const getWords = async (req, res) => {
+    // removeSpacesFromIds()
     const { searchKey, wordType } = req.query;
     let sendData = [];
     try {
@@ -80,6 +99,7 @@ export const updateWord = async (req, res) => {
             { english, chinese, annotation },
             { new: true }
         );
+        console.log('/////',word,id, wordType, english, chinese, annotation)
         if (!word) {
             res.sendError("Word not found");
             return;

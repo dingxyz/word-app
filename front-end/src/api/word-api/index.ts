@@ -1,11 +1,13 @@
 // services/api.ts
 import http from '@/api/http';
+import {WORD_TYPE} from "@/stores/useApp";
 
 export class IWord {
   id?: string = null;
   english: string = '';
   chinese: string = '';
   annotation?: string = ''
+  wordType?: WORD_TYPE;
 }
 
 class WordApi {

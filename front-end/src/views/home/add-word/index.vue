@@ -27,8 +27,9 @@ const saveWord = () => {
     english,
     chinese,
     annotation,
-    wordType: appStore.wordType,
   }
+  params['wordType'] = wordData.id ? wordData.wordType : appStore.wordType
+
   const apiFunc = wordData.id ? WordApi.update : WordApi.add
   apiFunc(params).then(res => {
     if (res.code === '000000') {
@@ -60,10 +61,10 @@ defineExpose({open})
       <van-cell-group inset>
         <van-field v-model="wordData.english" ref="fieldRef" label="en" placeholder="Please input english" label-width="40px"/>
         <van-field v-model="wordData.chinese" label="cn" placeholder="Please input chinese" label-width="40px"/>
-        <van-field v-model="wordData.annotation" type="textarea" label="annotation" placeholder="Please input annotation" clearable label-width="40px"/>
+        <van-field v-model="wordData.annotation" type="textarea" label="annotation" placeholder="Please input annotation" clearable label-align="top" :autosize="{minHeight: 100}"/>
       </van-cell-group>
       <div class="flex justify-center m-4">
-        <van-button type="success" @click="saveWord" block size="small">SAVE WORD</van-button>
+        <van-button type="success" @click="saveWord" block>SAVE WORD</van-button>
       </div>
     </div>
   </van-action-sheet>

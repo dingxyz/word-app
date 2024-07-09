@@ -1,15 +1,17 @@
-import { type App } from "vue"
+import {type App} from "vue"
 import 'vant/lib/index.css';
 import {
   ActionSheet,
   Button,
   CellGroup,
-  Checkbox, CheckboxGroup,
+  Checkbox,
+  CheckboxGroup,
   Dialog,
   Field,
   FloatingBubble,
   Form,
   Icon,
+  List, Loading,
   Notify,
   Pagination,
   Popover,
@@ -41,4 +43,6 @@ export function loadVantUI(app: App) {
   app.use(Pagination);
   app.use(Checkbox);
   app.use(CheckboxGroup);
+  app.use(List);
+  app.use(Loading);
 }

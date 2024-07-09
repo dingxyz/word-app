@@ -1,27 +1,21 @@
-import {ref, watch} from 'vue'
+import {ref, watchEffect} from 'vue'
 import {defineStore} from 'pinia'
-
-const PAGE_SIZE = 50
-const STORAGE_CURRENT_PAGE_KEY = 'storageCurrentPage';
-
-const initCurrentPage = () => {
-  const storedPage = localStorage.getItem(STORAGE_CURRENT_PAGE_KEY);
-  if (storedPage) {
-    return parseInt(storedPage);
-  }
-  return 1;
-}
+import {getCurrentPage, getIsPaging, getPageSize, setCurrentPage, setIsPaging, setPageSize} from "@/utils/local-storage";
 
 export const usePaginationStore = defineStore('pagination', () => {
-  const currentPage = ref(initCurrentPage())
+  const isPaging = ref(getIsPaging())
+  const currentPage = ref(getCurrentPage())
+  const pageSize = ref(getPageSize())
 
-  watch(currentPage, (newVal) => {
-    localStorage.setItem(STORAGE_CURRENT_PAGE_KEY, String(newVal));
-  });
+  watchEffect(() => {
+    setIsPaging(isPaging.value)
+    setPageSize(pageSize.value)
+    setCurrentPage(currentPage.value)
+  })
 
   const resetCurrentPage = () => {
     currentPage.value = 1;
   }
 
-  return {currentPage, PAGE_SIZE, resetCurrentPage}
+  return {isPaging, currentPage, pageSize, resetCurrentPage}
 })
