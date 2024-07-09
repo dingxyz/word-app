@@ -61,7 +61,10 @@ defineExpose({open})
       <van-cell-group inset>
         <van-field v-model="wordData.english" ref="fieldRef" label="en" placeholder="Please input english" label-width="40px"/>
         <van-field v-model="wordData.chinese" label="cn" placeholder="Please input chinese" label-width="40px"/>
-        <van-field v-model="wordData.annotation" type="textarea" label="annotation" placeholder="Please input annotation" clearable label-align="top" :autosize="{minHeight: 100}"/>
+        <van-field v-model="wordData.annotation" type="textarea" label="annotation" placeholder="Please input annotation" clearable
+                   label-align="top"
+                   :autosize="{minHeight: 100, maxHeight: 200}"
+        />
       </van-cell-group>
       <div class="flex justify-center m-4">
         <van-button type="success" @click="saveWord" block>SAVE WORD</van-button>
