@@ -5,26 +5,28 @@ import {debounce} from 'lodash-es';
 import WordItem from "@/views/home/word-item/index.vue";
 import AddWord from "@/views/home/add-word/index.vue";
 import SettingPopup from "@/views/home/setting-popup/index.vue";
-import {autoSpeak, ORDER_TYPE} from "@/utils/responsive-voice";
 import WordTypeSelect from "@/views/home/word-type-select/index.vue";
 import {useAppStore} from "@/stores/useApp";
 import SearchInput from "@/views/home/search-input/index.vue";
 import PaginationBox from "@/views/home/pagination-box/index.vue";
 import {usePaginationStore} from "@/stores/usePagination";
 import {showNotify} from "vant";
+import {ORDER_TYPE, useVoiceStore} from "@/stores/useVoice";
 
 const appStore = useAppStore();
+const voiceStore = useVoiceStore()
 const paginationStore = usePaginationStore()
 const addWordRef = ref<InstanceType<typeof AddWord>>()
 const settingPopupRef = ref<InstanceType<typeof SettingPopup>>()
 const words = reactive<IWord[]>([])
 const renderList = ref<IWord[]>([])
 const loading = ref(true)
+const isDev = import.meta.env.VITE_ENV === 'DEVELOPMENT'
 
 const openAddWord = () => addWordRef.value?.open()
 const openSettingPopup = () => settingPopupRef.value?.open()
 const editWordOpen = (word: IWord) => addWordRef.value?.open(word)
-const autoPlayChange = (autoPlayOrder: ORDER_TYPE) => autoSpeak(renderList.value, autoPlayOrder)
+const autoPlayChange = (autoPlayOrder: ORDER_TYPE) => voiceStore.autoSpeak(renderList.value, autoPlayOrder)
 
 const setRenderList = () => {
   const {isPaging, pageSize} = paginationStore
@@ -65,7 +67,10 @@ const searchWord = debounce(getWord, 300)
 </script>
 
 <template>
-  <div class="w-auto max-w-xl flex flex-1 flex-col container rounded-t-xl text-lg overflow-auto m-2 opacity-100">
+  <div
+    class="w-auto max-w-xl flex flex-1 flex-col container rounded-t-xl text-lg overflow-auto m-2"
+    :class="{'opacity-20': isDev }"
+  >
     <header class="flex items-center justify-between h-12 px-4 bg-fuchsia-300 text-center text-white">
       <span class="w-10">{{ words.length }}</span>
       <span class="text-xl">{{ appStore?.wordType }}</span>
@@ -93,8 +98,10 @@ const searchWord = debounce(getWord, 300)
       />
     </div>
     <footer class="flex items-center justify-between h-12 mt-2 px-4 bg-cyan-400 text-white rounded-xl">
-      <van-icon name="setting-o" @click="openSettingPopup" size="20"/>
+      <van-icon :name="voiceStore.nowPlaying ? 'pause-circle-o' : 'play-circle-o'" @click="autoPlayChange(ORDER_TYPE.SEQUENTIAL)" size="20"/>
+      <van-icon name="replay" @click="() => ''" size="20"/>
       <SearchInput @update:modelValue="searchWord"/>
+      <van-icon name="setting-o" @click="openSettingPopup" size="20"/>
       <van-icon name="add-o" @click="openAddWord" size="20"/>
     </footer>
     <AddWord ref="addWordRef" @add-complete="getWord"/>

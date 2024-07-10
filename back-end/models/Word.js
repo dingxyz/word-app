@@ -7,6 +7,7 @@ const wordSchema = new mongoose.Schema({
     chinese: { type: String, index: true },
     annotation: { type: String },
     wordType: { type: String, index: true },
+    createdAt: { type: Date, default: Date.now },
 });
 
 const Word = mongoose.model('Word', wordSchema);

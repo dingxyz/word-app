@@ -1,11 +1,16 @@
 <script setup lang="ts">
-import {defineComponent, ref} from 'vue'
+import {defineComponent, ref, watch} from 'vue'
+import {useAppStore} from "@/stores/useApp";
 
 defineComponent({
   name: 'SearchInput',
 })
 const searchValue = ref('')
 const searchFocus = ref(false)
+const appStore = useAppStore();
+watch(() => appStore.wordType, () => {
+  searchValue.value = ''
+})
 </script>
 
 <template>

@@ -21,7 +21,6 @@ const saveWord = () => {
     alert('Please input english')
     return
   }
-  isShow.value = false
   const params = {
     id: id ?? undefined,
     english,
@@ -33,6 +32,7 @@ const saveWord = () => {
   const apiFunc = wordData.id ? WordApi.update : WordApi.add
   apiFunc(params).then(res => {
     if (res.code === '000000') {
+      isShow.value = false
       emit('add-complete')
     } else {
       showNotify({type: 'danger', message: res.message});
@@ -56,14 +56,14 @@ defineExpose({open})
 </script>
 
 <template>
-  <van-action-sheet v-model:show="isShow" :title="wordData.id? 'Edit Word' : 'Add Word'" @closed="resetData">
+  <van-action-sheet v-model:show="isShow" :title="wordData.id? `Edit ${wordData.wordType}` : `Add ${appStore.wordType}`" @closed="resetData">
     <div>
       <van-cell-group inset>
         <van-field v-model="wordData.english" ref="fieldRef" label="en" placeholder="Please input english" label-width="40px"/>
         <van-field v-model="wordData.chinese" label="cn" placeholder="Please input chinese" label-width="40px"/>
         <van-field v-model="wordData.annotation" type="textarea" label="annotation" placeholder="Please input annotation" clearable
                    label-align="top"
-                   :autosize="{minHeight: 100, maxHeight: 200}"
+                   :autosize="{minHeight: 100, maxHeight: 140}"
         />
       </van-cell-group>
       <div class="flex justify-center m-4">

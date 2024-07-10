@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import {computed, defineComponent, ref} from 'vue'
 import {useAppStore} from "@/stores/useApp";
-import {ORDER_TYPE} from "@/utils/responsive-voice";
 import {usePaginationStore} from "@/stores/usePagination";
+import {ORDER_TYPE} from "@/stores/useVoice";
 
 defineComponent({
   name: 'SettingPopup',

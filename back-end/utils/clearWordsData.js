@@ -1,5 +1,5 @@
 // db/clearWordsData.js
-import mongoose from './mongoose.js';
+import mongoose from '../db/mongoose.js';
 import Word from '../models/Word.js';
 
 const clearData = async () => {

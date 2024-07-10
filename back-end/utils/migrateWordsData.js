@@ -1,6 +1,6 @@
 // db/migrateWordsData.js
 import {JSONFile, Low} from 'lowdb';
-import mongoose from './mongoose.js';
+import mongoose from '../db/mongoose.js';
 import Word from '../models/Word.js';
 
 const adapter = new JSONFile('db/db.json');

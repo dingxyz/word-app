@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import WordApi, {IWord} from '@/api/word-api'
 import {computed, defineComponent, ref, watch} from 'vue'
-import {voiceSpeak} from "@/utils/responsive-voice";
 import IconBtn from "@/components/IconBtn.vue";
 import {useAppStore, WORD_TYPE} from "@/stores/useApp";
 import {showConfirmDialog, showNotify} from "vant";
 import {copyToClipboard} from "@/utils/common-util";
 import {marked} from "marked";
 import 'github-markdown-css/github-markdown.css';
+import {useVoiceStore} from "@/stores/useVoice";
 
 defineComponent({
   name: 'WordItem',
@@ -19,11 +19,15 @@ const poops = defineProps<{
 }>()
 
 const appStore = useAppStore()
+const voiceStore = useVoiceStore()
 const emit = defineEmits(['refresh-list', 'edit-word'])
 const showDetailPopup = ref(false)
 const showChinese = ref(false)
-watch(() => appStore.showChineseChecked, (val) => showChinese.value = val)
 const compiledMarkdown = computed(() => marked(poops.wordData.annotation));
+const isPlaying = computed(() => voiceStore.playingId === poops.wordData.id)
+
+watch(() => appStore.showChineseChecked, (val) => showChinese.value = val)
+
 
 const removeHandler = async (id: string) => {
   const confirm = await showConfirmDialog({
@@ -59,14 +63,14 @@ const mouseHandler = (isHover: boolean) => {
   }, 0)
 }
 
-const playSound = (english: string) => voiceSpeak(english)
+const playSound = (english: string) => voiceStore.voiceSpeak(english)
 
 const openDetail = () => showDetailPopup.value = true
 
 </script>
 
 <template>
-  <div class="text-lg odd:bg-violet-100">
+  <div class="text-lg odd:bg-violet-100 border-red-300" :class="{'border': isPlaying}">
     <van-swipe-cell>
       <li class="flex items-center h-14">
         <div

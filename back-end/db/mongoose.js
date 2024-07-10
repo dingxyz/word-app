@@ -6,6 +6,7 @@ const uri = "mongodb+srv://admin:Hue65cZ9rw6eCtR@cluster0.hkvaxqb.mongodb.net/?a
 mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    // serverSelectionTimeoutMS: 5000, // 等待5秒钟，如果连接失败
 });
 
 const db = mongoose.connection;

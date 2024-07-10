@@ -1,12 +1,13 @@
 import Word from '../models/Word.js';
 import {generateUniqueId} from "../utils/commonUtil.mjs";
-import {removeSpacesFromIds} from "./removeSpacesFromIds.mjs";
+import mongoose from "mongoose";
 
 export const WORD_TYPE = {
     WORDS: 'words',
     PHRASE: 'phrase',
     SENTENCE: 'sentence',
     ANSWER: 'answer',
+    LEARNED: 'learned',
     NOTEBOOK: 'notebook'
 };
 
@@ -20,9 +21,9 @@ export const getWords = async (req, res) => {
                     {english: {$regex: searchKey, $options: 'i'}},
                     {chinese: {$regex: searchKey, $options: 'i'}}
                 ]
-            });
+            }).sort({createdAt: 1});
         } else if (wordType) {
-            sendData = await Word.find({wordType});
+            sendData = await Word.find({wordType}).sort({createdAt: 1});
         }
         res.sendSuccess(sendData ?? []);
     } catch (error) {
@@ -57,13 +58,14 @@ export const moveWord = async (req, res) => {
     try {
         const word = await Word.findOneAndUpdate(
             {id, wordType},
-            {wordType: toType},
+            {wordType: toType, createdAt: new Date()},
             {new: true}
         );
         if (!word) {
             res.sendError("Word not found");
             return;
         }
+
         res.sendSuccess();
     } catch (error) {
         res.sendError(error.message);
