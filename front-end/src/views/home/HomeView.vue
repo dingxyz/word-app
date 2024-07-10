@@ -98,7 +98,10 @@ const searchWord = debounce(getWord, 300)
       />
     </div>
     <footer class="flex items-center justify-between h-12 mt-2 px-4 bg-cyan-400 text-white rounded-xl">
-      <van-icon :name="voiceStore.nowPlaying ? 'pause-circle-o' : 'play-circle-o'" @click="autoPlayChange(ORDER_TYPE.SEQUENTIAL)" size="20"/>
+      <van-icon
+        :name="voiceStore.nowPlaying && !voiceStore.isPaused ? 'pause-circle-o' : 'play-circle-o'"
+        @click="autoPlayChange(ORDER_TYPE.SEQUENTIAL)" size="20"
+      />
       <van-icon name="replay" @click="() => ''" size="20"/>
       <SearchInput @update:modelValue="searchWord"/>
       <van-icon name="setting-o" @click="openSettingPopup" size="20"/>

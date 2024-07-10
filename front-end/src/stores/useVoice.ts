@@ -31,13 +31,15 @@ export const useVoiceStore = defineStore('voice', () => {
       return
     }
 
-    // if (nowPlaying.value && !isPaused.value) {
-    //   pauseSpeak();
-    // }
-    //
-    // if (nowPlaying.value && isPaused.value) {
-    //   resumeSpeak();
-    // }
+    if (nowPlaying.value && !isPaused.value) {
+      pauseSpeak();
+      return;
+    }
+
+    if (nowPlaying.value && isPaused.value) {
+      resumeSpeak();
+      return;
+    }
 
     nowPlaying.value = true;
     isPaused.value = false;
@@ -101,5 +103,5 @@ export const useVoiceStore = defineStore('voice', () => {
     responsiveVoice?.cancel();
   }
 
-  return {nowPlaying, playingId, voiceSpeak, autoSpeak, stopSpeak}
+  return {nowPlaying, isPaused, playingId, voiceSpeak, autoSpeak, stopSpeak}
 })
