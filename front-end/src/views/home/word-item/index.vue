@@ -20,12 +20,18 @@ const poops = defineProps<{
 
 const appStore = useAppStore()
 const voiceStore = useVoiceStore()
+const wordItemRef = ref()
 const emit = defineEmits(['refresh-list', 'edit-word'])
 const showDetailPopup = ref(false)
 const showChinese = ref(false)
 const compiledMarkdown = computed(() => marked(poops.wordData.annotation));
-const isPlaying = computed(() => voiceStore.playingId === poops.wordData.id)
+const isPlaying = computed(() => !voiceStore.isPaused && voiceStore.playingId === poops.wordData.id)
 
+watch(() => voiceStore.playingId, () => {
+  if (isPlaying.value) {
+    // wordItemRef.value.scrollIntoView({behavior: 'smooth', block: 'center'})
+  }
+})
 watch(() => appStore.showChineseChecked, (val) => showChinese.value = val)
 
 
@@ -70,7 +76,7 @@ const openDetail = () => showDetailPopup.value = true
 </script>
 
 <template>
-  <div class="text-lg odd:bg-violet-100 border-red-300" :class="{'border': isPlaying}">
+  <div ref="wordItemRef" class="text-lg odd:bg-violet-100 border-red-300" :class="{'border': isPlaying }">
     <van-swipe-cell>
       <li class="flex items-center h-14">
         <div
@@ -101,7 +107,7 @@ const openDetail = () => showDetailPopup.value = true
     </van-swipe-cell>
     <van-popup v-model:show="showDetailPopup" v-if="wordData.annotation" closeable lazy-render class="flex p-4" position="bottom">
       <div class="flex-1 flex flex-col">
-        <div v-html="compiledMarkdown" class="markdown-body flex-auto overflow-auto"></div>
+        <div v-html="compiledMarkdown" v-bold-english class="markdown-body flex-auto overflow-auto"></div>
         <div class="text-center mt-4">
           <van-button type="success" @click="showDetailPopup = false" class="w-full">CLOSE</van-button>
         </div>

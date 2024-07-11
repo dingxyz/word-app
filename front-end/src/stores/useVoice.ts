@@ -11,6 +11,7 @@ const responsiveVoice = window['responsiveVoice'];
 const PLAY_TIME_MS = 30 * 60 * 1000;
 
 export const useVoiceStore = defineStore('voice', () => {
+  const playOrder = ref(ORDER_TYPE.SEQUENTIAL)
   const nowPlaying = ref(false)
   const playingId = ref(null)
   const isPaused = ref(false)
@@ -25,10 +26,9 @@ export const useVoiceStore = defineStore('voice', () => {
     });
   }
 
-  const autoSpeak = (words: IWord[], autoPlayOrder: ORDER_TYPE) => {
-    if (!autoPlayOrder) {
-      stopSpeak();
-      return
+  const autoSpeak = (words: IWord[]) => {
+    if (words.length === 0) {
+      return;
     }
 
     if (nowPlaying.value && !isPaused.value) {
@@ -50,9 +50,9 @@ export const useVoiceStore = defineStore('voice', () => {
     const totalWords = words.length;
     playSequence = [];
 
-    if (autoPlayOrder === ORDER_TYPE.SEQUENTIAL) {
+    if (playOrder.value === ORDER_TYPE.SEQUENTIAL) {
       playSequence = Array.from({length: totalWords}, (_, i) => i);
-    } else if (autoPlayOrder === ORDER_TYPE.RANDOM) {
+    } else if (playOrder.value === ORDER_TYPE.RANDOM) {
       playSequence = Array.from({length: totalWords}, (_, i) => i);
       for (let i = totalWords - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -103,5 +103,13 @@ export const useVoiceStore = defineStore('voice', () => {
     responsiveVoice?.cancel();
   }
 
-  return {nowPlaying, isPaused, playingId, voiceSpeak, autoSpeak, stopSpeak}
+  const resetSpeak = () => {
+    stopSpeak();
+    playIndex = 0;
+    playSequence = [];
+    playWords = [];
+    playStartTime = 0;
+  }
+
+  return {nowPlaying, isPaused, playingId, playOrder,voiceSpeak, autoSpeak, stopSpeak, resetSpeak}
 })
