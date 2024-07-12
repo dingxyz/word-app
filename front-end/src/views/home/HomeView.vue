@@ -28,10 +28,10 @@ const openAddWord = () => addWordRef.value?.open()
 const openSettingPopup = () => settingPopupRef.value?.open()
 const editWordOpen = (word: IWord) => addWordRef.value?.open(word)
 const autoPlayChange = () => voiceStore.autoSpeak(renderList.value)
+const scrollToTop = () => listRef.value.scrollTop = 0
 
 const setRenderList = () => {
   voiceStore.resetSpeak()
-  listRef.value.scrollTop = 0
   const {isPaging, pageSize} = paginationStore
   let {currentPage} = paginationStore
   if (isPaging && words.length > pageSize) {
@@ -47,8 +47,18 @@ const setRenderList = () => {
   }
 }
 
-watch(() => paginationStore.isPaging, setRenderList)
-watch(() => paginationStore.pageSize, setRenderList)
+const currencyUpdate = () => {
+  scrollToTop()
+  setRenderList()
+}
+
+const typeChange = () => {
+  scrollToTop()
+  getWord()
+}
+
+watch(() => paginationStore.isPaging, () => setRenderList())
+watch(() => paginationStore.pageSize, () => setRenderList())
 
 const getWord = async (searchKey: string = '') => {
   loading.value = true
@@ -77,7 +87,7 @@ const searchWord = debounce(getWord, 300)
     <header class="flex items-center justify-between h-12 px-4 bg-fuchsia-300 text-center text-white">
       <span class="w-10">{{ words.length }}</span>
       <span class="text-xl">{{ appStore?.wordType }}</span>
-      <WordTypeSelect @refresh-list="getWord"/>
+      <WordTypeSelect @refresh-list="typeChange"/>
     </header>
     <article ref="listRef" class="relative flex-1 bg-violet-50 rounded-b-xl overflow-auto">
       <div v-if="loading" class="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-[#d9dae25a]">
@@ -97,7 +107,7 @@ const searchWord = debounce(getWord, 300)
     <div class="mt-2" v-if="paginationStore.isPaging && words.length > paginationStore.pageSize">
       <PaginationBox
         :total-items="words.length"
-        @update:currentPage="setRenderList"
+        @update:currentPage="currencyUpdate"
       />
     </div>
     <footer class="flex items-center justify-between h-12 mt-2 px-4 bg-cyan-400 text-white rounded-xl">
