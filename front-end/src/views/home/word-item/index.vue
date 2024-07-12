@@ -105,9 +105,9 @@ const openDetail = () => showDetailPopup.value = true
         </div>
       </template>
     </van-swipe-cell>
-    <van-popup v-model:show="showDetailPopup" v-if="wordData.annotation" closeable lazy-render class="flex p-4" position="bottom">
+    <van-popup v-model:show="showDetailPopup" v-if="wordData.annotation" closeable lazy-render class="flex p-4 bg-black" position="bottom">
       <div class="flex-1 flex flex-col">
-        <div v-html="compiledMarkdown" v-bold-english class="markdown-body flex-auto overflow-auto"></div>
+        <div v-html="compiledMarkdown" v-bold-english class="markdown-body flex-auto overflow-auto bg-black text-white"></div>
         <div class="text-center mt-4">
           <van-button type="success" @click="showDetailPopup = false" class="w-full">CLOSE</van-button>
         </div>

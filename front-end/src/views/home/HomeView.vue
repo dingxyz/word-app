@@ -17,6 +17,7 @@ const appStore = useAppStore();
 const voiceStore = useVoiceStore()
 const paginationStore = usePaginationStore()
 const addWordRef = ref<InstanceType<typeof AddWord>>()
+const listRef = ref()
 const settingPopupRef = ref<InstanceType<typeof SettingPopup>>()
 const words = reactive<IWord[]>([])
 const renderList = ref<IWord[]>([])
@@ -30,6 +31,7 @@ const autoPlayChange = () => voiceStore.autoSpeak(renderList.value)
 
 const setRenderList = () => {
   voiceStore.resetSpeak()
+  listRef.value.scrollTop = 0
   const {isPaging, pageSize} = paginationStore
   let {currentPage} = paginationStore
   if (isPaging && words.length > pageSize) {
@@ -77,7 +79,7 @@ const searchWord = debounce(getWord, 300)
       <span class="text-xl">{{ appStore?.wordType }}</span>
       <WordTypeSelect @refresh-list="getWord"/>
     </header>
-    <article class="relative flex-1 bg-violet-50 rounded-b-xl overflow-auto">
+    <article ref="listRef" class="relative flex-1 bg-violet-50 rounded-b-xl overflow-auto">
       <div v-if="loading" class="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-[#d9dae25a]">
         <van-loading type="spinner"/>
       </div>
