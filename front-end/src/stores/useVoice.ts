@@ -1,6 +1,7 @@
 import {ref} from 'vue'
 import {defineStore} from 'pinia'
 import {IWord} from "@/api/word-api";
+import {showNotify} from "vant";
 
 export enum ORDER_TYPE {
   SEQUENTIAL = 'sequential',
@@ -21,9 +22,18 @@ export const useVoiceStore = defineStore('voice', () => {
   let playStartTime = 0;
 
   const voiceSpeak = (english: string, onEnd?: () => void) => {
-    responsiveVoice?.speak(english, "UK English Male", {
-      onend: onEnd
-    });
+    // responsiveVoice?.speak(english, "UK English Male", {
+    //   onend: onEnd
+    // });
+
+    if (SpeechSynthesisUtterance) {
+      const utterance = new SpeechSynthesisUtterance(english);
+      utterance.lang = 'en-US';
+      utterance.onend = onEnd
+      window.speechSynthesis.speak(utterance);
+    } else {
+      showNotify({type: 'danger', message: 'Your browser does not support speech synthesis.'});
+    }
   }
 
   const autoSpeak = (words: IWord[]) => {
