@@ -26,14 +26,33 @@ export const useVoiceStore = defineStore('voice', () => {
     //   onend: onEnd
     // });
 
-    if (SpeechSynthesisUtterance) {
-      const utterance = new SpeechSynthesisUtterance(english);
-      utterance.lang = 'en-US';
-      utterance.onend = onEnd
-      window.speechSynthesis.speak(utterance);
-    } else {
-      showNotify({type: 'danger', message: 'Your browser does not support speech synthesis.'});
-    }
+    const apiKey = 'AIzaSyAJKCS3ks02UA8wqtq4U-AHPL85JWAUEus';
+
+    const url = `https://texttospeech.googleapis.com/v1/text:synthesize?key=${apiKey}`;
+
+    const data = {
+      input: { text: english },
+      voice: { languageCode: 'en-US', ssmlGender: 'NEUTRAL' },
+      audioConfig: { audioEncoding: 'MP3' },
+    };
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then(response => response.json())
+      .then(result => {
+        const audioContent = result.audioContent;
+        const audio = new Audio(`data:audio/mp3;base64,${audioContent}`);
+        audio.addEventListener('ended', onEnd);
+        audio.play();
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
   }
 
   const autoSpeak = (words: IWord[]) => {
