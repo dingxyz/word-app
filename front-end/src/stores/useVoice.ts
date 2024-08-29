@@ -1,11 +1,15 @@
 import {ref} from 'vue'
 import {defineStore} from 'pinia'
 import {IWord} from "@/api/word-api";
-import {showNotify} from "vant";
 
 export enum ORDER_TYPE {
   SEQUENTIAL = 'sequential',
   RANDOM = 'random'
+}
+
+export enum SSML_GENDER {
+  MALE = 'MALE',
+  FEMALE = 'FEMALE',
 }
 
 const responsiveVoice = window['responsiveVoice'];
@@ -13,6 +17,8 @@ const PLAY_TIME_MS = 30 * 60 * 1000;
 
 export const useVoiceStore = defineStore('voice', () => {
   const playOrder = ref(ORDER_TYPE.SEQUENTIAL)
+  const ssmlGender = ref(SSML_GENDER.FEMALE)
+  const speakingRate = ref(1)
   const nowPlaying = ref(false)
   const playingId = ref(null)
   const isPaused = ref(false)
@@ -31,9 +37,15 @@ export const useVoiceStore = defineStore('voice', () => {
     const url = `https://texttospeech.googleapis.com/v1/text:synthesize?key=${apiKey}`;
 
     const data = {
-      input: { text: english },
-      voice: { languageCode: 'en-US', ssmlGender: 'NEUTRAL' },
-      audioConfig: { audioEncoding: 'MP3' },
+      input: {text: english},
+      voice: {
+        languageCode: 'en-US',
+        ssmlGender: ssmlGender.value,
+      },
+      audioConfig: {
+        audioEncoding: 'MP3',
+        speakingRate: speakingRate.value,
+      },
     };
 
     fetch(url, {
@@ -140,5 +152,5 @@ export const useVoiceStore = defineStore('voice', () => {
     playStartTime = 0;
   }
 
-  return {nowPlaying, isPaused, playingId, playOrder,voiceSpeak, autoSpeak, stopSpeak, resetSpeak}
+  return {nowPlaying, ssmlGender, speakingRate, isPaused, playingId, playOrder, voiceSpeak, autoSpeak, stopSpeak, resetSpeak}
 })

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import {computed, defineComponent, ref} from 'vue'
+import {defineComponent, ref} from 'vue'
 import {useAppStore} from "@/stores/useApp";
 import {usePaginationStore} from "@/stores/usePagination";
-import {ORDER_TYPE, useVoiceStore} from "@/stores/useVoice";
+import {ORDER_TYPE, SSML_GENDER, useVoiceStore} from "@/stores/useVoice";
 
 defineComponent({
   name: 'SettingPopup',
@@ -11,25 +11,10 @@ const appStore = useAppStore();
 const voiceStore = useVoiceStore()
 const paginationStore = usePaginationStore()
 const isShow = ref(false)
-const showChineseChecked = computed({
-  get: () => appStore.showChineseChecked,
-  set: value => appStore.showChineseChecked = value
-})
-const isPaging = computed({
-  get: () => paginationStore.isPaging,
-  set: value => paginationStore.isPaging = value
-})
-const pageSize = computed({
-  get: () => paginationStore.pageSize,
-  set: value => paginationStore.pageSize = value
-})
-const playOrder = computed({
-  get: () => voiceStore.playOrder,
-  set: value => voiceStore.playOrder = value
-})
 
 const saveWord = () => isShow.value = false
-const resetData = () => {}
+const resetData = () => {
+}
 
 const open = () => isShow.value = true
 defineExpose({open})
@@ -41,12 +26,12 @@ defineExpose({open})
       <van-cell-group inset label-width="300px">
         <van-field name="switch" label-width="120px" input-align="right" label="Pagination">
           <template #input>
-            <van-switch v-model="isPaging" size="20"/>
+            <van-switch v-model="paginationStore.isPaging" size="20"/>
           </template>
         </van-field>
-        <van-field v-if="isPaging" name="radio" input-align="right" label="Page size">
+        <van-field v-if="paginationStore.isPaging" name="radio" input-align="right" label="Page size">
           <template #input>
-            <van-radio-group v-model="pageSize" direction="horizontal">
+            <van-radio-group v-model="paginationStore.pageSize" direction="horizontal">
               <van-radio :name="30">30</van-radio>
               <van-radio :name="60">60</van-radio>
               <van-radio :name="120">120</van-radio>
@@ -55,15 +40,28 @@ defineExpose({open})
         </van-field>
         <van-field name="radio" input-align="right" label="Play order">
           <template #input>
-            <van-radio-group v-model="playOrder" direction="horizontal">
+            <van-radio-group v-model="voiceStore.playOrder" direction="horizontal">
               <van-radio :name="ORDER_TYPE.SEQUENTIAL">{{ ORDER_TYPE.SEQUENTIAL }}</van-radio>
               <van-radio :name="ORDER_TYPE.RANDOM">{{ ORDER_TYPE.RANDOM }}</van-radio>
             </van-radio-group>
           </template>
         </van-field>
+        <van-field name="radio" input-align="right" label="Play Gender">
+          <template #input>
+            <van-radio-group v-model="voiceStore.ssmlGender" direction="horizontal">
+              <van-radio :name="SSML_GENDER.MALE">{{ SSML_GENDER.MALE }}</van-radio>
+              <van-radio :name="SSML_GENDER.FEMALE">{{ SSML_GENDER.FEMALE }}</van-radio>
+            </van-radio-group>
+          </template>
+        </van-field>
+        <van-field name="slider" input-align="right" label="Speech rate">
+          <template #input>
+            <van-slider v-model.number="voiceStore.speakingRate" :step="0.2" :min="0.6" :max="1.4"/>
+          </template>
+        </van-field>
         <van-field name="switch" label-width="120px" input-align="right" label="Display Chinese">
           <template #input>
-            <van-switch v-model="showChineseChecked" size="20"/>
+            <van-switch v-model="appStore.showChineseChecked" size="20"/>
           </template>
         </van-field>
       </van-cell-group>

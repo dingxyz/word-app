@@ -18,7 +18,7 @@ import {
   Popup,
   Radio,
   RadioGroup,
-  Search,
+  Search, Slider,
   SwipeCell,
   Switch
 } from "vant";
@@ -45,4 +45,5 @@ export function loadVantUI(app: App) {
   app.use(CheckboxGroup);
   app.use(List);
   app.use(Loading);
+  app.use(Slider);
 }
