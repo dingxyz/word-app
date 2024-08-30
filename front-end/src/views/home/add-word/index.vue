@@ -13,6 +13,7 @@ const emit = defineEmits(['add-complete'])
 const appStore = useAppStore()
 const fieldRef = ref<FieldInstance>();
 const isShow = ref(false)
+const loading = ref(false)
 const wordData = reactive<IWord>(new IWord())
 
 const saveWord = () => {
@@ -29,6 +30,7 @@ const saveWord = () => {
   }
   params['wordType'] = wordData.id ? wordData.wordType : appStore.wordType
 
+  loading.value = true
   const apiFunc = wordData.id ? WordApi.update : WordApi.add
   apiFunc(params).then(res => {
     if (res.code === '000000') {
@@ -37,6 +39,8 @@ const saveWord = () => {
     } else {
       showNotify({type: 'danger', message: res.message});
     }
+  }).finally(() => {
+    loading.value = false
   })
 }
 
@@ -67,7 +71,7 @@ defineExpose({open})
         />
       </van-cell-group>
       <div class="flex justify-center m-4">
-        <van-button type="success" @click="saveWord" block>SAVE WORD</van-button>
+        <van-button type="success" @click="saveWord" :loading="loading" loading-text="SAVE WORD" block>SAVE WORD</van-button>
       </div>
     </div>
   </van-action-sheet>

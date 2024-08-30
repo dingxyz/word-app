@@ -1,6 +1,9 @@
 import {ref} from 'vue'
 import {defineStore} from 'pinia'
 import {IWord} from "@/api/word-api";
+import {PERSIST_CONFIG} from "@/utils/local-storage";
+import {SYSTEM_NAME} from "@/utils/cache-key";
+import VoiceApi from "@/api/voice-api";
 
 export enum ORDER_TYPE {
   SEQUENTIAL = 'sequential',
@@ -12,30 +15,23 @@ export enum SSML_GENDER {
   FEMALE = 'FEMALE',
 }
 
-const responsiveVoice = window['responsiveVoice'];
 const PLAY_TIME_MS = 30 * 60 * 1000;
 
-export const useVoiceStore = defineStore('voice', () => {
+export const useVoiceStore = defineStore(`${SYSTEM_NAME}-voice`, () => {
   const playOrder = ref(ORDER_TYPE.SEQUENTIAL)
   const ssmlGender = ref(SSML_GENDER.FEMALE)
   const speakingRate = ref(1)
   const nowPlaying = ref(false)
   const playingId = ref(null)
   const isPaused = ref(false)
+  let audio  = null;
+  let loading = false;
   let playIndex = 0;
   let playSequence: number[] = [];
   let playWords: IWord[] = [];
   let playStartTime = 0;
 
-  const voiceSpeak = (english: string, onEnd?: () => void) => {
-    // responsiveVoice?.speak(english, "UK English Male", {
-    //   onend: onEnd
-    // });
-
-    const apiKey = 'AIzaSyAJKCS3ks02UA8wqtq4U-AHPL85JWAUEus';
-
-    const url = `https://texttospeech.googleapis.com/v1/text:synthesize?key=${apiKey}`;
-
+  const voiceSpeak = async (english: string, onEnd?: () => void) => {
     const data = {
       input: {text: english},
       voice: {
@@ -47,24 +43,14 @@ export const useVoiceStore = defineStore('voice', () => {
         speakingRate: speakingRate.value,
       },
     };
+    if (loading) return;
+    loading = true;
+    const res = await VoiceApi.getVoice(data).finally(() => loading = false)
 
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    })
-      .then(response => response.json())
-      .then(result => {
-        const audioContent = result.audioContent;
-        const audio = new Audio(`data:audio/mp3;base64,${audioContent}`);
-        audio.addEventListener('ended', onEnd);
-        audio.play();
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+    const audioContent = res.audioContent;
+    audio = new Audio(`data:audio/mp3;base64,${audioContent}`);
+    audio.addEventListener('ended', onEnd);
+    audio.play();
   }
 
   const autoSpeak = (words: IWord[]) => {
@@ -125,14 +111,13 @@ export const useVoiceStore = defineStore('voice', () => {
   const pauseSpeak = () => {
     if (nowPlaying.value) {
       isPaused.value = true;
-      responsiveVoice?.pause();
+      audio?.pause();
     }
   }
 
   const resumeSpeak = () => {
     if (nowPlaying.value && isPaused.value) {
       isPaused.value = false;
-      responsiveVoice?.resume();
       playNext();
     }
   }
@@ -141,7 +126,8 @@ export const useVoiceStore = defineStore('voice', () => {
     nowPlaying.value = false;
     isPaused.value = false;
     playingId.value = null;
-    responsiveVoice?.cancel();
+    audio?.pause();
+    audio && (audio.currentTime = 0);
   }
 
   const resetSpeak = () => {
@@ -152,5 +138,8 @@ export const useVoiceStore = defineStore('voice', () => {
     playStartTime = 0;
   }
 
-  return {nowPlaying, ssmlGender, speakingRate, isPaused, playingId, playOrder, voiceSpeak, autoSpeak, stopSpeak, resetSpeak}
+  return {nowPlaying, ssmlGender, speakingRate, isPaused, playingId, playOrder, voiceSpeak, autoSpeak, resetSpeak}
+}, {
+  // @ts-ignore
+  persist: PERSIST_CONFIG,
 })

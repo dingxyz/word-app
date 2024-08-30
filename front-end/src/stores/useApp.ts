@@ -1,6 +1,7 @@
-import {ref, watchEffect} from 'vue'
+import {ref} from 'vue'
 import {defineStore} from 'pinia'
-import {getWordType, setWordType} from "@/utils/local-storage";
+import {PERSIST_CONFIG} from "@/utils/local-storage";
+import {SYSTEM_NAME} from "@/utils/cache-key";
 
 export enum WORD_TYPE {
   WORDS = 'words',
@@ -11,13 +12,12 @@ export enum WORD_TYPE {
   NOTEBOOK = 'notebook'
 }
 
-export const useAppStore = defineStore('app', () => {
-  const wordType = ref(getWordType())
+export const useAppStore = defineStore(`${SYSTEM_NAME}-app`, () => {
+  const wordType = ref(WORD_TYPE.WORDS)
   const showChineseChecked = ref(false)
 
-  watchEffect(() => {
-    setWordType(wordType.value)
-  })
-
   return {wordType, showChineseChecked}
+}, {
+  // @ts-ignore
+  persist: PERSIST_CONFIG,
 })

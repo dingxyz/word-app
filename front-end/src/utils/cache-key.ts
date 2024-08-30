@@ -1,4 +1,4 @@
-const SYSTEM_NAME = "app-v1"
+export const SYSTEM_NAME = "app-v1"
 
 /** 缓存数据时用到的 Key */
 class CacheKey {
