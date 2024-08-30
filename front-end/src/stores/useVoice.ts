@@ -24,7 +24,7 @@ export const useVoiceStore = defineStore(`${SYSTEM_NAME}-voice`, () => {
   const nowPlaying = ref(false)
   const playingId = ref(null)
   const isPaused = ref(false)
-  let audio  = null;
+  const audio  = new Audio('');
   let loading = false;
   let playIndex = 0;
   let playSequence: number[] = [];
@@ -45,12 +45,13 @@ export const useVoiceStore = defineStore(`${SYSTEM_NAME}-voice`, () => {
     };
     if (loading) return;
     loading = true;
-    const res = await VoiceApi.getVoice(data).finally(() => loading = false)
+    const res = await VoiceApi.getVoice(data).catch(onEnd).finally(() => loading = false)
 
     const audioContent = res.audioContent;
-    audio = new Audio(`data:audio/mp3;base64,${audioContent}`);
-    audio.addEventListener('ended', onEnd);
-    audio.play();
+    audio.src = `data:audio/mp3;base64,${audioContent}`;
+    audio.load();
+    audio.onended = onEnd
+    audio.play()
   }
 
   const autoSpeak = (words: IWord[]) => {
