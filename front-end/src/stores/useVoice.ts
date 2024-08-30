@@ -4,6 +4,7 @@ import {IWord} from "@/api/word-api";
 import {PERSIST_CONFIG} from "@/utils/local-storage";
 import {SYSTEM_NAME} from "@/utils/cache-key";
 import VoiceApi from "@/api/voice-api";
+import {showNotify} from "vant";
 
 export enum ORDER_TYPE {
   SEQUENTIAL = 'sequential',
@@ -24,7 +25,7 @@ export const useVoiceStore = defineStore(`${SYSTEM_NAME}-voice`, () => {
   const nowPlaying = ref(false)
   const playingId = ref(null)
   const isPaused = ref(false)
-  const audio  = new Audio('');
+  const audio = new Audio('');
   let loading = false;
   let playIndex = 0;
   let playSequence: number[] = [];
@@ -45,7 +46,12 @@ export const useVoiceStore = defineStore(`${SYSTEM_NAME}-voice`, () => {
     };
     if (loading) return;
     loading = true;
-    const res = await VoiceApi.getVoice(data).catch(onEnd).finally(() => loading = false)
+    const res = await VoiceApi.getVoice(data)
+      .catch(() => {
+        showNotify({type: 'danger', message: "Failed to get voice"});
+        onEnd()
+      })
+      .finally(() => loading = false)
 
     const audioContent = res.audioContent;
     audio.src = `data:audio/mp3;base64,${audioContent}`;

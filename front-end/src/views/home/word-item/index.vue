@@ -28,8 +28,14 @@ const compiledMarkdown = computed(() => marked(poops.wordData.annotation));
 const isPlaying = computed(() => !voiceStore.isPaused && voiceStore.playingId === poops.wordData.id)
 
 watch(() => voiceStore.playingId, () => {
-  if (isPlaying.value) {
-    // wordItemRef.value.scrollIntoView({behavior: 'smooth', block: 'center'})
+  if (isPlaying.value && wordItemRef.value) {
+    const observer = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+      if (!entry.isIntersecting) {
+        wordItemRef.value?.scrollIntoView(true, {behavior: 'smooth'});
+      }
+    });
+    observer.observe(wordItemRef.value);
   }
 })
 watch(() => appStore.showChineseChecked, (val) => showChinese.value = val)
