@@ -3,7 +3,7 @@ import {type Directive} from "vue"
 
 function wrapEnglishText(node) {
   const queue = [node];
-  const englishRegex = /[A-Za-z]+/g;
+  const englishRegex = /[A-Za-z\u0250-\u02AF]+/g;
 
   while (queue.length > 0) {
     const currentNode = queue.shift();

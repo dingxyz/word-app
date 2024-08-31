@@ -22,17 +22,41 @@ export const useVoiceStore = defineStore(`${SYSTEM_NAME}-voice`, () => {
   const playOrder = ref(ORDER_TYPE.SEQUENTIAL)
   const ssmlGender = ref(SSML_GENDER.FEMALE)
   const speakingRate = ref(1)
-  const nowPlaying = ref(false)
+  const nowPlaying = ref(false)   // Is it playing automatically?
   const playingId = ref(null)
-  const isPaused = ref(false)
+  const isPaused = ref(false)    // Is it paused?
   const audio = new Audio('');
   let loading = false;
   let playIndex = 0;
   let playSequence: number[] = [];
   let playWords: IWord[] = [];
   let playStartTime = 0;
+  const lastPlayInfo = {
+    english: '',
+    ssmlGender: '',
+    speakingRate: 0,
+    onEnd: () => {
+    }
+  };
 
-  const voiceSpeak = async (english: string, onEnd?: () => void) => {
+  const voiceSpeak = async (english: string, isAutoPlay: boolean = false, onEnd?: () => void) => {
+    if (!isAutoPlay) {
+      pauseSpeak();
+      if (
+        english === lastPlayInfo.english &&
+        ssmlGender.value === lastPlayInfo.ssmlGender &&
+        speakingRate.value === lastPlayInfo.speakingRate
+      ) {
+        audio.play()
+        return
+      } else {
+        lastPlayInfo.onEnd && lastPlayInfo.onEnd();
+        lastPlayInfo.english = english;
+        lastPlayInfo.ssmlGender = ssmlGender.value;
+        lastPlayInfo.speakingRate = speakingRate.value;
+        lastPlayInfo.onEnd = onEnd;
+      }
+    }
     const data = {
       input: {text: english},
       voice: {
@@ -112,7 +136,7 @@ export const useVoiceStore = defineStore(`${SYSTEM_NAME}-voice`, () => {
     const word = playWords[playSequence[playIndex]];
     playingId.value = word.id;
     playIndex++;
-    voiceSpeak(word.english, playNext);
+    voiceSpeak(word.english, true, playNext);
   }
 
   const pauseSpeak = () => {

@@ -7,7 +7,7 @@ import {showConfirmDialog, showNotify} from "vant";
 import {copyToClipboard} from "@/utils/common-util";
 import {marked} from "marked";
 import 'github-markdown-css/github-markdown.css';
-import {useVoiceStore} from "@/stores/useVoice";
+import {ORDER_TYPE, useVoiceStore} from "@/stores/useVoice";
 
 defineComponent({
   name: 'WordItem',
@@ -23,23 +23,29 @@ const voiceStore = useVoiceStore()
 const wordItemRef = ref()
 const emit = defineEmits(['refresh-list', 'edit-word'])
 const showDetailPopup = ref(false)
-const showChinese = ref(false)
+const showChinese = ref(appStore.showChineseChecked)
 const compiledMarkdown = computed(() => marked(poops.wordData.annotation));
 const isPlaying = computed(() => !voiceStore.isPaused && voiceStore.playingId === poops.wordData.id)
+const isPlayingByClick = ref(false) // Manual click play
+
+const observer = new IntersectionObserver((entries) => {
+  const entry = entries[0];
+  if (!entry.isIntersecting) {
+    wordItemRef.value?.scrollIntoView({
+      block: voiceStore.playOrder === ORDER_TYPE.SEQUENTIAL ? 'start' : 'center'
+    });
+    observer.disconnect();
+  }
+});
 
 watch(() => voiceStore.playingId, () => {
   if (isPlaying.value && wordItemRef.value) {
-    const observer = new IntersectionObserver((entries) => {
-      const entry = entries[0];
-      if (!entry.isIntersecting) {
-        wordItemRef.value?.scrollIntoView(true, {behavior: 'smooth'});
-      }
-    });
     observer.observe(wordItemRef.value);
+  } else {
+    observer?.disconnect();
   }
 })
 watch(() => appStore.showChineseChecked, (val) => showChinese.value = val)
-
 
 const removeHandler = async (id: string) => {
   const confirm = await showConfirmDialog({
@@ -69,34 +75,39 @@ const moveToLearned = async () => {
   emit('refresh-list')
 }
 
-const mouseHandler = (isHover: boolean) => {
-  setTimeout(() => {
-    showChinese.value = isHover ? !showChinese.value : appStore.showChineseChecked;
-  }, 0)
+const mouseHandler = (isClick?: boolean) => {
+  showChinese.value = !showChinese.value;
+  if (isClick) {
+    setTimeout(mouseHandler, 1500)
+  }
 }
 
-const playSound = (english: string) => voiceStore.voiceSpeak(english)
+const playSound = (english: string) => {
+  isPlayingByClick.value = true
+  voiceStore.voiceSpeak(english, false, () => {
+    isPlayingByClick.value = false
+  })
+}
 
 const openDetail = () => showDetailPopup.value = true
 
 </script>
 
 <template>
-  <div ref="wordItemRef" class="text-lg odd:bg-violet-100 border-red-300" :class="{'border': isPlaying }">
+  <div ref="wordItemRef" class="text-lg odd:bg-violet-100 border-red-300 rounded-md" :class="{'border': isPlaying }">
     <van-swipe-cell>
       <li class="flex items-center h-14">
         <div
           class="word-box self-start flex-1 leading-tight pl-2"
           :class="{'show-chinese': showChinese}"
-          @mouseover="mouseHandler(true)"
-          @mouseleave="mouseHandler(false)"
+          @click="mouseHandler(true)"
         >
           <div class="btn h-14 flex items-center">{{ wordData.english }}</div>
-          <div class="btn h-14 flex items-center text-slate-400 text-base">{{ wordData.chinese }}</div>
+          <div class="btn h-14 flex items-center text-slate-400 text-base">{{ wordData.chinese ?? '--' }}</div>
         </div>
         <IconBtn v-if="wordData.annotation" icon="eye-o" @click="openDetail"/>
         <IconBtn icon="notes-o" @click.stop="copyToClipboard(showChinese ? wordData.chinese : wordData.english)"/>
-        <IconBtn icon="volume-o" @click="playSound(wordData.english)"/>
+        <IconBtn icon="volume-o" :color="isPlaying || isPlayingByClick ? '#49e05c' : ''" @click="playSound(wordData.english)"/>
       </li>
       <template #left>
         <div class="p-1 text-sm text-fuchsia-500">
@@ -107,7 +118,7 @@ const openDetail = () => showDetailPopup.value = true
         <div class="flex items-center">
           <IconBtn icon="delete-o" @click="removeHandler(wordData.id)" color="red"/>
           <IconBtn icon="edit" @click="emit('edit-word', wordData)"/>
-          <IconBtn v-if="wordData.wordType !== WORD_TYPE.LEARNED" icon="minus" @click="moveToLearned"/>
+          <IconBtn v-if="wordData.wordType === WORD_TYPE.WORDS" icon="minus" @click="moveToLearned"/>
         </div>
       </template>
     </van-swipe-cell>
