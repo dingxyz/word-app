@@ -75,10 +75,19 @@ const moveToLearned = async () => {
   emit('refresh-list')
 }
 
+let timeoutId = null;
 const mouseHandler = (isClick?: boolean) => {
   showChinese.value = !showChinese.value;
   if (isClick) {
-    setTimeout(mouseHandler, 1500)
+    if (timeoutId) {
+      clearTimeout(timeoutId)
+      timeoutId = null
+    } else {
+      timeoutId = setTimeout(() => {
+        mouseHandler()
+        timeoutId = null
+      }, 1500)
+    }
   }
 }
 

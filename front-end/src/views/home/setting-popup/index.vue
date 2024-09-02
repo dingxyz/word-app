@@ -32,9 +32,9 @@ defineExpose({open})
         <van-field v-if="paginationStore.isPaging" name="radio" input-align="right" label="Page size">
           <template #input>
             <van-radio-group v-model="paginationStore.pageSize" direction="horizontal">
+              <van-radio :name="20">20</van-radio>
               <van-radio :name="30">30</van-radio>
-              <van-radio :name="60">60</van-radio>
-              <van-radio :name="120">120</van-radio>
+              <van-radio :name="50">50</van-radio>
             </van-radio-group>
           </template>
         </van-field>

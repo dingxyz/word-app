@@ -1,19 +1,40 @@
-import {ref} from 'vue'
+import {reactive, ref, watch} from 'vue'
 import {defineStore} from 'pinia'
-import {PERSIST_CONFIG} from "@/utils/local-storage";
-import {SYSTEM_NAME} from "@/utils/cache-key";
+import {useAppStore} from "@/stores/useApp";
 
-export const usePaginationStore = defineStore(`${SYSTEM_NAME}-pagination`, () => {
+interface Pagination {
+  isPaging: boolean;
+  currentPage: number;
+  pageSize: number;
+}
+
+export const usePaginationStore = defineStore("pagination", () => {
+  const pageByWordType = reactive<Record<string, Pagination>>({})
   const isPaging = ref(true)
   const currentPage = ref(1)
   const pageSize = ref(30)
 
-  const resetCurrentPage = () => {
-    currentPage.value = 1;
-  }
+  const appStore = useAppStore()
 
-  return {isPaging, currentPage, pageSize, resetCurrentPage}
-}, {
-  // @ts-ignore
-  persist: PERSIST_CONFIG,
+  watch([isPaging, currentPage, pageSize], () => {
+    pageByWordType[appStore.wordType] = {
+      isPaging: isPaging.value,
+      currentPage: currentPage.value,
+      pageSize: pageSize.value,
+    }
+  })
+
+  const initPagination = () => {
+    const storedData = pageByWordType[appStore.wordType] || {
+      isPaging: true,
+      currentPage: 1,
+      pageSize: 30,
+    };
+    isPaging.value = storedData.isPaging;
+    currentPage.value = storedData.currentPage;
+    pageSize.value = storedData.pageSize;
+  }
+  initPagination()
+
+  return {isPaging, currentPage, pageSize, pageByWordType, initPagination}
 })

@@ -2,7 +2,6 @@
 import {defineComponent, ref} from 'vue'
 import IconBtn from "@/components/IconBtn.vue";
 import {useAppStore, WORD_TYPE} from "@/stores/useApp";
-import {usePaginationStore} from "@/stores/usePagination";
 
 defineComponent({
   name: 'WordTypeSelect',
@@ -12,11 +11,9 @@ const emit = defineEmits(['refresh-list'])
 
 const appStore = useAppStore()
 const popoverShow = ref(false)
-const {resetCurrentPage} = usePaginationStore()
 
 const typeChange = () => {
   popoverShow.value = false
-  resetCurrentPage()
   emit('refresh-list')
 }
 </script>

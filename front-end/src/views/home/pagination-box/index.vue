@@ -16,8 +16,9 @@ const paginationStore = usePaginationStore()
     v-model="paginationStore.currentPage"
     @change="emit('update:currentPage')"
     :items-per-page="paginationStore.pageSize"
-    :show-prev-button="true"
-    :show-next-button="true"
+    :show-prev-button="false"
+    :show-next-button="false"
+    :show-page-size="8"
     prev-text="prev"
     next-text="next"
     force-ellipses

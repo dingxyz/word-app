@@ -16,6 +16,7 @@ import {useVoiceStore} from "@/stores/useVoice";
 const appStore = useAppStore();
 const voiceStore = useVoiceStore()
 const paginationStore = usePaginationStore()
+
 const addWordRef = ref<InstanceType<typeof AddWord>>()
 const listRef = ref()
 const settingPopupRef = ref<InstanceType<typeof SettingPopup>>()
@@ -29,7 +30,6 @@ const openSettingPopup = () => settingPopupRef.value?.open()
 const editWordOpen = (word: IWord) => addWordRef.value?.open(word)
 const autoPlayChange = () => voiceStore.autoSpeak(renderList.value)
 const scrollToTop = () => listRef.value.scrollTop = 0
-
 const setRenderList = () => {
   voiceStore.resetSpeak()
   const {isPaging, pageSize} = paginationStore
@@ -45,20 +45,13 @@ const setRenderList = () => {
   } else {
     renderList.value = words
   }
-}
-
-const currencyUpdate = () => {
   scrollToTop()
-  setRenderList()
 }
 
-const typeChange = () => {
-  scrollToTop()
-  getWord()
-}
-
-watch(() => paginationStore.isPaging, () => setRenderList())
-watch(() => paginationStore.pageSize, () => setRenderList())
+watch([
+  () => paginationStore.isPaging,
+  () => paginationStore.pageSize
+], setRenderList);
 
 const getWord = async (searchKey: string = '') => {
   loading.value = true
@@ -72,6 +65,7 @@ const getWord = async (searchKey: string = '') => {
     showNotify({type: 'danger', message});
   }
   words.splice(0, words.length, ...data)
+  paginationStore.initPagination()
   setRenderList()
 }
 getWord()
@@ -87,9 +81,9 @@ const searchWord = debounce(getWord, 300)
     <header class="flex items-center justify-between h-12 px-4 bg-fuchsia-300 text-center text-white">
       <span class="w-10">{{ words.length }}</span>
       <span class="text-xl">{{ appStore?.wordType }}</span>
-      <WordTypeSelect @refresh-list="typeChange"/>
+      <WordTypeSelect @refresh-list="getWord"/>
     </header>
-    <article ref="listRef" class="relative flex-1 bg-violet-50 rounded-b-xl overflow-auto">
+    <article ref="listRef" class="relative flex-1 bg-violet-50 rounded-b-xl overflow-auto" :class="{'overflow-hidden': loading }">
       <div v-if="loading" class="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-[#d9dae25a]">
         <van-loading type="spinner"/>
       </div>
@@ -107,7 +101,7 @@ const searchWord = debounce(getWord, 300)
     <div class="mt-2" v-if="paginationStore.isPaging && words.length > paginationStore.pageSize">
       <PaginationBox
         :total-items="words.length"
-        @update:currentPage="currencyUpdate"
+        @update:currentPage="setRenderList"
       />
     </div>
     <footer class="flex items-center justify-between h-12 mt-2 px-4 bg-cyan-400 text-white rounded-xl">

@@ -1,8 +1,6 @@
 import {ref} from 'vue'
 import {defineStore} from 'pinia'
 import {IWord} from "@/api/word-api";
-import {PERSIST_CONFIG} from "@/utils/local-storage";
-import {SYSTEM_NAME} from "@/utils/cache-key";
 import VoiceApi from "@/api/voice-api";
 import {showNotify} from "vant";
 
@@ -18,7 +16,7 @@ export enum SSML_GENDER {
 
 const PLAY_TIME_MS = 30 * 60 * 1000;
 
-export const useVoiceStore = defineStore(`${SYSTEM_NAME}-voice`, () => {
+export const useVoiceStore = defineStore(`voice`, () => {
   const playOrder = ref(ORDER_TYPE.SEQUENTIAL)
   const ssmlGender = ref(SSML_GENDER.FEMALE)
   const speakingRate = ref(1)
@@ -170,7 +168,4 @@ export const useVoiceStore = defineStore(`${SYSTEM_NAME}-voice`, () => {
   }
 
   return {nowPlaying, ssmlGender, speakingRate, isPaused, playingId, playOrder, voiceSpeak, autoSpeak, resetSpeak}
-}, {
-  // @ts-ignore
-  persist: PERSIST_CONFIG,
 })
