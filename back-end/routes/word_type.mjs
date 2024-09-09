@@ -4,7 +4,7 @@ import {
     addWordType,
     updateWordType,
     deleteWordType
-} from '../controllers/WordTypeController.mjs';
+} from '../controllers/wordTypeController.mjs';
 
 const router = express.Router();
 
