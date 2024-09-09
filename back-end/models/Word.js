@@ -2,7 +2,7 @@
 import mongoose from '../db/mongoose.js';
 
 const wordSchema = new mongoose.Schema({
-    id: { type: String, required: true },
+    id: { type: String, required: true, unique: true },
     english: { type: String, required: true, index: true },
     chinese: { type: String, index: true },
     annotation: { type: String },

@@ -1,5 +1,4 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 import cors from 'cors';
 import wordsRouter from './routes/words.mjs';
 import wordTypeRouter from './routes/word_type.mjs';
@@ -9,7 +8,7 @@ const app = express();
 const port = 3030;
 
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(responseHandler); // 添加响应处理中间件
 
 app.use('/words', wordsRouter);

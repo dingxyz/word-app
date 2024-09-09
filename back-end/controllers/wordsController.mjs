@@ -11,7 +11,7 @@ export const getWords = async (req, res) => {
                     {english: {$regex: searchKey, $options: 'i'}},
                     {chinese: {$regex: searchKey, $options: 'i'}}
                 ]
-            }).sort({createdAt: 1});
+            }).maxTimeMS(9000).sort({createdAt: 1});
         } else if (wordType) {
             sendData = await Word.find({wordType}).sort({createdAt: 1});
         }
