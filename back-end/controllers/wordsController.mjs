@@ -1,15 +1,5 @@
 import Word from '../models/Word.js';
 import {generateUniqueId} from "../utils/commonUtil.mjs";
-import mongoose from "mongoose";
-
-export const WORD_TYPE = {
-    WORDS: 'words',
-    PHRASE: 'phrase',
-    SENTENCE: 'sentence',
-    ANSWER: 'answer',
-    LEARNED: 'learned',
-    NOTEBOOK: 'notebook'
-};
 
 export const getWords = async (req, res) => {
     const {searchKey, wordType} = req.query;

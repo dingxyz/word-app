@@ -2,7 +2,7 @@
 import WordApi, {IWord} from '@/api/word-api'
 import {computed, defineComponent, ref, watch} from 'vue'
 import IconBtn from "@/components/IconBtn.vue";
-import {useAppStore, WORD_TYPE} from "@/stores/useApp";
+import {useAppStore} from "@/stores/useApp";
 import {showConfirmDialog, showNotify} from "vant";
 import {copyToClipboard} from "@/utils/common-util";
 import {marked} from "marked";
@@ -68,7 +68,7 @@ const moveToLearned = async () => {
   await WordApi.moveTo({
     id: poops.wordData.id,
     wordType: poops.wordData.wordType,
-    toType: WORD_TYPE.LEARNED,
+    toType: 'learned',
   }).then(() => {
     showNotify({type: 'success', message: 'Moved to learned successfully'});
   })
@@ -127,7 +127,7 @@ const openDetail = () => showDetailPopup.value = true
         <div class="flex items-center">
           <IconBtn icon="delete-o" @click="removeHandler(wordData.id)" color="red"/>
           <IconBtn icon="edit" @click="emit('edit-word', wordData)"/>
-          <IconBtn v-if="wordData.wordType === WORD_TYPE.WORDS" icon="minus" @click="moveToLearned"/>
+          <IconBtn v-if="wordData.wordType === 'words'" icon="minus" @click="moveToLearned"/>
         </div>
       </template>
     </van-swipe-cell>
