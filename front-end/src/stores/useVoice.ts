@@ -19,6 +19,7 @@ const PLAY_TIME_MS = 30 * 60 * 1000;
 export const useVoiceStore = defineStore(`voice`, () => {
   const playOrder = ref(ORDER_TYPE.SEQUENTIAL)
   const ssmlGender = ref(SSML_GENDER.FEMALE)
+  const isLoopPlayback = ref(true)
   const speakingRate = ref(1)
   const nowPlaying = ref(false)   // Is it playing automatically?
   const playingId = ref(null)
@@ -127,8 +128,13 @@ export const useVoiceStore = defineStore(`voice`, () => {
       return;
     }
 
-    if (playIndex >= playWords.length) {
-      playIndex = 0;
+    if (playIndex >= playWords.length ) {
+      if (isLoopPlayback.value) {
+        playIndex = 0;
+      } else {
+        stopSpeak();
+        return;
+      }
     }
 
     const word = playWords[playSequence[playIndex]];
@@ -167,5 +173,5 @@ export const useVoiceStore = defineStore(`voice`, () => {
     playStartTime = 0;
   }
 
-  return {nowPlaying, ssmlGender, speakingRate, isPaused, playingId, playOrder, voiceSpeak, autoSpeak, resetSpeak}
+  return {nowPlaying, ssmlGender, speakingRate, isPaused, playingId, playOrder, isLoopPlayback, voiceSpeak, autoSpeak, resetSpeak}
 })

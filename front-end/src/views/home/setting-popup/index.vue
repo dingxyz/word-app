@@ -46,6 +46,11 @@ defineExpose({open})
             </van-radio-group>
           </template>
         </van-field>
+        <van-field name="switch" label-width="120px" input-align="right" label="Loop Playback">
+          <template #input>
+            <van-switch v-model="voiceStore.isLoopPlayback" size="20"/>
+          </template>
+        </van-field>
         <van-field name="radio" input-align="right" label="Play Gender">
           <template #input>
             <van-radio-group v-model="voiceStore.ssmlGender" direction="horizontal">

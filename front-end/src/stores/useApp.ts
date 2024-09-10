@@ -1,19 +1,26 @@
 import {ref} from 'vue'
 import {defineStore} from 'pinia'
-import {SYSTEM_NAME} from "@/utils/cache-key";
-
-export enum WORD_TYPE {
-  WORDS = 'words',
-  PHRASE = 'phrase',
-  SENTENCE = 'sentence',
-  ANSWER = 'answer',
-  LEARNED = 'learned',
-  NOTEBOOK = 'notebook'
-}
+import WordTypeApi, {WordType} from "@/api/word-type-api";
 
 export const useAppStore = defineStore(`app`, () => {
-  const wordType = ref(WORD_TYPE.WORDS)
+  const wordType = ref('words')
+  const typeList = ref<WordType[]>([])
   const showChineseChecked = ref(false)
 
-  return {wordType, showChineseChecked}
+  const getTypeList = async () => {
+    const res = await WordTypeApi.get()
+    typeList.value = res.data
+    const currentType = typeList.value.find((item) => item.name === wordType.value)
+    if (!currentType) {
+      wordType.value = typeList.value[0].name
+    }
+  }
+
+  getTypeList()
+
+  return {wordType, typeList, showChineseChecked, getTypeList}
+}, {
+  persist: {
+    paths: ['wordType', 'showChineseChecked'],
+  },
 })

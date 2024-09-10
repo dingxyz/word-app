@@ -12,12 +12,14 @@ import PaginationBox from "@/views/home/pagination-box/index.vue";
 import {usePaginationStore} from "@/stores/usePagination";
 import {showNotify} from "vant";
 import {useVoiceStore} from "@/stores/useVoice";
+import AddType from "@/views/home/add-type/index.vue";
 
 const appStore = useAppStore();
 const voiceStore = useVoiceStore()
 const paginationStore = usePaginationStore()
 
 const addWordRef = ref<InstanceType<typeof AddWord>>()
+const addTypeRef = ref<InstanceType<typeof AddType>>()
 const listRef = ref()
 const settingPopupRef = ref<InstanceType<typeof SettingPopup>>()
 const words = reactive<IWord[]>([])
@@ -26,6 +28,7 @@ const loading = ref(true)
 const isDev = import.meta.env.VITE_ENV === 'DEVELOPMENT'
 
 const openAddWord = () => addWordRef.value?.open()
+const openTypeDialog = () => addTypeRef.value?.open(appStore?.wordType, words.length)
 const openSettingPopup = () => settingPopupRef.value?.open()
 const editWordOpen = (word: IWord) => addWordRef.value?.open(word)
 const autoPlayChange = () => voiceStore.autoSpeak(renderList.value)
@@ -80,7 +83,7 @@ const searchWord = debounce(getWord, 300)
   >
     <header class="flex items-center justify-between h-12 px-4 bg-fuchsia-300 text-center text-white">
       <span class="w-10">{{ words.length }}</span>
-      <span class="text-xl">{{ appStore?.wordType }}</span>
+      <span class="text-xl" @click="openTypeDialog">{{ appStore?.wordType }}</span>
       <WordTypeSelect @refresh-list="getWord"/>
     </header>
     <article ref="listRef" class="relative flex-1 bg-violet-50 rounded-b-xl overflow-auto" :class="{'overflow-hidden': loading }">
@@ -115,6 +118,7 @@ const searchWord = debounce(getWord, 300)
       <van-icon name="add-o" @click="openAddWord" size="20"/>
     </footer>
     <AddWord ref="addWordRef" @add-complete="getWord"/>
+    <AddType ref="addTypeRef"/>
     <SettingPopup
       ref="settingPopupRef"
     />
