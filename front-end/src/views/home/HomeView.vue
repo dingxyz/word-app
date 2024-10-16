@@ -32,7 +32,7 @@ const openTypeDialog = () => addTypeRef.value?.open(appStore?.wordType, words.le
 const openSettingPopup = () => settingPopupRef.value?.open()
 const editWordOpen = (word: IWord) => addWordRef.value?.open(word)
 const autoPlayChange = () => voiceStore.autoSpeak(renderList.value)
-const setRenderList = (toBottom) => {
+const setRenderList = (toBottom = false) => {
   voiceStore.resetSpeak()
   const {isPaging, pageSize} = paginationStore
   let {currentPage} = paginationStore
@@ -59,7 +59,7 @@ const setRenderList = (toBottom) => {
 watch([
   () => paginationStore.isPaging,
   () => paginationStore.pageSize
-], setRenderList);
+], () => setRenderList());
 
 const getWord = async ({searchKey = null, toBottom = false} = {}) => {
   loading.value = true
