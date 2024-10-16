@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import WordApi, {IWord} from '@/api/word-api'
-import {reactive, ref, watch} from 'vue'
+import {reactive, ref, watch, nextTick} from 'vue'
 import {debounce} from 'lodash-es';
 import WordItem from "@/views/home/word-item/index.vue";
 import AddWord from "@/views/home/add-word/index.vue";
@@ -32,8 +32,7 @@ const openTypeDialog = () => addTypeRef.value?.open(appStore?.wordType, words.le
 const openSettingPopup = () => settingPopupRef.value?.open()
 const editWordOpen = (word: IWord) => addWordRef.value?.open(word)
 const autoPlayChange = () => voiceStore.autoSpeak(renderList.value)
-const scrollToTop = () => listRef.value.scrollTop = 0
-const setRenderList = () => {
+const setRenderList = (toBottom) => {
   voiceStore.resetSpeak()
   const {isPaging, pageSize} = paginationStore
   let {currentPage} = paginationStore
@@ -48,7 +47,13 @@ const setRenderList = () => {
   } else {
     renderList.value = words
   }
-  scrollToTop()
+  nextTick(() => {
+    if (toBottom === true) {
+      listRef.value.scrollTop = listRef.value.scrollHeight
+    } else {
+      listRef.value.scrollTop = 0
+    }
+  })
 }
 
 watch([
@@ -56,11 +61,11 @@ watch([
   () => paginationStore.pageSize
 ], setRenderList);
 
-const getWord = async (searchKey: string = '') => {
+const getWord = async ({searchKey = null, toBottom = false} = {}) => {
   loading.value = true
   const {data, code, message} = await WordApi.get({
     wordType: appStore.wordType,
-    searchKey: searchKey.trim() || null
+    searchKey: searchKey?.trim() || null
   }).finally(() => {
     loading.value = false
   })
@@ -69,7 +74,7 @@ const getWord = async (searchKey: string = '') => {
   }
   words.splice(0, words.length, ...data)
   paginationStore.initPagination()
-  setRenderList()
+  setRenderList(toBottom)
 }
 getWord()
 
@@ -104,7 +109,7 @@ const searchWord = debounce(getWord, 300)
     <div class="mt-2" v-if="paginationStore.isPaging && words.length > paginationStore.pageSize">
       <PaginationBox
         :total-items="words.length"
-        @update:currentPage="setRenderList"
+        @update:currentPage="setRenderList()"
       />
     </div>
     <footer class="flex items-center justify-between h-12 mt-2 px-4 bg-cyan-400 text-white rounded-xl">
@@ -113,11 +118,11 @@ const searchWord = debounce(getWord, 300)
         @click="autoPlayChange" size="20"
       />
       <van-icon name="replay" @click="voiceStore.resetSpeak" size="20"/>
-      <SearchInput @update:modelValue="searchWord"/>
+      <SearchInput @update:modelValue="(value) => searchWord({searchKey: value})"/>
       <van-icon name="setting-o" @click="openSettingPopup" size="20"/>
       <van-icon name="add-o" @click="openAddWord" size="20"/>
     </footer>
-    <AddWord ref="addWordRef" @add-complete="getWord"/>
+    <AddWord ref="addWordRef" @add-complete="getWord({toBottom: true})"/>
     <AddType ref="addTypeRef"/>
     <SettingPopup
       ref="settingPopupRef"

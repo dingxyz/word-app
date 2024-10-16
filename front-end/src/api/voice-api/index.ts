@@ -7,6 +7,9 @@ class VoiceApi {
   static getVoice(data: any): Promise<any> {
     return http.post(url, data);
   }
+  static getVoicesList(): Promise<any> {
+    return http.get(`https://texttospeech.googleapis.com/v1/voices?key=${apiKey}&languageCode=en-US`);
+  }
 }
 
 export default VoiceApi;

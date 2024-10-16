@@ -19,6 +19,8 @@ const PLAY_TIME_MS = 30 * 60 * 1000;
 export const useVoiceStore = defineStore(`voice`, () => {
   const playOrder = ref(ORDER_TYPE.SEQUENTIAL)
   const ssmlGender = ref(SSML_GENDER.FEMALE)
+  const voiceType = ref('')
+  const voiceName = ref('');
   const isLoopPlayback = ref(true)
   const speakingRate = ref(1)
   const nowPlaying = ref(false)   // Is it playing automatically?
@@ -32,6 +34,7 @@ export const useVoiceStore = defineStore(`voice`, () => {
   let playStartTime = 0;
   const lastPlayInfo = {
     english: '',
+    voiceName: '',
     ssmlGender: '',
     speakingRate: 0,
     onEnd: () => {
@@ -43,6 +46,7 @@ export const useVoiceStore = defineStore(`voice`, () => {
       pauseSpeak();
       if (
         english === lastPlayInfo.english &&
+        voiceName.value === lastPlayInfo.voiceName &&
         ssmlGender.value === lastPlayInfo.ssmlGender &&
         speakingRate.value === lastPlayInfo.speakingRate
       ) {
@@ -51,6 +55,7 @@ export const useVoiceStore = defineStore(`voice`, () => {
       } else {
         lastPlayInfo.onEnd && lastPlayInfo.onEnd();
         lastPlayInfo.english = english;
+        lastPlayInfo.voiceName = voiceName.value;
         lastPlayInfo.ssmlGender = ssmlGender.value;
         lastPlayInfo.speakingRate = speakingRate.value;
         lastPlayInfo.onEnd = onEnd;
@@ -60,11 +65,12 @@ export const useVoiceStore = defineStore(`voice`, () => {
       input: {text: english},
       voice: {
         languageCode: 'en-US',
-        ssmlGender: ssmlGender.value,
+        name: voiceName.value,
+        // ssmlGender: ssmlGender.value,
       },
       audioConfig: {
         audioEncoding: 'MP3',
-        speakingRate: speakingRate.value,
+        speakingRate: voiceName.value.includes('Journey') ? 1 : speakingRate.value,
       },
     };
     if (loading) return;
@@ -173,5 +179,5 @@ export const useVoiceStore = defineStore(`voice`, () => {
     playStartTime = 0;
   }
 
-  return {nowPlaying, ssmlGender, speakingRate, isPaused, playingId, playOrder, isLoopPlayback, voiceSpeak, autoSpeak, resetSpeak}
+  return {nowPlaying, ssmlGender, speakingRate, isPaused, playingId, playOrder, isLoopPlayback, voiceType, voiceName, voiceSpeak, autoSpeak, resetSpeak}
 })

@@ -20,7 +20,8 @@ import {
   RadioGroup,
   Search, Slider,
   SwipeCell,
-  Switch
+  Switch,
+  Picker
 } from "vant";
 
 export function loadVantUI(app: App) {
@@ -46,4 +47,5 @@ export function loadVantUI(app: App) {
   app.use(List);
   app.use(Loading);
   app.use(Slider);
+  app.use(Picker)
 }

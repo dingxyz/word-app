@@ -78,6 +78,9 @@ const moveToLearned = async () => {
 let timeoutId = null;
 const mouseHandler = (isClick?: boolean) => {
   showChinese.value = !showChinese.value;
+  if (!poops.wordData.chinese) {
+    showChinese.value = false
+  }
   if (isClick) {
     if (timeoutId) {
       clearTimeout(timeoutId)
@@ -87,6 +90,30 @@ const mouseHandler = (isClick?: boolean) => {
         mouseHandler()
         timeoutId = null
       }, 1500)
+    }
+  }
+}
+
+let longPressTimer = null;
+const startLongPress = () => {
+  longPressTimer = setTimeout(() => {
+    copyToClipboard(showChinese.value ? poops.wordData.chinese : poops.wordData.english)
+  }, 300)
+}
+
+const endLongPress = () => {
+  if (longPressTimer) {
+    clearTimeout(longPressTimer)
+    longPressTimer = null
+  }
+}
+
+const detailPopupClickHandler = (event: MouseEvent) => {
+  if (event.target instanceof HTMLElement) {
+    const tagName = event.target.tagName.toLowerCase()
+    if (tagName ==='strong') {
+      const text = event.target.textContent
+      playSound(text)
     }
   }
 }
@@ -105,17 +132,16 @@ const openDetail = () => showDetailPopup.value = true
 <template>
   <div ref="wordItemRef" class="text-lg odd:bg-violet-100 border-red-300 rounded-md" :class="{'border': isPlaying }">
     <van-swipe-cell>
-      <li class="flex items-center h-14">
+      <li class="flex items-center h-16">
         <div
           class="word-box self-start flex-1 leading-tight pl-2"
           :class="{'show-chinese': showChinese}"
           @click="mouseHandler(true)"
         >
-          <div class="btn h-14 flex items-center">{{ wordData.english }}</div>
-          <div class="btn h-14 flex items-center text-slate-400 text-base">{{ wordData.chinese ?? '--' }}</div>
+          <div @touchstart="startLongPress" @touchend="endLongPress" class="btn h-16 flex items-center">{{ wordData.english }}</div>
+          <div @touchstart="startLongPress" @touchend="endLongPress" class="btn h-16 flex items-center text-slate-400 text-base">{{ wordData.chinese ?? '--' }}</div>
         </div>
         <IconBtn v-if="wordData.annotation" icon="eye-o" @click="openDetail"/>
-        <IconBtn icon="notes-o" @click.stop="copyToClipboard(showChinese ? wordData.chinese : wordData.english)"/>
         <IconBtn icon="volume-o" :color="isPlaying || isPlayingByClick ? '#49e05c' : ''" @click="playSound(wordData.english)"/>
       </li>
       <template #left>
@@ -133,7 +159,7 @@ const openDetail = () => showDetailPopup.value = true
     </van-swipe-cell>
     <van-popup v-model:show="showDetailPopup" v-if="wordData.annotation" closeable lazy-render class="flex p-4 bg-black" position="bottom">
       <div class="flex-1 flex flex-col">
-        <div v-html="compiledMarkdown" v-bold-english class="markdown-body flex-auto overflow-auto bg-black text-white"></div>
+        <div v-html="compiledMarkdown" v-bold-english @click="detailPopupClickHandler" class="markdown-body flex-auto overflow-auto bg-black text-white"></div>
         <div class="text-center mt-4">
           <van-button type="success" @click="showDetailPopup = false" class="w-full">CLOSE</van-button>
         </div>
