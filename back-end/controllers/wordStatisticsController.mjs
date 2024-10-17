@@ -1,5 +1,5 @@
 // 帮我写个用来设置词频统计的接口吧
-import WordStatistics from '../models/wordStatistics.js';
+import WordStatistics from '../models/WordStatistics.js';
 
 // 写个方法，返回所有的统计数据
 export const getAllWordStatistics = async (req, res) => {
