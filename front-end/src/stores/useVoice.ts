@@ -19,19 +19,21 @@ const PLAY_TIME_MS = 30 * 60 * 1000;
 export const useVoiceStore = defineStore(`voice`, () => {
   const playOrder = ref(ORDER_TYPE.SEQUENTIAL)
   const ssmlGender = ref(SSML_GENDER.FEMALE)
-  const voiceType = ref('')
-  const voiceName = ref('');
+  const isAutoVoiceName = ref(true)
+  const voiceName = ref('en-US-Wavenet-C');
   const isLoopPlayback = ref(true)
   const speakingRate = ref(1)
   const nowPlaying = ref(false)   // Is it playing automatically?
   const playingId = ref(null)
   const isPaused = ref(false)    // Is it paused?
   const audio = new Audio('');
+  const voiceNameList = ref<any[]>([])
   let loading = false;
   let playIndex = 0;
   let playSequence: number[] = [];
   let playWords: IWord[] = [];
   let playStartTime = 0;
+  let autoVoiceTypeIndex = 0;
   const lastPlayInfo = {
     english: '',
     voiceName: '',
@@ -44,6 +46,13 @@ export const useVoiceStore = defineStore(`voice`, () => {
   const voiceSpeak = async (english: string, isAutoPlay: boolean = false, onEnd?: () => void) => {
     if (!isAutoPlay) {
       pauseSpeak();
+      if (isAutoVoiceName.value) {
+        voiceName.value = voiceNameList.value[autoVoiceTypeIndex].name;
+        autoVoiceTypeIndex++;
+        if (autoVoiceTypeIndex >= voiceNameList.value.length - 1) {
+          autoVoiceTypeIndex = 0;
+        }
+      }
       if (
         english === lastPlayInfo.english &&
         voiceName.value === lastPlayInfo.voiceName &&
@@ -134,7 +143,7 @@ export const useVoiceStore = defineStore(`voice`, () => {
       return;
     }
 
-    if (playIndex >= playWords.length ) {
+    if (playIndex >= playWords.length) {
       if (isLoopPlayback.value) {
         playIndex = 0;
       } else {
@@ -179,5 +188,19 @@ export const useVoiceStore = defineStore(`voice`, () => {
     playStartTime = 0;
   }
 
-  return {nowPlaying, ssmlGender, speakingRate, isPaused, playingId, playOrder, isLoopPlayback, voiceType, voiceName, voiceSpeak, autoSpeak, resetSpeak}
+  return {
+    nowPlaying,
+    ssmlGender,
+    speakingRate,
+    isPaused,
+    playingId,
+    playOrder,
+    isLoopPlayback,
+    isAutoVoiceName,
+    voiceName,
+    voiceNameList,
+    voiceSpeak,
+    autoSpeak,
+    resetSpeak
+  }
 })

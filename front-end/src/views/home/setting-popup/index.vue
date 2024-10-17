@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {defineComponent, ref} from 'vue'
+import {defineComponent, nextTick, ref} from 'vue'
 import {useAppStore} from "@/stores/useApp";
 import {usePaginationStore} from "@/stores/usePagination";
 import {ORDER_TYPE, SSML_GENDER, useVoiceStore} from "@/stores/useVoice";
@@ -12,24 +12,14 @@ const appStore = useAppStore();
 const voiceStore = useVoiceStore()
 const paginationStore = usePaginationStore()
 const isShow = ref(false)
-const voiceList = ref<any[]>([])
-const voiceNameList = ref<any[]>([])
-const showTypePicker = ref(false);
 const showNamePicker = ref(false);
 
-const onTypeConfirm = ({ selectedOptions }) => {
-  showTypePicker.value = false;
-  voiceStore.voiceType = selectedOptions[0].type;
-  voiceNameList.value = selectedOptions[0].children;
-  onNameConfirm({selectedOptions: voiceNameList.value, noClick: true})
-};
-
-const onNameConfirm = ({ selectedOptions, noClick }) => {
-  if (!noClick) {
-    isShow.value = false;
-  }
+const onNameConfirm = ({selectedOptions}) => {
   showNamePicker.value = false;
   voiceStore.voiceName = selectedOptions[0].name;
+  nextTick(() => {
+    isShow.value = false;
+  })
 };
 
 const saveWord = () => isShow.value = false
@@ -38,31 +28,14 @@ const initVoiceList = async () => {
   // These prices are too expensive: 'Studio','Polyglot'
   // These have no price: 'Casual','News'
   // Cheap but quality: 'Standard'
-  const excludeTypes = ['Studio','Polyglot','Casual','News','Standard'];
+  // Repeated with WaveNet: 'Neural2'
+  const excludeTypes = ['Studio', 'Polyglot', 'Casual', 'News', 'Standard', 'Neural2'];
   const {voices} = await VoiceApi.getVoicesList()
-  voiceList.value = voices.reduce((acc, voice) => {
-    const type = voice.name.split('-')[2];
-    if (excludeTypes.includes(type)) return acc;
-    const gender = voice.ssmlGender;
-    let group = acc.find(g => g.type === type);
-    if (!group) {
-      group = {type, children: []};
-      acc.push(group);
-    }
-    group.children.push({
-      name: voice.name,
-      gender: voice.name + '---' + gender,
-    });
-    return acc;
-  }, []);
-  console.log(voices,voiceList.value)
-
-  if (voiceStore.voiceType) {
-    const group = voiceList.value.find(g => g.type === voiceStore.voiceType);
-    onTypeConfirm({selectedOptions: [group]})
-  } else {
-    onTypeConfirm({selectedOptions: voiceList.value})
-  }
+  voiceStore.voiceNameList = voices.filter(voice => !excludeTypes.includes(voice.name.split('-')[2]))
+  voiceStore.voiceNameList.forEach(voice => {
+    voice.text = voice.name + '---' + voice.ssmlGender
+  })
+  console.log(voiceStore.voiceNameList)
 }
 initVoiceList()
 
@@ -101,14 +74,13 @@ defineExpose({open})
             <van-switch v-model="voiceStore.isLoopPlayback" size="20"/>
           </template>
         </van-field>
+        <van-field name="switch" label-width="120px" input-align="right" label="Auto Voice Type">
+          <template #input>
+            <van-switch v-model="voiceStore.isAutoVoiceName" size="20"/>
+          </template>
+        </van-field>
         <van-field
-          v-model="voiceStore.voiceType"
-          is-link
-          readonly
-          label="Voice Type"
-          @click="showTypePicker = true"
-        />
-        <van-field
+          v-if="!voiceStore.isAutoVoiceName"
           v-model="voiceStore.voiceName"
           is-link
           readonly
@@ -123,7 +95,7 @@ defineExpose({open})
             </van-radio-group>
           </template>
         </van-field>
-        <van-field v-if="voiceStore.voiceType !== 'Journey'" name="slider" input-align="right" label="Speech rate">
+        <van-field v-if="!voiceStore.voiceName.includes('Journey')" name="slider" input-align="right" label="Speech rate">
           <template #input>
             <van-slider v-model.number="voiceStore.speakingRate" :step="0.2" :min="0.6" :max="1.4"/>
           </template>
@@ -138,18 +110,10 @@ defineExpose({open})
         <van-button class="px-4" type="success" @click="saveWord" block>SAVE</van-button>
       </div>
     </van-form>
-    <van-popup v-model:show="showTypePicker" round position="bottom">
-      <van-picker
-        :columns="voiceList"
-        :columns-field-names="{ text: 'type', value: 'type', children: ''}"
-        @cancel="showTypePicker = false"
-        @confirm="onTypeConfirm"
-      />
-    </van-popup>
     <van-popup v-model:show="showNamePicker" round position="bottom">
       <van-picker
-        :columns="voiceNameList"
-        :columns-field-names="{ text: 'gender', value: 'name', children: ''}"
+        :columns="voiceStore.voiceNameList"
+        :columns-field-names="{ text: 'text', value: 'name', children: ''}"
         @cancel="showNamePicker = false"
         @confirm="onNameConfirm"
       />

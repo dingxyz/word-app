@@ -98,7 +98,7 @@ let longPressTimer = null;
 const startLongPress = () => {
   longPressTimer = setTimeout(() => {
     copyToClipboard(showChinese.value ? poops.wordData.chinese : poops.wordData.english)
-  }, 300)
+  }, 500)
 }
 
 const endLongPress = () => {
@@ -138,8 +138,8 @@ const openDetail = () => showDetailPopup.value = true
           :class="{'show-chinese': showChinese}"
           @click="mouseHandler(true)"
         >
-          <div @touchstart="startLongPress" @touchend="endLongPress" class="btn h-16 flex items-center">{{ wordData.english }}</div>
-          <div @touchstart="startLongPress" @touchend="endLongPress" class="btn h-16 flex items-center text-slate-400 text-base">{{ wordData.chinese ?? '--' }}</div>
+          <div @touchstart="startLongPress" @touchmove="endLongPress" @touchend="endLongPress" class="btn h-16 flex items-center">{{ wordData.english }}</div>
+          <div @touchstart="startLongPress" @touchmove="endLongPress" @touchend="endLongPress" class="btn h-16 flex items-center text-slate-400 text-base">{{ wordData.chinese ?? '--' }}</div>
         </div>
         <IconBtn v-if="wordData.annotation" icon="eye-o" @click="openDetail"/>
         <IconBtn icon="volume-o" :color="isPlaying || isPlayingByClick ? '#49e05c' : ''" @click="playSound(wordData.english)"/>
