@@ -3,6 +3,7 @@ import {defineStore} from 'pinia'
 import {IWord} from "@/api/word-api";
 import VoiceApi from "@/api/voice-api";
 import {showNotify} from "vant";
+import WordStatisticsApi from "@/api/word-statistics-api";
 
 export enum ORDER_TYPE {
   SEQUENTIAL = 'sequential',
@@ -70,6 +71,13 @@ export const useVoiceStore = defineStore(`voice`, () => {
         lastPlayInfo.onEnd = onEnd;
       }
     }
+
+    // add word to statistics
+    WordStatisticsApi.add({
+      date: new Date().toLocaleDateString(),
+      english
+    })
+
     const data = {
       input: {text: english},
       voice: {

@@ -35,7 +35,6 @@ const initVoiceList = async () => {
   voiceStore.voiceNameList.forEach(voice => {
     voice.text = voice.name + '---' + voice.ssmlGender
   })
-  console.log(voiceStore.voiceNameList)
 }
 initVoiceList()
 

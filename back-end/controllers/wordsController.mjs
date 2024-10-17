@@ -26,7 +26,7 @@ export const addWord = async (req, res) => {
     const {wordType, english} = body;
 
     try {
-        const existingWord = await Word.findOne({english: english.trim().toLowerCase()});
+        const existingWord = await Word.findOne({english: english});
         if (existingWord) {
             res.sendError("Word already exists");
             return;
