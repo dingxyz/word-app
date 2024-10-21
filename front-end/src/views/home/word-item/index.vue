@@ -130,7 +130,7 @@ const openDetail = () => showDetailPopup.value = true
 </script>
 
 <template>
-  <div ref="wordItemRef" class="text-[#fff] text-lg bg-[#935211] odd:bg-[#83480c] text-blue-300" :class="{'!text-blue-300': isPlaying || isPlayingByClick }">
+  <div ref="wordItemRef" class="text-[#fff] text-lg bg-[#935211] odd:bg-[#83480c]" :class="{'!text-blue-300': isPlaying || isPlayingByClick }">
     <van-swipe-cell>
       <li class="flex items-center h-16">
         <div
