@@ -99,7 +99,7 @@ defineExpose({open})
             <van-slider v-model.number="voiceStore.speakingRate" :step="0.2" :min="0.6" :max="1.4"/>
           </template>
         </van-field>
-        <van-field name="switch" label-width="120px" input-align="right" label="Display Chinese">
+        <van-field v-if="false" name="switch" label-width="120px" input-align="right" label="Display Chinese">
           <template #input>
             <van-switch v-model="appStore.showChineseChecked" size="20"/>
           </template>

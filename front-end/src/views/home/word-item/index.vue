@@ -56,7 +56,7 @@ const removeHandler = async (id: string) => {
     cancelButtonText: 'Cancel',
     cancelButtonColor: '#c7c7c7',
     confirmButtonText: 'Confirm',
-  })
+  }).catch(() => false)
   if (!confirm) return
   await WordApi.remove(id, {
     wordType: appStore.wordType,
@@ -130,19 +130,19 @@ const openDetail = () => showDetailPopup.value = true
 </script>
 
 <template>
-  <div ref="wordItemRef" class="text-lg odd:bg-violet-100 border-red-300 rounded-md" :class="{'border': isPlaying }">
+  <div ref="wordItemRef" class="text-[#fff] text-lg bg-[#935211] odd:bg-[#83480c] text-blue-300" :class="{'!text-blue-300': isPlaying || isPlayingByClick }">
     <van-swipe-cell>
       <li class="flex items-center h-16">
         <div
           class="word-box self-start flex-1 leading-tight pl-2"
           :class="{'show-chinese': showChinese}"
-          @click="mouseHandler(true)"
+          @click="playSound(wordData.english)"
         >
           <div @touchstart="startLongPress" @touchmove="endLongPress" @touchend="endLongPress" class="btn h-16 flex items-center">{{ wordData.english }}</div>
           <div @touchstart="startLongPress" @touchmove="endLongPress" @touchend="endLongPress" class="btn h-16 flex items-center text-slate-400 text-base">{{ wordData.chinese ?? '--' }}</div>
         </div>
         <IconBtn v-if="wordData.annotation" icon="eye-o" @click="openDetail"/>
-        <IconBtn icon="volume-o" :color="isPlaying || isPlayingByClick ? '#49e05c' : ''" @click="playSound(wordData.english)"/>
+        <IconBtn icon="exchange" v-if="wordData.chinese" @click="mouseHandler(true)"/>
       </li>
       <template #left>
         <div class="p-1 text-sm text-fuchsia-500">

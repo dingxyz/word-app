@@ -45,15 +45,15 @@ export const useVoiceStore = defineStore(`voice`, () => {
   };
 
   const voiceSpeak = async (english: string, isAutoPlay: boolean = false, onEnd?: () => void) => {
+    if (isAutoVoiceName.value) {
+      voiceName.value = voiceNameList.value[autoVoiceTypeIndex].name;
+      autoVoiceTypeIndex++;
+      if (autoVoiceTypeIndex >= voiceNameList.value.length - 1) {
+        autoVoiceTypeIndex = 0;
+      }
+    }
     if (!isAutoPlay) {
       pauseSpeak();
-      if (isAutoVoiceName.value) {
-        voiceName.value = voiceNameList.value[autoVoiceTypeIndex].name;
-        autoVoiceTypeIndex++;
-        if (autoVoiceTypeIndex >= voiceNameList.value.length - 1) {
-          autoVoiceTypeIndex = 0;
-        }
-      }
       if (
         english === lastPlayInfo.english &&
         voiceName.value === lastPlayInfo.voiceName &&
@@ -63,13 +63,17 @@ export const useVoiceStore = defineStore(`voice`, () => {
         audio.play()
         return
       } else {
-        lastPlayInfo.onEnd && lastPlayInfo.onEnd();
+        if (!audio.paused && english !== lastPlayInfo.english) {
+          lastPlayInfo.onEnd && lastPlayInfo.onEnd();
+        }
         lastPlayInfo.english = english;
         lastPlayInfo.voiceName = voiceName.value;
         lastPlayInfo.ssmlGender = ssmlGender.value;
         lastPlayInfo.speakingRate = speakingRate.value;
         lastPlayInfo.onEnd = onEnd;
       }
+    } else {
+      lastPlayInfo.onEnd && lastPlayInfo.onEnd();
     }
 
     // add word to statistics
@@ -194,6 +198,7 @@ export const useVoiceStore = defineStore(`voice`, () => {
     playSequence = [];
     playWords = [];
     playStartTime = 0;
+    lastPlayInfo?.onEnd && lastPlayInfo.onEnd();
   }
 
   return {

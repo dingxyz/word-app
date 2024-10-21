@@ -14,7 +14,7 @@ const open = async () => {
   isShow.value = true
   const res = await WordStatisticsApi.get()
   if (res.code === '000000') {
-    countList.value = res.data
+    countList.value = res.data.sort((a, b) => new Date(b.date) - new Date(a.date))
     totalCount.value = countList.value.reduce((acc, cur) => acc + cur.count, 0)
   }
 }
