@@ -113,7 +113,7 @@ const detailPopupClickHandler = (event: MouseEvent) => {
     const tagName = event.target.tagName.toLowerCase()
     if (tagName ==='strong') {
       const text = event.target.textContent
-      playSound(text)
+      voiceStore.voiceSpeak(text, false)
     }
   }
 }
