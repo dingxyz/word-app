@@ -63,7 +63,7 @@ export const useVoiceStore = defineStore(`voice`, () => {
         audio.play()
         return
       } else {
-        if (!audio.paused && english !== lastPlayInfo.english) {
+        if (english !== lastPlayInfo.english) {
           lastPlayInfo.onEnd && lastPlayInfo.onEnd();
         }
         lastPlayInfo.english = english;
