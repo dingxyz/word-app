@@ -24,7 +24,7 @@ const wordItemRef = ref()
 const emit = defineEmits(['refresh-list', 'edit-word'])
 const showDetailPopup = ref(false)
 const showChinese = ref(appStore.showChineseChecked)
-const compiledMarkdown = computed(() => marked(poops.wordData.annotation));
+const compiledMarkdown = computed(() => `<h3>${poops.wordData.english}</h3>`+marked(poops.wordData.annotation));
 const isPlaying = computed(() => !voiceStore.isPaused && voiceStore.playingId === poops.wordData.id)
 const isPlayingByClick = ref(false) // Manual click play
 
@@ -112,8 +112,12 @@ const detailPopupClickHandler = (event: MouseEvent) => {
   if (event.target instanceof HTMLElement) {
     const tagName = event.target.tagName.toLowerCase()
     if (tagName ==='strong') {
+      const oldColor = (event.target as HTMLElement).style.color
+      event.target.style.color = '#02c3ff'
       const text = event.target.textContent
-      voiceStore.voiceSpeak(text, false)
+      voiceStore.voiceSpeak(text, false, () => {
+        (event.target as HTMLElement).style.color = oldColor
+      })
     }
   }
 }

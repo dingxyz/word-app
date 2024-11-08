@@ -3,6 +3,7 @@ import 'vant/lib/index.css';
 import {
   ActionSheet,
   Button,
+  Cell,
   CellGroup,
   Checkbox,
   CheckboxGroup,
@@ -28,6 +29,7 @@ export function loadVantUI(app: App) {
   app.use(Popup);
   app.use(Form);
   app.use(Field);
+  app.use(Cell);
   app.use(CellGroup);
   app.use(Icon);
   app.use(SwipeCell);
