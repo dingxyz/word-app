@@ -1,5 +1,5 @@
 import Word from '../models/Word.js';
-import {generateUniqueId} from "../utils/commonUtil.mjs";
+import {generateUniqueId, removeWordByType, setWordStatistics} from "../utils/commonUtil.mjs";
 
 export const getWords = async (req, res) => {
     const {searchKey, wordType} = req.query;
@@ -14,8 +14,12 @@ export const getWords = async (req, res) => {
             }).maxTimeMS(9000).sort({createdAt: 1});
         } else if (wordType) {
             sendData = await Word.find({wordType}).sort({createdAt: 1});
+        } else {
+            sendData = await Word.find().sort({createdAt: 1});
         }
         res.sendSuccess(sendData ?? []);
+        // await setWordStatistics()
+        // removeWordByType()
     } catch (error) {
         res.sendError(error.message);
     }

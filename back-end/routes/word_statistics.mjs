@@ -1,11 +1,11 @@
 import express from 'express';
-import {getAllWordStatistics, setWordStatistics} from "../controllers/wordStatisticsController.mjs";
+import {getAllPlayStatistics, setPlayStatistics} from "../controllers/wordStatisticsController.mjs";
 
 
 const router = express.Router();
 
-router.get('/', getAllWordStatistics);
+router.get('/', getAllPlayStatistics);
 
-router.post('/', setWordStatistics);
+router.post('/', setPlayStatistics);
 
 export default router;

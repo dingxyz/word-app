@@ -1,8 +1,6 @@
-// 帮我写个用来设置词频统计的接口吧
 import WordStatistics from '../models/WordStatistics.js';
 
-// 写个方法，返回所有的统计数据
-export const getAllWordStatistics = async (req, res) => {
+export const getAllPlayStatistics = async (req, res) => {
     try {
         const wordStatistics = await WordStatistics.find();
         res.sendSuccess(wordStatistics);
@@ -11,9 +9,7 @@ export const getAllWordStatistics = async (req, res) => {
     }
 };
 
-// 模仿wordTypeController.mjs的写法
-// 写个方法，这个方法用来处理前端传来的一个日期和一个字符串，然后把日期和字符串存到数据库中
-export const setWordStatistics = async (req, res) => {
+export const setPlayStatistics = async (req, res) => {
     try {
         const {date, english} = req.body;
 
