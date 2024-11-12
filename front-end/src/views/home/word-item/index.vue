@@ -157,7 +157,6 @@ const openDetail = () => showDetailPopup.value = true
         <div class="flex items-center">
           <IconBtn icon="delete-o" @click="removeHandler(wordData.id)" color="red"/>
           <IconBtn icon="edit" @click="emit('edit-word', wordData)"/>
-          <IconBtn v-if="wordData.wordType === 'words'" icon="minus" @click="moveToLearned"/>
         </div>
       </template>
     </van-swipe-cell>

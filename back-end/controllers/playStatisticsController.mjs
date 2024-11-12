@@ -1,8 +1,8 @@
-import WordStatistics from '../models/WordStatistics.js';
+import PlayStatistics from '../models/PlayStatistics.js';
 
 export const getAllPlayStatistics = async (req, res) => {
     try {
-        const wordStatistics = await WordStatistics.find();
+        const wordStatistics = await PlayStatistics.find();
         res.sendSuccess(wordStatistics);
     } catch (error) {
         res.sendError('statistics error');
@@ -19,7 +19,7 @@ export const setPlayStatistics = async (req, res) => {
         }
 
         // 先根据date从数据库中查询是否有该日期的词频统计数据
-        const wordStatistics = await WordStatistics.findOne({date});
+        const wordStatistics = await PlayStatistics.findOne({date});
 
         // 计算english的字节数
         const count = Buffer.byteLength(english, 'utf8');
@@ -31,7 +31,7 @@ export const setPlayStatistics = async (req, res) => {
             res.sendSuccess();
         } else {
             // 如果没有，则新建一个词频统计数据
-            const newWordStatistics = new WordStatistics({
+            const newWordStatistics = new PlayStatistics({
                 date,
                 count
             });

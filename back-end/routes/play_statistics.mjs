@@ -1,5 +1,5 @@
 import express from 'express';
-import {getAllPlayStatistics, setPlayStatistics} from "../controllers/wordStatisticsController.mjs";
+import {getAllPlayStatistics, setPlayStatistics} from "../controllers/playStatisticsController.mjs";
 
 
 const router = express.Router();

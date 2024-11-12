@@ -1,6 +1,7 @@
 import Word from '../models/Word.js';
+import WordStatistics from "../models/WordStatistics.js"
 
-const STATISTICS_WORD_TYPE = 'statistics'
+export const STATISTICS_WORD_TYPE = 'WordCount'
 
 export const generateUniqueId = () => 'id-' + Date.now() + '-' + Math.floor(Math.random() * 10000)
 
@@ -20,8 +21,7 @@ const countEnglishWords = (text) => {
             wordCount.set(lowerCaseWord, (wordCount.get(lowerCaseWord) || 0) + 1);
         }
     });
-
-    return Object.fromEntries(wordCount); // 转换为普通对象格式返回
+    return Object.fromEntries(wordCount);
 }
 
 /*
@@ -56,16 +56,18 @@ const countAllWords = async () => {
 export const setWordStatistics = async () => {
     const allWordCountObj = await countAllWords();
 
+    console.log(allWordCountObj)
+
     await Promise.all(
         allWordCountObj.map(async (word) => {
             const {english, annotation, count} = word;
-            const existingWord = await Word.findOne({english, wordType: STATISTICS_WORD_TYPE});
+            const existingWord = await WordStatistics.findOne({english, wordType: STATISTICS_WORD_TYPE});
             if (existingWord) {
                 // 单词存在,就更新单词的count
-                // existingWord.count = count;
-                // await existingWord.save();
+                existingWord.count = count;
+                await existingWord.save();
             } else {
-                const newWord = new Word({
+                const newWord = new WordStatistics({
                     id: generateUniqueId(),
                     english,
                     chinese: '',
@@ -85,12 +87,12 @@ export const setWordStatistics = async () => {
 export const removeWordByType = async () => {
     const wordType = STATISTICS_WORD_TYPE;
 
-    const words = await Word.find({wordType: wordType})
+    const words = await WordStatistics.find({wordType: wordType})
     await Promise.all(
         words.map(async (word) => {
             const {id} = word;
-
-            await Word.findOneAndDelete({id, wordType});
+            // 谨慎操作！
+            // await WordStatistics.findOneAndDelete({id, wordType});
         })
     );
 }

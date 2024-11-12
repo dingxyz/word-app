@@ -1,5 +1,6 @@
 import Word from '../models/Word.js';
-import {generateUniqueId, removeWordByType, setWordStatistics} from "../utils/commonUtil.mjs";
+import {generateUniqueId, removeWordByType, setWordStatistics, STATISTICS_WORD_TYPE} from "../utils/commonUtil.mjs";
+import WordStatistics from "../models/WordStatistics.js";
 
 export const getWords = async (req, res) => {
     const {searchKey, wordType} = req.query;
@@ -13,7 +14,11 @@ export const getWords = async (req, res) => {
                 ]
             }).maxTimeMS(9000).sort({createdAt: 1});
         } else if (wordType) {
-            sendData = await Word.find({wordType}).sort({createdAt: 1});
+            if (wordType === STATISTICS_WORD_TYPE) {
+                sendData = await WordStatistics.find().sort({createdAt: 1});
+            } else {
+                sendData = await Word.find({wordType}).sort({createdAt: 1});
+            }
         } else {
             sendData = await Word.find().sort({createdAt: 1});
         }
@@ -30,14 +35,15 @@ export const addWord = async (req, res) => {
     const {wordType, english} = body;
 
     try {
-        const existingWord = await Word.findOne({english, wordType});
+        const Model = wordType === STATISTICS_WORD_TYPE ? WordStatistics : Word;
+        const existingWord = await Model.findOne({english, wordType});
         if (existingWord) {
             res.sendError("Word already exists");
             return;
         }
 
         body.id = generateUniqueId();
-        const newWord = new Word(body);
+        const newWord = new Model(body);
         await newWord.save();
         res.sendSuccess();
     } catch (error) {
@@ -72,7 +78,8 @@ export const updateWord = async (req, res) => {
     const {wordType, english, chinese, annotation} = body;
 
     try {
-        const word = await Word.findOneAndUpdate(
+        const Model = wordType === STATISTICS_WORD_TYPE ? WordStatistics : Word;
+        const word = await Model.findOneAndUpdate(
             {id, wordType},
             {english, chinese, annotation},
             {new: true}
@@ -92,7 +99,8 @@ export const deleteWord = async (req, res) => {
     const {wordType} = req.query;
 
     try {
-        const word = await Word.findOneAndDelete({id, wordType});
+        const Model = wordType === STATISTICS_WORD_TYPE ? WordStatistics : Word;
+        const word = await Model.findOneAndDelete({id, wordType});
         if (!word) {
             res.sendError("Word not found");
             return;
