@@ -15,11 +15,17 @@ export enum SSML_GENDER {
   FEMALE = 'FEMALE',
 }
 
+export enum LANGUAGE_CODE {
+  EN_US = 'en-US',
+  EN_GB = 'en-GB',
+}
+
 const PLAY_TIME_MS = 30 * 60 * 1000;
 
 export const useVoiceStore = defineStore(`voice`, () => {
   const playOrder = ref(ORDER_TYPE.SEQUENTIAL)
   const ssmlGender = ref(SSML_GENDER.FEMALE)
+  const languageCode = ref(LANGUAGE_CODE.EN_US)
   const isAutoVoiceName = ref(true)
   const voiceName = ref('en-US-Wavenet-C');
   const isLoopPlayback = ref(true)
@@ -85,7 +91,7 @@ export const useVoiceStore = defineStore(`voice`, () => {
     const data = {
       input: {text: english},
       voice: {
-        languageCode: 'en-US',
+        languageCode: languageCode.value,
         name: voiceName.value,
         // ssmlGender: ssmlGender.value,
       },
@@ -204,6 +210,7 @@ export const useVoiceStore = defineStore(`voice`, () => {
   return {
     nowPlaying,
     ssmlGender,
+    languageCode,
     speakingRate,
     isPaused,
     playingId,

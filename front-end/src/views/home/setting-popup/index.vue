@@ -2,7 +2,7 @@
 import {defineComponent, nextTick, ref} from 'vue'
 import {useAppStore} from "@/stores/useApp";
 import {usePaginationStore} from "@/stores/usePagination";
-import {ORDER_TYPE, SSML_GENDER, useVoiceStore} from "@/stores/useVoice";
+import {LANGUAGE_CODE, ORDER_TYPE, SSML_GENDER, useVoiceStore} from "@/stores/useVoice";
 import VoiceApi from "@/api/voice-api";
 
 defineComponent({
@@ -29,12 +29,14 @@ const initVoiceList = async () => {
   // These have no price: 'Casual','News'
   // Cheap but quality: 'Standard'
   // Repeated with WaveNet: 'Neural2'
-  const excludeTypes = ['Studio', 'Polyglot', 'Casual', 'News', 'Standard', 'Neural2'];
-  const {voices} = await VoiceApi.getVoicesList()
-  voiceStore.voiceNameList = voices.filter(voice => !excludeTypes.includes(voice.name.split('-')[2]))
+  // const excludeTypes = ['Studio', 'Polyglot', 'Casual', 'News', 'Standard', 'Neural2'];
+  const includeTypes = ['Journey', 'Wavenet'];
+  const {voices} = await VoiceApi.getVoicesList(voiceStore.languageCode)
+  voiceStore.voiceNameList = voices.filter(voice => includeTypes.includes(voice.name.split('-')[2]))
   voiceStore.voiceNameList.forEach(voice => {
     voice.text = voice.name + '---' + voice.ssmlGender
   })
+  voiceStore.voiceName = voiceStore.voiceNameList[0].name
 }
 initVoiceList()
 
@@ -74,14 +76,22 @@ defineExpose({open})
             <van-switch v-model="voiceStore.isLoopPlayback" size="20"/>
           </template>
         </van-field>
+        <van-field name="radio" input-align="right" label="Language">
+          <template #input>
+            <van-radio-group v-model="voiceStore.languageCode" @change="initVoiceList" direction="horizontal">
+              <van-radio :name="LANGUAGE_CODE.EN_US">{{ LANGUAGE_CODE.EN_US }}</van-radio>
+              <van-radio :name="LANGUAGE_CODE.EN_GB">{{ LANGUAGE_CODE.EN_GB }}</van-radio>
+            </van-radio-group>
+          </template>
+        </van-field>
         <van-field name="switch" label-width="120px" input-align="right" label="Auto Voice Type">
           <template #input>
             <van-switch v-model="voiceStore.isAutoVoiceName" size="20"/>
           </template>
         </van-field>
         <van-field
-          v-if="!voiceStore.isAutoVoiceName"
           v-model="voiceStore.voiceName"
+          :disabled="voiceStore.isAutoVoiceName"
           is-link
           readonly
           label="Voice Name"
@@ -95,9 +105,9 @@ defineExpose({open})
             </van-radio-group>
           </template>
         </van-field>
-        <van-field v-if="!voiceStore.voiceName.includes('Journey')" name="slider" input-align="right" label="Speech rate">
+        <van-field name="slider" input-align="right" label="Speech rate">
           <template #input>
-            <van-slider v-model.number="voiceStore.speakingRate" :step="0.2" :min="0.6" :max="1.4"/>
+            <van-slider v-model.number="voiceStore.speakingRate" :disabled="voiceStore.voiceName.includes('Journey')" :step="0.2" :min="0.6" :max="1.4"/>
           </template>
         </van-field>
         <van-field v-if="false" name="switch" label-width="120px" input-align="right" label="Display Chinese">
