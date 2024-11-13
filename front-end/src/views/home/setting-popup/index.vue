@@ -47,7 +47,7 @@ defineExpose({open})
 <template>
   <van-popup v-model:show="isShow" closeable position="bottom" round>
     <van-form @submit="saveWord" class="pt-8">
-      <van-cell-group inset label-width="300px">
+      <van-cell-group inset label-width="300px" class="m-0">
         <van-field name="switch" label-width="120px" input-align="right" label="Pagination">
           <template #input>
             <van-switch v-model="paginationStore.isPaging" size="20"/>
@@ -95,6 +95,7 @@ defineExpose({open})
           is-link
           readonly
           label="Voice Name"
+          input-align="right"
           @click="showNamePicker = true"
         />
         <van-field v-if="false" name="radio" input-align="right" label="Play Gender">
@@ -124,6 +125,7 @@ defineExpose({open})
       <van-picker
         :columns="voiceStore.voiceNameList"
         :columns-field-names="{ text: 'text', value: 'name', children: ''}"
+        :visible-option-num="9"
         @cancel="showNamePicker = false"
         @confirm="onNameConfirm"
       />
