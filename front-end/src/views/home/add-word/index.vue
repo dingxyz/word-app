@@ -3,6 +3,7 @@ import WordApi, {IWord} from '@/api/word-api'
 import {defineComponent, nextTick, reactive, ref} from 'vue'
 import {FieldInstance, showNotify} from "vant";
 import {useAppStore} from "@/stores/useApp";
+import {trimEnd} from "lodash-es";
 
 defineComponent({
   name: 'AddWord',
@@ -51,6 +52,7 @@ const resetData = () => {
 const open = (word?: IWord) => {
   isShow.value = true
   Object.assign(wordData, word || {})
+  wordData.annotation = trimEnd(wordData.annotation)
   nextTick(() => {
     fieldRef.value?.focus()
   })
@@ -65,9 +67,9 @@ defineExpose({open})
       <van-cell-group inset>
         <van-field v-model="wordData.english" ref="fieldRef" label="en" placeholder="Please input english" label-width="40px"/>
         <van-field v-model="wordData.chinese" label="cn" placeholder="Please input chinese" label-width="40px"/>
-        <van-field v-model="wordData.annotation" type="textarea" label="annotation" placeholder="Please input annotation" clearable
+        <van-field v-model.trim="wordData.annotation" type="textarea" label="annotation" placeholder="Please input annotation" clearable
                    label-align="top"
-                   :autosize="{minHeight: 50, maxHeight: wordData.id ? 180 : 120}"
+                   :autosize="{minHeight: 50, maxHeight: wordData.id ? 180 : 100}"
         />
       </van-cell-group>
       <div class="flex justify-center m-4">
