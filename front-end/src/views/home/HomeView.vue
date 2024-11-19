@@ -85,9 +85,10 @@ const searchWord = debounce(getWord, 300)
 </script>
 
 <template>
-  <div
+  <van-config-provider
+    theme="dark"
     class="w-auto max-w-xl flex flex-1 flex-col container rounded-t-xl text-lg overflow-auto m-2"
-    :class="{'opacity-10': isDev }"
+    :class="{'opacity-15': isDev }"
   >
     <header class="flex items-center justify-between h-12 px-4 bg-[#993333] text-center text-white">
       <span class="w-10" @click="openStatisticsPopup">{{ words.length }}</span>
@@ -131,5 +132,5 @@ const searchWord = debounce(getWord, 300)
       ref="settingPopupRef"
     />
     <StatisticsPopup ref="statisticsPopupRef"/>
-  </div>
+  </van-config-provider>
 </template>

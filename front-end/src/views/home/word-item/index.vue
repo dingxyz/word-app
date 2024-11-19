@@ -122,18 +122,11 @@ const detailPopupClickHandler = (event: MouseEvent) => {
   }
 }
 
-const playSound = async (english: string) => {
+const playSound = (english: string) => {
   isPlayingByClick.value = true
   voiceStore.voiceSpeak(english, false, () => {
     isPlayingByClick.value = false
   })
-
-  // const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/hello world`);
-  // const data = await response.json();
-  // if (Array.isArray(data) && data[0].phonetics.length > 0) {
-  //   console.log(data[0].phonetics.map(p => p.text).join(', '))
-  //
-  // }
 }
 
 const openDetail = () => showDetailPopup.value = true
