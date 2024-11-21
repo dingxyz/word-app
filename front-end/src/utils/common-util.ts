@@ -1,4 +1,5 @@
 import {showNotify} from "vant";
+import {useAppStore} from "@/stores/useApp";
 
 export const copyToClipboard = async (text: string) => {
   try {
@@ -14,3 +15,26 @@ export const copyToClipboard = async (text: string) => {
   }
   showNotify({ type: 'success', message: 'Copied to clipboard' });
 };
+
+
+export const methodTracker = (() => {
+  const timestamps = []; // 用来保存时间戳
+  const timeLimit = 1000; // 时间限制（毫秒）
+  const callThreshold = 3; // 调用次数限制
+
+  return () => {
+    const now = Date.now(); // 当前时间戳
+    timestamps.push(now); // 添加当前调用时间戳
+
+    // 移除超出两秒范围的时间戳
+    while (timestamps[0] < now - timeLimit) {
+      timestamps.shift();
+    }
+    // 判断是否满足连续调用3次的条件
+    if (timestamps.length >= callThreshold) {
+      timestamps.length = 0;
+      const appStore = useAppStore();
+      appStore.isLiteMode = !appStore.isLiteMode
+    }
+  };
+})();

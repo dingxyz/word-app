@@ -6,6 +6,7 @@ export const useAppStore = defineStore(`app`, () => {
   const wordType = ref('words')
   const typeList = ref<WordType[]>([])
   const showChineseChecked = ref(false)
+  const isLiteMode = ref(false)
 
   const getTypeList = async () => {
     const res = await WordTypeApi.get()
@@ -18,7 +19,7 @@ export const useAppStore = defineStore(`app`, () => {
 
   getTypeList()
 
-  return {wordType, typeList, showChineseChecked, getTypeList}
+  return {wordType, typeList, showChineseChecked, isLiteMode, getTypeList}
 }, {
   persist: {
     paths: ['wordType', 'showChineseChecked'],

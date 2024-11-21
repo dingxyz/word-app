@@ -30,7 +30,7 @@ const isPlayingByClick = ref(false) // Manual click play
 
 const observer = new IntersectionObserver((entries) => {
   const entry = entries[0];
-  if (!entry.isIntersecting) {
+  if (!entry.isIntersecting || appStore.isLiteMode) {
     wordItemRef.value?.scrollIntoView({
       block: voiceStore.playOrder === ORDER_TYPE.SEQUENTIAL ? 'start' : 'center'
     });

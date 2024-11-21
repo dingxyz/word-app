@@ -4,6 +4,8 @@ import {IWord} from "@/api/word-api";
 import VoiceApi from "@/api/voice-api";
 import {showNotify} from "vant";
 import WordStatisticsApi from "@/api/word-statistics-api";
+import {useAppStore} from "@/stores/useApp";
+import {methodTracker} from "@/utils/common-util";
 
 export enum ORDER_TYPE {
   SEQUENTIAL = 'sequential',
@@ -84,7 +86,7 @@ export const useVoiceStore = defineStore(`voice`, () => {
 
     // add word to statistics
     WordStatisticsApi.add({
-      date: new Date().toLocaleDateString(),
+      date: new Date().toLocaleDateString('zh-CN'),
       english
     })
 
@@ -122,6 +124,7 @@ export const useVoiceStore = defineStore(`voice`, () => {
     }
 
     if (nowPlaying.value && !isPaused.value) {
+      playIndex--
       pauseSpeak();
       return;
     }
@@ -179,7 +182,6 @@ export const useVoiceStore = defineStore(`voice`, () => {
   const pauseSpeak = () => {
     if (nowPlaying.value) {
       isPaused.value = true;
-      audio?.pause();
     }
   }
 
@@ -205,6 +207,7 @@ export const useVoiceStore = defineStore(`voice`, () => {
     playWords = [];
     playStartTime = 0;
     lastPlayInfo?.onEnd && lastPlayInfo.onEnd();
+    methodTracker();
   }
 
   return {

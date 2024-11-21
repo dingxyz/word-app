@@ -38,3 +38,13 @@ a,
         padding: 0 2rem;
     }
 }
+.is-lite-mode {
+    background: #2b2d30;
+    header {
+        display: none;
+    }
+    footer, article,li {
+        font-size: 16px;
+        background: #2b2d30;
+    }
+}
