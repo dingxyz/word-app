@@ -51,9 +51,17 @@ a,
         background: #595c63;
     }
 
-    li {
+    .van-swipe-cell li {
         font-size: 14px;
-        color: #fff;
+        color: #fff !important;
+    }
+
+    .van-pagination__item--page:not(.van-pagination__item--active) {
+        color: #b9c2ff;
+    }
+
+    .van-button {
+        background: #52575c;
     }
 
     .markdown-body {
