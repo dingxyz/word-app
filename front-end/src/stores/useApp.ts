@@ -22,6 +22,6 @@ export const useAppStore = defineStore(`app`, () => {
   return {wordType, typeList, showChineseChecked, isLiteMode, getTypeList}
 }, {
   persist: {
-    paths: ['wordType', 'showChineseChecked'],
+    paths: ['wordType', 'showChineseChecked', 'isLiteMode'],
   },
 })

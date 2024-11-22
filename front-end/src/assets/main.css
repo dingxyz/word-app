@@ -40,15 +40,24 @@ a,
 }
 
 .is-lite-mode {
-    opacity: 0.3;
-    background: #2b2d30;
+    opacity: 0.2;
+    background: #55595e;
 
     header {
         display: none;
     }
 
     footer, article, li {
-        font-size: 16px;
-        background: #2b2d30;
+        background: #595c63;
+    }
+
+    li {
+        font-size: 14px;
+        color: #fff;
+    }
+
+    .markdown-body {
+        font-size: 14px;
+        opacity: .8;
     }
 }

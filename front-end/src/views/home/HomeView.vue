@@ -88,7 +88,7 @@ const searchWord = debounce(getWord, 300)
   <van-config-provider
     theme="dark"
     class="w-auto max-w-xl flex flex-1 flex-col container rounded-t-xl text-lg overflow-auto m-2"
-    :class="{'opacity-30': isDev, 'is-lite-mode': appStore.isLiteMode }"
+    :class="{'opacity-30': isDev && !appStore.isLiteMode, 'is-lite-mode': appStore.isLiteMode }"
   >
     <header class="flex items-center justify-between h-12 px-4 bg-[#993333] text-center text-white">
       <span class="w-10" @click="openStatisticsPopup">{{ words.length }}</span>
