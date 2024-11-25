@@ -87,7 +87,7 @@ const searchWord = debounce(getWord, 300)
 <template>
   <van-config-provider
     theme="dark"
-    class="w-auto max-w-xl flex flex-1 flex-col container rounded-t-xl text-lg overflow-auto m-2"
+    class="w-auto max-w-xl flex flex-1 flex-col container text-lg overflow-auto"
     :class="{'opacity-30': isDev && !appStore.isLiteMode, 'is-lite-mode': appStore.isLiteMode }"
   >
     <header class="flex items-center justify-between h-12 px-4 bg-[#993333] text-center text-white">
@@ -95,7 +95,7 @@ const searchWord = debounce(getWord, 300)
       <span class="text-xl" @click="openTypeDialog">{{ appStore?.wordType }}</span>
       <WordTypeSelect @refresh-list="getWord"/>
     </header>
-    <article ref="listRef" class="relative flex-1 bg-[#935211] rounded-b-xl overflow-auto" :class="{'overflow-hidden': loading }">
+    <article ref="listRef" class="relative flex-1 bg-[#935211] overflow-auto" :class="{'overflow-hidden': loading }">
       <div v-if="loading" class="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-[#d9dae25a]">
         <van-loading type="spinner"/>
       </div>
@@ -116,7 +116,7 @@ const searchWord = debounce(getWord, 300)
         @update:currentPage="setRenderList()"
       />
     </div>
-    <footer class="flex items-center justify-between h-12 mt-2 px-4 bg-[#003300] text-white rounded-xl">
+    <footer class="flex items-center justify-between h-12 m-2 px-4 bg-[#003300] text-white rounded-xl">
       <van-icon
         :name="voiceStore.nowPlaying && !voiceStore.isPaused ? 'pause-circle-o' : 'play-circle-o'"
         @click="autoPlayChange" size="20"

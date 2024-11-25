@@ -106,9 +106,14 @@ defineExpose({open})
             </van-radio-group>
           </template>
         </van-field>
-        <van-field name="slider" input-align="right" label="Speech rate">
+        <van-field name="slider" label-width="100px" input-align="right" label="Speech rate">
           <template #input>
-            <van-slider v-model.number="voiceStore.speakingRate" :disabled="voiceStore.voiceName.includes('Journey')" :step="0.2" :min="0.6" :max="1.4"/>
+            <van-slider v-model.number="voiceStore.speakingRate" :step="0.2" :min="0.6" :max="1.4"/>
+          </template>
+        </van-field>
+        <van-field name="stepper" label-width="120px" input-align="right" label="Play Number">
+          <template #input>
+            <van-stepper v-model="voiceStore.playNumber" min="1" max="10" />
           </template>
         </van-field>
         <van-field v-if="false" name="switch" label-width="120px" input-align="right" label="Display Chinese">

@@ -1,11 +1,10 @@
-import {ref} from 'vue'
-import {defineStore} from 'pinia'
-import {IWord} from "@/api/word-api";
-import VoiceApi from "@/api/voice-api";
-import {showNotify} from "vant";
-import WordStatisticsApi from "@/api/word-statistics-api";
-import {useAppStore} from "@/stores/useApp";
-import {methodTracker} from "@/utils/common-util";
+import { ref } from 'vue'
+import { defineStore } from 'pinia'
+import { IWord } from '@/api/word-api'
+import VoiceApi from '@/api/voice-api'
+import { showNotify } from 'vant'
+import WordStatisticsApi from '@/api/word-statistics-api'
+import { methodTracker } from '@/utils/common-util'
 
 export enum ORDER_TYPE {
   SEQUENTIAL = 'sequential',
@@ -14,74 +13,48 @@ export enum ORDER_TYPE {
 
 export enum SSML_GENDER {
   MALE = 'MALE',
-  FEMALE = 'FEMALE',
+  FEMALE = 'FEMALE'
 }
 
 export enum LANGUAGE_CODE {
   EN_US = 'en-US',
-  EN_GB = 'en-GB',
+  EN_GB = 'en-GB'
 }
 
-const PLAY_TIME_MS = 30 * 60 * 1000;
+const PLAY_TIME_MS = 30 * 60 * 1000
 
 export const useVoiceStore = defineStore(`voice`, () => {
   const playOrder = ref(ORDER_TYPE.SEQUENTIAL)
   const ssmlGender = ref(SSML_GENDER.FEMALE)
   const languageCode = ref(LANGUAGE_CODE.EN_US)
   const isAutoVoiceName = ref(true)
-  const voiceName = ref('en-US-Wavenet-C');
+  const voiceName = ref('en-US-Wavenet-C')
   const isLoopPlayback = ref(true)
   const speakingRate = ref(1)
-  const nowPlaying = ref(false)   // Is it playing automatically?
+  const playNumber = ref(1)
+  const nowPlaying = ref(false) // Is it playing automatically?
   const playingId = ref(null)
-  const isPaused = ref(false)    // Is it paused?
-  const audio = new Audio('');
+  const isPaused = ref(false) // Is it paused?
+  const audio = new Audio('')
   const voiceNameList = ref<any[]>([])
-  let loading = false;
-  let playIndex = 0;
-  let playSequence: number[] = [];
-  let playWords: IWord[] = [];
-  let playStartTime = 0;
-  let autoVoiceTypeIndex = 0;
-  const lastPlayInfo = {
-    english: '',
-    voiceName: '',
-    ssmlGender: '',
-    speakingRate: 0,
-    onEnd: () => {
-    }
-  };
+  let loading = false
+  let playIndex = 0
+  let playedNumber = 1
+  let playSequence: number[] = []
+  let playWords: IWord[] = []
+  let playStartTime = 0
+  let autoVoiceTypeIndex = 0
 
   const voiceSpeak = async (english: string, isAutoPlay: boolean = false, onEnd?: () => void) => {
     if (isAutoVoiceName.value) {
-      voiceName.value = voiceNameList.value[autoVoiceTypeIndex].name;
-      autoVoiceTypeIndex++;
+      voiceName.value = voiceNameList.value[autoVoiceTypeIndex].name
+      autoVoiceTypeIndex++
       if (autoVoiceTypeIndex >= voiceNameList.value.length - 1) {
-        autoVoiceTypeIndex = 0;
+        autoVoiceTypeIndex = 0
       }
     }
     if (!isAutoPlay) {
-      pauseSpeak();
-      if (
-        english === lastPlayInfo.english &&
-        voiceName.value === lastPlayInfo.voiceName &&
-        ssmlGender.value === lastPlayInfo.ssmlGender &&
-        speakingRate.value === lastPlayInfo.speakingRate
-      ) {
-        audio.play()
-        return
-      } else {
-        if (english !== lastPlayInfo.english) {
-          lastPlayInfo.onEnd && lastPlayInfo.onEnd();
-        }
-        lastPlayInfo.english = english;
-        lastPlayInfo.voiceName = voiceName.value;
-        lastPlayInfo.ssmlGender = ssmlGender.value;
-        lastPlayInfo.speakingRate = speakingRate.value;
-        lastPlayInfo.onEnd = onEnd;
-      }
-    } else {
-      lastPlayInfo.onEnd && lastPlayInfo.onEnd();
+      pauseSpeak()
     }
 
     // add word to statistics
@@ -91,123 +64,128 @@ export const useVoiceStore = defineStore(`voice`, () => {
     })
 
     const data = {
-      input: {text: english},
+      input: { text: english },
       voice: {
         languageCode: languageCode.value,
-        name: voiceName.value,
+        name: voiceName.value
         // ssmlGender: ssmlGender.value,
       },
       audioConfig: {
         audioEncoding: 'MP3',
-        speakingRate: voiceName.value.includes('Journey') ? 1 : speakingRate.value,
-      },
-    };
-    if (loading) return;
-    loading = true;
+        speakingRate: voiceName.value.includes('Journey') ? 1 : speakingRate.value
+      }
+    }
+    if (loading) return
+    loading = true
     const res = await VoiceApi.getVoice(data)
       .catch(() => {
-        showNotify({type: 'danger', message: "Failed to get voice"});
+        showNotify({ type: 'danger', message: 'Failed to get voice' })
         onEnd()
       })
-      .finally(() => loading = false)
+      .finally(() => (loading = false))
 
-    const audioContent = res.audioContent;
-    audio.src = `data:audio/mp3;base64,${audioContent}`;
-    audio.load();
+    const audioContent = res.audioContent
+    audio.src = `data:audio/mp3;base64,${audioContent}`
+    audio.load()
     audio.onended = onEnd
+    if (playNumber.value > 1 && playNumber.value > playedNumber) {
+      playIndex--
+      playedNumber++
+    } else {
+      playedNumber = 1
+    }
     audio.play()
   }
 
   const autoSpeak = (words: IWord[]) => {
     if (words.length === 0) {
-      return;
+      return
     }
 
     if (nowPlaying.value && !isPaused.value) {
-      playIndex--
-      pauseSpeak();
-      return;
+      // playIndex--
+      pauseSpeak()
+      return
     }
 
     if (nowPlaying.value && isPaused.value) {
-      resumeSpeak();
-      return;
+      resumeSpeak()
+      return
     }
 
-    nowPlaying.value = true;
-    isPaused.value = false;
-    playWords = words;
-    playStartTime = Date.now();
-    playIndex = 0;
+    nowPlaying.value = true
+    isPaused.value = false
+    playWords = words
+    playStartTime = Date.now()
+    playIndex = 0
 
-    const totalWords = words.length;
-    playSequence = [];
+    const totalWords = words.length
+    playSequence = []
 
     if (playOrder.value === ORDER_TYPE.SEQUENTIAL) {
-      playSequence = Array.from({length: totalWords}, (_, i) => i);
+      playSequence = Array.from({ length: totalWords }, (_, i) => i)
     } else if (playOrder.value === ORDER_TYPE.RANDOM) {
-      playSequence = Array.from({length: totalWords}, (_, i) => i);
+      playSequence = Array.from({ length: totalWords }, (_, i) => i)
       for (let i = totalWords - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [playSequence[i], playSequence[j]] = [playSequence[j], playSequence[i]];
       }
     }
 
-    playNext();
+    playNext()
   }
 
   const playNext = () => {
-    if (isPaused.value || !nowPlaying.value) return;
+    if (isPaused.value || !nowPlaying.value) return
 
     if (Date.now() - playStartTime >= PLAY_TIME_MS) {
-      stopSpeak();
-      return;
+      stopSpeak()
+      return
     }
 
     if (playIndex >= playWords.length) {
       if (isLoopPlayback.value) {
-        playIndex = 0;
+        playIndex = 0
       } else {
-        stopSpeak();
-        return;
+        stopSpeak()
+        return
       }
     }
 
-    const word = playWords[playSequence[playIndex]];
-    playingId.value = word.id;
-    playIndex++;
-    voiceSpeak(word.english, true, playNext);
+    const word = playWords[playSequence[playIndex]]
+    playingId.value = word.id
+    playIndex++
+    voiceSpeak(word.english, true, playNext)
   }
 
   const pauseSpeak = () => {
     if (nowPlaying.value) {
-      isPaused.value = true;
+      isPaused.value = true
     }
   }
 
   const resumeSpeak = () => {
     if (nowPlaying.value && isPaused.value) {
-      isPaused.value = false;
-      playNext();
+      isPaused.value = false
+      playNext()
     }
   }
 
   const stopSpeak = () => {
-    nowPlaying.value = false;
-    isPaused.value = false;
-    playingId.value = null;
-    audio?.pause();
-    audio && (audio.currentTime = 0);
+    nowPlaying.value = false
+    isPaused.value = false
+    playingId.value = null
+    audio?.pause()
+    audio && (audio.currentTime = 0)
   }
 
   const resetSpeak = () => {
-    stopSpeak();
-    playIndex = 0;
-    playSequence = [];
-    playWords = [];
-    playStartTime = 0;
-    lastPlayInfo?.onEnd && lastPlayInfo.onEnd();
-    methodTracker();
+    stopSpeak()
+    playIndex = 0
+    playSequence = []
+    playWords = []
+    playStartTime = 0
+    methodTracker()
   }
 
   return {
@@ -215,6 +193,7 @@ export const useVoiceStore = defineStore(`voice`, () => {
     ssmlGender,
     languageCode,
     speakingRate,
+    playNumber,
     isPaused,
     playingId,
     playOrder,

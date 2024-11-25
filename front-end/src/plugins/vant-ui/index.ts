@@ -25,6 +25,7 @@ import {
   SwipeCell,
   Switch,
   Picker,
+  Stepper,
   ConfigProvider
 } from 'vant'
 
@@ -54,4 +55,5 @@ export function loadVantUI(app: App) {
   app.use(Loading)
   app.use(Slider)
   app.use(Picker)
+  app.use(Stepper)
 }
