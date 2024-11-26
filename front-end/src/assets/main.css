@@ -40,7 +40,7 @@ a,
 }
 
 .is-lite-mode {
-    opacity: 0.2;
+    opacity: 0.25;
     background: #55595e;
 
     header {
