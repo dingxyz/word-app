@@ -25,7 +25,7 @@ const emit = defineEmits(['refresh-list', 'edit-word'])
 const showDetailPopup = ref(false)
 const showChinese = ref(appStore.showChineseChecked)
 const compiledMarkdown = computed(
-  () => `<h3>${poops.wordData.english}</h3>` + marked(poops.wordData.annotation)
+  () => `<h3>${appStore.isLiteMode ? '' : poops.wordData.english}</h3>` + marked(poops.wordData.annotation)
 )
 const isPlaying = computed(() => !voiceStore.isPaused && voiceStore.playingId === poops.wordData.id)
 const isPlayingByClick = ref(false) // Manual click play
