@@ -1,15 +1,15 @@
 // models/Word.js
 import mongoose from '../db/mongoose.js';
 
-const wordSchema = new mongoose.Schema({
+const worldviewSchema = new mongoose.Schema({
     id: { type: String, required: true, unique: true },
     english: { type: String, required: true, index: true },
     chinese: { type: String },
     annotation: { type: String },
-    wordType: { type: String, index: true },
+    wordType: { type: String },
     createdAt: { type: Date, default: Date.now },
 });
 
-const Word = mongoose.model('Word', wordSchema);
+const Worldview = mongoose.model('Worldview', worldviewSchema);
 
-export default Word;
+export default Worldview;

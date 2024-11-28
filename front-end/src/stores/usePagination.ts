@@ -12,7 +12,7 @@ export const usePaginationStore = defineStore("pagination", () => {
   const pageByWordType = reactive<Record<string, Pagination>>({})
   const isPaging = ref(true)
   const currentPage = ref(1)
-  const pageSize = ref(30)
+  const pageSize = ref(50)
 
   const appStore = useAppStore()
 
@@ -28,7 +28,7 @@ export const usePaginationStore = defineStore("pagination", () => {
     const storedData = pageByWordType[appStore.wordType] || {
       isPaging: true,
       currentPage: 1,
-      pageSize: 30,
+      pageSize: 50,
     };
     isPaging.value = storedData.isPaging;
     currentPage.value = storedData.currentPage;

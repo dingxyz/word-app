@@ -10,7 +10,7 @@ defineComponent({
 
 const emit = defineEmits(['type-update'])
 const appStore = useAppStore()
-const fieldRef = ref<FieldInstance>();
+const fieldRef = ref<FieldInstance>()
 const typeDialog = ref(false)
 const wordLength = ref(0)
 const typeData = ref<WordType>({
@@ -24,16 +24,12 @@ const addOrEditType = async () => {
     return
   }
   if (typeData.value.id) {
-    if (wordLength.value > 0) {
-      showNotify({type: 'danger', message: 'This type has words, cannot be edited!'});
-    } else {
-      await WordTypeApi.update(typeData.value)
-    }
+    await WordTypeApi.update(typeData.value)
   } else {
     await WordTypeApi.add(typeData.value)
   }
   typeDialog.value = false
-  appStore.getTypeList()
+  appStore.getTypeList(typeData.value.name)
   emit('type-update')
 }
 
@@ -68,15 +64,17 @@ defineExpose({open})
 
 <template>
   <van-dialog
-    v-model:show="typeDialog" title="word type" show-cancel-button closeOnClickOverlay
-    @confirm="addOrEditType" cancelButtonText="cancel" confirmButtonText="confirm"
+      v-model:show="typeDialog" title="word type" show-cancel-button closeOnClickOverlay
+      @confirm="addOrEditType" cancelButtonText="cancel" confirmButtonText="confirm"
   >
     <van-cell-group inset>
-      <van-field v-model="typeData.name" ref="fieldRef" label="name" placeholder="Please input name"/>
+      <van-field v-model.trim="typeData.name" ref="fieldRef" label="name" placeholder="Please input name"/>
       <van-field v-model.number="typeData.order" label="parentId" placeholder="Please input order"/>
     </van-cell-group>
     <div v-if="typeData.id" class="flex justify-center">
-      <van-button icon="delete-o" @click="deleteType" plain type="primary" size="small" color="red" class="m-auto">Remove</van-button>
+      <van-button icon="delete-o" @click="deleteType" plain type="primary" size="small" color="red" class="m-auto">
+        Remove
+      </van-button>
     </div>
   </van-dialog>
 </template>

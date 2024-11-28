@@ -9,7 +9,7 @@
     margin: 0;
     padding: 0;
     font-weight: normal;
-    background: #000;
+    background: var(--vt-c-background);
 }
 
 a,
