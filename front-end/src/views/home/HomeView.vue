@@ -64,11 +64,10 @@ watch([
   () => paginationStore.pageSize
 ], () => setRenderList());
 
-const getWord = async ({searchKey = null, toBottom = false} = {}) => {
+const getWord = async ({toBottom = false} = {}) => {
   loading.value = true
   const {data, code, message} = await WordApi.get({
     wordType: appStore.wordType,
-    searchKey: searchKey?.trim() || null
   }).finally(() => {
     loading.value = false
   })
@@ -81,7 +80,27 @@ const getWord = async ({searchKey = null, toBottom = false} = {}) => {
 }
 getWord()
 
-const searchWord = debounce(getWord, 300)
+const search = async ({searchKey}) => {
+  if (searchKey?.length === 1) {
+    return
+  }
+  if (searchKey) {
+    loading.value = true
+    const {data, code, message} = await WordApi.search({
+      searchKey: searchKey?.trim()
+    }).finally(() => {
+      loading.value = false
+    })
+    if (code !== '000000') {
+      showNotify({type: 'danger', message});
+    }
+    words.splice(0, words.length, ...data)
+    setRenderList()
+  } else {
+    getWord()
+  }
+}
+const searchWord = debounce(search, 300)
 </script>
 
 <template>

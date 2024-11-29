@@ -4,7 +4,7 @@ import { IWord } from '@/api/word-api'
 import VoiceApi from '@/api/voice-api'
 import { showNotify } from 'vant'
 import WordStatisticsApi from '@/api/word-statistics-api'
-import { methodTracker } from '@/utils/common-util'
+import {groupWords, methodTracker} from '@/utils/common-util'
 
 export enum ORDER_TYPE {
   SEQUENTIAL = 'sequential',
@@ -101,7 +101,9 @@ export const useVoiceStore = defineStore(`voice`, () => {
     if (words.length === 0) {
       return
     }
-
+    if (words[0].wordType === "Worldview") {
+      words = groupWords(words)
+    }
     if (nowPlaying.value && !isPaused.value) {
       // playIndex--
       pauseSpeak()

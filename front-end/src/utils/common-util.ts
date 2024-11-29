@@ -1,5 +1,6 @@
 import {showNotify} from "vant";
 import {useAppStore} from "@/stores/useApp";
+import {IWord} from "@/api/word-api";
 
 export const copyToClipboard = async (text: string) => {
   try {
@@ -13,7 +14,7 @@ export const copyToClipboard = async (text: string) => {
     document.execCommand("copy");
     document.body.removeChild(tempTextArea);
   }
-  showNotify({ type: 'success', message: 'Copied to clipboard' });
+  showNotify({type: 'success', message: 'Copied to clipboard'});
 };
 
 
@@ -38,3 +39,16 @@ export const methodTracker = (() => {
     }
   };
 })();
+
+export const groupWords = (words: IWord[]): IWord[] => {
+  const result: IWord[] = [];
+  const num = 10
+
+  for (let i = 0; i < words.length; i += num) {
+    const group = words.slice(i, i + num);
+    const combinedWords = group.map(item => item.english).join("; ");
+    result.push({...group[0], english: combinedWords});
+  }
+
+  return result;
+}

@@ -14,6 +14,10 @@ class WordApi {
     return http.get('/words', {params});
   }
 
+  static search(data: any): Promise<any> {
+    return http.post(`/words/search`, data);
+  }
+
   static add(data: IWord): Promise<any> {
     return http.post('/words', data);
   }

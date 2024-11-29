@@ -1,5 +1,5 @@
 import express from 'express';
-import {getWords, addWord, updateWord, deleteWord, moveWord} from '../controllers/wordsController.mjs';
+import {getWords, addWord, updateWord, deleteWord, moveWord, searchWord} from '../controllers/wordsController.mjs';
 
 const router = express.Router();
 
@@ -9,6 +9,8 @@ router.get('/', getWords);
 router.post('/', addWord);
 // move
 router.post('/move', moveWord);
+// search
+router.post('/search', searchWord);
 // Update
 router.put('/:id', updateWord);
 // Delete

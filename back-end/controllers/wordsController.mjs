@@ -3,17 +3,10 @@ import {generateUniqueId, STATISTICS_WORD_TYPE} from "../utils/commonUtil.mjs";
 import Worldview from "../models/Worldview.js";
 
 export const getWords = async (req, res) => {
-  const {searchKey, wordType} = req.query;
+  const {wordType} = req.query;
   let sendData = [];
   try {
-    if (searchKey) {
-      sendData = await Word.find({
-        $or: [
-          {english: {$regex: searchKey, $options: 'i'}},
-          {chinese: {$regex: searchKey, $options: 'i'}}
-        ]
-      }).maxTimeMS(9000).sort({createdAt: 1});
-    } else if (wordType) {
+    if (wordType) {
       if (wordType === STATISTICS_WORD_TYPE) {
         sendData = await Worldview.find().sort({english: 1});
       } else {
@@ -23,8 +16,22 @@ export const getWords = async (req, res) => {
       sendData = await Word.find().sort({createdAt: 1});
     }
     res.sendSuccess(sendData ?? []);
-    // await setWordStatistics()
-    // removeWordByType()
+  } catch (error) {
+    res.sendError(error.message);
+  }
+};
+
+export const searchWord = async (req, res) => {
+  const {body} = req;
+  const {searchKey} = body;
+  let sendData = [];
+  try {
+    sendData = await Worldview.find({
+      $or: [
+        {english: {$regex: searchKey, $options: 'i'}},
+      ]
+    }).sort({english: 1});
+    res.sendSuccess(sendData ?? []);
   } catch (error) {
     res.sendError(error.message);
   }
