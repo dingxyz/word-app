@@ -36,6 +36,14 @@ const openStatisticsPopup = () => statisticsPopupRef.value?.open()
 const editWordOpen = (word: IWord) => addWordRef.value?.open(word)
 const autoPlayChange = () => voiceStore.autoSpeak(renderList.value)
 const setRenderList = (toBottom = false) => {
+  if (appStore.isWorldview) {
+    if (paginationStore.sortByTime) {
+      words.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
+    } else {
+      words.sort((a, b) => a.english.localeCompare(b.english))
+    }
+  }
+
   voiceStore.resetSpeak()
   const {isPaging, pageSize} = paginationStore
   let {currentPage} = paginationStore
@@ -114,11 +122,11 @@ const searchWord = debounce(search, 300)
       <span class="text-xl" @click="openTypeDialog">{{ appStore?.wordType }}</span>
       <WordTypeSelect @refresh-list="getWord"/>
     </header>
-    <article ref="listRef" class="relative flex-1 bg-[#935211] overflow-auto" :class="{'overflow-hidden': loading }">
+    <article ref="listRef" class="relative flex-1 bg-[#006633] overflow-auto" :class="{'overflow-hidden': loading }">
       <div v-if="loading" class="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-[#d9dae25a]">
         <van-loading type="spinner"/>
       </div>
-      <van-list>
+      <van-list :class="{'grid': appStore.isWorldview}" class="grid-cols-2">
         <WordItem
           v-for="(word, index) in renderList"
           :key="word.id"
@@ -149,6 +157,7 @@ const searchWord = debounce(search, 300)
     <AddType ref="addTypeRef"/>
     <SettingPopup
       ref="settingPopupRef"
+      @update:sortByTime="setRenderList"
     />
     <StatisticsPopup ref="statisticsPopupRef"/>
   </van-config-provider>

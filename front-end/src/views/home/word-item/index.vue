@@ -143,8 +143,8 @@ const openDetail = () => (showDetailPopup.value = true)
 <template>
   <div
     ref="wordItemRef"
-    class="text-[#fff] text-lg bg-[#935211] odd:bg-[#83480c]"
-    :class="{ '!text-blue-300': isPlaying || isPlayingByClick }"
+    class="word-list-item text-[#fff] text-lg bg-[#006633] odd:bg-[#124f33]"
+    :class="{ '!text-blue-300': isPlaying || isPlayingByClick, 'is-worldview': appStore.isWorldview }"
   >
     <van-swipe-cell>
       <li class="flex items-center">
@@ -201,8 +201,8 @@ const openDetail = () => (showDetailPopup.value = true)
           class="markdown-body flex-auto overflow-auto bg-black text-white"
         ></div>
         <div class="text-center mt-4">
-          <van-button type="success" @click="showDetailPopup = false" class="w-full"
-            >CLOSE
+          <van-button type="success" @click="showDetailPopup = false" class="w-full">
+            CLOSE
           </van-button>
         </div>
       </div>
@@ -211,6 +211,12 @@ const openDetail = () => (showDetailPopup.value = true)
 </template>
 
 <style scoped lang="scss">
+.word-list-item.is-worldview {
+  background-color: #006633;
+  &:nth-child(4n - 1), &:nth-child(4n - 2) {
+    background-color: #124f33;
+  }
+}
 .word-box {
   .second-text {
     display: none;

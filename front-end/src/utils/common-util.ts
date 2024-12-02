@@ -42,11 +42,11 @@ export const methodTracker = (() => {
 
 export const groupWords = (words: IWord[]): IWord[] => {
   const result: IWord[] = [];
-  const num = 10
+  const num = 8
 
   for (let i = 0; i < words.length; i += num) {
     const group = words.slice(i, i + num);
-    const combinedWords = group.map(item => item.english).join("; ");
+    const combinedWords = group.map(item => item.english).join(";");
     result.push({...group[0], english: combinedWords});
   }
 

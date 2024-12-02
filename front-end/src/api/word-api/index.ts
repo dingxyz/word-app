@@ -7,6 +7,7 @@ export class IWord {
   chinese: string = '';
   annotation?: string = ''
   wordType?: string = '';
+  createdAt?: string = '';
 }
 
 class WordApi {

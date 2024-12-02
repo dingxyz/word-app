@@ -44,7 +44,22 @@ a,
     background: #55595e;
 
     header {
-        display: none;
+        /*display: none;*/
+        height: 30px;
+        background: #55595e;
+        color: #fff;
+        span {
+            font-size: 14px !important;
+        }
+    }
+    footer, .van-pagination__item {
+        height: 25px;
+    }
+    .van-list.grid .word-box {
+        color: #c5c5c5 !important;
+        .first-text, .second-text {
+            min-height: 40px;
+        }
     }
 
     footer, article, li {

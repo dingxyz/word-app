@@ -14,6 +14,8 @@ const paginationStore = usePaginationStore()
 const isShow = ref(false)
 const showNamePicker = ref(false);
 
+const emit = defineEmits(['update:sortByTime'])
+
 const onNameConfirm = ({selectedOptions}) => {
   showNamePicker.value = false;
   voiceStore.voiceName = selectedOptions[0].name;
@@ -61,6 +63,11 @@ defineExpose({open})
               <van-radio :name="70">70</van-radio>
               <van-radio :name="100">100</van-radio>
             </van-radio-group>
+          </template>
+        </van-field>
+        <van-field v-show="appStore.isWorldview" name="switch" label-width="120px" input-align="right" label="Sort by time">
+          <template #input>
+            <van-switch v-model="paginationStore.sortByTime" @change="emit('update:sortByTime')" size="20"/>
           </template>
         </van-field>
         <van-field name="radio" input-align="right" label="Play order">
