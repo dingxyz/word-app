@@ -8,6 +8,7 @@ import {copyToClipboard} from '@/utils/common-util'
 import {marked} from 'marked'
 import 'github-markdown-css/github-markdown.css'
 import {ORDER_TYPE, useVoiceStore} from '@/stores/useVoice'
+import {usePaginationStore} from "@/stores/usePagination";
 
 defineComponent({
   name: 'WordItem'
@@ -20,6 +21,7 @@ const props = defineProps<{
 
 const appStore = useAppStore()
 const voiceStore = useVoiceStore()
+const paginationStore = usePaginationStore()
 const wordItemRef = ref()
 const emit = defineEmits(['refresh-list', 'edit-word'])
 const showDetailPopup = ref(false)
@@ -166,7 +168,7 @@ const openDetail = () => (showDetailPopup.value = true)
           </div>
         </div>
         <IconBtn
-          v-if="appStore.isWorldview"
+          v-if="appStore.isWorldview && paginationStore.showStar"
           :icon="wordData.collect ? 'star' : 'star-o'"
           :color="wordData.collect ? 'yellow' : 'white'"
           @click="toggleCollect"

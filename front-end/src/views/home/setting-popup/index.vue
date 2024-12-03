@@ -70,6 +70,11 @@ defineExpose({open})
             <van-switch v-model="paginationStore.sortByTime" @change="emit('update:sortByTime')" size="20"/>
           </template>
         </van-field>
+        <van-field v-show="appStore.isWorldview" name="switch" label-width="120px" input-align="right" label="Show Star">
+          <template #input>
+            <van-switch v-model="paginationStore.showStar" size="20"/>
+          </template>
+        </van-field>
         <van-field v-show="appStore.isWorldview" name="switch" label-width="120px" input-align="right" label="Only Collect">
           <template #input>
             <van-switch v-model="paginationStore.onlyCollect" @change="emit('update:onlyCollect')" size="20"/>

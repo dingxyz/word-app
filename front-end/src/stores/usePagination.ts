@@ -14,6 +14,7 @@ export const usePaginationStore = defineStore("pagination", () => {
   const currentPage = ref(1)
   const pageSize = ref(50)
   const sortByTime = ref(false)
+  const showStar = ref(true)
   const onlyCollect = ref(false)
 
   const appStore = useAppStore()
@@ -38,5 +39,5 @@ export const usePaginationStore = defineStore("pagination", () => {
   }
   initPagination()
 
-  return {isPaging, currentPage, pageSize, sortByTime, onlyCollect, pageByWordType, initPagination}
+  return {isPaging, currentPage, pageSize, sortByTime, showStar, onlyCollect, pageByWordType, initPagination}
 })
