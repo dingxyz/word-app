@@ -76,6 +76,7 @@ const getWord = async ({toBottom = false} = {}) => {
   loading.value = true
   const {data, code, message} = await WordApi.get({
     wordType: appStore.wordType,
+    collect: paginationStore.onlyCollect ? true : undefined,
   }).finally(() => {
     loading.value = false
   })
@@ -115,7 +116,7 @@ const searchWord = debounce(search, 300)
   <van-config-provider
     theme="dark"
     class="w-auto max-w-xl flex flex-1 flex-col container text-lg overflow-auto"
-    :class="{'opacity-30': isDev && !appStore.isLiteMode, 'is-lite-mode': appStore.isLiteMode }"
+    :class="{'opacity-20': isDev && !appStore.isLiteMode, 'is-lite-mode': appStore.isLiteMode }"
   >
     <header class="flex items-center justify-between h-12 px-4 bg-[#993333] text-center text-white">
       <span class="w-10" @click="openStatisticsPopup">{{ words.length }}</span>
@@ -158,6 +159,7 @@ const searchWord = debounce(search, 300)
     <SettingPopup
       ref="settingPopupRef"
       @update:sortByTime="setRenderList"
+      @update:onlyCollect="getWord"
     />
     <StatisticsPopup ref="statisticsPopupRef"/>
   </van-config-provider>

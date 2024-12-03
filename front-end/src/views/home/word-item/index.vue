@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import WordApi, { IWord } from '@/api/word-api'
-import { computed, defineComponent, ref, watch } from 'vue'
+import WordApi, {IWord} from '@/api/word-api'
+import {computed, defineComponent, ref, watch} from 'vue'
 import IconBtn from '@/components/IconBtn.vue'
-import { useAppStore } from '@/stores/useApp'
-import { showConfirmDialog, showNotify } from 'vant'
-import { copyToClipboard } from '@/utils/common-util'
-import { marked } from 'marked'
+import {useAppStore} from '@/stores/useApp'
+import {showConfirmDialog, showNotify} from 'vant'
+import {copyToClipboard} from '@/utils/common-util'
+import {marked} from 'marked'
 import 'github-markdown-css/github-markdown.css'
-import { ORDER_TYPE, useVoiceStore } from '@/stores/useVoice'
+import {ORDER_TYPE, useVoiceStore} from '@/stores/useVoice'
 
 defineComponent({
   name: 'WordItem'
 })
 
-const poops = defineProps<{
+const props = defineProps<{
   wordData: IWord
   index: number
 }>()
@@ -25,9 +25,9 @@ const emit = defineEmits(['refresh-list', 'edit-word'])
 const showDetailPopup = ref(false)
 const showChinese = ref(appStore.showChineseChecked)
 const compiledMarkdown = computed(
-  () => `<h3>${appStore.isLiteMode ? '' : poops.wordData.english}</h3>` + marked(poops.wordData.annotation)
+  () => `<h3>${appStore.isLiteMode ? '' : props.wordData.english}</h3>` + marked(props.wordData.annotation)
 )
-const isPlaying = computed(() => !voiceStore.isPaused && voiceStore.playingId === poops.wordData.id)
+const isPlaying = computed(() => !voiceStore.isPaused && voiceStore.playingId === props.wordData.id)
 const isPlayingByClick = ref(false) // Manual click play
 
 const observer = new IntersectionObserver((entries) => {
@@ -72,21 +72,10 @@ const removeHandler = async (id: string) => {
   emit('refresh-list')
 }
 
-const moveToLearned = async () => {
-  await WordApi.moveTo({
-    id: poops.wordData.id,
-    wordType: poops.wordData.wordType,
-    toType: 'learned'
-  }).then(() => {
-    showNotify({ type: 'success', message: 'Moved to learned successfully' })
-  })
-  emit('refresh-list')
-}
-
 let timeoutId = null
 const mouseHandler = (isClick?: boolean) => {
   showChinese.value = !showChinese.value
-  if (!poops.wordData.chinese) {
+  if (!props.wordData.chinese) {
     showChinese.value = false
   }
   if (isClick) {
@@ -105,7 +94,7 @@ const mouseHandler = (isClick?: boolean) => {
 let longPressTimer = null
 const startLongPress = () => {
   longPressTimer = setTimeout(() => {
-    copyToClipboard(showChinese.value ? poops.wordData.chinese : poops.wordData.english)
+    copyToClipboard(showChinese.value ? props.wordData.chinese : props.wordData.english)
   }, 500)
 }
 
@@ -128,6 +117,12 @@ const detailPopupClickHandler = (event: MouseEvent) => {
       })
     }
   }
+}
+
+const toggleCollect = async () => {
+  // eslint-disable-next-line vue/no-mutating-props
+  props.wordData.collect =!props.wordData.collect
+  await WordApi.collectToggle(props.wordData)
 }
 
 const playSound = (english: string) => {
@@ -170,8 +165,14 @@ const openDetail = () => (showDetailPopup.value = true)
             {{ wordData.chinese ?? '--' }}
           </div>
         </div>
-        <IconBtn v-if="wordData.annotation" icon="eye-o" @click="openDetail" />
-        <IconBtn icon="exchange" v-if="wordData.chinese" @click="mouseHandler(true)" />
+        <IconBtn
+          v-if="appStore.isWorldview"
+          :icon="wordData.collect ? 'star' : 'star-o'"
+          :color="wordData.collect ? 'yellow' : 'white'"
+          @click="toggleCollect"
+        />
+        <IconBtn v-if="wordData.annotation" icon="eye-o" @click="openDetail"/>
+        <IconBtn v-if="wordData.chinese" icon="exchange" @click="mouseHandler(true)"/>
       </li>
       <template #left>
         <div class="p-1 text-sm text-fuchsia-500">
@@ -180,8 +181,8 @@ const openDetail = () => (showDetailPopup.value = true)
       </template>
       <template #right>
         <div class="flex items-center">
-          <IconBtn icon="delete-o" @click="removeHandler(wordData.id)" color="red" />
-          <IconBtn icon="edit" @click="emit('edit-word', wordData)" />
+          <IconBtn icon="delete-o" @click="removeHandler(wordData.id)" color="red"/>
+          <IconBtn icon="edit" @click="emit('edit-word', wordData)"/>
         </div>
       </template>
     </van-swipe-cell>
@@ -213,14 +214,17 @@ const openDetail = () => (showDetailPopup.value = true)
 <style scoped lang="scss">
 .word-list-item.is-worldview {
   background-color: #006633;
+
   &:nth-child(4n - 1), &:nth-child(4n - 2) {
     background-color: #124f33;
   }
 }
+
 .word-box {
   .second-text {
     display: none;
   }
+
   &.show-chinese {
     .first-text {
       display: none;

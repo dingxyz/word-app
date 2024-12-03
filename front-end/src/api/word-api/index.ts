@@ -7,6 +7,7 @@ export class IWord {
   chinese: string = '';
   annotation?: string = ''
   wordType?: string = '';
+  collect?: boolean = true;
   createdAt?: string = '';
 }
 
@@ -27,8 +28,8 @@ class WordApi {
     return http.put(`/words/${data.id}`, data);
   }
 
-  static moveTo(data: any): Promise<any> {
-    return http.post(`/words/move`, data);
+  static collectToggle(data: IWord): Promise<any> {
+    return http.put(`/words/collect/${data.id}`, {collect: data.collect});
   }
 
   static remove(id: string, params: any): Promise<any> {

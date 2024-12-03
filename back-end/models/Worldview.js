@@ -7,6 +7,7 @@ const worldviewSchema = new mongoose.Schema({
     chinese: { type: String },
     annotation: { type: String },
     wordType: { type: String },
+    collect: { type: Boolean, default: true },
     createdAt: { type: Date, default: Date.now },
 });
 

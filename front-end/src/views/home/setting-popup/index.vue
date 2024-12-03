@@ -14,7 +14,7 @@ const paginationStore = usePaginationStore()
 const isShow = ref(false)
 const showNamePicker = ref(false);
 
-const emit = defineEmits(['update:sortByTime'])
+const emit = defineEmits(['update:sortByTime', 'update:onlyCollect'])
 
 const onNameConfirm = ({selectedOptions}) => {
   showNamePicker.value = false;
@@ -68,6 +68,11 @@ defineExpose({open})
         <van-field v-show="appStore.isWorldview" name="switch" label-width="120px" input-align="right" label="Sort by time">
           <template #input>
             <van-switch v-model="paginationStore.sortByTime" @change="emit('update:sortByTime')" size="20"/>
+          </template>
+        </van-field>
+        <van-field v-show="appStore.isWorldview" name="switch" label-width="120px" input-align="right" label="Only Collect">
+          <template #input>
+            <van-switch v-model="paginationStore.onlyCollect" @change="emit('update:onlyCollect')" size="20"/>
           </template>
         </van-field>
         <van-field name="radio" input-align="right" label="Play order">
