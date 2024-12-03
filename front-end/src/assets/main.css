@@ -47,6 +47,10 @@ a,
     opacity: 0.25;
     background: #55595e;
 
+    .van-icon:before {
+        color: #b1b1b1;
+    }
+
     header {
         /*display: none;*/
         height: 30px;
