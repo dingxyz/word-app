@@ -20,7 +20,8 @@ function wrapEnglishText(node) {
           if (i < matches.length) {
             const strong = document.createElement('strong');
             strong.textContent = matches[i];
-            strong.style.color = 'red'
+            // strong.style.color = 'red'
+            strong.classList.add('text-red')
             parent.insertBefore(strong, currentNode);
           }
         }

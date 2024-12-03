@@ -39,6 +39,10 @@ a,
     }
 }
 
+.markdown-body .text-red {
+    color: red;
+}
+
 .is-lite-mode {
     opacity: 0.25;
     background: #55595e;
@@ -52,7 +56,7 @@ a,
             font-size: 14px !important;
         }
     }
-    footer, .van-pagination__item {
+    footer, .van-pagination__item, .van-button {
         height: 25px;
     }
     .van-list.grid .word-box {
@@ -62,8 +66,19 @@ a,
         }
     }
 
-    footer, article, li {
+    footer, article, li, .markdown-body, .van-popup, .van-overlay {
         background: #595c63;
+    }
+    .markdown-body {
+        font-size: 12px;
+        opacity: .8;
+        p {
+            margin: 5px 0;
+        }
+        .text-red{
+            color: #93ff9c;
+            font-size: 14px;
+        }
     }
 
     .van-swipe-cell li {
@@ -77,10 +92,5 @@ a,
 
     .van-button {
         background: #52575c;
-    }
-
-    .markdown-body {
-        font-size: 14px;
-        opacity: .8;
     }
 }
