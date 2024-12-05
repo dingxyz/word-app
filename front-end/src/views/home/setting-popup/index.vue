@@ -33,8 +33,12 @@ const initVoiceList = async () => {
   // Repeated with WaveNet: 'Neural2'
   // const excludeTypes = ['Studio', 'Polyglot', 'Casual', 'News', 'Standard', 'Neural2'];
   const includeTypes = ['Journey', 'Wavenet'];
+  const includeWavenetName = ['B','C','D','F']
   const {voices} = await VoiceApi.getVoicesList(voiceStore.languageCode)
   voiceStore.voiceNameList = voices.filter(voice => includeTypes.includes(voice.name.split('-')[2]))
+  voiceStore.voiceNameList = voiceStore.voiceNameList.filter(voice =>
+    voice.name.includes('Wavenet') ? includeWavenetName.includes(voice.name.split('-')[3]) : true
+  )
   voiceStore.voiceNameList.forEach(voice => {
     voice.text = voice.name + '---' + voice.ssmlGender
   })
