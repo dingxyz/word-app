@@ -146,7 +146,7 @@ const openDetail = () => (showDetailPopup.value = true)
     <van-swipe-cell>
       <li class="flex items-center">
         <div
-          class="word-box self-start flex-1 leading-normal pl-2"
+          class="word-box self-start flex-1 leading-normal pl-2 relative"
           :class="{ 'show-chinese': showChinese }"
           @click="playSound(wordData.english)"
         >
@@ -167,13 +167,20 @@ const openDetail = () => (showDetailPopup.value = true)
             {{ wordData.chinese ?? '--' }}
           </div>
         </div>
+        <div
+          v-if="wordData.annotation"
+          class="triangle-btn absolute top-0 bottom-0 right-0 w-1/3 active:bg-[#ffffff33]"
+          @click="openDetail"
+        >
+          <div class="absolute top-0 right-0 w-0 h-0 border-l-9 border-t-9 border-red-700 border-l-transparent"></div>
+          <!--          <IconBtn icon="eye-o"/>-->
+        </div>
         <IconBtn
           v-if="appStore.isWorldview && paginationStore.showStar"
           :icon="wordData.collect ? 'star' : 'star-o'"
           :color="wordData.collect ? 'yellow' : 'white'"
           @click="toggleCollect"
         />
-        <IconBtn v-if="wordData.annotation" icon="eye-o" @click="openDetail"/>
         <IconBtn v-if="wordData.chinese" icon="exchange" @click="mouseHandler(true)"/>
       </li>
       <template #left>
