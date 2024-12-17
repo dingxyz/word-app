@@ -5,13 +5,16 @@ import {
   updateWord,
   deleteWord,
   searchWord,
-  toggleCollect
+  toggleCollect,
+  getAnnotation
 } from '../controllers/wordsController.mjs';
 
 const router = express.Router();
 
 // Get
 router.get('/', getWords);
+// Get
+router.get('/anno', getAnnotation);
 // Add
 router.post('/', addWord);
 // search

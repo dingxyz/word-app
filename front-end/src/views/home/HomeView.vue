@@ -72,6 +72,11 @@ watch([
   () => paginationStore.pageSize
 ], () => setRenderList());
 
+const typeChange = () => {
+  renderList.value = []
+  getWord()
+}
+
 const getWord = async ({toBottom = false} = {}) => {
   loading.value = true
   const {data, code, message} = await WordApi.get({
@@ -121,7 +126,7 @@ const searchWord = debounce(search, 300)
     <header class="flex items-center justify-between h-12 px-4 bg-[#993333] text-center text-white">
       <span class="w-10" @click="openStatisticsPopup">{{ words.length }}</span>
       <span class="text-xl" @click="openTypeDialog">{{ appStore?.wordType }}</span>
-      <WordTypeSelect @refresh-list="getWord"/>
+      <WordTypeSelect @refresh-list="typeChange"/>
     </header>
     <article ref="listRef" class="relative flex-1 bg-[#006633] overflow-auto" :class="{'overflow-hidden': loading }">
       <div v-if="loading" class="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-[#d9dae25a]">

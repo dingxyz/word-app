@@ -18,9 +18,8 @@ function wrapEnglishText(node) {
         for (let i = 0; i < parts.length; i++) {
           parent.insertBefore(document.createTextNode(parts[i]), currentNode);
           if (i < matches.length) {
-            const strong = document.createElement('strong');
+            const strong = document.createElement('span');
             strong.textContent = matches[i];
-            // strong.style.color = 'red'
             strong.classList.add('text-red')
             parent.insertBefore(strong, currentNode);
           }

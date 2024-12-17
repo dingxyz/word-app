@@ -8,14 +8,29 @@ export const getWords = async (req, res) => {
   try {
     if (wordType) {
       if (wordType === STATISTICS_WORD_TYPE) {
-        sendData = await Worldview.find(collect ? {collect: true} : {}).sort({english: 1});
+        sendData = await Worldview.find(collect ? {collect: true} : {}).sort({english: 1}).select('-annotation');
       } else {
-        sendData = await Word.find({wordType}).sort({createdAt: 1});
+        sendData = await Word.find({wordType}).sort({createdAt: 1}).select('-annotation');
       }
     } else {
-      sendData = await Word.find().sort({createdAt: 1});
+      sendData = await Word.find().sort({createdAt: 1}).select('-annotation');
     }
     res.sendSuccess(sendData ?? []);
+  } catch (error) {
+    res.sendError(error.message);
+  }
+};
+
+export const getAnnotation = async (req, res) => {
+  const {wordType, id} = req.query;
+  let sendData;
+  try {
+    if (wordType === STATISTICS_WORD_TYPE) {
+      sendData = await Worldview.findOne({id});
+    } else {
+      sendData = await Word.findOne({id, wordType});
+    }
+    res.sendSuccess(sendData ?? {});
   } catch (error) {
     res.sendError(error.message);
   }

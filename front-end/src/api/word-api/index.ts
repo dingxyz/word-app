@@ -16,6 +16,10 @@ class WordApi {
     return http.get('/words', {params});
   }
 
+  static getAnnotation(params: any): Promise<any> {
+    return http.get('/words/anno', {params});
+  }
+
   static search(data: any): Promise<any> {
     return http.post(`/words/search`, data);
   }

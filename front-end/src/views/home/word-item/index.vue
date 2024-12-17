@@ -3,12 +3,12 @@ import WordApi, {IWord} from '@/api/word-api'
 import {computed, defineComponent, ref, watch} from 'vue'
 import IconBtn from '@/components/IconBtn.vue'
 import {useAppStore} from '@/stores/useApp'
-import {showConfirmDialog, showNotify} from 'vant'
+import {showConfirmDialog} from 'vant'
 import {copyToClipboard} from '@/utils/common-util'
-import {marked} from 'marked'
 import 'github-markdown-css/github-markdown.css'
 import {ORDER_TYPE, useVoiceStore} from '@/stores/useVoice'
 import {usePaginationStore} from "@/stores/usePagination";
+import AnnoPopup from "@/views/home/anno-popup/index.vue";
 
 defineComponent({
   name: 'WordItem'
@@ -23,12 +23,9 @@ const appStore = useAppStore()
 const voiceStore = useVoiceStore()
 const paginationStore = usePaginationStore()
 const wordItemRef = ref()
+const annoPopupRef = ref()
 const emit = defineEmits(['refresh-list', 'edit-word'])
-const showDetailPopup = ref(false)
 const showChinese = ref(appStore.showChineseChecked)
-const compiledMarkdown = computed(
-  () => `<h3>${appStore.isLiteMode ? '' : props.wordData.english}</h3>` + marked(props.wordData.annotation)
-)
 const isPlaying = computed(() => !voiceStore.isPaused && voiceStore.playingId === props.wordData.id)
 const isPlayingByClick = ref(false) // Manual click play
 
@@ -107,23 +104,10 @@ const endLongPress = () => {
   }
 }
 
-const detailPopupClickHandler = (event: MouseEvent) => {
-  if (event.target instanceof HTMLElement) {
-    const tagName = event.target.tagName.toLowerCase()
-    if (tagName === 'strong') {
-      const oldColor = (event.target as HTMLElement).style.color
-      event.target.style.color = '#02c3ff'
-      const text = event.target.textContent
-      voiceStore.voiceSpeak(text, false, () => {
-        ;(event.target as HTMLElement).style.color = oldColor
-      })
-    }
-  }
-}
 
 const toggleCollect = async () => {
   // eslint-disable-next-line vue/no-mutating-props
-  props.wordData.collect =!props.wordData.collect
+  props.wordData.collect = !props.wordData.collect
   await WordApi.collectToggle(props.wordData)
 }
 
@@ -134,7 +118,7 @@ const playSound = (english: string) => {
   })
 }
 
-const openDetail = () => (showDetailPopup.value = true)
+const openDetail = () => annoPopupRef.value.open(props.wordData)
 </script>
 
 <template>
@@ -168,7 +152,6 @@ const openDetail = () => (showDetailPopup.value = true)
           </div>
         </div>
         <div
-          v-if="wordData.annotation"
           class="triangle-btn absolute top-0 bottom-0 right-0 w-1/3 active:bg-[#ffffff33]"
           @click="openDetail"
         >
@@ -195,28 +178,8 @@ const openDetail = () => (showDetailPopup.value = true)
         </div>
       </template>
     </van-swipe-cell>
-    <van-popup
-      v-model:show="showDetailPopup"
-      v-if="wordData.annotation"
-      closeable
-      lazy-render
-      class="flex p-4 bg-black"
-      position="bottom"
-    >
-      <div class="flex-1 flex flex-col">
-        <div
-          v-html="compiledMarkdown"
-          v-bold-english
-          @click="detailPopupClickHandler"
-          class="markdown-body flex-auto overflow-auto bg-black text-white"
-        ></div>
-        <div class="text-center mt-4">
-          <van-button type="success" @click="showDetailPopup = false" class="w-full">
-            CLOSE
-          </van-button>
-        </div>
-      </div>
-    </van-popup>
+
+    <AnnoPopup ref="annoPopupRef"/>
   </div>
 </template>
 

@@ -39,8 +39,17 @@ a,
     }
 }
 
-.markdown-body .text-red {
-    color: red;
+.markdown-body {
+    ol {
+        padding-left: 0;
+    }
+    ul {
+        padding-left: 1em;
+    }
+    .text-red {
+        color: red;
+        font-weight: bold;
+    }
 }
 
 .is-lite-mode {
@@ -76,8 +85,14 @@ a,
     .markdown-body {
         font-size: 12px;
         opacity: .8;
-        p, h3 {
+        p, h3, hr {
             margin: 5px 0;
+        }
+        hr {
+            height: 1px;
+        }
+        ol {
+            margin: 0;
         }
         .text-red{
             color: #93ff9c;
@@ -100,5 +115,13 @@ a,
 
     .triangle-btn:active {
         background: transparent;
+    }
+
+    .van-popup {
+        padding: 6px;
+        .close-box {
+            margin-top: 0;
+        }
+
     }
 }

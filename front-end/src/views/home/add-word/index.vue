@@ -49,31 +49,57 @@ const resetData = () => {
   Object.assign(wordData, new IWord())
 }
 
-const open = (word?: IWord) => {
+const open = async (word?: IWord) => {
   isShow.value = true
   Object.assign(wordData, word || {})
   wordData.annotation = trimEnd(wordData.annotation)
-  nextTick(() => {
-    fieldRef.value?.focus()
-  })
+  if (wordData.id) {
+    const res = await WordApi.getAnnotation({
+      id: wordData.id,
+      wordType: appStore.wordType,
+    })
+    if (res.code === '000000') {
+      wordData.annotation = res.data.annotation
+    }
+  }
+  await nextTick()
+  fieldRef.value?.focus()
 }
 
 defineExpose({open})
 </script>
 
 <template>
-  <van-action-sheet v-model:show="isShow" :title="wordData.id? `Edit ${wordData.wordType}` : `Add ${appStore.wordType}`" @closed="resetData">
+  <van-action-sheet
+    v-model:show="isShow" :title="wordData.id? `Edit ${wordData.wordType}` : `Add ${appStore.wordType}`"
+    @closed="resetData"
+  >
     <div>
       <van-cell-group inset>
-        <van-field v-model="wordData.english" ref="fieldRef" label="en" placeholder="Please input english" label-width="40px"/>
+        <van-field
+          v-model.trim="wordData.english"
+          ref="fieldRef"
+          type="textarea"
+          label="en"
+          label-width="40px"
+          placeholder="Please input english"
+          clearable
+          :autosize="{maxHeight: 150}"
+        />
         <van-field v-model="wordData.chinese" label="cn" placeholder="Please input chinese" label-width="40px"/>
-        <van-field v-model.trim="wordData.annotation" type="textarea" label="annotation" placeholder="Please input annotation" clearable
-                   label-align="top"
-                   :autosize="{minHeight: 50, maxHeight: wordData.id ? 180 : 100}"
+        <van-field
+          v-model.trim="wordData.annotation"
+          type="textarea"
+          label="annotation"
+          placeholder="Please input annotation"
+          clearable
+          label-align="top"
+          :autosize="{minHeight: 50, maxHeight: 150}"
         />
       </van-cell-group>
       <div class="flex justify-center m-4">
-        <van-button type="success" @click="saveWord" :loading="loading" loading-text="SAVE WORD" block>SAVE WORD</van-button>
+        <van-button type="success" @click="saveWord" :loading="loading" loading-text="SAVE WORD" block>SAVE WORD
+        </van-button>
       </div>
     </div>
   </van-action-sheet>
