@@ -15,7 +15,7 @@ const isShow = ref(false)
 const showEditTextarea = ref(false)
 const wordData = reactive<IWord>({} as IWord)
 const compiledMarkdown = computed(
-  () => `<h3>${appStore.isLiteMode ? '' : wordData.english}</h3>` + marked(wordData.annotation ?? '')
+  () => `<h3>${wordData.english}</h3>` + marked(wordData.annotation ?? '')
 )
 
 const saveAnnotation = async () => {
@@ -60,7 +60,7 @@ defineExpose({open})
     class="flex p-4 bg-black"
     position="bottom"
   >
-    <div class="flex-1 flex flex-col">
+    <div class="flex-1 flex flex-col min-h-[60vh]">
       <div
         v-if="!showEditTextarea"
         v-html="compiledMarkdown"
