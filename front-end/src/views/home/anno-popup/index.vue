@@ -15,7 +15,7 @@ const isShow = ref(false)
 const showEditTextarea = ref(false)
 const wordData = reactive<IWord>({} as IWord)
 const compiledMarkdown = computed(
-  () => `<h3>${appStore.isLiteMode ? '' : wordData.english}</h3>` + marked(wordData.annotation)
+  () => `<h3>${appStore.isLiteMode ? '' : wordData.english}</h3>` + marked(wordData.annotation ?? '')
 )
 
 const saveAnnotation = async () => {
@@ -38,6 +38,7 @@ const detailPopupClickHandler = (event: MouseEvent) => {
 }
 
 const open = async (data: IWord) => {
+  isShow.value = true
   Object.assign(wordData, data)
   const res = await WordApi.getAnnotation({
     id: wordData.id,
@@ -46,7 +47,6 @@ const open = async (data: IWord) => {
   if (res.code === '000000') {
     wordData.annotation = res.data.annotation
   }
-  isShow.value = true
 }
 
 defineExpose({open})
@@ -67,7 +67,7 @@ defineExpose({open})
         v-bold-english
         @click="detailPopupClickHandler"
         class="markdown-body flex-auto overflow-auto bg-black text-white"
-      ></div>
+      />
       <van-field
         v-if="showEditTextarea"
         v-model="wordData.annotation"

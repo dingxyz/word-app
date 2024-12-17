@@ -33,7 +33,7 @@ function wrapEnglishText(node) {
 }
 
 export const boldEnglish: Directive = {
-  mounted(el) {
+  updated(el) {
     wrapEnglishText(el);
   }
 }
