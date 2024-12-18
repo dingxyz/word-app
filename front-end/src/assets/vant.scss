@@ -5,3 +5,9 @@
 .van-theme-dark {
   --van-background-2: #5c5c60;
 }
+
+.is-lite-mode {
+  .van-theme-dark {
+    --van-background-2: #55595e;
+  }
+}

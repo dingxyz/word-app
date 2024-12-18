@@ -43,9 +43,11 @@ a,
     ol {
         padding-left: 0;
     }
+
     ul {
         padding-left: 1em;
     }
+
     .text-red {
         color: red;
         font-weight: bold;
@@ -65,36 +67,45 @@ a,
         height: 30px;
         background: #55595e;
         color: #fff;
+
         span {
             font-size: 14px !important;
         }
     }
+
     footer, .van-pagination__item, .van-button {
         height: 25px;
     }
+
     .van-list.grid .word-box {
         color: #c5c5c5 !important;
+
         .first-text, .second-text {
             min-height: 40px;
         }
     }
 
-    footer, article, li, .markdown-body, .van-popup, .van-overlay {
+    footer, article, li, .markdown-body, .van-popup, .van-overlay, .anno-textarea {
         background: #595c63;
     }
+
     .markdown-body {
         font-size: 12px;
         opacity: .8;
+
         p, h3, hr {
             margin: 5px 0;
         }
+
         hr {
             height: 1px;
         }
+
         ol {
             margin: 0;
         }
-        .text-red{
+
+        .text-red {
             color: #93ff9c;
             font-size: 14px;
         }
@@ -119,6 +130,7 @@ a,
 
     .van-popup {
         padding: 6px;
+
         .close-box {
             margin-top: 0;
         }

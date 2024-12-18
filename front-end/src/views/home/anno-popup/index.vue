@@ -39,6 +39,7 @@ const detailPopupClickHandler = (event: MouseEvent) => {
 
 const open = async (data: IWord) => {
   isShow.value = true
+  showEditTextarea.value = false
   Object.assign(wordData, data)
   const res = await WordApi.getAnnotation({
     id: wordData.id,
@@ -72,7 +73,7 @@ defineExpose({open})
         v-if="showEditTextarea"
         v-model="wordData.annotation"
         type="textarea"
-        class="flex-auto overflow-auto text-base"
+        class="anno-textarea flex-auto overflow-auto bg-black"
         autosize
         label=""
       />
