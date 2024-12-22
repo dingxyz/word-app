@@ -16,15 +16,17 @@ const fieldRef = ref<FieldInstance>();
 const isShow = ref(false)
 const loading = ref(false)
 const wordData = reactive<IWord>(new IWord())
+let wordOriginalData = null
 
 const saveWord = () => {
-  const {id, english, chinese, annotation} = wordData
+  const {id, english, context, chinese, annotation} = wordData
   if (!english) {
     alert('Please input english')
     return
   }
   const params = {
     id: id ?? undefined,
+    context,
     english,
     chinese,
     annotation,
@@ -36,7 +38,11 @@ const saveWord = () => {
   apiFunc(params).then(res => {
     if (res.code === '000000') {
       isShow.value = false
-      emit('add-complete')
+      if (wordData.id) {
+        wordOriginalData.context = context
+      } else {
+        emit('add-complete', {toBottom: !wordData.id})
+      }
     } else {
       showNotify({type: 'danger', message: res.message});
     }
@@ -50,6 +56,7 @@ const resetData = () => {
 }
 
 const open = async (word?: IWord) => {
+  wordOriginalData = word
   isShow.value = true
   Object.assign(wordData, word || {})
   wordData.annotation = trimEnd(wordData.annotation)
@@ -81,12 +88,13 @@ defineExpose({open})
           ref="fieldRef"
           type="textarea"
           label="en"
-          label-width="40px"
+          label-width="20px"
           placeholder="Please input english"
           clearable
           :autosize="{maxHeight: 150}"
         />
-        <van-field v-model="wordData.chinese" label="cn" placeholder="Please input chinese" label-width="40px"/>
+        <van-field v-if="appStore.isWorldview" v-model="wordData.context" label="context" placeholder="" label-width="50px"/>
+        <van-field v-if="!appStore.isWorldview" v-model="wordData.chinese" label="cn" placeholder="Please input chinese" label-width="40px"/>
         <van-field
           v-model.trim="wordData.annotation"
           type="textarea"

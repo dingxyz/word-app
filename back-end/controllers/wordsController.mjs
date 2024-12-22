@@ -76,15 +76,24 @@ export const addWord = async (req, res) => {
 export const updateWord = async (req, res) => {
   const {id} = req.params;
   const {body} = req;
-  const {wordType, english, chinese, annotation} = body;
+  const {wordType, english, context,chinese, annotation} = body;
 
   try {
-    const Model = wordType === STATISTICS_WORD_TYPE ? Worldview : Word;
-    const word = await Model.findOneAndUpdate(
-      {id, wordType},
-      {english, chinese, annotation},
-      {new: true}
-    );
+    let word;
+    if (wordType === STATISTICS_WORD_TYPE) {
+      word = await Worldview.findOneAndUpdate(
+        {id},
+        {english, context, chinese, annotation},
+        {new: true}
+      );
+    } else {
+      word = await Word.findOneAndUpdate(
+        {id, wordType},
+        {english, chinese, annotation},
+        {new: true}
+      );
+    }
+
     if (!word) {
       res.sendError("Word not found");
       return;

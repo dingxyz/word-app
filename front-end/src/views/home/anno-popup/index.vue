@@ -58,7 +58,7 @@ defineExpose({open})
     v-model:show="isShow"
     closeable
     lazy-render
-    class="flex p-4 bg-black"
+    class="flex p-4 bg-green-900"
     position="bottom"
   >
     <div class="flex-1 flex flex-col min-h-[60vh]">
@@ -67,13 +67,13 @@ defineExpose({open})
         v-html="compiledMarkdown"
         v-bold-english
         @click="detailPopupClickHandler"
-        class="markdown-body flex-auto overflow-auto bg-black text-white"
+        class="markdown-body flex-auto overflow-auto bg-green-900 text-white"
       />
       <van-field
         v-if="showEditTextarea"
         v-model="wordData.annotation"
         type="textarea"
-        class="anno-textarea flex-auto overflow-auto bg-black"
+        class="anno-textarea flex-auto overflow-auto bg-green-900"
         autosize
         label=""
       />

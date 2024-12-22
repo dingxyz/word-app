@@ -4,6 +4,7 @@ import http from '@/api/http';
 export class IWord {
   id?: string = null;
   english: string = '';
+  context?: string = '';
   chinese: string = '';
   annotation?: string = ''
   wordType?: string = '';

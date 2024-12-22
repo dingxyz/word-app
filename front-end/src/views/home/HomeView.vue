@@ -27,7 +27,7 @@ const statisticsPopupRef = ref<InstanceType<typeof StatisticsPopup>>()
 const words = reactive<IWord[]>([])
 const renderList = ref<IWord[]>([])
 const loading = ref(true)
-const isDev = import.meta.env.VITE_ENV === 'DEVELOPMENT'
+const isDev = import.meta.env.VITE_ENV === 'DEVELOPMENT '
 
 const openAddWord = () => addWordRef.value?.open()
 const openTypeDialog = () => addTypeRef.value?.open(appStore?.wordType, words.length)
@@ -159,7 +159,7 @@ const searchWord = debounce(search, 300)
       <van-icon name="setting-o" @click="openSettingPopup" size="20"/>
       <van-icon name="add-o" @click="openAddWord" size="20"/>
     </footer>
-    <AddWord ref="addWordRef" @add-complete="getWord({toBottom: true})"/>
+    <AddWord ref="addWordRef" @add-complete="getWord"/>
     <AddType ref="addTypeRef"/>
     <SettingPopup
       ref="settingPopupRef"

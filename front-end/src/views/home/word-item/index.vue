@@ -111,9 +111,10 @@ const toggleCollect = async () => {
   await WordApi.collectToggle(props.wordData)
 }
 
-const playSound = (english: string) => {
+const playSound = () => {
+  const str = props.wordData.english + (props.wordData.context ? ';' + props.wordData.context : '')
   isPlayingByClick.value = true
-  voiceStore.voiceSpeak(english, false, () => {
+  voiceStore.voiceSpeak(str, false, () => {
     isPlayingByClick.value = false
   })
 }
@@ -132,15 +133,16 @@ const openDetail = () => annoPopupRef.value.open(props.wordData)
         <div
           class="word-box self-start flex-1 leading-normal pl-2 relative"
           :class="{ 'show-chinese': showChinese }"
-          @click="playSound(wordData.english)"
+          @click="playSound"
         >
           <div
             @touchstart="startLongPress"
             @touchmove="endLongPress"
             @touchend="endLongPress"
-            class="first-text min-h-16 btn h-auto py-2 flex items-center"
+            class="first-text min-h-16 btn h-auto py-2"
           >
             {{ wordData.english }}
+            <div class="text-xs text-slate-300">{{ wordData.context }}</div>
           </div>
           <div
             @touchstart="startLongPress"
