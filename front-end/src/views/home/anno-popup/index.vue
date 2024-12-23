@@ -36,7 +36,7 @@ const detailPopupClickHandler = (event: MouseEvent) => {
 
 const playSound = (event: MouseEvent) => {
   const oldColor = (event.target as HTMLElement).style.color;
-  ;(event.target as HTMLElement).style.color = '#02c3ff'
+  ;(event.target as HTMLElement).style.color = '#28c7ff'
   const text = (event.target as HTMLElement).textContent
   voiceStore.voiceSpeak(text, false, () => {
     ;(event.target as HTMLElement).style.color = oldColor

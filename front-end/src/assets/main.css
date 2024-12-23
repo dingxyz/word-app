@@ -52,13 +52,13 @@ a,
 }
 
 .text-red {
-    color: red;
+    color: #ff5252;
     font-size: 20px;
     line-height: 24px;
 }
 
 .is-lite-mode {
-    opacity: 0.25;
+    opacity: 0.3;
     background: #55595e;
 
     .van-icon:before {
@@ -85,11 +85,11 @@ a,
         color: #c5c5c5 !important;
 
         .first-text, .second-text {
-            min-height: 40px;
+            min-height: 50px;
         }
     }
 
-    footer, article, li, .markdown-body, .van-popup, .van-overlay, .anno-textarea, .word-list-item {
+    footer, article, li, .markdown-body, .van-popup, .van-overlay, .anno-textarea, .word-list-item, .van-cell {
         background: #595c63 !important;
     }
 
@@ -108,12 +108,14 @@ a,
         ol {
             margin: 0;
         }
-
-        .text-red {
-            color: #93ff9c;
-            font-size: 16px;
-            line-height: 20px;
-        }
+    }
+    h3 {
+        font-size: 16px;
+    }
+    .text-red {
+        color: #93ff9c;
+        font-size: 16px;
+        line-height: 20px;
     }
 
     .van-swipe-cell li {

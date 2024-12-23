@@ -4,12 +4,14 @@ import {useAppStore} from "@/stores/useApp";
 import {usePaginationStore} from "@/stores/usePagination";
 import {LANGUAGE_CODE, ORDER_TYPE, SSML_GENDER, useVoiceStore} from "@/stores/useVoice";
 import VoiceApi from "@/api/voice-api";
+import {useWorldStore} from "@/stores/useWorldview";
 
 defineComponent({
   name: 'SettingPopup',
 })
 const appStore = useAppStore();
 const voiceStore = useVoiceStore()
+const worldStore = useWorldStore()
 const paginationStore = usePaginationStore()
 const isShow = ref(false)
 const showNamePicker = ref(false);
@@ -68,6 +70,11 @@ defineExpose({open})
               <van-radio :name="100">100</van-radio>
               <van-radio :name="200" v-if="appStore.isWorldview">200</van-radio>
             </van-radio-group>
+          </template>
+        </van-field>
+        <van-field v-show="appStore.isWorldview" name="switch" label-width="120px" input-align="right" label="Play Context">
+          <template #input>
+            <van-switch v-model="worldStore.isPlayContext" size="20"/>
           </template>
         </van-field>
         <van-field v-show="appStore.isWorldview" name="switch" label-width="120px" input-align="right" label="Sort by time">

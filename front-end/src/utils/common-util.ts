@@ -40,13 +40,13 @@ export const methodTracker = (() => {
   };
 })();
 
-export const groupWords = (words: IWord[]): IWord[] => {
+export const groupWords = (words: IWord[], isPlayContext: boolean): IWord[] => {
   const result: IWord[] = [];
   const num = 8
 
   for (let i = 0; i < words.length; i += num) {
     const group = words.slice(i, i + num);
-    const combinedWords = group.map(item => item.english).join(";");
+    const combinedWords = group.map(item => item.english + (isPlayContext && item.context ? `;${item.context}` : '')).join(";");
     result.push({...group[0], english: combinedWords});
   }
 

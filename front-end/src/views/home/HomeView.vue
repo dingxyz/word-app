@@ -14,9 +14,11 @@ import {showNotify} from "vant";
 import {useVoiceStore} from "@/stores/useVoice";
 import AddType from "@/views/home/add-type/index.vue";
 import StatisticsPopup from "@/views/home/statistics-popup/index.vue";
+import {useWorldStore} from "@/stores/useWorldview";
 
 const appStore = useAppStore();
 const voiceStore = useVoiceStore()
+const worldStore = useWorldStore()
 const paginationStore = usePaginationStore()
 
 const addWordRef = ref<InstanceType<typeof AddWord>>()

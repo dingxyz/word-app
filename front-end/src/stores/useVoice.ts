@@ -5,6 +5,7 @@ import VoiceApi from '@/api/voice-api'
 import { showNotify } from 'vant'
 import WordStatisticsApi from '@/api/word-statistics-api'
 import {groupWords, methodTracker} from '@/utils/common-util'
+import {useWorldStore} from "@/stores/useWorldview";
 
 export enum ORDER_TYPE {
   SEQUENTIAL = 'sequential',
@@ -44,6 +45,8 @@ export const useVoiceStore = defineStore(`voice`, () => {
   let playWords: IWord[] = []
   let playStartTime = 0
   let autoVoiceTypeIndex = 0
+
+  const worldStore = useWorldStore()
 
   const voiceSpeak = async (english: string, isAutoPlay: boolean = false, onEnd?: () => void) => {
     if (isAutoVoiceName.value) {
@@ -102,7 +105,7 @@ export const useVoiceStore = defineStore(`voice`, () => {
       return
     }
     if (words[0].wordType === "Worldview") {
-      words = groupWords(words)
+      words = groupWords(words, worldStore.isPlayContext)
     }
     if (nowPlaying.value && !isPaused.value) {
       // playIndex--
