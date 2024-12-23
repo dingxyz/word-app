@@ -29,7 +29,7 @@ export const useVoiceStore = defineStore(`voice`, () => {
   const languageCode = ref(LANGUAGE_CODE.EN_US)
   const isAutoVoiceName = ref(true)
   const voiceName = ref('en-US-Wavenet-C')
-  const isLoopPlayback = ref(true)
+  const isLoopPlayback = ref(false)
   const speakingRate = ref(1)
   const playNumber = ref(1)
   const nowPlaying = ref(false) // Is it playing automatically?
@@ -181,13 +181,14 @@ export const useVoiceStore = defineStore(`voice`, () => {
     audio && (audio.currentTime = 0)
   }
 
-  const resetSpeak = () => {
+  const resetSpeak = (isTrack = false) => {
     stopSpeak()
     playIndex = 0
+    playedNumber = 1
     playSequence = []
     playWords = []
     playStartTime = 0
-    methodTracker()
+    isTrack && methodTracker()
   }
 
   return {

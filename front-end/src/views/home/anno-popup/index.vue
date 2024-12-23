@@ -14,36 +14,43 @@ const voiceStore = useVoiceStore()
 const isShow = ref(false)
 const showEditTextarea = ref(false)
 const wordData = reactive<IWord>({} as IWord)
-const compiledMarkdown = computed(
-  () => `<h3>${wordData.english}</h3>` + marked(wordData.annotation ?? '')
-)
+let wordOriginalData = null
+const compiledMarkdown = computed(() => marked(wordData.annotation ?? ''))
 
 const saveAnnotation = async () => {
   showEditTextarea.value = false
-  WordApi.update(wordData)
+  await WordApi.update(wordData)
+  wordOriginalData.english = wordData.english
+  wordOriginalData.context = wordData.context
+  wordOriginalData.annotation = wordData.annotation
 }
 
 const detailPopupClickHandler = (event: MouseEvent) => {
   if (event.target instanceof HTMLElement) {
     const tagName = event.target.tagName.toLowerCase()
     if (tagName === 'span' && event.target.classList.contains('text-red')) {
-      const oldColor = (event.target as HTMLElement).style.color
-      event.target.style.color = '#02c3ff'
-      const text = event.target.textContent
-      voiceStore.voiceSpeak(text, false, () => {
-        ;(event.target as HTMLElement).style.color = oldColor
-      })
+      playSound(event)
     }
   }
+}
+
+const playSound = (event: MouseEvent) => {
+  const oldColor = (event.target as HTMLElement).style.color;
+  ;(event.target as HTMLElement).style.color = '#02c3ff'
+  const text = (event.target as HTMLElement).textContent
+  voiceStore.voiceSpeak(text, false, () => {
+    ;(event.target as HTMLElement).style.color = oldColor
+  })
 }
 
 const open = async (data: IWord) => {
   isShow.value = true
   showEditTextarea.value = false
   Object.assign(wordData, data)
+  wordOriginalData = data
   const res = await WordApi.getAnnotation({
     id: wordData.id,
-    wordType: appStore.wordType,
+    wordType: wordData.wordType,
   })
   if (res.code === '000000') {
     wordData.annotation = res.data.annotation
@@ -62,6 +69,26 @@ defineExpose({open})
     position="bottom"
   >
     <div class="flex-1 flex flex-col min-h-[60vh]">
+      <div v-if="!showEditTextarea" class="text-red mb-2">
+        <h3 @click="playSound" class="text-2xl mb-2">{{ wordData.english }}</h3>
+        <span v-if="wordData.context" @click="playSound" class="">{{ wordData.context }}</span>
+      </div>
+      <div v-if="showEditTextarea">
+        <van-field
+          v-model="wordData.english"
+          label=""
+          class="bg-green-900 px-0 py-2"
+        />
+        <van-field
+          v-if="appStore.isWorldview"
+          v-model="wordData.context"
+          label="Context"
+          label-width="60px"
+          placeholder="Context"
+          class="bg-green-900 px-0 py-2"
+          clearable
+        />
+      </div>
       <div
         v-if="!showEditTextarea"
         v-html="compiledMarkdown"

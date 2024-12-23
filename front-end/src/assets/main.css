@@ -48,10 +48,13 @@ a,
         padding-left: 1em;
     }
 
-    .text-red {
-        color: red;
-        font-weight: bold;
-    }
+
+}
+
+.text-red {
+    color: red;
+    font-size: 20px;
+    line-height: 24px;
 }
 
 .is-lite-mode {
@@ -78,6 +81,7 @@ a,
     }
 
     .van-list.grid .word-box {
+        font-size: 16px;
         color: #c5c5c5 !important;
 
         .first-text, .second-text {
@@ -85,8 +89,8 @@ a,
         }
     }
 
-    footer, article, li, .markdown-body, .van-popup, .van-overlay, .anno-textarea {
-        background: #595c63;
+    footer, article, li, .markdown-body, .van-popup, .van-overlay, .anno-textarea, .word-list-item {
+        background: #595c63 !important;
     }
 
     .markdown-body {
@@ -107,7 +111,8 @@ a,
 
         .text-red {
             color: #93ff9c;
-            font-size: 14px;
+            font-size: 16px;
+            line-height: 20px;
         }
     }
 

@@ -27,7 +27,7 @@ const statisticsPopupRef = ref<InstanceType<typeof StatisticsPopup>>()
 const words = reactive<IWord[]>([])
 const renderList = ref<IWord[]>([])
 const loading = ref(true)
-const isDev = import.meta.env.VITE_ENV === 'DEVELOPMENT '
+const isDev = import.meta.env.VITE_ENV === 'DEVELOPMENT'
 
 const openAddWord = () => addWordRef.value?.open()
 const openTypeDialog = () => addTypeRef.value?.open(appStore?.wordType, words.length)
@@ -154,7 +154,7 @@ const searchWord = debounce(search, 300)
         :name="voiceStore.nowPlaying && !voiceStore.isPaused ? 'pause-circle-o' : 'play-circle-o'"
         @click="autoPlayChange" size="20"
       />
-      <van-icon name="replay" @click="voiceStore.resetSpeak" size="20"/>
+      <van-icon name="replay" @click="voiceStore.resetSpeak(true)" size="20"/>
       <SearchInput @update:modelValue="(value) => searchWord({searchKey: value})"/>
       <van-icon name="setting-o" @click="openSettingPopup" size="20"/>
       <van-icon name="add-o" @click="openAddWord" size="20"/>

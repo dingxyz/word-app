@@ -125,13 +125,13 @@ const openDetail = () => annoPopupRef.value.open(props.wordData)
 <template>
   <div
     ref="wordItemRef"
-    class="word-list-item text-[#fff] text-lg bg-[#006633] odd:bg-[#124f33]"
+    class="word-list-item text-[#fff] bg-[#006633] odd:bg-[#124f33]"
     :class="{ '!text-blue-300': isPlaying || isPlayingByClick, 'is-worldview': appStore.isWorldview }"
   >
     <van-swipe-cell>
       <li class="flex items-center">
         <div
-          class="word-box self-start flex-1 leading-normal pl-2 relative"
+          class="word-box text-lg self-start flex-1 leading-normal pl-2 relative"
           :class="{ 'show-chinese': showChinese }"
           @click="playSound"
         >
@@ -139,7 +139,7 @@ const openDetail = () => annoPopupRef.value.open(props.wordData)
             @touchstart="startLongPress"
             @touchmove="endLongPress"
             @touchend="endLongPress"
-            class="first-text min-h-16 btn h-auto py-2"
+            class="first-text min-h-16 btn h-auto flex flex-col justify-center"
           >
             {{ wordData.english }}
             <div class="text-xs text-slate-300">{{ wordData.context }}</div>

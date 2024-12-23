@@ -18,9 +18,6 @@ const paginationStore = usePaginationStore()
     :items-per-page="paginationStore.pageSize"
     :show-prev-button="false"
     :show-next-button="false"
-    :show-page-size="8"
-    prev-text="prev"
-    next-text="next"
     force-ellipses
   />
 </template>

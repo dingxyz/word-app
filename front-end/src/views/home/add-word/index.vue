@@ -78,7 +78,8 @@ defineExpose({open})
 
 <template>
   <van-action-sheet
-    v-model:show="isShow" :title="wordData.id? `Edit ${wordData.wordType}` : `Add ${appStore.wordType}`"
+    v-model:show="isShow"
+    :title="wordData.id? `Edit ${wordData.wordType}` : `Add ${appStore.wordType}`"
     @closed="resetData"
   >
     <div>
@@ -87,26 +88,28 @@ defineExpose({open})
           v-model.trim="wordData.english"
           ref="fieldRef"
           type="textarea"
-          label="en"
+          label="US"
           label-width="20px"
           placeholder="Please input english"
           clearable
           :autosize="{maxHeight: 150}"
         />
         <van-field v-if="appStore.isWorldview" v-model="wordData.context" label="context" placeholder="" label-width="50px"/>
-        <van-field v-if="!appStore.isWorldview" v-model="wordData.chinese" label="cn" placeholder="Please input chinese" label-width="40px"/>
+        <van-field v-if="!appStore.isWorldview" v-model="wordData.chinese" label="cn" placeholder="Please input chinese" label-width="40px" clearable/>
         <van-field
+          v-if="appStore.isWorldview ? !wordData?.id : true"
           v-model.trim="wordData.annotation"
           type="textarea"
           label="annotation"
           placeholder="Please input annotation"
           clearable
           label-align="top"
-          :autosize="{minHeight: 50, maxHeight: 150}"
+          :autosize="{minHeight: 50, maxHeight: 250}"
         />
       </van-cell-group>
       <div class="flex justify-center m-4">
-        <van-button type="success" @click="saveWord" :loading="loading" loading-text="SAVE WORD" block>SAVE WORD
+        <van-button type="success" @click="saveWord" :loading="loading" loading-text="SAVE WORD" block>
+          SAVE WORD
         </van-button>
       </div>
     </div>
