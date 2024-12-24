@@ -100,7 +100,7 @@ defineExpose({open})
         v-if="showEditTextarea"
         v-model="wordData.annotation"
         type="textarea"
-        class="anno-textarea flex-auto overflow-auto bg-green-900"
+        class="anno-textarea p-0 flex-auto overflow-auto bg-green-900"
         autosize
         label=""
       />
@@ -118,3 +118,10 @@ defineExpose({open})
     </div>
   </van-popup>
 </template>
+
+<style scoped lang="scss">
+.anno-textarea :deep(textarea) {
+  width: 95%;
+}
+</style>
+

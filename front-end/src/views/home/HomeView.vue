@@ -134,7 +134,7 @@ const searchWord = debounce(search, 300)
       <div v-if="loading" class="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-[#d9dae25a]">
         <van-loading type="spinner"/>
       </div>
-      <van-list :class="{'grid': appStore.isWorldview}" class="grid-cols-2">
+      <van-list :class="{'grid000': appStore.isWorldview}" class="grid-cols-2">
         <WordItem
           v-for="(word, index) in renderList"
           :key="word.id"

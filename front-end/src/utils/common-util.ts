@@ -42,7 +42,7 @@ export const methodTracker = (() => {
 
 export const groupWords = (words: IWord[], isPlayContext: boolean): IWord[] => {
   const result: IWord[] = [];
-  const num = 8
+  const num = 6
 
   for (let i = 0; i < words.length; i += num) {
     const group = words.slice(i, i + num);
