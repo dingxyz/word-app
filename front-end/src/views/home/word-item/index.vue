@@ -126,7 +126,7 @@ const openDetail = () => annoPopupRef.value.open(props.wordData)
   <div
     ref="wordItemRef"
     class="word-list-item text-[#fff] bg-[#006633] odd:bg-[#124f33]"
-    :class="{ '!text-blue-300': isPlaying || isPlayingByClick, 'is-worldview': appStore.isWorldview }"
+    :class="{ '!text-blue-300': isPlaying || isPlayingByClick }"
   >
     <van-swipe-cell>
       <li class="flex items-center">
@@ -186,14 +186,6 @@ const openDetail = () => annoPopupRef.value.open(props.wordData)
 </template>
 
 <style scoped lang="scss">
-.word-list-item.is-worldview {
-  background-color: #006633;
-
-  &:nth-child(4n - 1), &:nth-child(4n - 2) {
-    background-color: #124f33;
-  }
-}
-
 .word-box {
   .second-text {
     display: none;

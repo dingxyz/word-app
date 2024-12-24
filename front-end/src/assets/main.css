@@ -80,12 +80,12 @@ a,
         height: 25px;
     }
 
-    .van-list .is-worldview .word-box {
+    .van-list .word-box {
         font-size: 14px;
         color: #c5c5c5 !important;
 
         .first-text, .second-text {
-            min-height: 40px;
+            min-height: 30px;
             div {
                 font-size: 12px;
             }
