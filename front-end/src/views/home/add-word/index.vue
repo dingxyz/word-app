@@ -92,9 +92,9 @@ defineExpose({open})
           label-width="20px"
           placeholder="Please input english"
           clearable
-          :autosize="{maxHeight: 150}"
+          :autosize="{maxHeight: appStore.isWorldview ? 24 : 150}"
         />
-        <van-field v-if="appStore.isWorldview" v-model="wordData.context" label="context" placeholder="" label-width="50px"/>
+        <van-field v-if="appStore.isWorldview && false" v-model="wordData.context" label="context" placeholder="" label-width="50px"/>
         <van-field v-if="!appStore.isWorldview" v-model="wordData.chinese" label="cn" placeholder="Please input chinese" label-width="40px" clearable/>
         <van-field
           v-if="appStore.isWorldview ? !wordData?.id : true"
