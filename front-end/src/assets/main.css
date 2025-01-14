@@ -99,6 +99,9 @@ a,
     .markdown-body {
         font-size: 12px;
         opacity: .8;
+        h3 {
+            font-size: 14px;
+        }
 
         p, h3, hr {
             margin: 5px 0;
