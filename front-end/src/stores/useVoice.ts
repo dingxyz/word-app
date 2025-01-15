@@ -7,11 +7,6 @@ import WordStatisticsApi from '@/api/word-statistics-api'
 import {groupWords, methodTracker} from '@/utils/common-util'
 import {useWorldStore} from "@/stores/useWorldview";
 
-export enum ORDER_TYPE {
-  SEQUENTIAL = 'sequential',
-  RANDOM = 'random'
-}
-
 export enum SSML_GENDER {
   MALE = 'MALE',
   FEMALE = 'FEMALE'
@@ -25,7 +20,6 @@ export enum LANGUAGE_CODE {
 const PLAY_TIME_MS = 30 * 60 * 1000
 
 export const useVoiceStore = defineStore(`voice`, () => {
-  const playOrder = ref(ORDER_TYPE.SEQUENTIAL)
   const ssmlGender = ref(SSML_GENDER.FEMALE)
   const languageCode = ref(LANGUAGE_CODE.EN_US)
   const isAutoVoiceName = ref(true)
@@ -126,17 +120,7 @@ export const useVoiceStore = defineStore(`voice`, () => {
 
     const totalWords = words.length
     playSequence = []
-
-    if (playOrder.value === ORDER_TYPE.SEQUENTIAL) {
-      playSequence = Array.from({ length: totalWords }, (_, i) => i)
-    } else if (playOrder.value === ORDER_TYPE.RANDOM) {
-      playSequence = Array.from({ length: totalWords }, (_, i) => i)
-      for (let i = totalWords - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [playSequence[i], playSequence[j]] = [playSequence[j], playSequence[i]];
-      }
-    }
-
+    playSequence = Array.from({ length: totalWords }, (_, i) => i)
     playNext()
   }
 
@@ -202,7 +186,6 @@ export const useVoiceStore = defineStore(`voice`, () => {
     playNumber,
     isPaused,
     playingId,
-    playOrder,
     isLoopPlayback,
     isAutoVoiceName,
     voiceName,

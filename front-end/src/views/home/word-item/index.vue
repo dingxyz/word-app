@@ -6,9 +6,10 @@ import {useAppStore} from '@/stores/useApp'
 import {showConfirmDialog} from 'vant'
 import {copyToClipboard} from '@/utils/common-util'
 import 'github-markdown-css/github-markdown.css'
-import {ORDER_TYPE, useVoiceStore} from '@/stores/useVoice'
+import {useVoiceStore} from '@/stores/useVoice'
 import {usePaginationStore} from "@/stores/usePagination";
 import AnnoPopup from "@/views/home/anno-popup/index.vue";
+import {useWorldStore} from "@/stores/useWorldview";
 
 defineComponent({
   name: 'WordItem'
@@ -21,6 +22,7 @@ const props = defineProps<{
 
 const appStore = useAppStore()
 const voiceStore = useVoiceStore()
+const worldStore = useWorldStore()
 const paginationStore = usePaginationStore()
 const wordItemRef = ref()
 const annoPopupRef = ref()
@@ -33,7 +35,7 @@ const observer = new IntersectionObserver((entries) => {
   const entry = entries[0]
   if (!entry.isIntersecting || appStore.isLiteMode) {
     wordItemRef.value?.scrollIntoView({
-      block: voiceStore.playOrder === ORDER_TYPE.SEQUENTIAL ? 'start' : 'center'
+      block: 'start'
     })
     observer.disconnect()
   }
@@ -161,7 +163,7 @@ const openDetail = () => annoPopupRef.value.open(props.wordData)
           <!--          <IconBtn icon="eye-o"/>-->
         </div>
         <IconBtn
-          v-if="appStore.isWorldview && paginationStore.showStar"
+          v-if="appStore.isWorldview && worldStore.showStar"
           :icon="wordData.collect ? 'star' : 'star-o'"
           :color="wordData.collect ? 'yellow' : 'white'"
           @click="toggleCollect"

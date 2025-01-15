@@ -42,11 +42,11 @@ export const methodTracker = (() => {
 
 export const groupWords = (words: IWord[], isPlayContext: boolean): IWord[] => {
   const result: IWord[] = [];
-  const num = 6
+  const num = isPlayContext ? 1 : 6
 
   for (let i = 0; i < words.length; i += num) {
     const group = words.slice(i, i + num);
-    const combinedWords = group.map(item => item.english + (isPlayContext && item.context ? `;${item.context}` : '')).join(";");
+    const combinedWords = group.map(item => item.english + (isPlayContext && item.context ? `;;${item.context}` : '')).join(";");
     result.push({...group[0], english: combinedWords});
   }
 

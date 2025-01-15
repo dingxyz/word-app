@@ -8,7 +8,10 @@ import {responseHandler} from './middlewares/responseHandler.mjs';
 const app = express();
 const port = 3030;
 
-app.use(cors());
+app.use(cors({
+    origin: '*',
+    maxAge: 86400,
+}));
 app.use(express.json());
 app.use(responseHandler); // 添加响应处理中间件
 

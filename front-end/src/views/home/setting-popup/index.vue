@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import {defineComponent, nextTick, ref} from 'vue'
 import {useAppStore} from "@/stores/useApp";
-import {usePaginationStore} from "@/stores/usePagination";
-import {LANGUAGE_CODE, ORDER_TYPE, SSML_GENDER, useVoiceStore} from "@/stores/useVoice";
+import {ORDER_TYPE, usePaginationStore} from "@/stores/usePagination";
+import {LANGUAGE_CODE, SSML_GENDER, useVoiceStore} from "@/stores/useVoice";
 import VoiceApi from "@/api/voice-api";
 import {useWorldStore} from "@/stores/useWorldview";
 
@@ -16,7 +16,7 @@ const paginationStore = usePaginationStore()
 const isShow = ref(false)
 const showNamePicker = ref(false);
 
-const emit = defineEmits(['update:sortByTime', 'update:onlyCollect'])
+const emit = defineEmits(['update:renderOrder', 'update:onlyCollect'])
 
 const onNameConfirm = ({selectedOptions}) => {
   showNamePicker.value = false;
@@ -72,34 +72,31 @@ defineExpose({open})
             </van-radio-group>
           </template>
         </van-field>
+        <van-field name="radio" input-align="right" label="Order">
+          <template #input>
+            <van-radio-group v-model="paginationStore.renderOrder" direction="horizontal" @change="emit('update:renderOrder')">
+              <van-radio :name="ORDER_TYPE.LETTER" v-show="appStore.isWorldview">{{ ORDER_TYPE.LETTER }}</van-radio>
+              <van-radio :name="ORDER_TYPE.TIME">{{ ORDER_TYPE.TIME }}</van-radio>
+              <van-radio :name="ORDER_TYPE.RANDOM">{{ ORDER_TYPE.RANDOM }}</van-radio>
+            </van-radio-group>
+          </template>
+        </van-field>
         <van-field v-show="appStore.isWorldview" name="switch" label-width="120px" input-align="right" label="Play Context">
           <template #input>
             <van-switch v-model="worldStore.isPlayContext" size="20"/>
           </template>
         </van-field>
-        <van-field v-show="appStore.isWorldview" name="switch" label-width="120px" input-align="right" label="Sort by time">
-          <template #input>
-            <van-switch v-model="paginationStore.sortByTime" @change="emit('update:sortByTime')" size="20"/>
-          </template>
-        </van-field>
         <van-field v-show="appStore.isWorldview" name="switch" label-width="120px" input-align="right" label="Show Star">
           <template #input>
-            <van-switch v-model="paginationStore.showStar" size="20"/>
+            <van-switch v-model="worldStore.showStar" size="20"/>
           </template>
         </van-field>
         <van-field v-show="appStore.isWorldview" name="switch" label-width="120px" input-align="right" label="Only Collect">
           <template #input>
-            <van-switch v-model="paginationStore.onlyCollect" @change="emit('update:onlyCollect')" size="20"/>
+            <van-switch v-model="worldStore.onlyCollect" @change="emit('update:onlyCollect')" size="20"/>
           </template>
         </van-field>
-        <van-field name="radio" input-align="right" label="Play order">
-          <template #input>
-            <van-radio-group v-model="voiceStore.playOrder" direction="horizontal">
-              <van-radio :name="ORDER_TYPE.SEQUENTIAL">{{ ORDER_TYPE.SEQUENTIAL }}</van-radio>
-              <van-radio :name="ORDER_TYPE.RANDOM">{{ ORDER_TYPE.RANDOM }}</van-radio>
-            </van-radio-group>
-          </template>
-        </van-field>
+        <van-divider/>
         <van-field name="switch" label-width="120px" input-align="right" label="Loop Playback">
           <template #input>
             <van-switch v-model="voiceStore.isLoopPlayback" size="20"/>

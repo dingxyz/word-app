@@ -57,6 +57,10 @@ a,
     line-height: 24px;
 }
 
+.van-form .van-cell:after {
+    display: none;
+}
+
 .is-lite-mode {
     opacity: 0.28;
     background: #55595e;

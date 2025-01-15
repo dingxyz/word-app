@@ -9,7 +9,7 @@ import WordTypeSelect from "@/views/home/word-type-select/index.vue";
 import {useAppStore} from "@/stores/useApp";
 import SearchInput from "@/views/home/search-input/index.vue";
 import PaginationBox from "@/views/home/pagination-box/index.vue";
-import {usePaginationStore} from "@/stores/usePagination";
+import {ORDER_TYPE, usePaginationStore} from "@/stores/usePagination";
 import {showNotify} from "vant";
 import {useVoiceStore} from "@/stores/useVoice";
 import AddType from "@/views/home/add-type/index.vue";
@@ -38,12 +38,10 @@ const openStatisticsPopup = () => statisticsPopupRef.value?.open()
 const editWordOpen = (word: IWord) => addWordRef.value?.open(word)
 const autoPlayChange = () => voiceStore.autoSpeak(renderList.value)
 const setRenderList = (toBottom = false) => {
-  if (appStore.isWorldview) {
-    if (paginationStore.sortByTime) {
-      words.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
-    } else {
-      words.sort((a, b) => a.english.localeCompare(b.english))
-    }
+  if (paginationStore.renderOrder === ORDER_TYPE.TIME && appStore.isWorldview) {
+    words.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
+  } else if (paginationStore.renderOrder === ORDER_TYPE.LETTER) {
+    words.sort((a, b) => a.english.localeCompare(b.english))
   }
 
   voiceStore.resetSpeak()
@@ -59,6 +57,9 @@ const setRenderList = (toBottom = false) => {
     renderList.value = words.slice(start, end)
   } else {
     renderList.value = words
+  }
+  if (paginationStore.renderOrder === ORDER_TYPE.RANDOM) {
+    renderList.value = renderList.value.sort(() => Math.random() - 0.5)
   }
   nextTick(() => {
     if (toBottom === true) {
@@ -83,7 +84,7 @@ const getWord = async ({toBottom = false} = {}) => {
   loading.value = true
   const {data, code, message} = await WordApi.get({
     wordType: appStore.wordType,
-    collect: paginationStore.onlyCollect ? true : undefined,
+    collect: worldStore.onlyCollect ? true : undefined,
   }).finally(() => {
     loading.value = false
   })
@@ -165,7 +166,7 @@ const searchWord = debounce(search, 300)
     <AddType ref="addTypeRef"/>
     <SettingPopup
       ref="settingPopupRef"
-      @update:sortByTime="setRenderList"
+      @update:renderOrder="setRenderList"
       @update:onlyCollect="getWord"
     />
     <StatisticsPopup ref="statisticsPopupRef"/>

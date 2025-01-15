@@ -6,6 +6,13 @@ interface Pagination {
   isPaging: boolean;
   currentPage: number;
   pageSize: number;
+  renderOrder: ORDER_TYPE;
+}
+
+export enum ORDER_TYPE {
+  TIME = 'time',
+  LETTER = 'letter',
+  RANDOM = 'random',
 }
 
 export const usePaginationStore = defineStore("pagination", () => {
@@ -13,17 +20,16 @@ export const usePaginationStore = defineStore("pagination", () => {
   const isPaging = ref(true)
   const currentPage = ref(1)
   const pageSize = ref(50)
-  const sortByTime = ref(false)
-  const showStar = ref(true)
-  const onlyCollect = ref(false)
+  const renderOrder = ref(ORDER_TYPE.TIME)
 
   const appStore = useAppStore()
 
-  watch([isPaging, currentPage, pageSize], () => {
+  watch([isPaging, currentPage, pageSize, renderOrder], () => {
     pageByWordType[appStore.wordType] = {
       isPaging: isPaging.value,
       currentPage: currentPage.value,
       pageSize: pageSize.value,
+      renderOrder: renderOrder.value,
     }
   })
 
@@ -32,12 +38,14 @@ export const usePaginationStore = defineStore("pagination", () => {
       isPaging: true,
       currentPage: 1,
       pageSize: 50,
+      renderOrder: ORDER_TYPE.TIME,
     };
     isPaging.value = storedData.isPaging;
     currentPage.value = storedData.currentPage;
     pageSize.value = storedData.pageSize;
+    renderOrder.value = storedData.renderOrder;
   }
   initPagination()
 
-  return {isPaging, currentPage, pageSize, sortByTime, showStar, onlyCollect, pageByWordType, initPagination}
+  return {isPaging, currentPage, pageSize, renderOrder, pageByWordType, initPagination}
 })
