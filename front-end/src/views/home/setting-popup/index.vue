@@ -72,7 +72,7 @@ defineExpose({open})
             </van-radio-group>
           </template>
         </van-field>
-        <van-field name="radio" input-align="right" label="Order">
+        <van-field name="radio" input-align="right" label="Order" label-width="80px">
           <template #input>
             <van-radio-group v-model="paginationStore.renderOrder" direction="horizontal" @change="emit('update:renderOrder')">
               <van-radio :name="ORDER_TYPE.LETTER" v-show="appStore.isWorldview">{{ ORDER_TYPE.LETTER }}</van-radio>
@@ -117,7 +117,6 @@ defineExpose({open})
         </van-field>
         <van-field
           v-model="voiceStore.voiceName"
-          :disabled="voiceStore.isAutoVoiceName"
           is-link
           readonly
           label="Voice Name"
