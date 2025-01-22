@@ -144,7 +144,11 @@ const openDetail = () => annoPopupRef.value.open(props.wordData)
             class="first-text min-h-16 btn h-auto gap-4 flex items-center justify-between"
           >
             {{ wordData.english }}
-            <div class="text-sm pr-2 text-slate-300">{{ wordData.context }}</div>
+            <div
+              class="text-sm pr-2 text-slate-300"
+              :class="{ '!text-blue-300': isPlaying || isPlayingByClick }"
+              v-html="wordData.context?.replace(/;/g,`<br/>`)"
+            />
           </div>
           <div
             @touchstart="startLongPress"
