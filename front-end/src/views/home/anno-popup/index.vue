@@ -13,6 +13,7 @@ const appStore = useAppStore()
 const voiceStore = useVoiceStore()
 const isShow = ref(false)
 const showEditTextarea = ref(false)
+const showSecondContext = ref(false)
 const showThirdContext = ref(false)
 const wordData = reactive<IWord>({} as IWord)
 const contextList = ref({
@@ -31,6 +32,7 @@ watch(() => wordData.context, () => {
     }
     if (contextArr.length > 1) {
       contextList.value.second = contextArr[1]
+      showSecondContext.value = true
     }
     if (contextArr.length > 2) {
       contextList.value.third = contextArr[2]
@@ -111,17 +113,17 @@ defineExpose({open})
           v-model="contextList.first"
           label="Context"
           label-width="56px"
+          right-icon="add-o"
+          @click-right-icon="showSecondContext ? showThirdContext = true : showSecondContext = true"
           placeholder="Context"
           class="bg-green-900 px-0 py-2"
           clearable
         />
         <van-field
-          v-if="appStore.isWorldview"
+          v-if="appStore.isWorldview && showSecondContext"
           v-model="contextList.second"
           label="Context"
           label-width="56px"
-          right-icon="add-o"
-          @click-right-icon="showThirdContext = true"
           placeholder="Context"
           class="bg-green-900 px-0 py-2"
           clearable
