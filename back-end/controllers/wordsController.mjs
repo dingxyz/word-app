@@ -1,6 +1,7 @@
 import Word from '../models/Word.js';
 import {generateUniqueId, STATISTICS_WORD_TYPE} from "../utils/commonUtil.mjs";
 import Worldview from "../models/Worldview.js";
+// import {removeAnnotationStr} from "../utils/removeSpacesFromIds.mjs";
 
 export const getWords = async (req, res) => {
   const {wordType, collect} = req.query;

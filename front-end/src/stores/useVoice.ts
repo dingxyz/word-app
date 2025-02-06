@@ -26,15 +26,15 @@ export const useVoiceStore = defineStore(`voice`, () => {
   const voiceName = ref('en-US-Wavenet-C')
   const isLoopPlayback = ref(false)
   const speakingRate = ref(1)
-  const playNumber = ref(1)
+  const playNumber = ref(1)     // Number of plays for each
   const nowPlaying = ref(false) // Is it playing automatically?
   const playingId = ref(null)
   const isPaused = ref(false) // Is it paused?
   const audio = new Audio('')
   const voiceNameList = ref<any[]>([])
   let loading = false
-  let playIndex = 0
-  let playedNumber = 1
+  let playIndex = 0       // Which word is it playing now?
+  let playedNumber = 1    // Which number is it playing now?
   let playSequence: number[] = []
   let playWords: IWord[] = []
   let playStartTime = 0
@@ -85,11 +85,13 @@ export const useVoiceStore = defineStore(`voice`, () => {
     audio.src = `data:audio/mp3;base64,${audioContent}`
     audio.load()
     audio.onended = onEnd
-    if (playNumber.value > 1 && playNumber.value > playedNumber) {
-      playIndex--
-      playedNumber++
-    } else {
-      playedNumber = 1
+    if (isAutoPlay) {
+      if (playNumber.value > 1 && playNumber.value > playedNumber) {
+        playIndex--
+        playedNumber++
+      } else {
+        playedNumber = 1
+      }
     }
     audio.play()
   }
