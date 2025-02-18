@@ -36,7 +36,7 @@ export const removeAnnotationStr = async () => {
 
         for (let word of words) {
             if (word.annotation?.includes('例句')) {
-                const updatedAnnotation = word.annotation.replace(/\*\*例句:\*\*|\*\*例句 1:\*\*|\*\*例句 2:\*\*/g, '');
+                const updatedAnnotation = word.annotation.replace(/\*\*例句:\*\*|\*\*例句 1:\*\*|\*\*例句 2:\*\*|例句：/g, '');
                 // 如果发生变化，则更新数据库
                 if ( updatedAnnotation !== word.annotation) {
                     await Worldview.updateOne({ _id: word._id }, { annotation: updatedAnnotation });
