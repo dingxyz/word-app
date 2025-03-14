@@ -46,7 +46,7 @@ export const useVoiceStore = defineStore(`voice`, () => {
     if (isAutoVoiceName.value) {
       voiceName.value = voiceNameList.value[autoVoiceTypeIndex].name
       autoVoiceTypeIndex++
-      if (autoVoiceTypeIndex >= voiceNameList.value.length - 1) {
+      if (autoVoiceTypeIndex >= voiceNameList.value.length) {
         autoVoiceTypeIndex = 0
       }
     }

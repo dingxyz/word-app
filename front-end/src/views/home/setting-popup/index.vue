@@ -35,7 +35,7 @@ const initVoiceList = async () => {
   // Repeated with WaveNet: 'Neural2'
   // const excludeTypes = ['Studio', 'Polyglot', 'Casual', 'News', 'Standard', 'Neural2'];
   const includeTypes = ['Chirp', 'Wavenet'];
-  const includeWavenetName = ['B','C','D','F']
+  const includeWavenetName = ['B','C']
   const {voices} = await VoiceApi.getVoicesList(voiceStore.languageCode)
   voiceStore.voiceNameList = voices.filter(voice => includeTypes.includes(voice.name.split('-')[2]))
   voiceStore.voiceNameList = voiceStore.voiceNameList.filter(voice =>
@@ -139,11 +139,6 @@ defineExpose({open})
         <van-field name="stepper" label-width="120px" input-align="right" label="Play Number">
           <template #input>
             <van-stepper v-model="voiceStore.playNumber" min="1" max="10" />
-          </template>
-        </van-field>
-        <van-field v-if="false" name="switch" label-width="120px" input-align="right" label="Display Chinese">
-          <template #input>
-            <van-switch v-model="appStore.showChineseChecked" size="20"/>
           </template>
         </van-field>
       </van-cell-group>

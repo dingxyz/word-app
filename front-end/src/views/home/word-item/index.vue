@@ -7,7 +7,6 @@ import {showConfirmDialog} from 'vant'
 import {copyToClipboard} from '@/utils/common-util'
 import 'github-markdown-css/github-markdown.css'
 import {useVoiceStore} from '@/stores/useVoice'
-import {usePaginationStore} from "@/stores/usePagination";
 import AnnoPopup from "@/views/home/anno-popup/index.vue";
 import {useWorldStore} from "@/stores/useWorldview";
 
@@ -23,7 +22,6 @@ const props = defineProps<{
 const appStore = useAppStore()
 const voiceStore = useVoiceStore()
 const worldStore = useWorldStore()
-const paginationStore = usePaginationStore()
 const wordItemRef = ref()
 const annoPopupRef = ref()
 const emit = defineEmits(['refresh-list', 'edit-word'])
@@ -141,7 +139,7 @@ const openDetail = () => annoPopupRef.value.open(props.wordData)
             @touchstart="startLongPress"
             @touchmove="endLongPress"
             @touchend="endLongPress"
-            class="first-text min-h-16 btn h-auto gap-4 flex items-center justify-between"
+            class="first-text min-h-16 py-2 btn h-auto gap-4 flex items-center justify-between"
           >
             {{ wordData.english }}
             <div
