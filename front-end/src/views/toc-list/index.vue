@@ -20,7 +20,10 @@ const gotoBack = () => {
 
 
 <template>
-  <div class="toc-container bg-black opacity-30">
+  <div
+    class="toc-container bg-black"
+    :class="{'opacity-30': (import.meta.env.VITE_ENV === 'DEVELOPMENT') }"
+  >
     <van-nav-bar
       title="TOC"
       left-text=""
