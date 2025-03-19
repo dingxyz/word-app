@@ -52,3 +52,7 @@ export const groupWords = (words: IWord[], isPlayContext: boolean): IWord[] => {
 
   return result;
 }
+
+export const isWorldviewByItem = (str: string) => {
+  return str === 'Worldview'
+}

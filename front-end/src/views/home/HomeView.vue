@@ -15,15 +15,18 @@ import {useVoiceStore} from "@/stores/useVoice";
 import AddType from "@/views/home/add-type/index.vue";
 import StatisticsPopup from "@/views/home/statistics-popup/index.vue";
 import {useWorldStore} from "@/stores/useWorldview";
+import {useTOCStore} from "@/stores/useTOC";
+import TOCItem from "@/views/toc-list/toc-item/index.vue";
 
 const appStore = useAppStore();
 const voiceStore = useVoiceStore()
 const worldStore = useWorldStore()
+const docStore = useTOCStore()
 const paginationStore = usePaginationStore()
 
 const addWordRef = ref<InstanceType<typeof AddWord>>()
 const addTypeRef = ref<InstanceType<typeof AddType>>()
-const listRef = ref()
+const listRef = ref<HTMLDivElement>(null)
 const settingPopupRef = ref<InstanceType<typeof SettingPopup>>()
 const statisticsPopupRef = ref<InstanceType<typeof StatisticsPopup>>()
 const words = reactive<IWord[]>([])
@@ -84,6 +87,7 @@ const getWord = async ({toBottom = false} = {}) => {
   loading.value = true
   const {data, code, message} = await WordApi.get({
     wordType: appStore.wordType,
+    TOC_Order: !docStore.isSetToc ? (docStore.currentTOC?.order ?? undefined) : undefined,
     collect: worldStore.onlyCollect ? true : undefined,
   }).finally(() => {
     loading.value = false
@@ -95,7 +99,6 @@ const getWord = async ({toBottom = false} = {}) => {
   paginationStore.initPagination()
   setRenderList(toBottom)
 }
-getWord()
 
 const search = async ({searchKey}) => {
   if (searchKey?.length === 1) {
@@ -118,12 +121,17 @@ const search = async ({searchKey}) => {
   }
 }
 const searchWord = debounce(search, 300)
+const initialize = async () => {
+  await appStore.getTypeList()
+  docStore.initialize()
+  getWord()
+}
+initialize()
 </script>
 
 <template>
-  <van-config-provider
-    theme="dark"
-    class="w-auto max-w-xl flex flex-1 flex-col container text-lg overflow-auto"
+  <div
+    class="w-auto h-full max-w-xl flex flex-1 flex-col container text-lg overflow-auto"
     :class="{'opacity-20': isDev && !appStore.isLiteMode, 'is-lite-mode': appStore.isLiteMode }"
   >
     <header class="flex items-center justify-between h-12 px-4 bg-[#993333] text-center text-white">
@@ -131,6 +139,7 @@ const searchWord = debounce(search, 300)
       <span class="text-xl" @click="openTypeDialog">{{ appStore?.wordType }}</span>
       <WordTypeSelect @refresh-list="typeChange"/>
     </header>
+    <TOCItem v-if="paginationStore.renderOrder === ORDER_TYPE.BY_TOC" :tocData="docStore.currentTOC" isHome/>
     <article ref="listRef" class="relative flex-1 bg-[#006633] overflow-auto" :class="{'overflow-hidden': loading }">
       <div v-if="loading" class="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-[#d9dae25a]">
         <van-loading type="spinner"/>
@@ -168,7 +177,8 @@ const searchWord = debounce(search, 300)
       ref="settingPopupRef"
       @update:renderOrder="setRenderList"
       @update:onlyCollect="getWord"
+      @update:setToc="getWord"
     />
     <StatisticsPopup ref="statisticsPopupRef"/>
-  </van-config-provider>
+  </div>
 </template>

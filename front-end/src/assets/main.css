@@ -40,6 +40,7 @@ a,
 }
 
 .markdown-body {
+    color: #ffffff7a;
     ol {
         padding-left: 0;
     }
@@ -52,13 +53,19 @@ a,
 }
 
 .text-red {
-    color: #ff5252;
+    color: #ffffff;
     font-size: 20px;
     line-height: 24px;
 }
 
 .van-form .van-cell:after {
     display: none;
+}
+
+.van-swipe-cell__right,
+.van-swipe-cell__left {
+    display: flex;
+    align-items: center;
 }
 
 .is-lite-mode {

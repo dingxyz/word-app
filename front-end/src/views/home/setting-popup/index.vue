@@ -5,6 +5,7 @@ import {ORDER_TYPE, usePaginationStore} from "@/stores/usePagination";
 import {LANGUAGE_CODE, SSML_GENDER, useVoiceStore} from "@/stores/useVoice";
 import VoiceApi from "@/api/voice-api";
 import {useWorldStore} from "@/stores/useWorldview";
+import {useTOCStore} from "@/stores/useTOC";
 
 defineComponent({
   name: 'SettingPopup',
@@ -12,11 +13,12 @@ defineComponent({
 const appStore = useAppStore();
 const voiceStore = useVoiceStore()
 const worldStore = useWorldStore()
+const docStore = useTOCStore()
 const paginationStore = usePaginationStore()
 const isShow = ref(false)
 const showNamePicker = ref(false);
 
-const emit = defineEmits(['update:renderOrder', 'update:onlyCollect'])
+const emit = defineEmits(['update:renderOrder', 'update:onlyCollect', 'update:setToc'])
 
 const onNameConfirm = ({selectedOptions}) => {
   showNamePicker.value = false;
@@ -76,9 +78,15 @@ defineExpose({open})
           <template #input>
             <van-radio-group v-model="paginationStore.renderOrder" direction="horizontal" @change="emit('update:renderOrder')">
               <van-radio :name="ORDER_TYPE.LETTER" v-show="appStore.isWorldview">{{ ORDER_TYPE.LETTER }}</van-radio>
+              <van-radio :name="ORDER_TYPE.BY_TOC" v-show="appStore.currentBook?.hasTOC">{{ ORDER_TYPE.BY_TOC }}</van-radio>
               <van-radio :name="ORDER_TYPE.TIME">{{ ORDER_TYPE.TIME }}</van-radio>
               <van-radio :name="ORDER_TYPE.RANDOM">{{ ORDER_TYPE.RANDOM }}</van-radio>
             </van-radio-group>
+          </template>
+        </van-field>
+        <van-field v-show="appStore.currentBook?.hasTOC" name="switch" label-width="120px" input-align="right" label="Set TOC">
+          <template #input>
+            <van-switch v-model="docStore.isSetToc" @change="emit('update:setToc')" size="20"/>
           </template>
         </van-field>
         <van-field v-show="appStore.isWorldview" name="switch" label-width="120px" input-align="right" label="Play Context">

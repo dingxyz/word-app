@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import WordApi, {IWord} from '@/api/word-api'
 import {defineComponent, nextTick, reactive, ref} from 'vue'
-import {FieldInstance, showNotify} from "vant";
+import {FieldInstance, showNotify, showToast} from "vant";
 import {useAppStore} from "@/stores/useApp";
 import {trimEnd} from "lodash-es";
+import {useTOCStore} from "@/stores/useTOC";
 
 defineComponent({
   name: 'AddWord',
@@ -12,6 +13,7 @@ defineComponent({
 const emit = defineEmits(['add-complete'])
 
 const appStore = useAppStore()
+const docStore = useTOCStore()
 const fieldRef = ref<FieldInstance>();
 const isShow = ref(false)
 const loading = ref(false)
@@ -24,8 +26,14 @@ const saveWord = () => {
     alert('Please input english')
     return
   }
+  const {currentTOC} = docStore
+  if (appStore.isGrammarInUse1 && !currentTOC?.order) {
+    alert('Please input order')
+    return
+  }
   const params = {
     id: id ?? undefined,
+    TOC_Order: appStore.isGrammarInUse1 ? currentTOC?.order : undefined,
     context,
     english,
     chinese,
@@ -95,7 +103,7 @@ defineExpose({open})
           :autosize="{maxHeight: appStore.isWorldview ? 24 : 150}"
         />
         <van-field v-if="appStore.isWorldview && false" v-model="wordData.context" label="context" placeholder="" label-width="50px"/>
-        <van-field v-if="!appStore.isWorldview" v-model="wordData.chinese" label="cn" placeholder="Please input chinese" label-width="40px" clearable/>
+        <van-field v-if="!appStore.isWorldview && !appStore.wordType.includes('GrammarInUse')" v-model="wordData.chinese" label="cn" placeholder="Please input chinese" label-width="40px" clearable/>
         <van-field
           v-if="appStore.isWorldview ? !wordData?.id : true"
           v-model.trim="wordData.annotation"

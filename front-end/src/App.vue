@@ -1,7 +1,12 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
+import {RouterView} from 'vue-router'
 </script>
 
 <template>
-  <RouterView />
+  <van-config-provider
+    theme="dark"
+    class="h-full"
+  >
+    <RouterView/>
+  </van-config-provider>
 </template>

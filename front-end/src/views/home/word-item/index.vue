@@ -7,7 +7,7 @@ import {showConfirmDialog} from 'vant'
 import {copyToClipboard} from '@/utils/common-util'
 import 'github-markdown-css/github-markdown.css'
 import {useVoiceStore} from '@/stores/useVoice'
-import AnnoPopup from "@/views/home/anno-popup/index.vue";
+import AnnoPopup from "@/views/home/word-item/anno-popup/index.vue";
 import {useWorldStore} from "@/stores/useWorldview";
 
 defineComponent({
@@ -23,7 +23,7 @@ const appStore = useAppStore()
 const voiceStore = useVoiceStore()
 const worldStore = useWorldStore()
 const wordItemRef = ref()
-const annoPopupRef = ref()
+const annoPopupRef = ref<InstanceType<typeof AnnoPopup>>()
 const emit = defineEmits(['refresh-list', 'edit-word'])
 const showChinese = ref(appStore.showChineseChecked)
 const isPlaying = computed(() => !voiceStore.isPaused && voiceStore.playingId === props.wordData.id)
@@ -161,7 +161,7 @@ const openDetail = () => annoPopupRef.value.open(props.wordData)
           class="triangle-btn absolute top-0 bottom-0 right-0 w-1/3 active:bg-[#ffffff33]"
           @click="openDetail"
         >
-          <div class="absolute top-0 right-0 w-0 h-0 border-l-9 border-t-9 border-red-700 border-l-transparent"></div>
+          <div v-if="wordData.annotation" class="absolute top-0 right-0 w-0 h-0 border-l-9 border-t-9 border-red-700 border-l-transparent"></div>
           <!--          <IconBtn icon="eye-o"/>-->
         </div>
         <IconBtn
@@ -204,11 +204,5 @@ const openDetail = () => annoPopupRef.value.open(props.wordData)
       display: flex;
     }
   }
-}
-
-:deep(.van-swipe-cell__right),
-:deep(.van-swipe-cell__left) {
-  display: flex;
-  align-items: center;
 }
 </style>

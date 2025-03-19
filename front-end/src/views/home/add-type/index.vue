@@ -16,6 +16,7 @@ const wordLength = ref(0)
 const typeData = ref<WordType>({
   name: '',
   order: 0,
+  hasTOC: false,
 })
 
 const addOrEditType = async () => {
@@ -58,7 +59,7 @@ const open = async (name: string = null, length: number = 0) => {
     fieldRef.value?.focus()
   })
 }
-
+// appStore.getTypeList()
 defineExpose({open})
 </script>
 
@@ -70,6 +71,11 @@ defineExpose({open})
     <van-cell-group inset>
       <van-field v-model.trim="typeData.name" ref="fieldRef" label="name" placeholder="Please input name"/>
       <van-field v-model.number="typeData.order" label="parentId" placeholder="Please input order"/>
+      <van-field name="switch" label-width="120px" input-align="right" label="Auto Voice Type">
+        <template #input>
+          <van-switch v-model="typeData.hasTOC" size="20"/>
+        </template>
+      </van-field>
     </van-cell-group>
     <div v-if="typeData.id" class="flex justify-center">
       <van-button icon="delete-o" @click="deleteType" plain type="primary" size="small" color="red" class="m-auto">

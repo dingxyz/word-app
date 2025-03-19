@@ -5,7 +5,6 @@ const worldviewSchema = new mongoose.Schema({
     id: { type: String, required: true, unique: true },
     english: { type: String, required: true, index: true },
     context: { type: String },
-    chinese: { type: String },
     annotation: { type: String },
     wordType: { type: String },
     collect: { type: Boolean, default: true },

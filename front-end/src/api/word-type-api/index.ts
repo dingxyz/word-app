@@ -5,6 +5,7 @@ export class WordType {
   id?: string = null;
   name: string = '';
   order?: number = 0;
+  hasTOC?: boolean = false;
   parentId?: string = null;
 }
 

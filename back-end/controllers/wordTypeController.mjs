@@ -42,14 +42,14 @@ export const addWordType = async (req, res) => {
 export const updateWordType = async (req, res) => {
   const {id} = req.params;
   const {body} = req;
-  const {name, order, parentId} = body;
+  const {name, order, parentId, hasTOC} = body;
 
   try {
     const oldWordType = await WordType.findOne({id});
     if (oldWordType) {
       await WordType.findOneAndUpdate(
         {id: id},
-        {name, order, parentId},
+        {name, order, parentId, hasTOC},
         {new: true}
       );
       if (oldWordType.name !== name) {

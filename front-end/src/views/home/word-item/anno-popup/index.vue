@@ -4,6 +4,8 @@ import WordApi, {IWord} from "@/api/word-api";
 import marked from "@/utils/markedRenderer";
 import {useAppStore} from "@/stores/useApp";
 import {useVoiceStore} from "@/stores/useVoice";
+import {isWorldviewByItem} from "@/utils/common-util";
+import {useTOCStore} from "@/stores/useTOC";
 
 defineComponent({
   name: 'AnnoPopup'
@@ -11,6 +13,7 @@ defineComponent({
 
 const appStore = useAppStore()
 const voiceStore = useVoiceStore()
+const docStore = useTOCStore()
 const isShow = ref(false)
 const showEditTextarea = ref(false)
 const showSecondContext = ref(false)
@@ -22,7 +25,7 @@ const contextList = ref({
   third: '',
 })
 let wordOriginalData = null
-const compiledMarkdown = computed(() => marked(wordData.annotation ?? ''))
+const compiledMarkdown = computed(() => marked(String(wordData.annotation) ?? ''))
 
 watch(() => wordData.context, () => {
   if (wordData.context) {
@@ -46,6 +49,7 @@ const saveAnnotation = async () => {
   showEditTextarea.value = false
   const {first, second, third} = contextList.value
   wordData.context = first + (second ? `;${second}` : '') + (third ? `;${third}` : '')
+  wordData.TOC_Order = docStore.currentTOC.order || undefined
   await WordApi.update(wordData)
   wordOriginalData.english = wordData.english
   wordOriginalData.context = wordData.context
@@ -109,7 +113,7 @@ defineExpose({open})
           class="bg-green-900 px-0 py-2"
         />
         <van-field
-          v-if="appStore.isWorldview"
+          v-if="isWorldviewByItem(wordData.wordType)"
           v-model="contextList.first"
           label="Context"
           label-width="56px"
@@ -120,7 +124,7 @@ defineExpose({open})
           clearable
         />
         <van-field
-          v-if="appStore.isWorldview && showSecondContext"
+          v-if="isWorldviewByItem(wordData.wordType) && showSecondContext"
           v-model="contextList.second"
           label="Context"
           label-width="56px"
@@ -129,7 +133,7 @@ defineExpose({open})
           clearable
         />
         <van-field
-          v-if="appStore.isWorldview && showThirdContext"
+          v-if="isWorldviewByItem(wordData.wordType) && showThirdContext"
           v-model="contextList.third"
           label="Context"
           label-width="56px"
@@ -143,13 +147,13 @@ defineExpose({open})
         v-html="compiledMarkdown"
         v-bold-english
         @click="detailPopupClickHandler"
-        class="markdown-body flex-auto overflow-auto bg-green-900 text-white"
+        class="markdown-body flex-auto overflow-auto bg-green-900 text-sm"
       />
       <van-field
         v-if="showEditTextarea"
         v-model="wordData.annotation"
         type="textarea"
-        class="anno-textarea p-0 flex-auto overflow-auto bg-green-900"
+        class="p-0 flex-auto overflow-auto bg-green-900"
         autosize
         label=""
       />
@@ -169,8 +173,6 @@ defineExpose({open})
 </template>
 
 <style scoped lang="scss">
-.anno-textarea :deep(textarea) {
-  width: 95%;
-}
+
 </style>
 

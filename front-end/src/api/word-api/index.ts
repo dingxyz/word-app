@@ -8,6 +8,7 @@ export class IWord {
   chinese: string = '';
   annotation?: string = ''
   wordType?: string = '';
+  TOC_Order?: number = 0;
   collect?: boolean = true;
   createdAt?: string = '';
 }

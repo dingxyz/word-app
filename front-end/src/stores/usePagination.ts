@@ -13,6 +13,7 @@ export enum ORDER_TYPE {
   TIME = 'time',
   LETTER = 'letter',
   RANDOM = 'random',
+  BY_TOC = 'by_toc',
 }
 
 export const usePaginationStore = defineStore("pagination", () => {

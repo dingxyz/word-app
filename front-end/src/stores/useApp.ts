@@ -8,6 +8,8 @@ export const useAppStore = defineStore(`app`, () => {
   const showChineseChecked = ref(false)
   const isLiteMode = ref(false)
   const isWorldview = computed(() => wordType.value === 'Worldview')
+  const isGrammarInUse1 = computed(() => wordType.value === 'GrammarInUse1')
+  const currentBook = computed(() => typeList.value.find((item) => item.name === wordType.value))
 
   const getTypeList = async (typeName?: string) => {
     const res = await WordTypeApi.get()
@@ -18,9 +20,8 @@ export const useAppStore = defineStore(`app`, () => {
     }
   }
 
-  getTypeList()
 
-  return {wordType, typeList, showChineseChecked, isLiteMode, isWorldview,getTypeList}
+  return {wordType, typeList, showChineseChecked, isLiteMode, isWorldview, isGrammarInUse1,currentBook, getTypeList }
 }, {
   persist: {
     paths: ['wordType', 'showChineseChecked', 'isLiteMode'],

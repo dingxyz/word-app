@@ -26,7 +26,7 @@ import {
   Switch,
   Picker,
   Stepper,
-  ConfigProvider, Divider
+  ConfigProvider, Divider, NavBar
 } from 'vant'
 
 export function loadVantUI(app: App) {
@@ -57,4 +57,5 @@ export function loadVantUI(app: App) {
   app.use(Picker)
   app.use(Stepper)
   app.use(Divider)
+  app.use(NavBar)
 }
