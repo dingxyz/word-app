@@ -45,10 +45,6 @@ export const addTOC = async (req, res) => {
       return res.sendError("TOC already exists");
     }
 
-    if (body.id) {
-      delete body.id;
-    }
-
     const newTOC = new TOC(body);
     await newTOC.save();
     res.sendSuccess();
@@ -63,7 +59,6 @@ export const updateTOC = async (req, res) => {
   const { order, bookId, title, detail } = body;
 
   try {
-    console.log('order', order, body);
     const toc = await TOC.findOneAndUpdate(
       { order },
       { bookId, title, detail },
@@ -81,7 +76,6 @@ export const updateTOC = async (req, res) => {
 
 export const deleteTOC = async (req, res) => {
   const order = +req.params.order;
-  console.log('order', req);
   try {
     const toc = await TOC.findOneAndDelete({ order });
     if (!toc) {

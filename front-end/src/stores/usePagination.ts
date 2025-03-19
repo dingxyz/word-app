@@ -1,4 +1,4 @@
-import {reactive, ref, watch} from 'vue'
+import {computed, reactive, ref, watch} from 'vue'
 import {defineStore} from 'pinia'
 import {useAppStore} from "@/stores/useApp";
 
@@ -22,6 +22,8 @@ export const usePaginationStore = defineStore("pagination", () => {
   const currentPage = ref(1)
   const pageSize = ref(50)
   const renderOrder = ref(ORDER_TYPE.TIME)
+
+  const isByToc = computed(() => renderOrder.value === ORDER_TYPE.BY_TOC)
 
   const appStore = useAppStore()
 
@@ -48,5 +50,5 @@ export const usePaginationStore = defineStore("pagination", () => {
   }
   initPagination()
 
-  return {isPaging, currentPage, pageSize, renderOrder, pageByWordType, initPagination}
+  return {isPaging, currentPage, pageSize, renderOrder, isByToc, pageByWordType, initPagination}
 })

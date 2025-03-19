@@ -18,7 +18,7 @@ const paginationStore = usePaginationStore()
 const isShow = ref(false)
 const showNamePicker = ref(false);
 
-const emit = defineEmits(['update:renderOrder', 'update:onlyCollect', 'update:setToc'])
+const emit = defineEmits(['update'])
 
 const onNameConfirm = ({selectedOptions}) => {
   showNamePicker.value = false;
@@ -58,12 +58,12 @@ defineExpose({open})
   <van-popup v-model:show="isShow" closeable position="bottom" round>
     <van-form @submit="saveWord" class="pt-8">
       <van-cell-group inset label-width="300px" class="m-0">
-        <van-field name="switch" label-width="120px" input-align="right" label="Pagination">
+        <van-field v-if="!paginationStore.isByToc" name="switch" label-width="120px" input-align="right" label="Pagination">
           <template #input>
             <van-switch v-model="paginationStore.isPaging" size="20"/>
           </template>
         </van-field>
-        <van-field v-if="paginationStore.isPaging" name="radio" input-align="right" label="Page size">
+        <van-field v-if="!paginationStore.isByToc && paginationStore.isPaging" name="radio" input-align="right" label="Page size">
           <template #input>
             <van-radio-group v-model="paginationStore.pageSize" direction="horizontal">
               <van-radio :name="30" v-if="!appStore.isWorldview">30</van-radio>
@@ -76,7 +76,7 @@ defineExpose({open})
         </van-field>
         <van-field name="radio" input-align="right" label="Order" label-width="80px">
           <template #input>
-            <van-radio-group v-model="paginationStore.renderOrder" direction="horizontal" @change="emit('update:renderOrder')">
+            <van-radio-group v-model="paginationStore.renderOrder" direction="horizontal" @change="emit('update')">
               <van-radio :name="ORDER_TYPE.LETTER" v-show="appStore.isWorldview">{{ ORDER_TYPE.LETTER }}</van-radio>
               <van-radio :name="ORDER_TYPE.BY_TOC" v-show="appStore.currentBook?.hasTOC">{{ ORDER_TYPE.BY_TOC }}</van-radio>
               <van-radio :name="ORDER_TYPE.TIME">{{ ORDER_TYPE.TIME }}</van-radio>
@@ -84,9 +84,9 @@ defineExpose({open})
             </van-radio-group>
           </template>
         </van-field>
-        <van-field v-show="appStore.currentBook?.hasTOC" name="switch" label-width="120px" input-align="right" label="Set TOC">
+        <van-field v-show="appStore.currentBook?.hasTOC" name="switch" label-width="120px" input-align="right" label="Always Show TOC">
           <template #input>
-            <van-switch v-model="docStore.isSetToc" @change="emit('update:setToc')" size="20"/>
+            <van-switch v-model="docStore.isSetToc" @change="emit('update')" size="20"/>
           </template>
         </van-field>
         <van-field v-show="appStore.isWorldview" name="switch" label-width="120px" input-align="right" label="Play Context">
@@ -101,7 +101,7 @@ defineExpose({open})
         </van-field>
         <van-field v-show="appStore.isWorldview" name="switch" label-width="120px" input-align="right" label="Only Collect">
           <template #input>
-            <van-switch v-model="worldStore.onlyCollect" @change="emit('update:onlyCollect')" size="20"/>
+            <van-switch v-model="worldStore.onlyCollect" @change="emit('update')" size="20"/>
           </template>
         </van-field>
         <van-divider/>

@@ -87,7 +87,7 @@ const getWord = async ({toBottom = false} = {}) => {
   loading.value = true
   const {data, code, message} = await WordApi.get({
     wordType: appStore.wordType,
-    TOC_Order: !docStore.isSetToc ? (docStore.currentTOC?.order ?? undefined) : undefined,
+    TOC_Order: paginationStore.isByToc && !docStore.isSetToc ? (docStore.currentTOC?.order ?? undefined) : undefined,
     collect: worldStore.onlyCollect ? true : undefined,
   }).finally(() => {
     loading.value = false
@@ -139,7 +139,7 @@ initialize()
       <span class="text-xl" @click="openTypeDialog">{{ appStore?.wordType }}</span>
       <WordTypeSelect @refresh-list="typeChange"/>
     </header>
-    <TOCItem v-if="paginationStore.renderOrder === ORDER_TYPE.BY_TOC" :tocData="docStore.currentTOC" isHome/>
+    <TOCItem v-if="appStore.currentBook?.hasTOC && (docStore.isSetToc || paginationStore.isByToc)" :tocData="docStore.currentTOC" isHome/>
     <article ref="listRef" class="relative flex-1 bg-[#006633] overflow-auto" :class="{'overflow-hidden': loading }">
       <div v-if="loading" class="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-[#d9dae25a]">
         <van-loading type="spinner"/>
@@ -175,9 +175,7 @@ initialize()
     <AddType ref="addTypeRef"/>
     <SettingPopup
       ref="settingPopupRef"
-      @update:renderOrder="setRenderList"
-      @update:onlyCollect="getWord"
-      @update:setToc="getWord"
+      @update="getWord"
     />
     <StatisticsPopup ref="statisticsPopupRef"/>
   </div>
