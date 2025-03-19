@@ -10,6 +10,7 @@ defineComponent({
   name: 'TOCList'
 })
 
+const isDev = import.meta.env.VITE_ENV === 'DEVELOPMENT'
 const docStore = useTOCStore()
 const addTocRef = ref<InstanceType<typeof AddToc>>()
 
@@ -22,7 +23,7 @@ const gotoBack = () => {
 <template>
   <div
     class="toc-container bg-black"
-    :class="{'opacity-30': (import.meta.env.VITE_ENV === 'DEVELOPMENT') }"
+    :class="{'opacity-30': isDev }"
   >
     <van-nav-bar
       title="TOC"
