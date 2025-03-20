@@ -22,12 +22,12 @@ const tocData = reactive<ITOC>(new ITOC())
 const saveWord = () => {
   const { order,title, detail} = tocData
   if (!title) {
-    alert('Please input english')
+    showNotify({ type: 'warning', message: 'Please input title' });
     return
   }
 
   if (!appStore.currentBook?.id) {
-    alert('Please select a book')
+    showNotify({ type: 'warning', message: 'Please select a book' });
     return
   }
 

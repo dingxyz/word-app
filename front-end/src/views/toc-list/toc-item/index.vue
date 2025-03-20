@@ -7,6 +7,7 @@ import 'github-markdown-css/github-markdown.css'
 import TocDetailPopup from "@/views/toc-list/toc-detail-popup/index.vue";
 import router from "@/router";
 import TOCApi, {ITOC} from "@/api/toc-api";
+import {showConfirmDialog} from "vant";
 
 defineComponent({
   name: 'TOCItem'
@@ -34,7 +35,22 @@ const titleClickHandler = () => {
 
 
 const removeTOCHandler = async () => {
-  await TOCApi.remove(props.tocData.order)
+
+
+
+  const confirm = await showConfirmDialog({
+    message: 'Are you sure you want to delete?',
+    width: '280px',
+    theme: 'round-button',
+    closeOnClickOverlay: true,
+    cancelButtonText: 'Cancel',
+    cancelButtonColor: '#c7c7c7',
+    confirmButtonText: 'Confirm'
+  }).catch(() => false)
+  if (!confirm) return
+  await TOCApi.remove(props.tocData.order, {
+    bookId: props.tocData.bookId,
+  })
   docStore.fetchTOCList()
 }
 
@@ -47,8 +63,8 @@ const removeTOCHandler = async () => {
     :class="{'bg-[#333]': docStore.currentTOC?.order === tocData?.order}"
   >
     <van-swipe-cell>
-      <li class="flex items-center justify-between leading-15 px-2">
-        <span @click="titleClickHandler">{{ tocData?.order + '.' + tocData?.title || '-' }}</span>
+      <li class="flex items-center justify-between px-2">
+        <span @click="titleClickHandler" class="py-4">{{ tocData?.order + '.' + tocData?.title || '-' }}</span>
         <span @click="tocDetailPopupRef?.open(tocData)">detail</span>
       </li>
       <template #left>

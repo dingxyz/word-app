@@ -23,12 +23,12 @@ let wordOriginalData = null
 const saveWord = () => {
   const {id, english, context, chinese, annotation} = wordData
   if (!english) {
-    alert('Please input english')
+    showNotify({ type: 'warning', message: 'Please input english' });
     return
   }
   const {currentTOC} = docStore
   if (appStore.isGrammarInUse1 && !currentTOC?.order) {
-    alert('Please input order')
+    showNotify({ type: 'warning', message: 'Please input order' });
     return
   }
   const params = {
@@ -45,6 +45,7 @@ const saveWord = () => {
   const apiFunc = wordData.id ? WordApi.update : WordApi.add
   apiFunc(params).then(res => {
     if (res.code === '000000') {
+      showNotify({type:'success', message: 'Save success'});
       isShow.value = false
       if (wordData.id) {
         wordOriginalData.context = context

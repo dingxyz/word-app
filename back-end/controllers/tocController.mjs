@@ -1,5 +1,6 @@
 import TOC from '../models/TOC.js';
 import { generateUniqueId } from "../utils/commonUtil.mjs";
+import {getWordsNumByTOCOrder} from "./wordsController.mjs";
 
 // 获取所有 TOC 记录
 export const getAllTOCs = async (req, res) => {
@@ -9,7 +10,7 @@ export const getAllTOCs = async (req, res) => {
     if (bookId) {
       query.bookId = bookId;
     }
-    const tocList = await TOC.find(query).sort({ createdAt: 1 });
+    const tocList = await TOC.find(query).sort({ order: 1 });
     res.sendSuccess(tocList);
   } catch (error) {
     res.sendError(error.message);
@@ -76,7 +77,9 @@ export const updateTOC = async (req, res) => {
 
 export const deleteTOC = async (req, res) => {
   const order = +req.params.order;
+  const { bookId } = req.query;
   try {
+    // const num = await getWordsNumByTOCOrder({ bookId, order });
     const toc = await TOC.findOneAndDelete({ order });
     if (!toc) {
       return res.sendError("TOC not found");

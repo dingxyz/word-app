@@ -58,12 +58,12 @@ defineExpose({open})
   <van-popup v-model:show="isShow" closeable position="bottom" round>
     <van-form @submit="saveWord" class="pt-8">
       <van-cell-group inset label-width="300px" class="m-0">
-        <van-field v-if="!paginationStore.isByToc" name="switch" label-width="120px" input-align="right" label="Pagination">
+        <van-field v-if="docStore.isSetToc || !paginationStore.isByToc" name="switch" label-width="120px" input-align="right" label="Pagination">
           <template #input>
             <van-switch v-model="paginationStore.isPaging" size="20"/>
           </template>
         </van-field>
-        <van-field v-if="!paginationStore.isByToc && paginationStore.isPaging" name="radio" input-align="right" label="Page size">
+        <van-field v-if="(docStore.isSetToc || !paginationStore.isByToc) && paginationStore.isPaging" name="radio" input-align="right" label="Page size">
           <template #input>
             <van-radio-group v-model="paginationStore.pageSize" direction="horizontal">
               <van-radio :name="30" v-if="!appStore.isWorldview">30</van-radio>

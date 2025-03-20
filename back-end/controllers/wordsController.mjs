@@ -10,12 +10,18 @@ export const getWords = async (req, res) => {
     if (wordType) {
       if (wordType === STATISTICS_WORD_TYPE) {
         sendData = await Worldview.aggregate([
-          { $match: collect ? { collect: true } : {} },
-          { $sort: { english: 1 } },
+          {$match: collect ? {collect: true} : {}},
+          {$sort: {english: 1}},
           {
             $project: {
               id: 1,
-              annotation: { $cond: { if: { $and: [ { $gt: ["$annotation", null] }, { $ne: ["$annotation", ""] } ] }, then: true, else: false } },
+              annotation: {
+                $cond: {
+                  if: {$and: [{$gt: ["$annotation", null]}, {$ne: ["$annotation", ""]}]},
+                  then: true,
+                  else: false
+                }
+              },
               english: 1,
               context: 1,
               wordType: 1,
@@ -26,20 +32,26 @@ export const getWords = async (req, res) => {
         ]);
       } else {
         let TOC_Order = +req.query.TOC_Order ?? -1;
-        let matchCondition = { wordType };
+        let matchCondition = {wordType};
 
         if (TOC_Order === 0) {
-          matchCondition.TOC_Order = { $exists: false }; // 只查询没有 TOC_Order 的数据
+          matchCondition.TOC_Order = {$exists: false}; // 只查询没有 TOC_Order 的数据
         } else if (TOC_Order > 0) {
           matchCondition.TOC_Order = TOC_Order;
         }
         sendData = await Word.aggregate([
-          { $match: matchCondition  },
-          { $sort: { createdAt: 1 } },
+          {$match: matchCondition},
+          {$sort: {createdAt: 1}},
           {
             $project: {
               id: 1,
-              annotation: { $cond: { if: { $and: [ { $gt: ["$annotation", null] }, { $ne: ["$annotation", ""] } ] }, then: true, else: false } },
+              annotation: {
+                $cond: {
+                  if: {$and: [{$gt: ["$annotation", null]}, {$ne: ["$annotation", ""]}]},
+                  then: true,
+                  else: false
+                }
+              },
               english: 1,
               TOC_Order: 1,
               chinese: 1,
@@ -51,11 +63,17 @@ export const getWords = async (req, res) => {
       }
     } else {
       sendData = await Word.aggregate([
-        { $sort: { createdAt: 1 } },
+        {$sort: {createdAt: 1}},
         {
           $project: {
             id: 1,
-            annotation: { $cond: { if: { $and: [ { $gt: ["$annotation", null] }, { $ne: ["$annotation", ""] } ] }, then: true, else: false } },
+            annotation: {
+              $cond: {
+                if: {$and: [{$gt: ["$annotation", null]}, {$ne: ["$annotation", ""]}]},
+                then: true,
+                else: false
+              }
+            },
             english: 1,
             TOC_Order: 1,
             chinese: 1,
@@ -126,7 +144,7 @@ export const addWord = async (req, res) => {
 export const updateWord = async (req, res) => {
   const {id} = req.params;
   const {body} = req;
-  const {wordType, english, context,chinese, annotation, TOC_Order} = body;
+  const {wordType, english, context, chinese, annotation, TOC_Order} = body;
 
   try {
     let word;
@@ -202,4 +220,11 @@ export const toggleCollect = async (req, res) => {
   } catch (error) {
     res.sendError(error.message);
   }
+};
+
+// 写个函数，getWordsNumByTOCOrder，根据 TOC_Order 查询单词的数量
+export const getWordsNumByTOCOrder = async ({wordType, TOC_Order}) => {
+  console.log("wordType", wordType, "TOC_Order", TOC_Order);
+  let sendData = await Word.countDocuments({wordType, TOC_Order: +TOC_Order});
+  return sendData ?? 0
 };
