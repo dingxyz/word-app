@@ -28,7 +28,7 @@ class TOCApi {
     return http.put(`/toc/${data.order}`, data);
   }
 
-  static remove(order: number, params: any): Promise<any> {
+  static remove(order: number, params?: any): Promise<any> {
     return http.delete(`/toc/${order}`, { params });
   }
 }
