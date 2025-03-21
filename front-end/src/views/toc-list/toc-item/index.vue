@@ -63,9 +63,13 @@ const removeTOCHandler = async () => {
     :class="{'bg-[#333]': docStore.currentTOC?.order === tocData?.order}"
   >
     <van-swipe-cell>
-      <li class="flex items-center justify-between px-2">
+      <li class="flex items-center justify-between px-2 relative">
         <span @click="titleClickHandler" class="py-4">{{ tocData?.order + '.' + tocData?.title || '-' }}</span>
-        <span @click="tocDetailPopupRef?.open(tocData)">detail</span>
+        <div
+          class="triangle-btn absolute top-0 bottom-0 right-0 w-1/3 active:bg-[#ffffff33]"
+          @click="tocDetailPopupRef?.open(tocData)"
+        >
+        </div>
       </li>
       <template #left>
         <div class="p-1 text-sm text-fuchsia-500">
