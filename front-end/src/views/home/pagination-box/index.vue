@@ -6,6 +6,13 @@ defineComponent({
   name: 'PaginationBox',
 })
 
+const props = defineProps({
+  totalItems: {
+    type: Number,
+    required: true
+  }
+})
+
 const emit = defineEmits(['update:currentPage'])
 
 const paginationStore = usePaginationStore()
@@ -16,6 +23,7 @@ const paginationStore = usePaginationStore()
     v-model="paginationStore.currentPage"
     @change="emit('update:currentPage')"
     :items-per-page="paginationStore.pageSize"
+    :total-items="totalItems"
     :show-prev-button="false"
     :show-next-button="false"
     force-ellipses

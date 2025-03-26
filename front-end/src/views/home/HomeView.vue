@@ -33,36 +33,17 @@ const words = reactive<IWord[]>([])
 const renderList = ref<IWord[]>([])
 const loading = ref(true)
 const isDev = import.meta.env.VITE_ENV === 'DEVELOPMENT'
+const totalItems = ref(0)
 
 const openAddWord = () => addWordRef.value?.open()
-const openTypeDialog = () => addTypeRef.value?.open(appStore?.bookId, words.length)
+const openTypeDialog = () => addTypeRef.value?.open(appStore?.bookId, totalItems.value)
 const openSettingPopup = () => settingPopupRef.value?.open()
 const openStatisticsPopup = () => statisticsPopupRef.value?.open()
 const editWordOpen = (word: IWord) => addWordRef.value?.open(word)
 const autoPlayChange = () => voiceStore.autoSpeak(renderList.value)
 const setRenderList = (toBottom = false) => {
-  if (paginationStore.renderOrder === ORDER_TYPE.TIME && appStore.isWorldview) {
-    words.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
-  } else if (paginationStore.renderOrder === ORDER_TYPE.LETTER) {
-    words.sort((a, b) => a.english.localeCompare(b.english))
-  }
-
-  voiceStore.resetSpeak()
-  const {isPaging, pageSize} = paginationStore
-  let {currentPage} = paginationStore
-  if (isPaging && words.length > pageSize) {
-    let start = (currentPage - 1) * pageSize
-    if (start >= words.length) {
-      currentPage = Math.ceil(words.length / pageSize)
-      start = (currentPage - 1) * pageSize
-    }
-    const end = start + pageSize
-    renderList.value = words.slice(start, end)
-  } else {
-    renderList.value = words
-  }
   if (paginationStore.renderOrder === ORDER_TYPE.RANDOM) {
-    renderList.value = renderList.value.sort(() => Math.random() - 0.5)
+    renderList.value = [...renderList.value].sort(() => Math.random() - 0.5)
   }
   nextTick(() => {
     if (toBottom === true) {
@@ -71,12 +52,15 @@ const setRenderList = (toBottom = false) => {
       listRef.value.scrollTop = 0
     }
   })
+  voiceStore.resetSpeak()
 }
 
 watch([
   () => paginationStore.isPaging,
-  () => paginationStore.pageSize
-], () => setRenderList());
+  () => paginationStore.pageSize,
+  () => paginationStore.currentPage,
+  () => paginationStore.renderOrder
+], () => getWord());
 
 const typeChange = () => {
   renderList.value = []
@@ -86,18 +70,30 @@ const typeChange = () => {
 const getWord = async ({toBottom = false} = {}) => {
   loading.value = true
   const {data, code, message} = await WordApi.get({
-    // bookId: appStore.bookId,
     bookId: appStore.bookId,
     TOC_Order: paginationStore.isByToc && !docStore.isSetToc ? (docStore.currentTOC?.order ?? undefined) : undefined,
     collect: worldStore.onlyCollect ? true : undefined,
+    page: (paginationStore.isPaging && !paginationStore.isByToc) ? paginationStore.currentPage : undefined,
+    pageSize: (paginationStore.isPaging && !paginationStore.isByToc) ? paginationStore.pageSize : undefined,
+    renderOrder: paginationStore.renderOrder
   }).finally(() => {
     loading.value = false
   })
   if (code !== '000000') {
     showNotify({type: 'danger', message});
   }
-  words.splice(0, words.length, ...data)
-  paginationStore.initPagination()
+  
+  // 更新数据结构
+  if (data && data.list) {
+    words.splice(0, words.length, ...data.list)
+    renderList.value = data.list
+    totalItems.value = data.total
+  } else {
+    words.splice(0, words.length, ...(data || []))
+    renderList.value = data || []
+    totalItems.value = (data || []).length
+  }
+  
   setRenderList(toBottom)
 }
 
@@ -116,6 +112,8 @@ const search = async ({searchKey}) => {
       showNotify({type: 'danger', message});
     }
     words.splice(0, words.length, ...data)
+    renderList.value = data
+    totalItems.value = data.length
     setRenderList()
   } else {
     getWord()
@@ -136,7 +134,7 @@ initialize()
     :class="{'opacity-20': isDev && !appStore.isLiteMode, 'is-lite-mode': appStore.isLiteMode }"
   >
     <header class="flex items-center justify-between h-12 px-4 bg-[#993333] text-center text-white">
-      <span class="w-10" @click="openStatisticsPopup">{{ words.length }}</span>
+      <span class="w-10" @click="openStatisticsPopup">{{ totalItems }}</span>
       <span class="text-xl" @click="openTypeDialog">{{ appStore?.currentBook.name }}</span>
       <WordTypeSelect @refresh-list="typeChange"/>
     </header>
@@ -156,10 +154,10 @@ initialize()
         />
       </van-list>
     </article>
-    <div class="mt-2" v-if="paginationStore.isPaging && words.length > paginationStore.pageSize">
+    <div class="mt-2" v-if="paginationStore.isPaging && !paginationStore.isByToc && totalItems > paginationStore.pageSize">
       <PaginationBox
-        :total-items="words.length"
-        @update:currentPage="setRenderList()"
+        :total-items="totalItems"
+        @update:currentPage="getWord()"
       />
     </div>
     <footer class="flex items-center justify-between h-12 m-2 px-4 bg-[#003300] text-white rounded-xl">

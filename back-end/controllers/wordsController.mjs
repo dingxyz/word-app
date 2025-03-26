@@ -4,94 +4,44 @@ import Worldview from "../models/Worldview.js";
 // import {removeAnnotationStr} from "../utils/removeSpacesFromIds.mjs";
 
 export const getWords = async (req, res) => {
-  const {bookId, collect} = req.query;
+  const {bookId, collect, page, pageSize, renderOrder} = req.query;
   let sendData = [];
+  let totalCount = 0;
+  let skip = 0;
+  let limit = 0;
+  
+  // 处理分页参数
+  if (page && pageSize) {
+    skip = (parseInt(page) - 1) * parseInt(pageSize);
+    limit = parseInt(pageSize);
+  }
+  
   try {
     // await removeWordTypeFromWords();
 
     if (bookId) {
       if (bookId === 'all') {
         // 当bookId为'all'时，查询所有记录
-        sendData = await Word.aggregate([
-          {$sort: {createdAt: 1}},
-          {
-            $project: {
-              id: 1,
-              annotation: {
-                $cond: {
-                  if: {$and: [{$gt: ["$annotation", null]}, {$ne: ["$annotation", ""]}]},
-                  then: true,
-                  else: false
-                }
-              },
-              bookId: 1,
-              english: 1,
-              TOC_Order: 1,
-              chinese: 1,
-              createdAt: 1
-            }
-          }
-        ]);
-      }
-      else if (bookId === mappingNameAndId.find(item => item.name === STATISTICS_WORD_TYPE)?.id) {
-        sendData = await Worldview.aggregate([
-          {$match: collect ? {collect: true} : {}},
-          {$sort: {english: 1}},
-          {
-            $project: {
-              id: 1,
-              annotation: {
-                $cond: {
-                  if: {$and: [{$gt: ["$annotation", null]}, {$ne: ["$annotation", ""]}]},
-                  then: true,
-                  else: false
-                }
-              },
-              bookId: 1,
-              english: 1,
-              context: 1,
-              collect: 1,
-              createdAt: 1
-            }
-          }
-        ]);
-      } else {
-        let TOC_Order = +req.query.TOC_Order ?? -1;
-        let matchCondition = {bookId};
-
-        if (TOC_Order === 0) {
-          matchCondition.TOC_Order = {$exists: false}; // 只查询没有 TOC_Order 的数据
-        } else if (TOC_Order > 0) {
-          matchCondition.TOC_Order = TOC_Order;
+        // 先获取总数
+        totalCount = await Word.countDocuments();
+        
+        // 查询分页数据
+        let aggregation = [
+          {$sort: {createdAt: 1}}
+        ];
+        
+        // 添加排序
+        if (renderOrder === 'letter') {
+          aggregation[0] = {$sort: {english: 1}};
         }
-        sendData = await Word.aggregate([
-          {$match: matchCondition},
-          {$sort: {createdAt: 1}},
-          {
-            $project: {
-              id: 1,
-              annotation: {
-                $cond: {
-                  if: {$and: [{$gt: ["$annotation", null]}, {$ne: ["$annotation", ""]}]},
-                  then: true,
-                  else: false
-                }
-              },
-              bookId: 1,
-              english: 1,
-              TOC_Order: 1,
-              chinese: 1,
-              createdAt: 1
-            }
-          }
-        ]);
-      }
-    } else {
-      // 当bookId不存在时，查询所有不含bookId字段的记录
-      sendData = await Word.aggregate([
-        {$match: {bookId: {$exists: false}}}, // 只查询没有bookId字段的记录
-        {$sort: {createdAt: 1}},
-        {
+        
+        // 添加分页
+        if (page && pageSize) {
+          aggregation.push({$skip: skip});
+          aggregation.push({$limit: limit});
+        }
+        
+        aggregation.push({
           $project: {
             id: 1,
             annotation: {
@@ -107,10 +57,151 @@ export const getWords = async (req, res) => {
             chinese: 1,
             createdAt: 1
           }
+        });
+        
+        sendData = await Word.aggregate(aggregation);
+      }
+      else if (bookId === mappingNameAndId.find(item => item.name === STATISTICS_WORD_TYPE)?.id) {
+        // 构建查询条件
+        const matchCondition = collect ? {collect: true} : {};
+        
+        // 获取总数
+        totalCount = await Worldview.countDocuments(matchCondition);
+        
+        // 构建聚合查询
+        let aggregation = [
+          {$match: matchCondition},
+          {$sort: {english: 1}}
+        ];
+        
+        // 处理排序
+        if (renderOrder === 'time') {
+          aggregation[1] = {$sort: {createdAt: 1}};
         }
-      ]);
+        
+        // 添加分页
+        if (page && pageSize) {
+          aggregation.push({$skip: skip});
+          aggregation.push({$limit: limit});
+        }
+        
+        aggregation.push({
+          $project: {
+            id: 1,
+            annotation: {
+              $cond: {
+                if: {$and: [{$gt: ["$annotation", null]}, {$ne: ["$annotation", ""]}]},
+                then: true,
+                else: false
+              }
+            },
+            bookId: 1,
+            english: 1,
+            context: 1,
+            collect: 1,
+            createdAt: 1
+          }
+        });
+        
+        sendData = await Worldview.aggregate(aggregation);
+      } else {
+        let TOC_Order = +req.query.TOC_Order ?? -1;
+        let matchCondition = {bookId};
+
+        if (TOC_Order === 0) {
+          matchCondition.TOC_Order = {$exists: false}; // 只查询没有 TOC_Order 的数据
+        } else if (TOC_Order > 0) {
+          matchCondition.TOC_Order = TOC_Order;
+        }
+        
+        // 获取总数
+        totalCount = await Word.countDocuments(matchCondition);
+        
+        // 构建聚合查询
+        let aggregation = [
+          {$match: matchCondition},
+          {$sort: {createdAt: 1}}
+        ];
+        
+        // 处理排序
+        if (renderOrder === 'letter') {
+          aggregation[1] = {$sort: {english: 1}};
+        }
+        
+        // 添加分页
+        if (page && pageSize) {
+          aggregation.push({$skip: skip});
+          aggregation.push({$limit: limit});
+        }
+        
+        aggregation.push({
+          $project: {
+            id: 1,
+            annotation: {
+              $cond: {
+                if: {$and: [{$gt: ["$annotation", null]}, {$ne: ["$annotation", ""]}]},
+                then: true,
+                else: false
+              }
+            },
+            bookId: 1,
+            english: 1,
+            TOC_Order: 1,
+            chinese: 1,
+            createdAt: 1
+          }
+        });
+        
+        sendData = await Word.aggregate(aggregation);
+      }
+    } else {
+      // 当bookId不存在时，查询所有不含bookId字段的记录
+      const matchCondition = {bookId: {$exists: false}};
+      
+      // 获取总数
+      totalCount = await Word.countDocuments(matchCondition);
+      
+      // 构建聚合查询
+      let aggregation = [
+        {$match: matchCondition},
+        {$sort: {createdAt: 1}}
+      ];
+      
+      // 处理排序
+      if (renderOrder === 'letter') {
+        aggregation[1] = {$sort: {english: 1}};
+      }
+      
+      // 添加分页
+      if (page && pageSize) {
+        aggregation.push({$skip: skip});
+        aggregation.push({$limit: limit});
+      }
+      
+      aggregation.push({
+        $project: {
+          id: 1,
+          annotation: {
+            $cond: {
+              if: {$and: [{$gt: ["$annotation", null]}, {$ne: ["$annotation", ""]}]},
+              then: true,
+              else: false
+            }
+          },
+          bookId: 1,
+          english: 1,
+          TOC_Order: 1,
+          chinese: 1,
+          createdAt: 1
+        }
+      });
+      
+      sendData = await Word.aggregate(aggregation);
     }
-    res.sendSuccess(sendData ?? []);
+    res.sendSuccess({
+      list: sendData ?? [],
+      total: totalCount
+    });
   } catch (error) {
     res.sendError(error.message);
   }

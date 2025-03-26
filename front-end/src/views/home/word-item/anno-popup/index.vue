@@ -12,6 +12,7 @@ defineComponent({
 })
 
 const {isWorldviewById} = useAppStore()
+const appStore = useAppStore()
 const voiceStore = useVoiceStore()
 const docStore = useTOCStore()
 const isShow = ref(false)
@@ -50,6 +51,7 @@ const saveAnnotation = async () => {
   const {first, second, third} = contextList.value
   wordData.context = first + (second ? `;${second}` : '') + (third ? `;${third}` : '')
   wordData.TOC_Order = docStore.currentTOC.order || undefined
+  wordData['bookId'] = wordData.bookId ?? appStore.bookId
   await WordApi.update(wordData)
   wordOriginalData.english = wordData.english
   wordOriginalData.context = wordData.context
