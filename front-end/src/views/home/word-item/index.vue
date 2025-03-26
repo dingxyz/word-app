@@ -141,6 +141,7 @@ const openDetail = () => annoPopupRef.value.open(props.wordData)
             @touchend="endLongPress"
             class="first-text min-h-16 py-2 btn h-auto gap-4 flex items-center justify-between"
           >
+            <span v-if="wordData.TOC_Order" class="text-xs text-slate-400 text-red">{{wordData.TOC_Order}}</span>
             {{ wordData.english }}
             <div
               class="text-sm pr-2 text-slate-300"
