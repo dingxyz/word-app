@@ -66,7 +66,7 @@ const removeHandler = async (id: string) => {
   }).catch(() => false)
   if (!confirm) return
   await WordApi.remove(id, {
-    wordType: appStore.wordType
+    bookId: appStore.bookId
   })
   emit('refresh-list')
 }

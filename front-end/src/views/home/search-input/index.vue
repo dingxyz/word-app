@@ -8,7 +8,7 @@ defineComponent({
 const searchValue = ref('')
 const searchFocus = ref(false)
 const appStore = useAppStore();
-watch(() => appStore.wordType, () => {
+watch(() => appStore.bookId, () => {
   searchValue.value = ''
 })
 </script>

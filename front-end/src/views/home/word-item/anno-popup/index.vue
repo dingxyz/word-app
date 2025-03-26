@@ -11,7 +11,7 @@ defineComponent({
   name: 'AnnoPopup'
 })
 
-const appStore = useAppStore()
+const {isWorldviewById} = useAppStore()
 const voiceStore = useVoiceStore()
 const docStore = useTOCStore()
 const isShow = ref(false)
@@ -81,7 +81,7 @@ const open = async (data: IWord) => {
   wordOriginalData = data
   const res = await WordApi.getAnnotation({
     id: wordData.id,
-    wordType: wordData.wordType,
+    bookId: wordData.bookId,
   })
   if (res.code === '000000') {
     wordData.annotation = res.data.annotation
@@ -113,7 +113,7 @@ defineExpose({open})
           class="bg-green-900 px-0 py-2"
         />
         <van-field
-          v-if="isWorldviewByItem(wordData.wordType)"
+          v-if="isWorldviewById(wordData.bookId)"
           v-model="contextList.first"
           label="Context"
           label-width="56px"
@@ -124,7 +124,7 @@ defineExpose({open})
           clearable
         />
         <van-field
-          v-if="isWorldviewByItem(wordData.wordType) && showSecondContext"
+          v-if="isWorldviewById(wordData.bookId) && showSecondContext"
           v-model="contextList.second"
           label="Context"
           label-width="56px"
@@ -133,7 +133,7 @@ defineExpose({open})
           clearable
         />
         <van-field
-          v-if="isWorldviewByItem(wordData.wordType) && showThirdContext"
+          v-if="isWorldviewById(wordData.bookId) && showThirdContext"
           v-model="contextList.third"
           label="Context"
           label-width="56px"

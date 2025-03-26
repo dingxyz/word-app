@@ -28,7 +28,7 @@ export const usePaginationStore = defineStore("pagination", () => {
   const appStore = useAppStore()
 
   watch([isPaging, currentPage, pageSize, renderOrder], () => {
-    pageByWordType[appStore.wordType] = {
+    pageByWordType[appStore.bookId] = {
       isPaging: isPaging.value,
       currentPage: currentPage.value,
       pageSize: pageSize.value,
@@ -37,7 +37,7 @@ export const usePaginationStore = defineStore("pagination", () => {
   })
 
   const initPagination = () => {
-    const storedData = pageByWordType[appStore.wordType] || {
+    const storedData = pageByWordType[appStore.bookId] || {
       isPaging: true,
       currentPage: 1,
       pageSize: 50,

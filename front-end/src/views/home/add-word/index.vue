@@ -39,7 +39,7 @@ const saveWord = () => {
     chinese,
     annotation,
   }
-  params['wordType'] = wordData.id ? wordData.wordType : appStore.wordType
+  params['bookId'] = wordData.id ? wordData.bookId : appStore.bookId
 
   loading.value = true
   const apiFunc = wordData.id ? WordApi.update : WordApi.add
@@ -72,7 +72,7 @@ const open = async (word?: IWord) => {
   if (wordData.id) {
     const res = await WordApi.getAnnotation({
       id: wordData.id,
-      wordType: appStore.wordType,
+      bookId: appStore.bookId,
     })
     if (res.code === '000000') {
       wordData.annotation = res.data.annotation
@@ -88,7 +88,7 @@ defineExpose({open})
 <template>
   <van-action-sheet
     v-model:show="isShow"
-    :title="wordData.id? `Edit ${wordData.wordType}` : `Add ${appStore.wordType}`"
+    :title="wordData.id? `Edit ${appStore.currentBook?.name}` : `Add ${appStore.currentBook?.name}`"
     @closed="resetData"
   >
     <div>
@@ -104,7 +104,7 @@ defineExpose({open})
           :autosize="{maxHeight: appStore.isWorldview ? 24 : 150}"
         />
         <van-field v-if="appStore.isWorldview && false" v-model="wordData.context" label="context" placeholder="" label-width="50px"/>
-        <van-field v-if="!appStore.isWorldview && !appStore.wordType.includes('GrammarInUse')" v-model="wordData.chinese" label="cn" placeholder="Please input chinese" label-width="40px" clearable/>
+        <van-field v-if="!appStore.isWorldview && !appStore.currentBook?.name.includes('GrammarInUse')" v-model="wordData.chinese" label="cn" placeholder="Please input chinese" label-width="40px" clearable/>
         <van-field
           v-if="appStore.isWorldview ? !wordData?.id : true"
           v-model.trim="wordData.annotation"

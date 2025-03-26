@@ -35,7 +35,7 @@ const loading = ref(true)
 const isDev = import.meta.env.VITE_ENV === 'DEVELOPMENT'
 
 const openAddWord = () => addWordRef.value?.open()
-const openTypeDialog = () => addTypeRef.value?.open(appStore?.wordType, words.length)
+const openTypeDialog = () => addTypeRef.value?.open(appStore?.bookId, words.length)
 const openSettingPopup = () => settingPopupRef.value?.open()
 const openStatisticsPopup = () => statisticsPopupRef.value?.open()
 const editWordOpen = (word: IWord) => addWordRef.value?.open(word)
@@ -86,7 +86,7 @@ const typeChange = () => {
 const getWord = async ({toBottom = false} = {}) => {
   loading.value = true
   const {data, code, message} = await WordApi.get({
-    wordType: appStore.wordType,
+    // bookId: appStore.bookId,
     TOC_Order: paginationStore.isByToc && !docStore.isSetToc ? (docStore.currentTOC?.order ?? undefined) : undefined,
     collect: worldStore.onlyCollect ? true : undefined,
   }).finally(() => {
@@ -136,7 +136,7 @@ initialize()
   >
     <header class="flex items-center justify-between h-12 px-4 bg-[#993333] text-center text-white">
       <span class="w-10" @click="openStatisticsPopup">{{ words.length }}</span>
-      <span class="text-xl" @click="openTypeDialog">{{ appStore?.wordType }}</span>
+      <span class="text-xl" @click="openTypeDialog">{{ appStore?.currentBook.name }}</span>
       <WordTypeSelect @refresh-list="typeChange"/>
     </header>
     <TOCItem v-if="appStore.currentBook?.hasTOC && (docStore.isSetToc || paginationStore.isByToc)" :tocData="docStore.currentTOC" isHome/>

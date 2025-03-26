@@ -7,13 +7,13 @@ const wordSchema = new mongoose.Schema({
     TOC_Order: { type: Number },
     chinese: { type: String },
     annotation: { type: String },
-    wordType: { type: String, index: true },
+    bookId: { type: String, index: true, required: true },
     createdAt: { type: Date, default: Date.now },
 });
 
 // 添加索引以提高查询性能
 wordSchema.index({ id: 1 });
-wordSchema.index({ wordType: 1 });
+wordSchema.index({ bookId: 1 });
 wordSchema.index({ TOC_Order: 1 });
 
 // 添加实例方法

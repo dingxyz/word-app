@@ -6,6 +6,7 @@ import { showNotify } from 'vant'
 import WordStatisticsApi from '@/api/word-statistics-api'
 import {groupWords, methodTracker} from '@/utils/common-util'
 import {useWorldStore} from "@/stores/useWorldview";
+import {useAppStore} from "@/stores/useApp";
 
 export enum SSML_GENDER {
   MALE = 'MALE',
@@ -40,6 +41,7 @@ export const useVoiceStore = defineStore(`voice`, () => {
   let playStartTime = 0
   let autoVoiceTypeIndex = 0
 
+  const appStore = useAppStore()
   const worldStore = useWorldStore()
 
   const voiceSpeak = async (english: string, isAutoPlay: boolean = false, onEnd?: () => void) => {
@@ -100,7 +102,7 @@ export const useVoiceStore = defineStore(`voice`, () => {
     if (words.length === 0) {
       return
     }
-    if (words[0].wordType === "Worldview") {
+    if (appStore.isWorldviewById(words[0].bookId)) {
       words = groupWords(words, worldStore.isPlayContext)
     }
     if (nowPlaying.value && !isPaused.value) {

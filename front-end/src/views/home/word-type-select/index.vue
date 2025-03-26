@@ -26,8 +26,8 @@ const typeChange = () => {
 
 <template>
   <van-popover v-model:show="popoverShow" placement="bottom-end">
-    <van-radio-group v-model="appStore.wordType" @change="typeChange" shape="dot">
-      <van-radio v-for="(item) in appStore.typeList" :key="item.id" :name="item.name" class="m-4">
+    <van-radio-group v-model="appStore.bookId" @change="typeChange" shape="dot">
+      <van-radio v-for="(item) in appStore.typeList" :key="item.id" :name="item.id" class="m-4">
         {{ item.name }}
       </van-radio>
     </van-radio-group>

@@ -30,7 +30,7 @@ const addOrEditType = async () => {
     await WordTypeApi.add(typeData.value)
   }
   typeDialog.value = false
-  appStore.getTypeList(typeData.value.name)
+  appStore.getTypeList(typeData.value.id)
   emit('type-update')
 }
 

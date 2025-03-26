@@ -25,7 +25,7 @@ export const addWordType = async (req, res) => {
   try {
     const existingWordType = await WordType.findOne({name: name.trim()});
     if (existingWordType) {
-      res.sendError("Word type already exists");
+      res.sendError("Book type already exists");
       return;
     }
 
@@ -53,11 +53,11 @@ export const updateWordType = async (req, res) => {
         {new: true}
       );
       if (oldWordType.name !== name) {
-        await changeTypeName(oldWordType.name, name);
+        await changeTypeName(oldWordType.id, id);
       }
       res.sendSuccess();
     } else {
-      res.sendError("Word type not found");
+      res.sendError("Book type not found");
     }
   } catch (error) {
     res.sendError(error.message);
@@ -71,7 +71,7 @@ export const deleteWordType = async (req, res) => {
   try {
     const wordType = await WordType.findOneAndDelete({id});
     if (!wordType) {
-      res.sendError("Word type not found");
+      res.sendError("Book type not found");
       return;
     }
     res.sendSuccess();

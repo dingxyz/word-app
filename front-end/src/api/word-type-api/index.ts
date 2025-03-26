@@ -25,6 +25,10 @@ class WordTypeApi {
   static remove(id: string): Promise<any> {
     return http.delete(`/types/${id}`);
   }
+
+  static getById(id: string): Promise<any> {
+    return http.get(`/types/${id}`);
+  }
 }
 
 export default WordTypeApi;
