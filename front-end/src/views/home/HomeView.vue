@@ -87,6 +87,7 @@ const getWord = async ({toBottom = false} = {}) => {
   loading.value = true
   const {data, code, message} = await WordApi.get({
     // bookId: appStore.bookId,
+    bookId: appStore.bookId,
     TOC_Order: paginationStore.isByToc && !docStore.isSetToc ? (docStore.currentTOC?.order ?? undefined) : undefined,
     collect: worldStore.onlyCollect ? true : undefined,
   }).finally(() => {
