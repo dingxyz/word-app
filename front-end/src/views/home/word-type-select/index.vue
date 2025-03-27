@@ -3,6 +3,7 @@ import {defineComponent, ref} from 'vue'
 import IconBtn from "@/components/IconBtn.vue";
 import {useAppStore} from "@/stores/useApp";
 import AddType from "@/views/home/add-type/index.vue";
+import {usePaginationStore} from "@/stores/usePagination";
 
 defineComponent({
   name: 'WordTypeSelect',
@@ -11,6 +12,7 @@ defineComponent({
 const emit = defineEmits(['refresh-list'])
 const addTypeRef = ref<InstanceType<typeof AddType>>()
 const appStore = useAppStore()
+const paginationStore = usePaginationStore()
 const popoverShow = ref(false)
 
 const openTypeDialog = () => {
@@ -20,6 +22,7 @@ const openTypeDialog = () => {
 
 const typeChange = () => {
   popoverShow.value = false
+  paginationStore.initPagination()
   emit('refresh-list')
 }
 </script>

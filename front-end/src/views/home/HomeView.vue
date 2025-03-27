@@ -82,7 +82,7 @@ const getWord = async ({toBottom = false} = {}) => {
   if (code !== '000000') {
     showNotify({type: 'danger', message});
   }
-  
+
   // 更新数据结构
   if (data && data.list) {
     words.splice(0, words.length, ...data.list)
@@ -93,7 +93,7 @@ const getWord = async ({toBottom = false} = {}) => {
     renderList.value = data || []
     totalItems.value = (data || []).length
   }
-  
+
   setRenderList(toBottom)
 }
 

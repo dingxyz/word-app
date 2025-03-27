@@ -22,7 +22,7 @@ const gotoBack = () => {
 
 <template>
   <div
-    class="toc-container bg-black"
+    class="toc-container h-full bg-black flex flex-col"
     :class="{'opacity-30': isDev }"
   >
     <van-nav-bar
@@ -35,7 +35,7 @@ const gotoBack = () => {
         <IconBtn icon="plus" @click="addTocRef?.open()"/>
       </template>
     </van-nav-bar>
-    <div>
+    <div class="flex-1 overflow-y-auto">
       <TOCItem
         v-for="item in docStore.tocList"
         :key="item.order"
