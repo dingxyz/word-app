@@ -71,7 +71,7 @@ defineExpose({open})
     <van-cell-group inset>
       <van-field v-model.trim="typeData.name" ref="fieldRef" label="name" placeholder="Please input name"/>
       <van-field v-model.number="typeData.order" label="parentId" placeholder="Please input order"/>
-      <van-field name="switch" label-width="120px" input-align="right" label="Auto Voice Type">
+      <van-field name="switch" label-width="120px" input-align="right" label="Has TOC">
         <template #input>
           <van-switch v-model="typeData.hasTOC" size="20"/>
         </template>

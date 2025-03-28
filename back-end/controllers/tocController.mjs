@@ -1,17 +1,37 @@
 import TOC from '../models/TOC.js';
 import { generateUniqueId } from "../utils/commonUtil.mjs";
-import {getWordsNumByTOCOrder} from "./wordsController.mjs";
+import {getWordsNumByTOCOrder, getWordsNumByBookId} from "./wordsController.mjs";
 
 // 获取所有 TOC 记录
 export const getAllTOCs = async (req, res) => {
   const { bookId } = req.query;
   try {
     let query = {};
+
     if (bookId) {
       query.bookId = bookId;
+
+      const tocList = await TOC.find(query).sort({ order: 1 });
+      
+      const wordsDistribution = await getWordsNumByBookId(bookId);
+
+      const tocListWithWordCounts = tocList.map(toc => {
+        // 将Mongoose文档转换为普通JavaScript对象
+        const plainToc = toc.toObject();
+        plainToc.wordsNum = wordsDistribution[toc.order] || 0;
+        return plainToc;
+      });
+      
+      tocListWithWordCounts.push({
+        order: 0,
+        title: '无TOC',
+        wordsNum: wordsDistribution[0] || 0
+      })
+      res.sendSuccess(tocListWithWordCounts);
+    } else {
+      const tocList = await TOC.find(query).sort({ order: 1 });
+      res.sendSuccess(tocList);
     }
-    const tocList = await TOC.find(query).sort({ order: 1 });
-    res.sendSuccess(tocList);
   } catch (error) {
     res.sendError(error.message);
   }

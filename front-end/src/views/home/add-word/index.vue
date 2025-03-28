@@ -33,7 +33,7 @@ const saveWord = () => {
   }
   const params = {
     id: id ?? undefined,
-    TOC_Order: appStore.isGrammarInUse1 ? currentTOC?.order : undefined,
+    TOC_Order: appStore.currentBook?.hasTOC ? currentTOC?.order : undefined,
     context,
     english,
     chinese,

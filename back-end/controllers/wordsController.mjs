@@ -357,12 +357,58 @@ export const getWordsNumByTOCOrder = async ({bookId, TOC_Order}) => {
   return sendData ?? 0
 };
 
+// 写个函数根据 bookId 查 TOC_Order 的分布, 返回一个map对象，key 是 TOC_Order，value 是单词的数量
+// 如果没有 TOC_Order 则认为该单词的 TOC_Order 为 0
+export const getWordsNumByBookId = async (bookId) => {
+  if (!bookId) {
+    return {};
+  }
+
+  // 创建结果对象
+  const distribution = {};
+  
+  // 获取无TOC_Order的单词数量
+  const noTOCOrderCount = await Word.countDocuments({
+    bookId,
+    TOC_Order: { $exists: false }
+  });
+  // 使用数字0作为键
+  distribution[0] = noTOCOrderCount;
+  
+  // 获取所有不同的TOC_Order值
+  const tocOrders = await Word.distinct('TOC_Order', { 
+    bookId, 
+    TOC_Order: { $exists: true }
+  });
+  
+  // 为每个TOC_Order计算单词数量
+  for (const order of tocOrders) {
+    // 确保order是数字类型
+    const numericOrder = Number(order);
+    const count = await Word.countDocuments({
+      bookId,
+      TOC_Order: numericOrder
+    });
+    // 使用数字作为键
+    distribution[numericOrder] = count;
+  }
+  
+  console.log("Distribution in getWordsNumByBookId:", distribution);
+  return distribution;
+};
+
 // 写个函数，
 export const getTOCDistributed = async (req, res) => {
-  const {bookId, TOC_Order} = req.query;
+  const {bookId} = req.query;
   try {
-
-    res.sendSuccess();
+    if (!bookId) {
+      return res.sendError("BookId is required");
+    }
+    
+    // 使用getWordsNumByBookId获取TOC分布
+    const distribution = await getWordsNumByBookId(bookId);
+    
+    res.sendSuccess(distribution);
   } catch (error) {
     res.sendError(error.message);
   }

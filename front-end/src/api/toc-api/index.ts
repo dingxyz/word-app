@@ -5,6 +5,7 @@ export class ITOC {
   bookId: string = '';
   title: string = '';
   detail?: string = '';
+  wordsNum?: number;
 }
 
 class TOCApi {

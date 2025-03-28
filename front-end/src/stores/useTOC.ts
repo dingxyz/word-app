@@ -22,6 +22,8 @@ export const useTOCStore = defineStore("toc", () => {
   const isLoaded = ref(false)
   const isSetToc = ref(false)
 
+  const appStore = useAppStore()
+
   // 计算属性
   const filteredTOCList = computed(() => {
     let result = [...tocList.value]
@@ -47,7 +49,9 @@ export const useTOCStore = defineStore("toc", () => {
     error.value = null
 
     try {
-      const res = await TOCApi.getList({})
+      const res = await TOCApi.getList({
+        bookId: appStore.currentBook.id
+      })
       if (res.code === '000000') {
         tocList.value = res.data || []
         tocList.value.push(EMPTY_TOC)

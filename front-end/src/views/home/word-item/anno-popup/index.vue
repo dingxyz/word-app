@@ -50,7 +50,7 @@ const saveAnnotation = async () => {
   showEditTextarea.value = false
   const {first, second, third} = contextList.value
   wordData.context = first + (second ? `;${second}` : '') + (third ? `;${third}` : '')
-  wordData.TOC_Order = docStore.currentTOC.order || undefined
+  wordData.TOC_Order = appStore.currentBook?.hasTOC ? docStore.currentTOC.order : undefined
   wordData['bookId'] = wordData.bookId ?? appStore.bookId
   await WordApi.update(wordData)
   wordOriginalData.english = wordData.english
