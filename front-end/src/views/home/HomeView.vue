@@ -41,10 +41,7 @@ const openSettingPopup = () => settingPopupRef.value?.open()
 const openStatisticsPopup = () => statisticsPopupRef.value?.open()
 const editWordOpen = (word: IWord) => addWordRef.value?.open(word)
 const autoPlayChange = () => voiceStore.autoSpeak(renderList.value)
-const setRenderList = (toBottom = false) => {
-  if (paginationStore.renderOrder === ORDER_TYPE.RANDOM) {
-    renderList.value = [...renderList.value].sort(() => Math.random() - 0.5)
-  }
+const goToBottom = (toBottom = false) => {
   nextTick(() => {
     if (toBottom === true) {
       listRef.value.scrollTop = listRef.value.scrollHeight
@@ -52,7 +49,6 @@ const setRenderList = (toBottom = false) => {
       listRef.value.scrollTop = 0
     }
   })
-  voiceStore.resetSpeak()
 }
 
 watch([
@@ -93,8 +89,9 @@ const getWord = async ({toBottom = false} = {}) => {
     renderList.value = data || []
     totalItems.value = (data || []).length
   }
+  voiceStore.resetSpeak()
 
-  setRenderList(toBottom)
+  goToBottom(toBottom)
 }
 
 const search = async ({searchKey}) => {
@@ -114,12 +111,12 @@ const search = async ({searchKey}) => {
     words.splice(0, words.length, ...data)
     renderList.value = data
     totalItems.value = data.length
-    setRenderList()
+    goToBottom()
   } else {
     getWord()
   }
 }
-const searchWord = debounce(search, 300)
+const searchWord = debounce(search, 500)
 const initialize = async () => {
   await appStore.getTypeList()
   docStore.initialize()
@@ -135,7 +132,7 @@ initialize()
   >
     <header class="flex items-center justify-between h-12 px-4 bg-[#993333] text-center text-white">
       <span class="w-10" @click="openStatisticsPopup">{{ totalItems }}</span>
-      <span class="text-xl" @click="openTypeDialog">{{ appStore?.currentBook.name }}</span>
+      <span class="text-xl" @click="openTypeDialog">{{ appStore?.currentBook?.name }}</span>
       <WordTypeSelect @refresh-list="typeChange"/>
     </header>
     <TOCItem v-if="appStore.currentBook?.hasTOC && (docStore.isSetToc || paginationStore.isByToc)" :tocData="docStore.currentTOC" isHome/>
@@ -157,10 +154,9 @@ initialize()
     <div class="mt-2" v-if="paginationStore.isPaging && !paginationStore.isByToc && totalItems > paginationStore.pageSize">
       <PaginationBox
         :total-items="totalItems"
-        @update:currentPage="getWord()"
       />
     </div>
-    <footer class="flex items-center justify-between h-12 m-2 px-4 bg-[#003300] text-white rounded-xl">
+    <footer class="home-footer flex items-center justify-between h-14 m-2 px-2 bg-[#003300] text-white rounded-xl">
       <van-icon
         :name="voiceStore.nowPlaying && !voiceStore.isPaused ? 'pause-circle-o' : 'play-circle-o'"
         @click="autoPlayChange" size="20"
@@ -179,3 +175,9 @@ initialize()
     <StatisticsPopup ref="statisticsPopupRef"/>
   </div>
 </template>
+
+<style scoped lang="scss">
+.home-footer .van-icon{
+  font-size: 26px !important;
+}
+</style>

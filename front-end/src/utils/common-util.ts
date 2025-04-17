@@ -17,6 +17,24 @@ export const copyToClipboard = async (text: string) => {
   showNotify({type: 'success', message: 'Copied to clipboard'});
 };
 
+export const readFromClipboard = async (): Promise<string> => {
+  try {
+    const text = await navigator.clipboard.readText();
+    if (text?.length > 60) {
+      return text;
+    }
+    return '';
+  } catch (err) {
+    showNotify({type: 'danger', message: '无法读取剪贴板内容'});
+    return '';
+  }
+};
+
+// 判断文本是否为纯英文句子
+const isEnglishSentence = (text: string): boolean => {
+  // 允许英文字母、数字、标点符号和空格
+  return /^[A-Za-z0-9\s.,!?;:'"\-()]+$/.test(text.trim()) && text.trim().length > 0;
+}
 
 export const methodTracker = (() => {
   const timestamps = []; // 用来保存时间戳

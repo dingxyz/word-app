@@ -5,7 +5,7 @@ import {FieldInstance, showNotify, showToast} from "vant";
 import {useAppStore} from "@/stores/useApp";
 import {trimEnd} from "lodash-es";
 import {useTOCStore} from "@/stores/useTOC";
-
+import {readFromClipboard} from "@/utils/common-util";
 defineComponent({
   name: 'AddWord',
 })
@@ -80,6 +80,14 @@ const open = async (word?: IWord) => {
   }
   await nextTick()
   fieldRef.value?.focus()
+
+  // 如果不是编辑模式（没有id），则尝试读取剪贴板
+  if (!wordData.id) {
+    const clipboardContent = await readFromClipboard()
+    if (clipboardContent) {
+      wordData.annotation = clipboardContent
+    }
+  }
 }
 
 defineExpose({open})
