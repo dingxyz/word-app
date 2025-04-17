@@ -6,28 +6,30 @@ import Worldview from "../models/Worldview.js";
 // 创建聚合管道辅助函数
 const buildAggregationPipeline = ({ matchCondition = {}, renderOrder, limit, skip, fields = {} }) => {
   const pipeline = [];
-  
+
   // 添加匹配条件（如果有）
   if (Object.keys(matchCondition).length > 0) {
     pipeline.push({ $match: matchCondition });
   }
-  
+
   // 添加排序
   if (renderOrder === 'letter') {
     pipeline.push({ $sort: { english: 1 } });
   } else if (renderOrder === 'random') {
     pipeline.push({ $sample: { size: limit || 1000 } });
+  } else if (renderOrder === 'by_toc') {
+    pipeline.push({ $sort: { TOC_Order: 1 } });
   } else {
     // 默认按创建时间排序
     pipeline.push({ $sort: { createdAt: 1 } });
   }
-  
+
   // 添加分页 (只有非随机排序时才添加)
   if (skip !== undefined && limit !== undefined && renderOrder !== 'random') {
     pipeline.push({ $skip: skip });
     pipeline.push({ $limit: limit });
   }
-  
+
   // 项目映射
   const projectFields = {
     id: 1,
@@ -43,9 +45,9 @@ const buildAggregationPipeline = ({ matchCondition = {}, renderOrder, limit, ski
     createdAt: 1,
     ...fields
   };
-  
+
   pipeline.push({ $project: projectFields });
-  
+
   return pipeline;
 };
 
@@ -55,19 +57,22 @@ export const getWords = async (req, res) => {
   let totalCount = 0;
   let skip = 0;
   let limit = 0;
-  
+
   // 定义排序是否区分大小写
   let collationOptions = null;
   if (renderOrder === 'letter') {
     collationOptions = { locale: 'en', strength: 2 };
   }
-  
+
   // 处理分页参数
   if (page && pageSize) {
     skip = (parseInt(page) - 1) * parseInt(pageSize);
     limit = parseInt(pageSize);
+  } else {
+    // 当没有提供分页参数时，设置一个默认值避免错误
+    limit = 1000; // 默认限制1000条
   }
-  
+
   try {
     // await removeWordTypeFromWords();
 
@@ -76,28 +81,28 @@ export const getWords = async (req, res) => {
         // 当bookId为'all'时，查询所有记录
         // 先获取总数
         totalCount = await Word.countDocuments();
-        
+
         // 构建聚合管道
         const aggregation = buildAggregationPipeline({
           renderOrder,
           limit,
-          skip, 
-          fields: { 
+          skip,
+          fields: {
             TOC_Order: 1,
             chinese: 1
           }
         });
-        
+
         // 应用排序选项
         sendData = await Word.aggregate(aggregation).collation(collationOptions || {});
       }
       else if (bookId === mappingNameAndId.find(item => item.name === STATISTICS_WORD_TYPE)?.id) {
         // 构建查询条件
         const matchCondition = collect ? { collect: true } : {};
-        
+
         // 获取总数
         totalCount = await Worldview.countDocuments(matchCondition);
-        
+
         // 构建聚合管道
         const aggregation = buildAggregationPipeline({
           matchCondition,
@@ -109,7 +114,7 @@ export const getWords = async (req, res) => {
             collect: 1
           }
         });
-        
+
         // 应用排序选项
         sendData = await Worldview.aggregate(aggregation).collation(collationOptions || {});
       } else {
@@ -121,10 +126,10 @@ export const getWords = async (req, res) => {
         } else if (TOC_Order > 0) {
           matchCondition.TOC_Order = TOC_Order;
         }
-        
+
         // 获取总数
         totalCount = await Word.countDocuments(matchCondition);
-        
+
         // 构建聚合管道
         const aggregation = buildAggregationPipeline({
           matchCondition,
@@ -136,17 +141,17 @@ export const getWords = async (req, res) => {
             chinese: 1
           }
         });
-        
+
         // 应用排序选项
         sendData = await Word.aggregate(aggregation).collation(collationOptions || {});
       }
     } else {
       // 当bookId不存在时，查询所有不含bookId字段的记录
       const matchCondition = { bookId: { $exists: false } };
-      
+
       // 获取总数
       totalCount = await Word.countDocuments(matchCondition);
-      
+
       // 构建聚合管道
       const aggregation = buildAggregationPipeline({
         matchCondition,
@@ -158,11 +163,11 @@ export const getWords = async (req, res) => {
           chinese: 1
         }
       });
-      
+
       // 应用排序选项
       sendData = await Word.aggregate(aggregation).collation(collationOptions || {});
     }
-    
+
     res.sendSuccess({
       list: sendData ?? [],
       total: totalCount
