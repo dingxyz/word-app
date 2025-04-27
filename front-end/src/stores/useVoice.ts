@@ -46,6 +46,32 @@ export const useVoiceStore = defineStore(`voice`, () => {
   const appStore = useAppStore()
   const worldStore = useWorldStore()
 
+  const initVoiceList = async () => {
+    // These prices are too expensive: 'Studio','Polyglot'
+    // These have no price: 'Casual','News'
+    // Cheap but quality: 'Standard'
+    // Repeated with WaveNet: 'Neural2'
+    // const excludeTypes = ['Studio', 'Polyglot', 'Casual', 'News', 'Standard', 'Neural2'];
+    // const includeTypes = ['Chirp', 'Wavenet'];
+    const includeTypes = ['Chirp', 'Chirp3'];
+    const includeWavenetName = ['B','C']
+    const {voices} = await VoiceApi.getVoicesList(languageCode.value)
+
+    // 保存所有的Chirp3声音用于多选框
+    allChirp3Voices.value = voices.filter(voice => voice.name.includes('Chirp3'));
+
+    // 筛选声音列表
+    voiceNameList.value = voices
+      .filter(voice => includeTypes.includes(voice.name.split('-')[2]))
+      .filter(voice => !voice.name.includes('Wavenet') || includeWavenetName.includes(voice.name.split('-')[3]))
+
+    voiceNameList.value.forEach(voice => {
+      voice.text = `${voice.name}---${voice.ssmlGender}`
+    })
+    updateChirp3VoiceList()
+    voiceName.value = voiceNameList.value[0]?.name
+  }
+
   const voiceSpeak = async (english: string, isAutoPlay: boolean = false, onEnd?: () => void) => {
     if (isAutoVoiceName.value) {
       voiceName.value = voiceNameList.value[autoVoiceTypeIndex].name
@@ -217,6 +243,7 @@ export const useVoiceStore = defineStore(`voice`, () => {
     voiceSpeak,
     autoSpeak,
     resetSpeak,
-    updateChirp3VoiceList
+    updateChirp3VoiceList,
+    initVoiceList
   }
 })

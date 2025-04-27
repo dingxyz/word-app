@@ -32,36 +32,11 @@ const onNameConfirm = ({selectedOptions}) => {
 
 const saveWord = () => isShow.value = false
 
-const initVoiceList = async () => {
-  // These prices are too expensive: 'Studio','Polyglot'
-  // These have no price: 'Casual','News'
-  // Cheap but quality: 'Standard'
-  // Repeated with WaveNet: 'Neural2'
-  // const excludeTypes = ['Studio', 'Polyglot', 'Casual', 'News', 'Standard', 'Neural2'];
-  // const includeTypes = ['Chirp', 'Wavenet'];
-  const includeTypes = ['Chirp', 'Chirp3'];
-  const includeWavenetName = ['B','C']
-  const {voices} = await VoiceApi.getVoicesList(voiceStore.languageCode)
-
-  // 保存所有的Chirp3声音用于多选框
-  voiceStore.allChirp3Voices = voices.filter(voice => voice.name.includes('Chirp3'));
-
-  voiceStore.voiceNameList = voices.filter(voice => includeTypes.includes(voice.name.split('-')[2]))
-  voiceStore.voiceNameList = voiceStore.voiceNameList.filter(voice =>
-    voice.name.includes('Wavenet') ? includeWavenetName.includes(voice.name.split('-')[3]) : true
-  )
-
-  voiceStore.voiceNameList.forEach(voice => {
-    voice.text = voice.name + '---' + voice.ssmlGender
-  })
-  voiceStore.voiceName = voiceStore.voiceNameList[0].name
-}
-
 const chirp3Result = computed(() => {
   return `${voiceStore.selectedChirp3Voices.length}/${voiceStore.allChirp3Voices.length}`;
 });
 
-initVoiceList()
+voiceStore.initVoiceList()
 
 const open = () => isShow.value = true
 defineExpose({open})
@@ -125,7 +100,7 @@ defineExpose({open})
         </van-field>
         <van-field name="radio" input-align="right" label="Language">
           <template #input>
-            <van-radio-group v-model="voiceStore.languageCode" @change="initVoiceList" direction="horizontal">
+            <van-radio-group v-model="voiceStore.languageCode" @change="voiceStore.initVoiceList" direction="horizontal">
               <van-radio :name="LANGUAGE_CODE.EN_US">{{ LANGUAGE_CODE.EN_US }}</van-radio>
               <van-radio :name="LANGUAGE_CODE.EN_GB">{{ LANGUAGE_CODE.EN_GB }}</van-radio>
             </van-radio-group>
