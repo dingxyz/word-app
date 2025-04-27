@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import {defineComponent, nextTick, ref} from 'vue'
+import {defineComponent, nextTick, ref, onMounted, computed} from 'vue'
 import {useAppStore} from "@/stores/useApp";
 import {ORDER_TYPE, usePaginationStore} from "@/stores/usePagination";
 import {LANGUAGE_CODE, SSML_GENDER, useVoiceStore} from "@/stores/useVoice";
 import VoiceApi from "@/api/voice-api";
 import {useWorldStore} from "@/stores/useWorldview";
 import {useTOCStore} from "@/stores/useTOC";
+import ChirpVoicePopup from './chirp-voice-popup/index.vue';
 
 defineComponent({
   name: 'SettingPopup',
@@ -17,6 +18,7 @@ const docStore = useTOCStore()
 const paginationStore = usePaginationStore()
 const isShow = ref(false)
 const showNamePicker = ref(false);
+const showChirpCheck = ref(false);
 
 const emit = defineEmits(['update'])
 
@@ -40,15 +42,25 @@ const initVoiceList = async () => {
   const includeTypes = ['Chirp', 'Chirp3'];
   const includeWavenetName = ['B','C']
   const {voices} = await VoiceApi.getVoicesList(voiceStore.languageCode)
+
+  // 保存所有的Chirp3声音用于多选框
+  voiceStore.allChirp3Voices = voices.filter(voice => voice.name.includes('Chirp3'));
+
   voiceStore.voiceNameList = voices.filter(voice => includeTypes.includes(voice.name.split('-')[2]))
   voiceStore.voiceNameList = voiceStore.voiceNameList.filter(voice =>
     voice.name.includes('Wavenet') ? includeWavenetName.includes(voice.name.split('-')[3]) : true
   )
+
   voiceStore.voiceNameList.forEach(voice => {
     voice.text = voice.name + '---' + voice.ssmlGender
   })
   voiceStore.voiceName = voiceStore.voiceNameList[0].name
 }
+
+const chirp3Result = computed(() => {
+  return `${voiceStore.selectedChirp3Voices.length}/${voiceStore.allChirp3Voices.length}`;
+});
+
 initVoiceList()
 
 const open = () => isShow.value = true
@@ -119,11 +131,22 @@ defineExpose({open})
             </van-radio-group>
           </template>
         </van-field>
+
         <van-field name="switch" label-width="120px" input-align="right" label="Auto Voice Type">
           <template #input>
             <van-switch v-model="voiceStore.isAutoVoiceName" size="20"/>
           </template>
         </van-field>
+        <van-field
+          v-model="chirp3Result"
+          is-link
+          readonly
+          name="picker"
+          label="Chirp3"
+          input-align="right"
+          placeholder="Select Chirp3 voices"
+          @click="showChirpCheck = true"
+        />
         <van-field
           v-model="voiceStore.voiceName"
           is-link
@@ -164,5 +187,7 @@ defineExpose({open})
         @confirm="onNameConfirm"
       />
     </van-popup>
+
+    <ChirpVoicePopup v-model:show="showChirpCheck" />
   </van-popup>
 </template>

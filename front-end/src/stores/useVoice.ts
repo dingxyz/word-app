@@ -33,6 +33,8 @@ export const useVoiceStore = defineStore(`voice`, () => {
   const isPaused = ref(false) // Is it paused?
   const audio = new Audio('')
   const voiceNameList = ref<any[]>([])
+  const allChirp3Voices = ref<any[]>([])
+  const selectedChirp3Voices = ref<string[]>([])
   let loading = false
   let playIndex = 0       // Which word is it playing now?
   let playedNumber = 1    // Which number is it playing now?
@@ -182,6 +184,22 @@ export const useVoiceStore = defineStore(`voice`, () => {
     isTrack && methodTracker()
   }
 
+  const updateChirp3VoiceList = () => {
+    // 先保留非Chirp3的声音
+    const nonChirp3Voices = voiceNameList.value.filter(voice => !voice.name.includes('Chirp3'));
+    
+    // 添加用户选择的Chirp3声音
+    const selectedVoices = allChirp3Voices.value.filter(voice => 
+      selectedChirp3Voices.value.includes(voice.name)
+    );
+    
+    selectedVoices.forEach(voice => {
+      voice.text = voice.name + '---' + voice.ssmlGender;
+    });
+    
+    voiceNameList.value = [...nonChirp3Voices, ...selectedVoices];
+  }
+
   return {
     nowPlaying,
     ssmlGender,
@@ -194,8 +212,11 @@ export const useVoiceStore = defineStore(`voice`, () => {
     isAutoVoiceName,
     voiceName,
     voiceNameList,
+    allChirp3Voices,
+    selectedChirp3Voices,
     voiceSpeak,
     autoSpeak,
-    resetSpeak
+    resetSpeak,
+    updateChirp3VoiceList
   }
 })
