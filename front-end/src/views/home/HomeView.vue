@@ -135,7 +135,11 @@ initialize()
       <span class="text-xl" @click="openTypeDialog">{{ appStore?.currentBook?.name }}</span>
       <WordTypeSelect @refresh-list="typeChange"/>
     </header>
-    <TOCItem v-if="appStore.currentBook?.hasTOC && (docStore.isSetToc || paginationStore.isByToc)" :tocData="docStore.currentTOC" isHome/>
+    <TOCItem
+      v-if="appStore.currentBook?.hasTOC && (docStore.isSetToc || paginationStore.isByToc)"
+      :tocData="docStore.currentTOC"
+      isHome
+    />
     <article ref="listRef" class="relative flex-1 bg-[#006633] overflow-auto" :class="{'overflow-hidden': loading }">
       <div v-if="loading" class="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-[#d9dae25a]">
         <van-loading type="spinner"/>

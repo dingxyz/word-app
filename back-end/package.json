@@ -13,9 +13,9 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.17.1",
+    "express": "^5.0.0",
     "gtts": "^0.2.1",
     "lowdb": "^3.0.0",
-    "mongoose": "^8.4.5"
+    "mongoose": "^8.9.5"
   }
 }

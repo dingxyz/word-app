@@ -54,7 +54,7 @@ export const useTOCStore = defineStore("toc", () => {
       })
       if (res.code === '000000') {
         tocList.value = res.data || []
-        tocList.value.push(EMPTY_TOC)
+        // tocList.value.push(EMPTY_TOC)
         if (currentTOC.value === null) {
           currentTOC.value = tocList.value[0]
         }

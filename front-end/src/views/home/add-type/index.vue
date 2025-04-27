@@ -51,7 +51,7 @@ const open = async (name: string = null, length: number = 0) => {
   typeDialog.value = true
   wordLength.value = length
   if (name) {
-    typeData.value = appStore.typeList.find(item => item.name === name)
+    typeData.value = appStore.typeList.find(item => item.id === name)
   } else {
     typeData.value = new WordType()
   }

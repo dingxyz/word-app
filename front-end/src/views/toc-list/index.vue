@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import router from "@/router";
 import {useTOCStore} from "@/stores/useTOC";
-import {defineComponent, ref} from "vue";
+import {defineComponent, ref, onMounted, nextTick} from "vue";
 import IconBtn from "@/components/IconBtn.vue";
 import AddToc from "@/views/toc-list/add-toc/index.vue";
 import TOCItem from "@/views/toc-list/toc-item/index.vue";
@@ -13,10 +13,24 @@ defineComponent({
 const isDev = import.meta.env.VITE_ENV === 'DEVELOPMENT'
 const docStore = useTOCStore()
 const addTocRef = ref<InstanceType<typeof AddToc>>()
+const tocItemsRef = ref<InstanceType<typeof TOCItem>[]>([])
 
 const gotoBack = () => {
   router.push({name: 'Home'})
 }
+
+// 页面加载后滚动到激活的TOC项目
+onMounted(async () => {
+  // 等待DOM更新完成
+  await nextTick()
+  // 查找激活的TOCItem并滚动到视口
+  const activeItem = tocItemsRef.value.find(item => 
+    docStore.currentTOC?.order === item.$props.tocData.order
+  )
+  if (activeItem) {
+    activeItem.scrollIntoView()
+  }
+})
 </script>
 
 
@@ -40,6 +54,7 @@ const gotoBack = () => {
         v-for="item in docStore.tocList"
         :key="item.order"
         :tocData="item"
+        ref="tocItemsRef"
       />
     </div>
 

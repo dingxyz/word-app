@@ -25,7 +25,6 @@ export const readFromClipboard = async (): Promise<string> => {
     }
     return '';
   } catch (err) {
-    showNotify({type: 'danger', message: '无法读取剪贴板内容'});
     return '';
   }
 };
