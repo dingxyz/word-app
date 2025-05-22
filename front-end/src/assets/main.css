@@ -70,17 +70,16 @@ a,
 }
 
 .is-lite-mode {
-    opacity: 0.28;
-    background: #55595e;
+    opacity: 0.32;
+    background: #3d3f43;
+    --van-lite-text-color: #c3c3c3;
 
     .van-icon:before {
         color: #b1b1b1;
     }
 
     header {
-        /*display: none;*/
         height: 30px;
-        background: #55595e;
         color: #fff;
 
         span {
@@ -94,7 +93,7 @@ a,
 
     .van-list .word-box {
         font-size: 14px;
-        color: #c5c5c5 !important;
+        color: var(--van-lite-text-color) !important;
 
         .first-text, .second-text {
             min-height: 30px;
@@ -104,13 +103,14 @@ a,
         }
     }
 
-    footer, article, li, .markdown-body, .van-popup, .van-overlay, .anno-textarea, .word-list-item, .van-cell {
-        background: #595c63 !important;
+    header,footer, article, li, .markdown-body, .van-popup, .van-overlay, .anno-textarea, .word-list-item, .van-cell, .van-button {
+        background: #3d3f43 !important;
     }
 
     .markdown-body {
         font-size: 12px;
-        opacity: .8;
+        /*opacity: .8;*/
+        color: var(--van-lite-text-color) !important;
         h3 {
             font-size: 14px;
         }
@@ -131,22 +131,18 @@ a,
         font-size: 16px;
     }
     .text-red {
-        color: #93ff9c;
+        color: #b6edbb;
         font-size: 16px;
         line-height: 20px;
     }
 
     .van-swipe-cell li {
         font-size: 14px;
-        color: #fff !important;
+        color: var(--van-lite-text-color) !important;
     }
 
     .van-pagination__item--page:not(.van-pagination__item--active) {
         color: #b9c2ff;
-    }
-
-    .van-button {
-        background: #52575c;
     }
 
     .triangle-btn:active {
