@@ -9,6 +9,7 @@ export const useAppStore = defineStore(`app`, () => {
   const typeList = ref<WordType[]>([])
   const showChineseChecked = ref(false)
   const isLiteMode = ref(false)
+
   const currentBook = computed(() => typeList.value.find((item) => item.id === bookId.value))
   const wordType = computed(() => currentBook.value?.name ?? WORLD_VIEW)
   const isWorldview = computed(() => currentBook.value?.name === WORLD_VIEW)
@@ -18,7 +19,7 @@ export const useAppStore = defineStore(`app`, () => {
     const res = await WordTypeApi.get()
     typeList.value = res.data
     if (!bookId.value) {
-      bookId.value = id ?? typeList.value[0].id
+      bookId.value = id ?? typeList.value.find((item) => item.name === 'GrammarInUse1').id
     }
   }
 

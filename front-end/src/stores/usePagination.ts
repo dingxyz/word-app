@@ -21,7 +21,7 @@ export const usePaginationStore = defineStore("pagination", () => {
   const isPaging = ref(true)
   const currentPage = ref(1)
   const pageSize = ref(50)
-  const renderOrder = ref(ORDER_TYPE.TIME)
+  const renderOrder = ref()
 
   const isByToc = computed(() => renderOrder.value === ORDER_TYPE.BY_TOC)
 
@@ -41,7 +41,7 @@ export const usePaginationStore = defineStore("pagination", () => {
       isPaging: true,
       currentPage: 1,
       pageSize: 50,
-      renderOrder: ORDER_TYPE.TIME,
+      renderOrder: ORDER_TYPE.RANDOM,
     };
     isPaging.value = storedData.isPaging;
     currentPage.value = storedData.currentPage;

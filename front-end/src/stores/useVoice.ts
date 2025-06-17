@@ -60,6 +60,13 @@ export const useVoiceStore = defineStore(`voice`, () => {
     // 保存所有的Chirp3声音用于多选框
     allChirp3Voices.value = voices.filter(voice => voice.name.includes('Chirp3'));
 
+
+    if (!selectedChirp3Voices.value.length && allChirp3Voices.value.length) {
+      // 从allChirp3Voices中随机选择3个声音
+      const randomChirp3Voices = allChirp3Voices.value.sort(() => 0.5 - Math.random()).slice(0, 3);
+      selectedChirp3Voices.value = randomChirp3Voices.map(voice => voice.name);
+    }
+
     // 筛选声音列表
     voiceNameList.value = voices
       .filter(voice => includeTypes.includes(voice.name.split('-')[2]))
@@ -213,16 +220,16 @@ export const useVoiceStore = defineStore(`voice`, () => {
   const updateChirp3VoiceList = () => {
     // 先保留非Chirp3的声音
     const nonChirp3Voices = voiceNameList.value.filter(voice => !voice.name.includes('Chirp3'));
-    
+
     // 添加用户选择的Chirp3声音
-    const selectedVoices = allChirp3Voices.value.filter(voice => 
+    const selectedVoices = allChirp3Voices.value.filter(voice =>
       selectedChirp3Voices.value.includes(voice.name)
     );
-    
+
     selectedVoices.forEach(voice => {
       voice.text = voice.name + '---' + voice.ssmlGender;
     });
-    
+
     voiceNameList.value = [...nonChirp3Voices, ...selectedVoices];
   }
 
