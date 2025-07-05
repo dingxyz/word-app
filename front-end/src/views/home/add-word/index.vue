@@ -60,6 +60,88 @@ const saveWord = () => {
   })
 }
 
+// TODO: 批量添加front-end\src\views\home\add-word\oxford_words.json中的单词，
+// 把单词放在english中，bookId保持不变，context和chinese为空，annotation为空
+// 每100毫秒调用一次WordApi.add来添加单词
+const batchAdd = async () => {
+  try {
+    // 动态导入 JSON 文件
+    const oxfordWords = await import('./oxford_words.json');
+    const words = oxfordWords.words;
+    
+    if (!words || words.length === 0) {
+      showNotify({ type: 'warning', message: '没有找到要添加的单词' });
+      return;
+    }
+
+    // 显示确认对话框
+    const confirmed = confirm(`确定要批量添加 ${words.length} 个单词吗？这可能需要一些时间。`);
+    if (!confirmed) return;
+
+    loading.value = true;
+    let successCount = 0;
+    let failCount = 0;
+
+    showNotify({ type: 'primary', message: `开始批量添加 ${words.length} 个单词...` });
+
+    // 遍历所有单词
+    for (let i = 0; i < words.length; i++) {
+      const word = words[i];
+      
+      const params = {
+        context: "",
+        english: word,
+        chinese: "",
+        annotation: "",
+        bookId: appStore.bookId || "id-1732776325985-3969"
+      };
+
+      try {
+        const res = await WordApi.add(params);
+        if (res.code === '000000') {
+          successCount++;
+        } else {
+          failCount++;
+          console.error(`添加单词 "${word}" 失败:`, res.message);
+        }
+      } catch (error) {
+        failCount++;
+        console.error(`添加单词 "${word}" 出错:`, error);
+      }
+
+      // 每100毫秒添加一个单词
+      if (i < words.length - 1) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
+
+      // 每添加50个单词显示一次进度
+      if ((i + 1) % 50 === 0) {
+        showNotify({ 
+          type: 'primary', 
+          message: `已处理 ${i + 1}/${words.length} 个单词，成功: ${successCount}，失败: ${failCount}` 
+        });
+      }
+    }
+
+    // 显示最终结果
+    showNotify({ 
+      type: successCount > failCount ? 'success' : 'warning', 
+      message: `批量添加完成！成功: ${successCount}，失败: ${failCount}` 
+    });
+
+    // 如果有成功添加的单词，触发刷新
+    if (successCount > 0) {
+      emit('add-complete', { toBottom: false });
+    }
+
+  } catch (error) {
+    console.error('批量添加出错:', error);
+    showNotify({ type: 'danger', message: '批量添加失败，请检查控制台错误信息' });
+  } finally {
+    loading.value = false;
+  }
+}
+
 const resetData = () => {
   Object.assign(wordData, new IWord())
 }
@@ -100,6 +182,17 @@ defineExpose({open})
     @closed="resetData"
   >
     <div>
+      <!-- <div class="flex justify-center mb-4">
+        <van-button 
+          type="primary" 
+          size="small" 
+          @click="batchAdd" 
+          :loading="loading"
+          loading-text="批量添加中..."
+        >
+          批量添加
+        </van-button>
+      </div> -->
       <van-cell-group inset>
         <van-field
           v-model.trim="wordData.english"
