@@ -4,6 +4,8 @@ import Worldview from "../models/Worldview.js";
 // import {removeAnnotationStr} from "../utils/removeSpacesFromIds.mjs";
 
 // 创建聚合管道辅助函数
+// 修复了随机排序的实现，现在使用 $rand 操作符确保真正的随机排序
+// 同时支持所有排序方式的分页功能
 const buildAggregationPipeline = ({ matchCondition = {}, renderOrder, limit, skip, fields = {} }) => {
   const pipeline = [];
 
@@ -16,16 +18,26 @@ const buildAggregationPipeline = ({ matchCondition = {}, renderOrder, limit, ski
   if (renderOrder === 'letter') {
     pipeline.push({ $sort: { english: 1 } });
   } else if (renderOrder === 'random') {
-    pipeline.push({ $sample: { size: limit || 1000 } });
+    // 对于随机排序，我们需要先获取所有数据，然后随机排序
+    // 使用 $addFields 添加一个随机字段，然后按该字段排序
+    pipeline.push({ 
+      $addFields: { 
+        randomSort: { $rand: {} } 
+      } 
+    });
+    pipeline.push({ $sort: { randomSort: 1 } });
   } else if (renderOrder === 'by_toc') {
     pipeline.push({ $sort: { TOC_Order: 1 } });
+  } else if (renderOrder === 'time') {
+    // 明确处理 time 排序
+    pipeline.push({ $sort: { createdAt: 1 } });
   } else {
     // 默认按创建时间排序
     pipeline.push({ $sort: { createdAt: 1 } });
   }
 
-  // 添加分页 (只有非随机排序时才添加)
-  if (skip !== undefined && limit !== undefined && renderOrder !== 'random') {
+  // 添加分页 (所有排序方式都支持分页)
+  if (skip !== undefined && limit !== undefined) {
     pipeline.push({ $skip: skip });
     pipeline.push({ $limit: limit });
   }
@@ -106,7 +118,7 @@ export const getWords = async (req, res) => {
         // 构建聚合管道
         const aggregation = buildAggregationPipeline({
           matchCondition,
-          renderOrder: renderOrder === 'time' ? 'time' : renderOrder,
+          renderOrder,
           limit,
           skip,
           fields: {
